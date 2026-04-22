@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Nav } from '../site/Nav.jsx';
@@ -56,6 +57,39 @@ export default function App() {
     r.style.setProperty('--blue-ink', accents.i);
     r.style.setProperty('--blue-soft', accents.s);
   }, [tweaks.accent]);
+
+  /* Global smooth scroll — one RAF via GSAP ticker; keep ScrollTrigger in sync. Skipped for reduced motion. */
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const lenis = new Lenis({
+      lerp: 0.08,
+      smoothWheel: true,
+      /* Slower travel per wheel / touch gesture */
+      wheelMultiplier: 0.72,
+      touchMultiplier: 0.8,
+      anchors: true,
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    const onTick = (time) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(onTick);
+    gsap.ticker.lagSmoothing(0);
+    const onLoad = () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('load', onLoad);
+    requestAnimationFrame(() => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    });
+    return () => {
+      window.removeEventListener('load', onLoad);
+      gsap.ticker.remove(onTick);
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     const onMsg = (e) => {

@@ -23,6 +23,11 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
+/* Let Lenis own scroll smoothing; avoid double-easing on anchor nav */
+html{scroll-behavior:auto;}
+/* Hide the default scrollbar; scrolling still works (trackpad, wheel, touch, keys) */
+html,body{scrollbar-width:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0;}
 html,body{background:#fff;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 body{overflow-x:hidden;line-height:1.52;font-weight:450;font-optical-sizing:auto;text-rendering:optimizeLegibility;}
 ::selection{background:var(--blue);color:#fff;}

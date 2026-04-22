@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
 
 const ease = [0.2, 0.7, 0.2, 1];
 
@@ -28,12 +28,67 @@ const rise = {
 
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
+/**
+ * Scroll 0 → 1 over ~0.38× viewport (Lenis provides smooth inertial scroll; no extra spring here).
+ * `vhPxRef` is kept in sync for pixel-accurate viewport-relative shifts.
+ */
+function useHeroScroll() {
+  const { scrollY } = useScroll();
+  const rangeRef = useRef(400);
+  const vhPxRef = useRef(800);
+  const motionOff = useMotionValue(0);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const sync = () => {
+      const h = window.innerHeight;
+      vhPxRef.current = h;
+      rangeRef.current = Math.min(520, Math.max(240, h * 0.38));
+    };
+    sync();
+    window.addEventListener('resize', sync);
+    return () => window.removeEventListener('resize', sync);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(mq.matches);
+    const h = () => setReduced(mq.matches);
+    mq.addEventListener('change', h);
+    return () => mq.removeEventListener('change', h);
+  }, []);
+
+  useEffect(() => {
+    motionOff.set(reduced ? 1 : 0);
+  }, [reduced, motionOff]);
+
+  const pScroll = useTransform(scrollY, (y) => {
+    const t = y / rangeRef.current;
+    return t <= 0 ? 0 : t >= 1 ? 1 : t;
+  });
+  const scrollP = useTransform([pScroll, motionOff], ([a, b]) => a * (1 - b));
+  return { scrollP, vhPxRef };
+}
+
 /* Static assets in /public (sync from project root when you replace files) */
 const heroBackgroundSrc = `${import.meta.env.BASE_URL}main-back.png`;
-const heroSkylineSrc = `${import.meta.env.BASE_URL}hero.png`;
+const heroTopSrc = `${import.meta.env.BASE_URL}top1.png`;
+const heroBottomSrc = `${import.meta.env.BASE_URL}bottom2.png`;
 
 /* Hero — GoGetta structure: editorial headline, sub, CTAs, then dashboard preview below */
 export const Hero = ({ tweaks }) => {
+  const { scrollP, vhPxRef } = useHeroScroll();
+
+  /** Viewport-fraction for dashboard lift + matching preview-area growth */
+  const dashVh = 0.024;
+  const minH = useTransform(scrollP, (p) => `${(1 + 0.036 * p) * 100}dvh`);
+  const skylineY = useTransform(scrollP, (p) => p * 0.036 * vhPxRef.current);
+  const dashboardY = useTransform(scrollP, (p) => -p * dashVh * vhPxRef.current);
+  const dashboardImgHeight = useTransform(scrollP, (p) => {
+    const add = p * dashVh * vhPxRef.current;
+    return `calc(clamp(220px, 40vw, 480px) + ${add}px)`;
+  });
+
   const headlines = {
     edge: { a: 'Immigration,', b: 'at the edge.' },
     quiet: { a: 'The quiet layer', b: 'under every filing' },
@@ -44,7 +99,7 @@ export const Hero = ({ tweaks }) => {
   const h = headlines[tweaks?.headline] || headlines.edge;
 
   return (
-    <section
+    <motion.section
       className="hero-full-viewport"
       style={{
         display: 'flex',
@@ -54,6 +109,7 @@ export const Hero = ({ tweaks }) => {
         overflow: 'hidden',
         isolation: 'isolate',
         boxSizing: 'border-box',
+        minHeight: minH,
         backgroundColor: '#eef3f8',
         backgroundImage: `url(${heroBackgroundSrc})`,
         backgroundSize: 'cover',
@@ -152,13 +208,20 @@ export const Hero = ({ tweaks }) => {
         </motion.div>
       </div>
 
-      {/* Dashboard preview — pinned below the centered copy block */}
-      <div
+      {/* Dashboard preview — pinned below the centered copy block; moves up slightly on scroll */}
+      <motion.div
         className="reveal d4"
-        style={{ position: 'relative', zIndex: 2, flexShrink: 0, marginBottom: -1, width: '100%' }}
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          flexShrink: 0,
+          marginBottom: -1,
+          width: '100%',
+          y: dashboardY,
+        }}
       >
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <HeroDashboard />
+          <HeroDashboard imageHeight={dashboardImgHeight} />
         </div>
         {/* Full-bleed blend (breaks out of .container) */}
         <div
@@ -177,10 +240,35 @@ export const Hero = ({ tweaks }) => {
               'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 32%, rgba(255,255,255,0.55) 68%, rgba(255,255,255,0.94) 88%, #ffffff 100%)',
           }}
         />
+      </motion.div>
+
+      {/* Top band — static on scroll; under copy (z1) so headline stays readable */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          lineHeight: 0,
+        }}
+      >
+        <img
+          src={heroTopSrc}
+          alt=""
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            verticalAlign: 'top',
+          }}
+        />
       </div>
 
-      {/* Landmark skyline — full width, intrinsic height (no cover crop / no mask) */}
-      <div
+      {/* Landmarks / skyline — full width, intrinsic height; same scroll motion as before (was single hero.png) */}
+      <motion.div
         aria-hidden="true"
         style={{
           position: 'absolute',
@@ -190,10 +278,11 @@ export const Hero = ({ tweaks }) => {
           zIndex: 50,
           pointerEvents: 'none',
           lineHeight: 0,
+          y: skylineY,
         }}
       >
         <img
-          src={heroSkylineSrc}
+          src={heroBottomSrc}
           alt=""
           style={{
             width: '100%',
@@ -202,12 +291,12 @@ export const Hero = ({ tweaks }) => {
             verticalAlign: 'bottom',
           }}
         />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
-export const HeroDashboard = () => (
+export const HeroDashboard = ({ imageHeight } = {}) => (
   <motion.div
     initial={{ opacity: 0, y: 40, rotateX: 10 }}
     animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -329,22 +418,16 @@ export const HeroDashboard = () => (
           >
             app.globalcodio.ai
           </span>
-          <button
-            type="button"
-            aria-label="Reload page"
-            title="Reload"
-            onClick={() => window.location.reload()}
+          <span
+            aria-hidden="true"
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               padding: 2,
               margin: 0,
-              border: 'none',
-              background: 'none',
               color: 'inherit',
-              cursor: 'pointer',
-              borderRadius: 6,
+              cursor: 'default',
               flexShrink: 0,
               lineHeight: 0,
             }}
@@ -363,34 +446,8 @@ export const HeroDashboard = () => (
               <path d="M21 2v6h-6" />
               <path d="M20.49 15a9 9 0 1 1-2.12-9.36L21 10" />
             </svg>
-          </button>
+          </span>
         </div>
-      </div>
-
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 6,
-          padding: '4px 8px',
-          background: '#fff',
-          border: '1px solid var(--line)',
-          borderRadius: 999,
-          flexShrink: 0,
-        }}
-        aria-hidden="true"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M8 2v8M5.5 6.5L8 9l2.5-2.5" />
-          <rect x="3" y="10" width="10" height="4" rx="1" />
-        </svg>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round">
-          <path d="M8 3.5v9M3.5 8h9" />
-        </svg>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.35">
-          <rect x="3" y="4" width="7" height="9" rx="1" />
-          <rect x="6" y="3" width="7" height="9" rx="1" opacity={0.45} />
-        </svg>
       </div>
 
       <div
@@ -426,13 +483,13 @@ export const HeroDashboard = () => (
         overflow: 'hidden',
       }}
     >
-      <img
+      <motion.img
         src="assets/dashboard.png"
         alt="GlobalCodio case manager dashboard"
         style={{
           display: 'block',
           width: '100%',
-          height: 'clamp(220px, 40vw, 480px)',
+          height: imageHeight ?? 'clamp(220px, 40vw, 480px)',
           objectFit: 'cover',
           /* Was bottom center — cropped off top of UI; ~72% shows more from the start without full reflow */
           objectPosition: 'center 25%',

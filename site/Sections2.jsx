@@ -276,8 +276,39 @@ export const Footer = () => (
         <div>© 2026 GlobalCodio Inc. · San Francisco · Delhi · London</div>
         <div className="mono" style={{letterSpacing:'.05em'}}>v2026.2 · Apr 22, 2026</div>
       </div>
-      <div aria-hidden="true" className="display" style={{fontSize:'clamp(72px,18vw,260px)',marginTop:48,color:'var(--surface)',pointerEvents:'none',textAlign:'center',letterSpacing:'-0.03em',lineHeight:.95,userSelect:'none'}}>
-        GlobalCodio<em style={{fontStyle:'italic',color:'var(--blue-soft)'}}>.</em>
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'relative',
+          marginTop: 48,
+          textAlign: 'center',
+        }}
+      >
+        <div
+          className="display"
+          style={{
+            fontSize: 'clamp(72px,18vw,260px)',
+            color: 'var(--surface)',
+            pointerEvents: 'none',
+            letterSpacing: '-0.03em',
+            lineHeight: 0.95,
+            userSelect: 'none',
+          }}
+        >
+          GlobalCodio<span style={{ color: 'var(--blue-soft)' }}>.ai</span>
+        </div>
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: '50%',
+            pointerEvents: 'none',
+            background: 'linear-gradient(to top, #fff 0%, rgba(255,255,255,0.92) 28%, rgba(255,255,255,0.4) 62%, rgba(255,255,255,0) 100%)',
+          }}
+        />
       </div>
       <style>{`@media(max-width:900px){.ft-grid{grid-template-columns:1fr 1fr !important;}}`}</style>
     </div>
