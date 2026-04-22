@@ -104,7 +104,7 @@ export const AgentOrbit = () => {
                   width:56,height:56,borderRadius:'50%',
                   background:'var(--ink-2)',border:'1px solid rgba(255,255,255,.12)',
                   display:'grid',placeItems:'center',
-                  fontSize:13,fontWeight:600,color:'#fff',
+                  fontSize:13,fontWeight:650,color:'#fff',
                   fontFamily:'var(--mono)',
                   boxShadow:'0 10px 30px -10px rgba(0,0,0,.5)',
                 }}>{a.n}</div>
@@ -161,9 +161,9 @@ export const Testimonial = () => (
         <em style={{fontStyle:'italic',color:'var(--blue)'}}>"</em>When USCIS shifted a rule at 4pm, every affected case carried an impact memo by morning — with a plain-English explanation for the employee. That used to be a three-day fire drill.<em style={{fontStyle:'italic',color:'var(--blue)'}}>"</em>
       </motion.blockquote>
       <div className="reveal d2" style={{display:'inline-flex',alignItems:'center',gap:14}}>
-        <div style={{width:44,height:44,borderRadius:'50%',background:'var(--ink)',color:'#fff',display:'grid',placeItems:'center',fontWeight:500,fontSize:15}}>MR</div>
+        <div style={{width:44,height:44,borderRadius:'50%',background:'var(--ink)',color:'#fff',display:'grid',placeItems:'center',fontWeight:560,fontSize:15}}>MR</div>
         <div style={{textAlign:'left'}}>
-          <div style={{fontWeight:600,fontSize:15}}>Maya Reyes</div>
+          <div style={{fontWeight:650,fontSize:15}}>Maya Reyes</div>
           <div style={{fontSize:13.5,color:'var(--muted)'}}>Managing Partner · Reyes & Leung Immigration</div>
         </div>
       </div>
@@ -201,7 +201,7 @@ export const CaseStudies = () => {
               <p style={{fontSize:14.5,color:'var(--ink-3)',lineHeight:1.6,flex:1}}>{c.b}</p>
               <div style={{display:'flex',justifyContent:'space-between',paddingTop:16,borderTop:'1px solid var(--line)',alignItems:'center'}}>
                 <span style={{fontSize:13,color:'var(--muted)'}}>{c.firm}</span>
-                <span style={{fontSize:13,color:'var(--blue)',fontWeight:500}}>Read →</span>
+                <span style={{fontSize:13,color:'var(--blue)',fontWeight:600}}>Read →</span>
               </div>
             </article>
           ))}
@@ -260,8 +260,8 @@ export const Footer = () => (
     <div className="container">
       <div style={{display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr 1fr',gap:32,marginBottom:48}} className="ft-grid">
         <div style={{maxWidth:'32ch'}}>
-          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16,fontWeight:600,fontSize:17,letterSpacing:'-0.01em'}}>
-            <Logo/> GlobalCodio
+          <div style={{display:'flex',alignItems:'center',marginBottom:16,lineHeight:0}}>
+            <Logo height={36} />
           </div>
           <p style={{fontSize:13.5,color:'var(--muted)',lineHeight:1.6}}>The AI platform for global immigration. Built for attorneys, corporations, and the people moving across borders.</p>
         </div>
@@ -294,7 +294,7 @@ export const Tweaks = ({tweaks, onChange}) => {
   return (
     <div className="tweaks-panel">
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
-        <div style={{fontSize:17,fontWeight:600,letterSpacing:'-0.01em'}}>Tweaks</div>
+        <div style={{fontSize:17,fontWeight:650,letterSpacing:'-0.01em'}}>Tweaks</div>
         <span className="mono" style={{fontSize:10,color:'var(--blue)',letterSpacing:'.12em'}}>LIVE</span>
       </div>
       <div className="row"><h4>Headline</h4><Seg k="headline" options={[['edge','Edge'],['quiet','Quiet'],['craft','Craft'],['scale','Scale']]}/></div>

@@ -5,17 +5,17 @@ import { motion } from 'framer-motion';
 export const LogoStrip = () => {
   const logos = ['Kirkland & Ellis','Latham & Watkins','Skadden','Paul Weiss','Cravath','Wachtell','Sullivan & Cromwell','Ropes & Gray','Cleary Gottlieb','Davis Polk','Jones Day','Baker McKenzie'];
   return (
-    <section className="logo-strip-section" style={{padding:'56px 0 60px',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)'}}>
+    <section className="logo-strip-section" style={{padding:'56px 0 60px',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'#fff'}}>
       <div className="container">
         <div className="reveal" style={{textAlign:'center',marginBottom:28}}>
           <span className="eyebrow" style={{color:'var(--muted)'}}>Trusted by immigration teams at</span>
         </div>
         <div className="reveal d1" style={{overflow:'hidden',position:'relative'}}>
-          <div style={{position:'absolute',left:0,top:0,bottom:0,width:120,background:'linear-gradient(to right, var(--surface-tint), transparent)',zIndex:2}}/>
-          <div style={{position:'absolute',right:0,top:0,bottom:0,width:120,background:'linear-gradient(to left, var(--surface-tint), transparent)',zIndex:2}}/>
+          <div style={{position:'absolute',left:0,top:0,bottom:0,width:120,background:'linear-gradient(to right, #fff, transparent)',zIndex:2}}/>
+          <div style={{position:'absolute',right:0,top:0,bottom:0,width:120,background:'linear-gradient(to left, #fff, transparent)',zIndex:2}}/>
           <div className="logo-strip-track" style={{display:'flex',gap:64,animation:'marquee 48s linear infinite',whiteSpace:'nowrap'}}>
             {[...logos,...logos].map((l,i)=>(
-              <span key={i} style={{fontSize:22,color:'var(--ink-3)',fontWeight:400,letterSpacing:'-0.02em',opacity:.82}}>{l}</span>
+              <span key={i} style={{fontSize:22,color:'var(--ink-3)',fontWeight:560,letterSpacing:'-0.02em',opacity:.78}}>{l}</span>
             ))}
           </div>
         </div>
@@ -60,7 +60,7 @@ export const ValueProp = () => (
         ].map((v,i)=>(
           <div key={i} className={`reveal d${i+1}`}>
             <div className="mono" style={{fontSize:12,color:'var(--blue)',marginBottom:20,letterSpacing:'.08em'}}>/{v.n}</div>
-            <h3 style={{fontSize:24,fontWeight:600,letterSpacing:'-0.015em',marginBottom:14,lineHeight:1.2}}>{v.h}</h3>
+            <h3 style={{fontSize:24,fontWeight:650,letterSpacing:'-0.015em',marginBottom:14,lineHeight:1.2}}>{v.h}</h3>
             <p style={{fontSize:15.5,color:'var(--ink-3)',lineHeight:1.55}}>{v.b}</p>
           </div>
         ))}

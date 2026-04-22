@@ -45,7 +45,7 @@ const PLogo = () => (
 const PHero = ({tweaks}) => {
   const h = {
     perform:{a:'Immigration',b:'Performance'},
-    edge:{a:'Immigration,',b:'at the edge'},
+    edge:{a:'Immigration,',b:'at the edge.'},
     scale:{a:'Scale',b:'immigration.'},
   }[tweaks?.headline||'perform'];
 
