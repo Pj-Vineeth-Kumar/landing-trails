@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'lenis/dist/lenis.css';
-import '../site.css';
+import './styles/global.css';
 import App from './App.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

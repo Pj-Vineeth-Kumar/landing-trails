@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Nav } from '../site/Nav.jsx';
-import { Hero } from '../site/Hero.jsx';
-import { LogoStrip, ValueProp, HowItWorks } from '../site/Sections1.jsx';
+import { Nav } from './components/Nav.jsx';
+import { Hero } from './components/Hero.jsx';
+import { LogoStrip, ValueProp, HowItWorks } from './components/MarketingSections.jsx';
 import {
   AgentOrbit,
   Testimonial,
@@ -13,7 +13,7 @@ import {
   CTA,
   Footer,
   Tweaks,
-} from '../site/Sections2.jsx';
+} from './components/ContentSections.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
