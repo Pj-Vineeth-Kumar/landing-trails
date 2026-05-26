@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const ease = [0.2, 0.7, 0.2, 1];
 
@@ -28,68 +28,15 @@ const rise = {
 
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
-/**
- * Scroll 0 → 1 over ~0.38× viewport (Lenis provides smooth inertial scroll; no extra spring here).
- * `vhPxRef` is kept in sync for pixel-accurate viewport-relative shifts.
- */
-function useHeroScroll() {
-  const { scrollY } = useScroll();
-  const rangeRef = useRef(400);
-  const vhPxRef = useRef(800);
-  const motionOff = useMotionValue(0);
-  const [reduced, setReduced] = useState(false);
+/* Matches `Nav` fixed bar: `top: max(16px, safe-area)` + row padding (12+12) + logo (32) — flex-1 then centers between this and the dashboard. */
+const HERO_NAV_CLEARANCE = 'calc(56px + max(16px, env(safe-area-inset-top, 0px)))';
 
-  useEffect(() => {
-    const sync = () => {
-      const h = window.innerHeight;
-      vhPxRef.current = h;
-      rangeRef.current = Math.min(520, Math.max(240, h * 0.38));
-    };
-    sync();
-    window.addEventListener('resize', sync);
-    return () => window.removeEventListener('resize', sync);
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduced(mq.matches);
-    const h = () => setReduced(mq.matches);
-    mq.addEventListener('change', h);
-    return () => mq.removeEventListener('change', h);
-  }, []);
-
-  useEffect(() => {
-    motionOff.set(reduced ? 1 : 0);
-  }, [reduced, motionOff]);
-
-  const pScroll = useTransform(scrollY, (y) => {
-    const t = y / rangeRef.current;
-    return t <= 0 ? 0 : t >= 1 ? 1 : t;
-  });
-  const scrollP = useTransform([pScroll, motionOff], ([a, b]) => a * (1 - b));
-  return { scrollP, vhPxRef };
-}
-
-/* Static assets in /public (sync from project root when you replace files) */
-const heroBackgroundSrc = `${import.meta.env.BASE_URL}main-back.png`;
-const heroTopSrc = `${import.meta.env.BASE_URL}top1.png`;
-const heroBottomSrc = `${import.meta.env.BASE_URL}bottom2.png`;
+/* Static assets in /public */
+const heroBackgroundSrc = `${import.meta.env.BASE_URL}sky.png`;
 const dashboardPreviewSrc = `${import.meta.env.BASE_URL}assets/dashboard.png`;
 
 /* Hero — GoGetta structure: editorial headline, sub, CTAs, then dashboard preview below */
 export const Hero = ({ tweaks }) => {
-  const { scrollP, vhPxRef } = useHeroScroll();
-
-  /** Viewport-fraction for dashboard lift + matching preview-area growth */
-  const dashVh = 0.024;
-  const minH = useTransform(scrollP, (p) => `${(1 + 0.036 * p) * 100}dvh`);
-  const skylineY = useTransform(scrollP, (p) => p * 0.036 * vhPxRef.current);
-  const dashboardY = useTransform(scrollP, (p) => -p * dashVh * vhPxRef.current);
-  const dashboardImgHeight = useTransform(scrollP, (p) => {
-    const add = p * dashVh * vhPxRef.current;
-    return `calc(clamp(220px, 40vw, 480px) + ${add}px)`;
-  });
-
   const headlines = {
     edge: { a: 'Immigration,', b: 'at the edge.' },
     quiet: { a: 'The quiet layer', b: 'under every filing' },
@@ -100,17 +47,17 @@ export const Hero = ({ tweaks }) => {
   const h = headlines[tweaks?.headline] || headlines.edge;
 
   return (
-    <motion.section
+    <section
       className="hero-full-viewport"
       style={{
         display: 'flex',
         flexDirection: 'column',
-        padding: '96px 0 0',
+        boxSizing: 'border-box',
+        /* min height: .hero-full-viewport (100dvh) */
+        padding: `${HERO_NAV_CLEARANCE} 0 0`,
         position: 'relative',
         overflow: 'hidden',
         isolation: 'isolate',
-        boxSizing: 'border-box',
-        minHeight: minH,
         backgroundColor: '#eef3f8',
         backgroundImage: `url(${heroBackgroundSrc})`,
         backgroundSize: 'cover',
@@ -118,13 +65,15 @@ export const Hero = ({ tweaks }) => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Fills space below nav; centers copy vertically in the gap above the dashboard */}
+      {/* Fills from nav bottom to dashboard top; centers copy in that band */}
       <div
+        className="hero-copy-stack"
         style={{
-          flex: 1,
+          flex: '1 1 0',
           minHeight: 0,
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
           zIndex: 2,
@@ -209,20 +158,19 @@ export const Hero = ({ tweaks }) => {
         </motion.div>
       </div>
 
-      {/* Dashboard preview — pinned below the centered copy block; moves up slightly on scroll */}
-      <motion.div
-        className="reveal d4"
+      {/* Dashboard preview — not scroll-animated: avoids Framer+Lenis + overflow clipping glitches */}
+      <div
+        className="hero-dashboard-slot"
         style={{
           position: 'relative',
           zIndex: 2,
           flexShrink: 0,
           marginBottom: -1,
           width: '100%',
-          y: dashboardY,
         }}
       >
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <HeroDashboard imageHeight={dashboardImgHeight} />
+          <HeroDashboard />
         </div>
         {/* Full-bleed blend (breaks out of .container) */}
         <div
@@ -241,59 +189,8 @@ export const Hero = ({ tweaks }) => {
               'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 32%, rgba(255,255,255,0.55) 68%, rgba(255,255,255,0.94) 88%, #ffffff 100%)',
           }}
         />
-      </motion.div>
-
-      {/* Top band — static on scroll; under copy (z1) so headline stays readable */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          zIndex: 1,
-          pointerEvents: 'none',
-          lineHeight: 0,
-        }}
-      >
-        <img
-          src={heroTopSrc}
-          alt=""
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            verticalAlign: 'top',
-          }}
-        />
       </div>
-
-      {/* Landmarks / skyline — full width, intrinsic height; same scroll motion as before (was single hero.png) */}
-      <motion.div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 50,
-          pointerEvents: 'none',
-          lineHeight: 0,
-          y: skylineY,
-        }}
-      >
-        <img
-          src={heroBottomSrc}
-          alt=""
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            verticalAlign: 'bottom',
-          }}
-        />
-      </motion.div>
-    </motion.section>
+    </section>
   );
 };
 

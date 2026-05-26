@@ -110,6 +110,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* Nav */
 .navlink{font-size:14px;color:var(--ink-3);font-weight:560;letter-spacing:0.01em;transition:color .2s;}
 .navlink:hover{color:var(--ink);}
-/* Lighter bar + links than default .navlink */
-.site-nav .navlink{color:var(--muted-2);font-weight:520;}
-.site-nav .navlink:hover{color:var(--ink-3);}
+/* Sits on hero sky + photos: need real contrast (muted-2 is illegible on bright clouds) */
+.site-nav .navlink{color:var(--ink-2);font-weight:560;}
+.site-nav .navlink:hover{color:var(--ink);}

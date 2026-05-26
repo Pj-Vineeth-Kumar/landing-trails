@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export const LogoStrip = () => {
   const logos = ['Kirkland & Ellis','Latham & Watkins','Skadden','Paul Weiss','Cravath','Wachtell','Sullivan & Cromwell','Ropes & Gray','Cleary Gottlieb','Davis Polk','Jones Day','Baker McKenzie'];
   return (
-    <section className="logo-strip-section" style={{padding:'56px 0 60px',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'#fff'}}>
+    <section className="logo-strip-section" style={{ padding: '56px 0 60px', background: '#fff' }}>
       <div className="container">
         <div className="reveal" style={{textAlign:'center',marginBottom:28}}>
           <span className="eyebrow" style={{color:'var(--muted)'}}>Trusted by immigration teams at</span>
