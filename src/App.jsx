@@ -10,6 +10,7 @@ import {
   Testimonial,
   CaseStudies,
   Metrics,
+  PricingTiers,
   CTA,
   Footer,
   Tweaks,
@@ -58,7 +59,7 @@ export default function App() {
     r.style.setProperty('--blue-soft', accents.s);
   }, [tweaks.accent]);
 
-  /* Global smooth scroll — one RAF via GSAP ticker; keep ScrollTrigger in sync. Skipped for reduced motion. */
+  /* Global smooth scroll - one RAF via GSAP ticker; keep ScrollTrigger in sync. Skipped for reduced motion. */
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const lenis = new Lenis({
@@ -102,7 +103,7 @@ export default function App() {
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
-  /* GSAP — scroll-driven accents (cards, metrics, logo strip) */
+  /* GSAP - scroll-driven accents (cards, metrics, logo strip) */
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -170,6 +171,7 @@ export default function App() {
         <Testimonial />
         <CaseStudies />
         <Metrics />
+        <PricingTiers />
         <CTA />
       </main>
       <Footer />

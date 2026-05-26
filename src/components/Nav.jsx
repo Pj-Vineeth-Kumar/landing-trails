@@ -6,7 +6,7 @@ const logoSrc = `${import.meta.env.BASE_URL}logo.png`;
 /** Pill radius matches .btn (56px) for one design system curve */
 const NAV_PILL_RADIUS = 56;
 
-/** Brand lockup — `public/logo.png` (GLOBALCODIO AI). Use `wide` for large footer watermark. */
+/** Brand lockup - `public/logo.png` (GLOBALCODIO AI). Use `wide` for large footer watermark. */
 export const Logo = ({ height = 30, style, className, alt = 'GLOBALCODIO AI', wide }) => (
   <img
     src={logoSrc}
@@ -21,7 +21,7 @@ export const Logo = ({ height = 30, style, className, alt = 'GLOBALCODIO AI', wi
   />
 );
 
-/* Nav — floating glass pill */
+/* Nav - floating glass pill */
 export const Nav = () => {
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
@@ -94,9 +94,9 @@ export const Nav = () => {
           </a>
           <div style={{ display: 'flex', gap: 28, alignItems: 'center', flex: 1, justifyContent: 'center' }} className="navlinks">
             <a className="navlink" href="#platform">Platform</a>
-            <a className="navlink" href="#how">How it works</a>
-            <a className="navlink" href="#customers">Customers</a>
-            <a className="navlink" href="#cases">Case studies</a>
+            <a className="navlink" href="#how">Questions</a>
+            <a className="navlink" href="#customers">Partners</a>
+            <a className="navlink" href="#cases">ROI</a>
             <a className="navlink" href="#pricing">Pricing</a>
           </div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0 }}>

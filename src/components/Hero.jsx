@@ -28,21 +28,21 @@ const rise = {
 
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
-/* Matches `Nav` fixed bar: `top: max(16px, safe-area)` + row padding (12+12) + logo (32) — flex-1 then centers between this and the dashboard. */
+/* Matches `Nav` fixed bar: `top: max(16px, safe-area)` + row padding (12+12) + logo (32) - flex-1 then centers between this and the dashboard. */
 const HERO_NAV_CLEARANCE = 'calc(56px + max(16px, env(safe-area-inset-top, 0px)))';
 
 /* Static assets in /public */
 const heroBackgroundSrc = `${import.meta.env.BASE_URL}sky.png`;
 const dashboardPreviewSrc = `${import.meta.env.BASE_URL}assets/dashboard.png`;
 
-/* Hero — GoGetta structure: editorial headline, sub, CTAs, then dashboard preview below */
+/* Hero - GoGetta structure: editorial headline, sub, CTAs, then dashboard preview below */
 export const Hero = ({ tweaks }) => {
   const headlines = {
-    edge: { a: 'Immigration,', b: 'at the edge.' },
-    quiet: { a: 'The quiet layer', b: 'under every filing' },
-    craft: { a: 'Global immigration,', b: 'crafted by agents' },
-    perform: { a: 'Immigration,', b: 'performance' },
-    scale: { a: 'Immigration', b: 'that scales' },
+    edge: { a: 'We deploy it. We run it', b: 'You practice law.' },
+    quiet: { a: 'We run the stack.', b: 'You own the judgment.' },
+    craft: { a: 'Outcome-based.', b: 'Immigration-exclusive.' },
+    perform: { a: 'Partnership', b: 'not software licensing.' },
+    scale: { a: 'Operational leverage', b: 'for immigration firms.' },
   };
   const h = headlines[tweaks?.headline] || headlines.edge;
 
@@ -98,7 +98,7 @@ export const Hero = ({ tweaks }) => {
                 animation: 'livepulse 2s infinite',
               }}
             />
-            v2026.2 — Policy Intelligence
+            Immigration Technology Partner
           </span>
         </motion.div>
 
@@ -108,18 +108,16 @@ export const Hero = ({ tweaks }) => {
             fontSize: 'clamp(35px, 6.4vw, 96px)',
             textAlign: 'center',
             marginBottom: 16,
-            whiteSpace: 'nowrap',
           }}
           variants={headlineStagger}
         >
-          <motion.span style={{ display: 'inline' }} variants={rise}>
+          <motion.span style={{ display: 'block' }} variants={rise}>
             {h.a}
           </motion.span>
           <motion.em
-            style={{ display: 'inline', fontStyle: 'italic', color: 'var(--blue)' }}
+            style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}
             variants={rise}
           >
-            {'\u00A0'}
             {h.b}
           </motion.em>
         </motion.h1>
@@ -130,14 +128,15 @@ export const Hero = ({ tweaks }) => {
             fontSize: 'clamp(13.5px, 1.04vw, 16px)',
             lineHeight: 1.45,
             color: 'var(--ink-3)',
-            maxWidth: '62ch',
+            maxWidth: '80ch',
             textAlign: 'center',
             margin: '0 auto 20px',
           }}
           variants={rise}
         >
-          A workforce of AI agents for document intake, form preparation, compliance verification, and
-          evidentiary drafting. Attorneys focus on judgment. The platform handles the mechanical 60-70%.
+          AI-powered case management, Forward Deployed Engineers, and fully Managed Technology
+          Operations - built exclusively for immigration law firms. We deploy it. We run it. You practice
+          law.
         </motion.p>
 
         <motion.div
@@ -146,19 +145,19 @@ export const Hero = ({ tweaks }) => {
           variants={rise}
         >
           <motion.a href="#cta" className="btn btn-dark" {...btnTap}>
-            Request a walkthrough
+            Schedule a call
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 8h10M9 4l4 4-4 4" />
             </svg>
           </motion.a>
           <motion.a href="#platform" className="btn btn-surface" {...btnTap}>
-            View the platform
+            See the stack
           </motion.a>
         </motion.div>
         </motion.div>
       </div>
 
-      {/* Dashboard preview — not scroll-animated: avoids Framer+Lenis + overflow clipping glitches */}
+      {/* Dashboard preview - not scroll-animated: avoids Framer+Lenis + overflow clipping glitches */}
       <div
         className="hero-dashboard-slot"
         style={{
@@ -211,7 +210,7 @@ export const HeroDashboard = ({ imageHeight } = {}) => (
       perspective: 1200,
     }}
   >
-    {/* Browser chrome — Safari-like light pills; icons use currentColor from header */}
+    {/* Browser chrome - Safari-like light pills; icons use currentColor from header */}
     <div
       className="hero-dash-chrome"
       style={{
@@ -389,7 +388,7 @@ export const HeroDashboard = ({ imageHeight } = {}) => (
           width: '100%',
           height: imageHeight ?? 'clamp(220px, 40vw, 480px)',
           objectFit: 'cover',
-          /* Was bottom center — cropped off top of UI; ~72% shows more from the start without full reflow */
+          /* Was bottom center - cropped off top of UI; ~72% shows more from the start without full reflow */
           objectPosition: 'center 25%',
         }}
       />

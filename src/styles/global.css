@@ -1,4 +1,4 @@
-/* GlobalCodio — GoGetta structure × Coinbase discipline × brand blue */
+/* GlobalCodio - GoGetta structure × Coinbase discipline × brand blue */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root{
@@ -47,7 +47,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .reveal-anim.in{opacity:1;transform:none;}
 .reveal-anim.d1{transition-delay:.06s;}.reveal-anim.d2{transition-delay:.12s;}.reveal-anim.d3{transition-delay:.18s;}.reveal-anim.d4{transition-delay:.24s;}.reveal-anim.d5{transition-delay:.3s;}
 
-/* Coinbase-style pill buttons — 56px radius */
+/* Coinbase-style pill buttons - 56px radius */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 28px;border-radius:56px;font-family:var(--sans);font-weight:650;font-size:15px;letter-spacing:0.01em;transition:all .25s cubic-bezier(.2,.7,.2,1);border:1px solid transparent;white-space:nowrap;}
 .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue);}
 .btn-primary:hover{background:var(--blue-hover);border-color:var(--blue-hover);}
@@ -92,7 +92,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* Orbit wrapper */
 .orbit-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px dashed var(--line-2);border-radius:50%;}
 
-/* Hero — one full viewport tall (dvh when supported for mobile browser chrome) */
+/* Hero - one full viewport tall (dvh when supported for mobile browser chrome) */
 .hero-full-viewport{min-height:100vh;min-height:100dvh;}
 /* Hero-only: tighter eyebrow (~20% smaller than .pill), shorter CTAs */
 .hero-full-viewport .pill{

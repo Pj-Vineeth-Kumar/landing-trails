@@ -1,14 +1,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-/* Logo strip — GoGetta-style scrolling wall of firms */
+/* Logo strip - GoGetta-style scrolling wall of firms */
 export const LogoStrip = () => {
-  const logos = ['Kirkland & Ellis','Latham & Watkins','Skadden','Paul Weiss','Cravath','Wachtell','Sullivan & Cromwell','Ropes & Gray','Cleary Gottlieb','Davis Polk','Jones Day','Baker McKenzie'];
+  const logos = [
+    'Boutique & solo immigration',
+    'Regional full-service immigration',
+    'National immigration practices',
+    'Corporate mobility partners',
+    'Family & removal defense firms',
+    'EB-5 & investor practices',
+    'Global immigration boutiques',
+    'Cap-season H-1B teams',
+    'Compliance-heavy PERM shops',
+    'High-volume consular firms',
+    'Enterprise immigration groups',
+    'HR–legal hybrid teams',
+  ];
   return (
     <section className="logo-strip-section" style={{ padding: '56px 0 60px', background: '#fff' }}>
       <div className="container">
         <div className="reveal" style={{textAlign:'center',marginBottom:28}}>
-          <span className="eyebrow" style={{color:'var(--muted)'}}>Trusted by immigration teams at</span>
+          <span className="eyebrow" style={{color:'var(--muted)'}}>Immigration practices from solo to enterprise</span>
         </div>
         <div className="reveal d1" style={{overflow:'hidden',position:'relative'}}>
           <div style={{position:'absolute',left:0,top:0,bottom:0,width:120,background:'linear-gradient(to right, #fff, transparent)',zIndex:2}}/>
@@ -24,7 +37,7 @@ export const LogoStrip = () => {
   );
 };
 
-/* Value Prop band — GoGetta structure: big left-aligned statement, supporting columns */
+/* Value Prop band - promise headline + three pillar columns */
 export const ValueProp = () => (
   <section className="sec">
     <div className="container">
@@ -37,7 +50,7 @@ export const ValueProp = () => (
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
         >
-          The platform
+          Our promise
         </motion.div>
         <motion.h2
           className="display"
@@ -47,16 +60,20 @@ export const ValueProp = () => (
           viewport={{ once: true, amount: 0.45 }}
           transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}
         >
-          <span style={{display:'block',width:'1000px'}}>Built for the 60% of work</span>
-          <em style={{display:'block',fontStyle:'italic',color:'var(--blue)',width:'1000px'}}>that shouldn't need a lawyer.</em>
+          <span style={{display:'block',width:'1000px'}}>We don&apos;t charge for software -</span>
+          <em style={{display:'block',fontStyle:'italic',color:'var(--blue)',width:'1000px'}}>we charge for outcomes.</em>
         </motion.h2>
+      </div>
+
+      <div className="reveal" style={{marginBottom:32}}>
+        <div className="eyebrow" style={{color:'var(--blue)',marginBottom:0}}>Three pillars</div>
       </div>
 
       <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:40}} className="vp-grid">
         {[
-          {n:'01',h:'Intake becomes instant',b:'Agents read incoming emails, WhatsApp messages, and forwarded documents. Cases open themselves, questionnaires pre-fill, and attorneys see structured data the first time they look.'},
-          {n:'02',h:'Drafts arrive pre-formed',b:'Forms populate from the questionnaire. Support letters draft in your firm\'s voice. RFE responses come with the cited statute already attached. You review; you don\'t assemble.'},
-          {n:'03',h:'Compliance runs constantly',b:'400+ rules check every case continuously. When USCIS shifts at 4pm, every affected case carries an impact memo by morning — with a plain-English explanation for the employee.'},
+          {n:'01',h:'AI-Powered Case Management',b:'Intelligent automation for intake, document extraction, form preparation, and deadline tracking - built for immigration workflows.'},
+          {n:'02',h:'Forward Deployed Engineers (FDE)',b:'Our engineers come to your firm, map your workflows, and configure the AI around how you work - not the other way around.'},
+          {n:'03',h:'Managed Technology Operations',b:'We run your entire technology operation ongoing - updates, integrations, optimization, and 24/7 support. Fully managed.'},
         ].map((v,i)=>(
           <div key={i} className={`reveal d${i+1}`}>
             <div className="mono" style={{fontSize:12,color:'var(--blue)',marginBottom:20,letterSpacing:'.08em'}}>/{v.n}</div>
@@ -70,34 +87,34 @@ export const ValueProp = () => (
   </section>
 );
 
-/* How it works — GoGetta-style numbered accordion / progressive reveal */
+/* How it works - GoGetta-style numbered accordion / progressive reveal */
 export const HowItWorks = () => {
   const [open, setOpen] = React.useState(0);
   const toggle = (i) => setOpen((prev) => (prev === i ? null : i));
   const steps = [
     {
       t:'01',
-      h:'A case request arrives.',
-      b:'Corporate HR forwards an offer letter, or an applicant emails your intake address. The Intake Agent parses the thread, classifies attachments, and maps them onto your questionnaire — no extra handoff, no attorney triage.',
-      meta:['< 1 day turnaround','21 document types','Email + WhatsApp + upload'],
+      h:'We already have case management software.',
+      b:'We integrate with your existing tools and layer AI, Forward Deployed Engineers, and Managed Technology Operations on top of what you have - so you keep your systems and still get the outcomes.',
+      meta:['Integrations','No rip-and-replace','AI + FDE + MTO layer'],
     },
     {
       t:'02',
-      h:'Documents extract themselves.',
-      b:'Document Intelligence reads passports, degrees, pay stubs, and I-94s. Each field comes with a confidence score and a source-box overlay. Attorneys accept in one click; they don\'t rekey.',
-      meta:['98.2% extraction accuracy','Field-level lineage','One-click accept'],
+      h:'We don\'t have time to implement new software.',
+      b:'That\'s exactly why we send an engineer to you. Your team keeps working while we handle discovery, configuration, training, and go-live - the implementation burden sits with us, not your attorneys.',
+      meta:['On-site FDE','Parallel to billable work','We own the rollout'],
     },
     {
       t:'03',
-      h:'Compliance checks run continuously.',
-      b:'400+ country- and visa-specific rules evaluate in parallel. Cases get a 0.0–1.0 risk score and route into the right playbook branch automatically. Policy Intelligence catches any rule drift overnight.',
-      meta:['< 10% RFE rate','7 jurisdictions','< 60s rule propagation'],
+      h:'AI makes mistakes on legal documents.',
+      b:'Every extraction and draft is attorney-reviewable. AI handles the grunt work - intake structure, field population, and first-pass assembly. You stay in control of what leaves the firm.',
+      meta:['Review-first workflow','Lineage to source','Human sign-off'],
     },
     {
       t:'04',
-      h:'Drafts arrive in your firm\'s voice.',
-      b:'Form Registry auto-populates I-129, I-140, PERM, LCA, and 40+ government forms. The Evidentiary Drafter writes support letters, cover letters, and RFE responses — tone-matched to your past filings, with track changes.',
-      meta:['> 95% field acceptance','4× faster first drafts','Per-paragraph confidence'],
+      h:'What you get in year one.',
+      b:'Immigration firms that partner with GlobalCodio typically see a 3× return in year one through reduced operational costs and significantly increased case volume - without adding headcount for IT or implementation.',
+      meta:['3× average year-one return','$150K avg. cost savings','+20% cases, same team'],
     },
   ];
 
@@ -106,13 +123,13 @@ export const HowItWorks = () => {
       <div className="container">
         <div style={{display:'grid',gridTemplateColumns:'1fr 1.4fr',gap:80,alignItems:'start'}} className="how-grid">
           <div className="reveal" style={{position:'sticky',top:120}}>
-            <div className="eyebrow" style={{color:'var(--blue)',marginBottom:20}}>How it works</div>
+            <div className="eyebrow" style={{color:'var(--blue)',marginBottom:20}}>Common questions</div>
             <h2 className="display" style={{fontSize:'clamp(40px,5.5vw,80px)',letterSpacing:'-0.025em',marginBottom:28}}>
-              <span style={{display:'block'}}>Four agents,</span>
-              <em style={{display:'block',fontStyle:'italic',color:'var(--blue)'}}>one flow.</em>
+              <span style={{display:'block'}}>Straight answers,</span>
+              <em style={{display:'block',fontStyle:'italic',color:'var(--blue)'}}>before you commit.</em>
             </h2>
             <p style={{fontSize:16,color:'var(--ink-3)',lineHeight:1.6,maxWidth:'38ch'}}>
-              A case moves from inbox to filing without the usual twenty handoffs. Every step is auditable, reversible, and tied back to its source.
+              The same objections come up on every sales call - here is how we address them in practice, without changing how your firm earns fees day to day.
             </p>
           </div>
 
