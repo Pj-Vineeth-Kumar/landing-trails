@@ -1,0 +1,35 @@
+# GlobalCodio
+
+> AI for Global Immigration: Cut Costs, Grow Revenue.
+
+GlobalCodio is the AI-powered platform and global ecosystem built exclusively for immigration teams — law firms and corporate immigration departments. We deploy AI case management, manage technology operations end-to-end, and connect teams to a global immigration partner network.
+
+## Product
+
+- AI Case Management: intake, document extraction, form preparation, deadlines, renewals, client communication
+- Managed Technology Operations: implementation, configuration, integrations, optimization, dedicated support
+- Global Immigration Ecosystem: translators, document authentication, foreign attorneys, medical exams, couriers
+
+## Audiences
+
+- Immigration law firms (solo, mid-size, enterprise)
+- Corporate immigration departments and mobility teams
+
+## Pricing
+
+Base retainer plus value share tied to cost savings and revenue growth. Typical year-one ROI: 3x.
+
+## Links
+
+- Website: https://www.globalcodio.ai/
+- App login: https://app.globalcodio.ai/login
+- Sitemap: https://www.globalcodio.ai/sitemap.xml
+
+## Contact
+
+- Email: support@globalcodio.ai
+- Phone: +1 (800) GBL-CDIO
+
+## Keywords
+
+AI global immigration, immigration case management, immigration law firm software, corporate immigration platform, managed technology operations, global immigration ecosystem, immigration automation, visa case management

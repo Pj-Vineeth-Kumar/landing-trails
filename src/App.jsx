@@ -3,47 +3,76 @@ import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Nav } from './components/Nav.jsx';
+import { SeoHead } from './components/SeoHead.jsx';
 import { Hero } from './components/Hero.jsx';
-import { LogoStrip, ValueProp, HowItWorks } from './components/MarketingSections.jsx';
+import { LogoStrip, OutcomesHeadline, ValueProp, HowItWorks } from './components/MarketingSections.jsx';
 import {
   AgentOrbit,
   Testimonial,
-  CaseStudies,
   Metrics,
-  PricingTiers,
+  PricingModel,
+  ValueLevers,
   CTA,
   Footer,
   Tweaks,
 } from './components/ContentSections.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ limitCallbacks: true });
+
+const REDUCED_MOTION = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const delayForReveal = (el) => {
+  if (el.classList.contains('d5')) return 0.24;
+  if (el.classList.contains('d4')) return 0.2;
+  if (el.classList.contains('d3')) return 0.15;
+  if (el.classList.contains('d2')) return 0.1;
+  if (el.classList.contains('d1')) return 0.05;
+  return 0;
+};
+
+const refreshScroll = () => {
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh();
+  });
+};
 
 export default function App() {
   const [tweaks, setTweaks] = React.useState(window.__TWEAKS__);
   const [editMode, setEditMode] = React.useState(false);
 
   useEffect(() => {
-    const vh = window.innerHeight;
-    const belowFold = [];
-    document.querySelectorAll('.reveal').forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.top >= vh * 0.95) {
-        el.classList.add('reveal-anim');
-        belowFold.push(el);
-      }
-    });
-    const io = new IntersectionObserver(
-      (es) =>
-        es.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in');
-            io.unobserve(e.target);
+    if (REDUCED_MOTION()) {
+      document.querySelectorAll('section:not(.hero-full-viewport) .reveal').forEach((el) => {
+        el.classList.add('is-in');
+      });
+      return undefined;
+    }
+
+    const reveals = gsap.utils.toArray('section:not(.hero-full-viewport):not(.logo-strip-section) .reveal');
+    const ctx = gsap.context(() => {
+      reveals.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 28, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.95,
+            delay: delayForReveal(el),
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 91%',
+              toggleActions: 'play none none none',
+              onEnter: () => el.classList.add('is-in'),
+            },
           }
-        }),
-      { threshold: 0.05, rootMargin: '0px 0px -5% 0px' }
-    );
-    belowFold.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+        );
+      });
+    });
+
+    return () => ctx.revert();
   }, [tweaks]);
 
   useEffect(() => {
@@ -59,33 +88,63 @@ export default function App() {
     r.style.setProperty('--blue-soft', accents.s);
   }, [tweaks.accent]);
 
-  /* Global smooth scroll - one RAF via GSAP ticker; keep ScrollTrigger in sync. Skipped for reduced motion. */
+  /* Lenis + GSAP ticker sync — industry standard for jitter-free smooth scroll */
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (REDUCED_MOTION()) return undefined;
+
     const lenis = new Lenis({
-      lerp: 0.08,
+      lerp: 0.1,
+      duration: 1.25,
       smoothWheel: true,
-      /* Slower travel per wheel / touch gesture */
-      wheelMultiplier: 0.72,
-      touchMultiplier: 0.8,
-      anchors: true,
+      wheelMultiplier: 0.88,
+      touchMultiplier: 1.05,
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      autoRaf: false,
+      prevent: (node) => node?.classList?.contains('nav-mobile-panel'),
     });
+
     lenis.on('scroll', ScrollTrigger.update);
+
+    const onAnchorClick = (e) => {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, {
+        offset: -88,
+        duration: 1.35,
+        easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+      });
+    };
+
+    document.addEventListener('click', onAnchorClick);
+
     const onTick = (time) => {
       lenis.raf(time * 1000);
     };
+
     gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
+
     const onLoad = () => {
       lenis.resize();
-      ScrollTrigger.refresh();
+      refreshScroll();
     };
+
     window.addEventListener('load', onLoad);
+    document.fonts?.ready?.then(refreshScroll);
+
     requestAnimationFrame(() => {
       lenis.resize();
-      ScrollTrigger.refresh();
+      refreshScroll();
     });
+
     return () => {
+      document.removeEventListener('click', onAnchorClick);
       window.removeEventListener('load', onLoad);
       gsap.ticker.remove(onTick);
       lenis.destroy();
@@ -103,20 +162,22 @@ export default function App() {
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
-  /* GSAP - scroll-driven accents (cards, metrics, logo strip) */
+  /* GSAP scroll accents — transform + opacity only for compositor-friendly motion */
   useEffect(() => {
+    if (REDUCED_MOTION()) return undefined;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '#cases .card',
-        { y: 36, opacity: 0 },
+        '#value-levers .value-levers-grid > article',
+        { y: 24, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.75,
-          stagger: 0.12,
+          stagger: 0.07,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: '#cases .cs-grid',
+            trigger: '#value-levers .value-levers-grid',
             start: 'top 88%',
             toggleActions: 'play none none none',
           },
@@ -124,31 +185,20 @@ export default function App() {
       );
 
       gsap.from('.m-grid > div', {
-        y: 28,
+        y: 24,
         opacity: 0,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: 'power2.out',
+        duration: 0.7,
+        stagger: 0.07,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: '.m-grid',
-          start: 'top 82%',
+          start: 'top 84%',
           toggleActions: 'play none none none',
         },
       });
 
-      gsap.from('.logo-strip-track span', {
-        opacity: 0,
-        y: 10,
-        duration: 0.45,
-        stagger: { each: 0.025, from: 'random' },
-        ease: 'sine.out',
-        scrollTrigger: {
-          trigger: '.logo-strip-section',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
     });
+
     return () => ctx.revert();
   }, [tweaks]);
 
@@ -161,17 +211,20 @@ export default function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <SeoHead />
       <Nav />
-      <main>
-        <Hero tweaks={tweaks} />
+      <main id="main-content">
+        <Hero />
         <LogoStrip />
+        <OutcomesHeadline />
         <ValueProp />
-        <HowItWorks />
         <AgentOrbit />
         <Testimonial />
-        <CaseStudies />
+        <HowItWorks />
+        <PricingModel />
+        <ValueLevers />
         <Metrics />
-        <PricingTiers />
         <CTA />
       </main>
       <Footer />

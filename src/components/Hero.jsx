@@ -28,35 +28,19 @@ const rise = {
 
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
-/* Matches `Nav` fixed bar: `top: max(16px, safe-area)` + row padding (12+12) + logo (32) - flex-1 then centers between this and the dashboard. */
-const HERO_NAV_CLEARANCE = 'calc(56px + max(16px, env(safe-area-inset-top, 0px)))';
-
 /* Static assets in /public */
 const heroBackgroundSrc = `${import.meta.env.BASE_URL}sky.png`;
 const dashboardPreviewSrc = `${import.meta.env.BASE_URL}assets/dashboard.png`;
 
 /* Hero - GoGetta structure: editorial headline, sub, CTAs, then dashboard preview below */
-export const Hero = ({ tweaks }) => {
-  const headlines = {
-    edge: { a: 'We deploy it. We run it', b: 'You practice law.' },
-    quiet: { a: 'We run the stack.', b: 'You own the judgment.' },
-    craft: { a: 'Outcome-based.', b: 'Immigration-exclusive.' },
-    perform: { a: 'Partnership', b: 'not software licensing.' },
-    scale: { a: 'Operational leverage', b: 'for immigration firms.' },
-  };
-  const h = headlines[tweaks?.headline] || headlines.edge;
-
-  return (
+export const Hero = () => (
     <section
-      className="hero-full-viewport"
+      className="hero-full-viewport hero-section"
       style={{
         display: 'flex',
         flexDirection: 'column',
         boxSizing: 'border-box',
-        /* min height: .hero-full-viewport (100dvh) */
-        padding: `${HERO_NAV_CLEARANCE} 0 0`,
         position: 'relative',
-        overflow: 'hidden',
         isolation: 'isolate',
         backgroundColor: '#eef3f8',
         backgroundImage: `url(${heroBackgroundSrc})`,
@@ -65,20 +49,7 @@ export const Hero = ({ tweaks }) => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Fills from nav bottom to dashboard top; centers copy in that band */}
-      <div
-        className="hero-copy-stack"
-        style={{
-          flex: '1 1 0',
-          minHeight: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative',
-          zIndex: 2,
-        }}
-      >
+      <div className="hero-copy-stack">
         <motion.div
           className="container"
           style={{ position: 'relative', zIndex: 2, width: '100%' }}
@@ -86,7 +57,7 @@ export const Hero = ({ tweaks }) => {
           initial="hidden"
           animate="show"
         >
-        <motion.div className="reveal" style={{ textAlign: 'center', marginBottom: 16 }} variants={rise}>
+        <motion.div className="reveal" style={{ textAlign: 'center', marginBottom: 'var(--space-sm)' }} variants={rise}>
           <span className="pill">
             <span
               style={{
@@ -98,50 +69,62 @@ export const Hero = ({ tweaks }) => {
                 animation: 'livepulse 2s infinite',
               }}
             />
-            Immigration Technology Partner
+            Built exclusively for immigration teams
           </span>
         </motion.div>
 
         <motion.h1
-          className="reveal d1 display"
+          className="reveal d1 display type-display-hero"
           style={{
-            fontSize: 'clamp(35px, 6.4vw, 96px)',
             textAlign: 'center',
-            marginBottom: 16,
+            marginBottom: 'var(--space-sm)',
+            lineHeight: 1.04,
           }}
           variants={headlineStagger}
         >
           <motion.span style={{ display: 'block' }} variants={rise}>
-            {h.a}
+            AI for Global Immigration
           </motion.span>
           <motion.em
             style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}
             variants={rise}
           >
-            {h.b}
+            Cut Costs, Grow Revenue.
           </motion.em>
         </motion.h1>
 
         <motion.p
-          className="reveal d2"
+          className="reveal d2 type-lead hero-lead hero-lead-full"
           style={{
-            fontSize: 'clamp(13.5px, 1.04vw, 16px)',
-            lineHeight: 1.45,
+            lineHeight: 1.55,
             color: 'var(--ink-3)',
-            maxWidth: '80ch',
             textAlign: 'center',
-            margin: '0 auto 20px',
+            margin: '0 auto var(--space-md)',
           }}
           variants={rise}
         >
-          AI-powered case management, Forward Deployed Engineers, and fully Managed Technology
-          Operations - built exclusively for immigration law firms. We deploy it. We run it. You practice
-          law.
+          GlobalCodio is the AI-powered platform and global ecosystem built exclusively for immigration teams
+          — whether you&apos;re a law firm or a corporate department. We deploy the technology, manage the
+          operations, and connect you to the partners you need to deliver end-to-end immigration services.
+        </motion.p>
+
+        <motion.p
+          className="reveal d2 type-lead hero-lead hero-lead-mobile"
+          style={{
+            lineHeight: 1.48,
+            color: 'var(--ink-3)',
+            textAlign: 'center',
+            margin: '0 auto var(--space-md)',
+          }}
+          variants={rise}
+        >
+          The AI-powered platform built for immigration teams — law firms and corporate departments.
+          We deploy the technology, manage operations, and connect you end-to-end.
         </motion.p>
 
         <motion.div
-          className="reveal d3"
-          style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
+          className="reveal d3 hero-cta-row"
+          style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
           variants={rise}
         >
           <motion.a href="#cta" className="btn btn-dark" {...btnTap}>
@@ -150,38 +133,26 @@ export const Hero = ({ tweaks }) => {
               <path d="M3 8h10M9 4l4 4-4 4" />
             </svg>
           </motion.a>
-          <motion.a href="#platform" className="btn btn-surface" {...btnTap}>
-            See the stack
-          </motion.a>
         </motion.div>
         </motion.div>
       </div>
 
-      {/* Dashboard preview - not scroll-animated: avoids Framer+Lenis + overflow clipping glitches */}
-      <div
-        className="hero-dashboard-slot"
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          flexShrink: 0,
-          marginBottom: -1,
-          width: '100%',
-        }}
-      >
+      {/* Dashboard preview — hidden on mobile via .hero-dashboard-slot in global.css */}
+      <div className="hero-dashboard-slot">
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
           <HeroDashboard />
         </div>
-        {/* Full-bleed blend (breaks out of .container) */}
         <div
           aria-hidden="true"
+          className="hero-dashboard-fade"
           style={{
             position: 'absolute',
             left: '50%',
             bottom: 0,
             transform: 'translateX(-50%)',
-            width: '100vw',
-            /* Short band: only the lower slice of the preview; no backdrop-blur (was fogging the whole image) */
-            height: 'clamp(120px, 32vw, 300px)',
+            width: '100%',
+            maxWidth: '100vw',
+            height: 'clamp(calc(120px * var(--ui-scale)), calc(32vw * var(--ui-scale)), calc(300px * var(--ui-scale)))',
             pointerEvents: 'none',
             zIndex: 6,
             background:
@@ -190,8 +161,7 @@ export const Hero = ({ tweaks }) => {
         />
       </div>
     </section>
-  );
-};
+);
 
 export const HeroDashboard = ({ imageHeight } = {}) => (
   <motion.div
@@ -382,11 +352,16 @@ export const HeroDashboard = ({ imageHeight } = {}) => (
     >
       <motion.img
         src={dashboardPreviewSrc}
-        alt="GlobalCodio case manager dashboard"
+        alt="GlobalCodio immigration case management dashboard for law firms and corporate teams"
+        width={1200}
+        height={630}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
         style={{
           display: 'block',
           width: '100%',
-          height: imageHeight ?? 'clamp(220px, 40vw, 480px)',
+          height: imageHeight ?? 'clamp(calc(220px * var(--ui-scale)), calc(40vw * var(--ui-scale)), calc(480px * var(--ui-scale)))',
           objectFit: 'cover',
           /* Was bottom center - cropped off top of UI; ~72% shows more from the start without full reflow */
           objectPosition: 'center 25%',
