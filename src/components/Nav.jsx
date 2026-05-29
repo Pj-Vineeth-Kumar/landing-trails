@@ -14,7 +14,7 @@ const ChevronRight = () => (
 );
 
 /** Brand lockup - `public/logo.png` (GLOBALCODIO AI). Use `wide` for large footer watermark. */
-export const Logo = ({ height, style, className, alt = 'GlobalCodio — AI for Global Immigration', wide }) => (
+export const Logo = ({ height, style, className, alt = 'GlobalCodio - AI Workforce for Global Immigration', wide }) => (
   <img
     src={logoSrc}
     alt={alt}

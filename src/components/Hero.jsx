@@ -69,7 +69,7 @@ export const Hero = () => (
                 animation: 'livepulse 2s infinite',
               }}
             />
-            Built exclusively for immigration teams
+            Your AI workforce - built, deployed, and managed
           </span>
         </motion.div>
 
@@ -83,13 +83,13 @@ export const Hero = () => (
           variants={headlineStagger}
         >
           <motion.span style={{ display: 'block' }} variants={rise}>
-            AI for Global Immigration
+            AI Workforce for Global Immigration.
           </motion.span>
           <motion.em
             style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}
             variants={rise}
           >
-            Cut Costs, Grow Revenue.
+            Deployed and Managed.
           </motion.em>
         </motion.h1>
 
@@ -103,9 +103,11 @@ export const Hero = () => (
           }}
           variants={rise}
         >
-          GlobalCodio is the AI-powered platform and global ecosystem built exclusively for immigration teams
-          — whether you&apos;re a law firm or a corporate department. We deploy the technology, manage the
-          operations, and connect you to the partners you need to deliver end-to-end immigration services.
+          GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce
+          - built, deployed, and managed end-to-end. Our AI Agents handle case management, client communications,
+          renewals, and business development, while our team runs the entire technology operation. Connected to a
+          global ecosystem of immigration partners, we help your team cut costs and grow revenue - without ever
+          managing technology again.
         </motion.p>
 
         <motion.p
@@ -118,8 +120,8 @@ export const Hero = () => (
           }}
           variants={rise}
         >
-          The AI-powered platform built for immigration teams — law firms and corporate departments.
-          We deploy the technology, manage operations, and connect you end-to-end.
+          Your own AI workforce for immigration - built, deployed, and managed end-to-end. Cut costs and grow
+          revenue without ever managing technology again.
         </motion.p>
 
         <motion.div
@@ -137,7 +139,7 @@ export const Hero = () => (
         </motion.div>
       </div>
 
-      {/* Dashboard preview — hidden on mobile via .hero-dashboard-slot in global.css */}
+      {/* Dashboard preview - hidden on mobile via .hero-dashboard-slot in global.css */}
       <div className="hero-dashboard-slot">
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
           <HeroDashboard />
@@ -352,7 +354,7 @@ export const HeroDashboard = ({ imageHeight } = {}) => (
     >
       <motion.img
         src={dashboardPreviewSrc}
-        alt="GlobalCodio immigration case management dashboard for law firms and corporate teams"
+        alt="GlobalCodio AI workforce immigration platform dashboard for law firms and corporate teams"
         width={1200}
         height={630}
         loading="eager"

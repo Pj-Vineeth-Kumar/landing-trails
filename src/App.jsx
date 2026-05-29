@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Nav } from './components/Nav.jsx';
 import { SeoHead } from './components/SeoHead.jsx';
 import { Hero } from './components/Hero.jsx';
-import { LogoStrip, OutcomesHeadline, ValueProp, HowItWorks } from './components/MarketingSections.jsx';
+import { LogoStrip, OutcomesHeadline, ValueProp, AgentCatalog, HowItWorks } from './components/MarketingSections.jsx';
 import {
   AgentOrbit,
   Testimonial,
@@ -88,7 +88,7 @@ export default function App() {
     r.style.setProperty('--blue-soft', accents.s);
   }, [tweaks.accent]);
 
-  /* Lenis + GSAP ticker sync — industry standard for jitter-free smooth scroll */
+  /* Lenis + GSAP ticker sync - industry standard for jitter-free smooth scroll */
   useEffect(() => {
     if (REDUCED_MOTION()) return undefined;
 
@@ -162,7 +162,7 @@ export default function App() {
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
-  /* GSAP scroll accents — transform + opacity only for compositor-friendly motion */
+  /* GSAP scroll accents - transform + opacity only for compositor-friendly motion */
   useEffect(() => {
     if (REDUCED_MOTION()) return undefined;
 
@@ -220,6 +220,7 @@ export default function App() {
         <OutcomesHeadline />
         <ValueProp />
         <AgentOrbit />
+        <AgentCatalog />
         <Testimonial />
         <HowItWorks />
         <PricingModel />

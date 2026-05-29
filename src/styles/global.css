@@ -155,6 +155,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .sec-metrics{padding:calc(56px * var(--ui-scale)) 0;}
 .sec-pricing{padding:calc(64px * var(--ui-scale)) 0;}
 .sec-pillars{padding-top:calc(48px * var(--ui-scale));}
+.agent-icon{
+  display:grid;
+  place-items:center;
+  width:calc(40px * var(--ui-scale));
+  height:calc(40px * var(--ui-scale));
+  border-radius:calc(10px * var(--ui-scale));
+  background:var(--blue-soft);
+  color:var(--blue);
+  flex-shrink:0;
+}
 .sec-pricing .section-head-row{margin-bottom:var(--space-3xl);}
 .sec-levers{padding:calc(56px * var(--ui-scale)) 0;}
 .sec-levers .section-head-row{margin-bottom:var(--space-3xl);}
@@ -536,13 +546,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .navlinks{gap:calc(20px * var(--ui-scale));}
   .nav-signin{padding:calc(8px * var(--ui-scale)) calc(14px * var(--ui-scale));font-size:calc(12px * var(--ui-scale));}
   .value-levers-grid{grid-template-columns:repeat(2,1fr) !important;}
+  .agent-catalog-grid{grid-template-columns:repeat(2,1fr) !important;}
 }
 
 @media(max-width:900px){
   .vp-grid{grid-template-columns:1fr !important;gap:var(--space-4xl) !important;}
   .how-grid{grid-template-columns:1fr !important;gap:calc(56px * var(--ui-scale)) !important;}
   .how-grid > div:first-child{position:static !important;}
-  .audience-grid,.cs-grid,.pricing-grid,.value-levers-grid{grid-template-columns:1fr !important;}
+  .audience-grid,.cs-grid,.pricing-grid,.value-levers-grid,.agent-catalog-grid{grid-template-columns:1fr !important;}
   .ft-grid{grid-template-columns:1fr 1fr !important;}
   .pricing-roi-grid{grid-template-columns:1fr !important;gap:var(--space-2xl) !important;}
   .m-grid{grid-template-columns:1fr 1fr !important;}
@@ -685,7 +696,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   .platform-cta .btn{width:100%;max-width:calc(360px * var(--ui-scale));}
 
-  /* Orbit diagram — scale to fit narrow viewports */
+  /* Orbit diagram - scale to fit narrow viewports */
   #platform .orbit-stage{
     height:clamp(calc(300px * var(--ui-scale)),84vw,calc(340px * var(--ui-scale)));
     margin-bottom:calc(12px * var(--ui-scale));

@@ -10,10 +10,13 @@ const ORBIT_CAPTION_NUDGE = {
   'p-mto': { dx: 45, dy: -51 },
   'p-eco': { dx: 0, dy: 51 },
   'o-in': { dx: 3, dy: 43 },
-  'o-fm': { dx: 19, dy: 37 },
-  'o-dc': { dx: 0, dy: -43 },
-  'o-cw': { dx: -26, dy: -43 },
-  'o-rv': { dx: -8, dy: -43 },
+  'o-dc': { dx: 19, dy: 37 },
+  'o-fm': { dx: 0, dy: -43 },
+  'o-dl': { dx: -26, dy: -43 },
+  'o-cc': { dx: -8, dy: -43 },
+  'o-rn': { dx: 8, dy: 43 },
+  'o-bd': { dx: -19, dy: 37 },
+  'o-ec': { dx: 0, dy: 43 },
 };
 
 /** Overrides GSAP inline transform so card lift + border hover still works after scroll reveal */
@@ -33,16 +36,19 @@ export const AgentOrbit = () => {
   const rootRef = useRef(null);
 
   const innerPillars = [
-    { id: 'p-ai', n: 'AI', label: 'AI Case Management' },
+    { id: 'p-ai', n: 'AI', label: 'AI Agents' },
     { id: 'p-mto', n: 'MTO', label: 'Managed Technology Operations' },
     { id: 'p-eco', n: 'ECO', label: 'Global Immigration Ecosystem' },
   ];
   const outerCapabilities = [
-    { id: 'o-in', n: 'IN', label: 'Intake & extraction' },
-    { id: 'o-fm', n: 'FM', label: 'Forms & deadlines' },
-    { id: 'o-dc', n: 'DC', label: 'Document intelligence' },
-    { id: 'o-cw', n: 'CW', label: 'Policy & compliance' },
-    { id: 'o-rv', n: 'RV', label: 'Attorney-reviewed output' },
+    { id: 'o-in', n: 'IN', label: 'Intake Agent' },
+    { id: 'o-dc', n: 'DC', label: 'Document Agent' },
+    { id: 'o-fm', n: 'FM', label: 'Forms Agent' },
+    { id: 'o-dl', n: 'DL', label: 'Deadline Agent' },
+    { id: 'o-cc', n: 'CC', label: 'Client Comms Agent' },
+    { id: 'o-rn', n: 'RN', label: 'Renewal Agent' },
+    { id: 'o-bd', n: 'BD', label: 'BD Agent' },
+    { id: 'o-ec', n: 'EC', label: 'Ecosystem Agent' },
   ];
 
   const orbitNodes = [
@@ -105,8 +111,8 @@ export const AgentOrbit = () => {
         <div className="reveal section-head-wide" style={{ textAlign: 'left' }}>
           <div className="eyebrow" style={{ color: 'var(--blue-hover)', marginBottom: 'var(--space-md)' }}>Platform</div>
           <h2 className="display type-display-xl" style={{ color: '#fff' }}>
-            <span style={{ display: 'block', textAlign: 'left' }}>Deploy, manage, connect</span>
-            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue-hover)' }}>on every case file.</em>
+            <span style={{ display: 'block', textAlign: 'left' }}>Eight agents, three pillars,</span>
+            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue-hover)' }}>one case file.</em>
           </h2>
         </div>
 
@@ -116,7 +122,7 @@ export const AgentOrbit = () => {
           <div className="orbit-ring" style={{width:'calc(612px * var(--ui-scale))',height:'calc(612px * var(--ui-scale))',borderColor:'rgba(255,255,255,.09)'}}/>
           <div className="orbit-ring" style={{width:'calc(384px * var(--ui-scale))',height:'calc(384px * var(--ui-scale))',borderColor:'rgba(255,255,255,.14)'}}/>
           <span className="orbit-ring-legend orbit-ring-legend--inner">Three pillars</span>
-          <span className="orbit-ring-legend orbit-ring-legend--outer">Immigration workflows</span>
+          <span className="orbit-ring-legend orbit-ring-legend--outer">Eight AI Agents</span>
 
           {/* Center - one case file; pillars orbit inside, workflows outside */}
           <div className="orbit-hub" style={{
@@ -290,13 +296,13 @@ export const AgentOrbit = () => {
 
         <div className="reveal d2 platform-cta" style={{ textAlign: 'center', marginTop: 0, padding: '0 var(--container-px)' }}>
           <motion.a
-            href="#customers"
+            href="#agents"
             className="btn btn-primary"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 420, damping: 22 }}
           >
-            See who it&apos;s built for
+            Explore each agent
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </motion.a>
         </div>
@@ -320,16 +326,19 @@ export const Testimonial = () => (
         {[
           {
             title: 'Immigration Law Firms',
+            quote: 'GlobalCodio Agents handle case prep, deadlines, client comms, and renewals - so your attorneys focus on what matters.',
             body: 'Solo, mid-size, and large law firms practicing immigration law. Pain points: manual case preparation, scaling case volume, growing revenue from existing clients, and managing technology.',
           },
           {
             title: 'Corporate Immigration Departments',
+            quote: 'GlobalCodio Agents handle visa case tracking, compliance monitoring, and vendor coordination - so your mobility team focuses on strategy.',
             body: 'In-house mobility, HR, and legal operations teams at mid-to-large employers managing employee visa cases. Pain points: scaling case volume, compliance, vendor management, and cost predictability.',
           },
         ].map((a, i) => (
           <article key={i} className={`card reveal d${i + 1}`} {...interactiveCardProps}>
             <h3 className="display" style={{ fontSize: 'var(--text-display-audience)', letterSpacing: '-0.02em', marginBottom: 'calc(14px * var(--ui-scale))' }}>{a.title}</h3>
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.6 }}>{a.body}</p>
+            <blockquote style={{ fontSize: 'var(--text-body)', color: 'var(--ink)', lineHeight: 1.55, fontStyle: 'italic', margin: '0 0 calc(14px * var(--ui-scale))', paddingLeft: 'calc(12px * var(--ui-scale))', borderLeft: '2px solid var(--blue-soft)' }}>{a.quote}</blockquote>
+            <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.6 }}>{a.body}</p>
           </article>
         ))}
       </div>
@@ -342,7 +351,7 @@ export const Metrics = () => (
   <section className="sec sec-metrics" id="metrics">
     <div className="container">
       <div className="reveal m-grid">
-        {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['Deploy', 'manage, connect'], ['End-to-end', 'immigration services']].map(([n, l], i) => (
+        {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['8', 'autonomous AI Agents'], ['2', 'audiences - firms & corporate']].map(([n, l], i) => (
           <div key={i}>
             <div className="display type-display-metric metric-value" style={{ color: 'var(--blue)', letterSpacing: '-0.03em' }}>{n}</div>
             <div className="metric-label">{l}</div>
@@ -361,10 +370,10 @@ export const Metrics = () => (
 );
 
 const VALUE_LEVERS = [
-  { tag: 'COST SAVINGS', h: 'Reduced case preparation time', b: 'Cost savings from automated document processing' },
-  { tag: 'COST SAVINGS', h: 'AI-powered customer support', b: 'Cost savings from automated client communications' },
-  { tag: 'REVENUE GROWTH', h: 'Renewal detection', b: 'Revenue from previously missed renewal opportunities' },
-  { tag: 'REVENUE GROWTH', h: 'BD campaign automation', b: 'Revenue from new client acquisition' },
+  { tag: 'COST SAVINGS', h: 'Reduced case preparation time', b: 'Cost savings from Document, Forms, and Intake Agents' },
+  { tag: 'COST SAVINGS', h: 'AI-powered customer support', b: 'Cost savings from Client Comms Agent' },
+  { tag: 'REVENUE GROWTH', h: 'Renewal detection', b: 'Revenue from previously missed renewals (Renewal Agent)' },
+  { tag: 'REVENUE GROWTH', h: 'BD campaign automation', b: 'Revenue from new client acquisition (BD Agent)' },
 ];
 
 export const PricingModel = () => (
@@ -373,10 +382,11 @@ export const PricingModel = () => (
       <div className="reveal section-head-row">
         <div className="section-copy">
           <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-            Pricing Model — Base + Performance
+            Pricing Model - Base + Performance
           </div>
           <h2 className="display type-display-lg">
-            <span style={{ display: 'block' }}>How It Works</span>
+            <span style={{ display: 'block' }}>Base + performance</span>
+            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>share model.</em>
           </h2>
           <p className="pricing-intro" style={{ fontSize: 'var(--text-body)', lineHeight: 1.6, color: 'var(--ink-3)', maxWidth: '58ch', marginTop: 'var(--space-md)' }}>
             A predictable monthly base fee covers the platform and managed operations. A small performance share is
@@ -413,8 +423,8 @@ export const ValueLevers = () => (
         <div className="section-copy">
           <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value Levers Measured</div>
           <h2 className="display type-display-lg">
-            <span style={{ display: 'block' }}>Performance share tied to</span>
-            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>measurable outcomes.</em>
+            <span style={{ display: 'block' }}>Where savings</span>
+            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>and revenue come from.</em>
           </h2>
         </div>
       </div>
@@ -443,11 +453,11 @@ export const CTA = () => (
     <div className="container-narrow" style={{ textAlign: 'center', position: 'relative' }}>
       <div aria-hidden="true" className="sec-cta-glow" />
       <h2 className="reveal d1 display type-display-cta" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginBottom: 'var(--space-2xl)', position: 'relative', textAlign: 'center' }}>
-        <span style={{ display: 'block', maxWidth: '100%' }}>Walk through the full partnership stack</span>
-        <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)', whiteSpace: 'nowrap' }} className="cta-nowrap">on live cases.</em>
+        <span style={{ display: 'block', maxWidth: '100%' }}>See AI Agents on your live cases</span>
+        <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)', whiteSpace: 'nowrap' }} className="cta-nowrap">- not a generic vendor deck.</em>
       </h2>
-      <p className="reveal d1" style={{ fontSize: 'calc(18px * var(--ui-scale))', color: 'var(--ink-3)', maxWidth: '48ch', margin: '0 auto var(--space-3xl)', lineHeight: 1.55, position: 'relative' }}>
-        See how we deploy, manage, and connect on your live cases — no generic vendor deck.
+      <p className="reveal d1" style={{ fontSize: 'calc(18px * var(--ui-scale))', color: 'var(--ink-3)', maxWidth: '52ch', margin: '0 auto var(--space-3xl)', lineHeight: 1.55, position: 'relative' }}>
+        Walk through deployment, managed operations, and the global ecosystem on cases your team is running today.
       </p>
       <div className="reveal d2" style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
         <a href={SUPPORT_MAILTO} className="btn btn-dark">Book a demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
@@ -467,7 +477,7 @@ export const Footer = () => (
             <Logo height={36} />
           </div>
           <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6 }}>
-            Immigration Technology Partner - AI-powered case management, Forward Deployed Engineers, and fully Managed Technology Operations, built exclusively for immigration law firms.
+            AI Workforce for Global Immigration. Deployed and Managed.
           </p>
           <div style={{ marginTop: 16, fontSize: 13.5, lineHeight: 1.8 }}>
             <a href={SITE_URL} style={{ color: 'var(--ink-3)', display: 'block' }}>
@@ -481,7 +491,7 @@ export const Footer = () => (
             </a>
           </div>
         </div>
-        {[['Solutions', ['AI case management', 'Forward deployed engineers', 'Managed technology operations']], ['For firms', ['Solo & small', 'Mid-size practices', 'Enterprise immigration']], ['Company', ['About', 'Customers', 'Careers', 'Contact']], ['Legal', ['Privacy', 'Terms', 'Security']]].map(([h, items]) => (
+        {[['Solutions', ['AI Agents', 'Managed technology operations', 'Global immigration ecosystem']], ['For firms', ['Solo & small', 'Mid-size practices', 'Enterprise immigration']], ['Company', ['About', 'Customers', 'Careers', 'Contact']], ['Legal', ['Privacy', 'Terms', 'Security']]].map(([h, items]) => (
           <div key={h}>
             <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 14 }}>{h}</div>
             <ul style={{ listStyle: 'none', display: 'grid', gap: 10, fontSize: 13.5 }}>{items.map((it) => <li key={it}><a href="#" style={{ color: 'var(--ink-3)' }}>{it}</a></li>)}</ul>

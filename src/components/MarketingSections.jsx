@@ -1,6 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+  CalendarClock,
+  ClipboardList,
+  FileText,
+  Globe,
+  MessageCircle,
+  PenLine,
+  RefreshCw,
+  TrendingUp,
+} from 'lucide-react';
 
 export const LogoStrip = () => {
   const logos = [
@@ -39,9 +49,13 @@ export const OutcomesHeadline = () => (
       <div className="reveal section-head-wide">
         <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value-Based Partnership</div>
         <h2 className="display type-display-lg">
-          <span style={{ display: 'block' }}>We don&apos;t charge for software —</span>
-          <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>we charge for outcomes.</em>
+          <span style={{ display: 'block' }}>Agents that handle the work -</span>
+          <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>pricing tied to what they deliver.</em>
         </h2>
+        <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.6, maxWidth: '62ch', marginTop: 'var(--space-lg)' }}>
+          What if AI Agents handled your case prep, renewals, and client comms - and you only paid based on
+          the savings and revenue they generated?
+        </p>
       </div>
     </div>
   </section>
@@ -56,15 +70,52 @@ export const ValueProp = () => (
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3xl)' }} className="vp-grid">
         {[
-          { n: '01', h: 'AI Case Management', b: 'Intelligent automation for intake, document extraction, form preparation, deadline tracking, renewal detection, and proactive client communication — built specifically for immigration workflows.' },
-          { n: '02', h: 'Managed Technology Operations', b: 'We run your entire technology operation ongoing — implementation, configuration, updates, integrations, optimization, and dedicated support. Fully managed by our team.' },
-          { n: '03', h: 'Global Immigration Ecosystem', b: 'Curated network of pre-vetted immigration service providers worldwide — translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more — all accessible through one platform.' },
+          { n: '01', h: 'AI Agents', b: 'A suite of autonomous AI workers handling case management, client communications, renewals, and business development - purpose-built for immigration workflows.' },
+          { n: '02', h: 'Managed Technology Operations', b: 'We deploy, configure, monitor, and optimize the entire agent ecosystem within your firm. Updates, integrations, support, and ongoing improvements - fully managed by our team.' },
+          { n: '03', h: 'Global Immigration Ecosystem', b: 'Curated network of pre-vetted immigration service providers worldwide - translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more - all accessible through one platform.' },
         ].map((v, i) => (
           <div key={i} className={`reveal d${i + 1}`}>
             <div className="mono" style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--blue)', marginBottom: 'var(--space-md)', letterSpacing: '.08em' }}>/{v.n}</div>
             <h3 style={{ fontSize: 'calc(24px * var(--ui-scale))', fontWeight: 650, letterSpacing: '-0.015em', marginBottom: 'calc(14px * var(--ui-scale))', lineHeight: 1.2 }}>{v.h}</h3>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{v.b}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const AGENTS = [
+  { Icon: ClipboardList, h: 'Intake Agent', b: 'Collects client info, validates documents, opens cases' },
+  { Icon: FileText, h: 'Document Agent', b: 'Extracts data from passports, visas, foreign records, translates' },
+  { Icon: PenLine, h: 'Forms Agent', b: 'Auto-fills I-130, I-485, N-400, H-1B, EB-5, and other USCIS forms' },
+  { Icon: CalendarClock, h: 'Deadline Agent', b: 'Tracks every case deadline, alerts on expirations' },
+  { Icon: MessageCircle, h: 'Client Comms Agent', b: 'Proactively updates clients, answers FAQs, sends reminders' },
+  { Icon: RefreshCw, h: 'Renewal Agent', b: 'Surfaces renewal opportunities from existing client data' },
+  { Icon: TrendingUp, h: 'BD Agent', b: 'Runs business development campaigns, qualifies leads' },
+  { Icon: Globe, h: 'Ecosystem Agent', b: 'Coordinates with translators, courier services, foreign agents' },
+];
+
+export const AgentCatalog = () => (
+  <section className="sec sec-surface" id="agents">
+    <div className="container">
+      <div className="reveal section-head-wide">
+        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>The AI Agents</div>
+        <h2 className="display type-display-lg">
+          <span style={{ display: 'block' }}>Autonomous workers</span>
+          <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>for every immigration workflow.</em>
+        </h2>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-lg)' }} className="agent-catalog-grid">
+        {AGENTS.map((a, i) => (
+          <article key={a.h} className={`card card-compact reveal d${(i % 4) + 1}`} style={{ display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))' }}>
+            <div className="agent-icon" aria-hidden="true">
+              <a.Icon size={20} strokeWidth={1.75} />
+            </div>
+            <h3 className="display text-card-sm">{a.h}</h3>
+            <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{a.b}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -81,7 +132,7 @@ export const HowItWorks = () => {
     {
       t: '01',
       h: 'We already have case management software.',
-      b: 'We integrate with your existing tools and layer our platform on top — so you keep your systems and still get the outcomes. No rip-and-replace required.',
+      b: 'We integrate with your existing tools and layer our platform on top - so you keep your systems and still get the outcomes. No rip-and-replace required.',
       meta: ['Integrations', 'No rip-and-replace'],
     },
     {
@@ -92,13 +143,13 @@ export const HowItWorks = () => {
     },
     {
       t: '03',
-      h: 'AI makes mistakes on legal documents.',
-      b: 'Every extraction and draft is attorney-reviewable. AI handles intake structure, field population, and first-pass assembly — you stay in control of what leaves the firm.',
-      meta: ['Review-first workflow', 'Human sign-off'],
+      h: 'Will AI Agents replace our attorneys?',
+      b: 'No. Agents augment your team - handling repetitive case prep, comms, and renewals so attorneys focus on what only humans can do. Every extraction and draft remains attorney-reviewable before it leaves your firm.',
+      meta: ['Augment, not replace', 'Attorney sign-off'],
     },
     {
       t: '04',
-      h: 'Switching platforms seems risky — will we lose data or downtime?',
+      h: 'Switching platforms seems risky - will we lose data or downtime?',
       b: 'Migration is planned and handled by our team. Your records are mapped before anything moves, active cases keep running, and we manage extraction from your current vendor so nothing important gets left behind.',
       meta: ['Guided migration', 'Active cases continue'],
     },

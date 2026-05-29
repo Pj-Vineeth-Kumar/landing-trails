@@ -1,14 +1,25 @@
 # GlobalCodio
 
-> AI for Global Immigration: Cut Costs, Grow Revenue.
+> AI Workforce for Global Immigration. Deployed and Managed.
 
-GlobalCodio is the AI-powered platform and global ecosystem built exclusively for immigration teams — law firms and corporate immigration departments. We deploy AI case management, manage technology operations end-to-end, and connect teams to a global immigration partner network.
+GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce - built, deployed, and managed end-to-end. Our AI Agents handle case management, client communications, renewals, and business development, while our team runs the entire technology operation. Connected to a global ecosystem of immigration partners, we help your team cut costs and grow revenue - without ever managing technology again.
 
-## Product
+## Three Pillars
 
-- AI Case Management: intake, document extraction, form preparation, deadlines, renewals, client communication
-- Managed Technology Operations: implementation, configuration, integrations, optimization, dedicated support
+- AI Agents: autonomous workers for case management, comms, renewals, and business development
+- Managed Technology Operations: deploy, configure, monitor, and optimize the agent ecosystem
 - Global Immigration Ecosystem: translators, document authentication, foreign attorneys, medical exams, couriers
+
+## AI Agents
+
+- Intake Agent: collects client info, validates documents, opens cases
+- Document Agent: extracts data from passports, visas, foreign records, translates
+- Forms Agent: auto-fills I-130, I-485, N-400, H-1B, EB-5, and other USCIS forms
+- Deadline Agent: tracks every case deadline, alerts on expirations
+- Client Comms Agent: proactively updates clients, answers FAQs, sends reminders
+- Renewal Agent: surfaces renewal opportunities from existing client data
+- BD Agent: runs business development campaigns, qualifies leads
+- Ecosystem Agent: coordinates with translators, courier services, foreign agents
 
 ## Audiences
 
@@ -17,7 +28,7 @@ GlobalCodio is the AI-powered platform and global ecosystem built exclusively fo
 
 ## Pricing
 
-Base retainer plus value share tied to cost savings and revenue growth. Typical year-one ROI: 3x.
+Base retainer plus performance share tied to cost savings and revenue growth. Typical year-one ROI: 3x.
 
 ## Links
 
@@ -32,4 +43,4 @@ Base retainer plus value share tied to cost savings and revenue growth. Typical 
 
 ## Keywords
 
-AI global immigration, immigration case management, immigration law firm software, corporate immigration platform, managed technology operations, global immigration ecosystem, immigration automation, visa case management
+AI workforce global immigration, AI agents global immigration, immigration law firm software, corporate immigration platform, managed technology operations, global immigration ecosystem, immigration automation, cut costs grow revenue immigration

@@ -1,7 +1,7 @@
 {
-  "name": "GlobalCodio — AI for Global Immigration",
+  "name": "GlobalCodio - AI Workforce for Global Immigration",
   "short_name": "GlobalCodio",
-  "description": "AI-powered immigration case management for law firms and corporate immigration teams.",
+  "description": "Your own AI workforce for immigration - built, deployed, and managed end-to-end.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

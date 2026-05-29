@@ -1,7 +1,8 @@
-/** Primary nav — order matches on-page scroll order */
+/** Primary nav - order matches on-page scroll order */
 export const SITE_NAV_LINKS = [
   { href: '#pillars', label: 'Pillars' },
   { href: '#platform', label: 'Platform' },
+  { href: '#agents', label: 'Agents' },
   { href: '#customers', label: 'Teams' },
   { href: '#how', label: 'Questions' },
   { href: '#pricing', label: 'Pricing' },
@@ -21,7 +22,7 @@ export const FOOTER_COLUMNS = [
   {
     title: 'Solutions',
     links: [
-      { href: '#pillars', label: 'AI Case Management' },
+      { href: '#agents', label: 'AI Agents' },
       { href: '#pillars', label: 'Managed Operations' },
       { href: '#platform', label: 'Global Ecosystem' },
     ],

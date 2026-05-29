@@ -1,4 +1,4 @@
-# GlobalCodio — Brand Positioning
+# GlobalCodio - Brand Positioning
 
 ---
 
@@ -10,7 +10,7 @@
 
 ## 📋 Brand Statement
 
-> **GlobalCodio is the AI-powered platform and global ecosystem built exclusively for immigration teams — whether you're a law firm or a corporate department. We deploy the technology, manage the operations, and connect you to the partners you need to deliver end-to-end immigration services.**
+> **GlobalCodio is the AI-powered platform and global ecosystem built exclusively for immigration teams - whether you're a law firm or a corporate department. We deploy the technology, manage the operations, and connect you to the partners you need to deliver end-to-end immigration services.**
 
 ---
 
@@ -45,13 +45,13 @@
 ## 🎯 The Three Pillars
 
 ### 1. AI Case Management
-Intelligent automation for intake, document extraction, form preparation, deadline tracking, renewal detection, and proactive client communication — built specifically for immigration workflows.
+Intelligent automation for intake, document extraction, form preparation, deadline tracking, renewal detection, and proactive client communication - built specifically for immigration workflows.
 
 ### 2. Managed Technology Operations
-We run your entire technology operation ongoing — implementation, configuration, updates, integrations, optimization, and dedicated support. Fully managed by our team.
+We run your entire technology operation ongoing - implementation, configuration, updates, integrations, optimization, and dedicated support. Fully managed by our team.
 
 ### 3. Global Immigration Ecosystem
-Curated network of pre-vetted immigration service providers worldwide — translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more — all accessible through one platform.
+Curated network of pre-vetted immigration service providers worldwide - translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more - all accessible through one platform.
 
 ---
 
@@ -65,16 +65,16 @@ In-house mobility, HR, and legal operations teams at mid-to-large employers mana
 
 ---
 
-## 💰 Pricing Model — Base + Performance
+## 💰 Pricing Model - Base + Performance
 
 ### How It Works
 A predictable monthly base fee covers the platform and managed operations. A small performance share is tied directly to measurable cost savings and revenue gains delivered. Firms only pay more when they earn more or save more.
 
 ### Value Levers Measured
-1. **Reduced case preparation time** — Cost savings from automated document processing
-2. **AI-powered customer support** — Cost savings from automated client communications
-3. **Renewal detection** — Revenue from previously missed renewal opportunities
-4. **BD campaign automation** — Revenue from new client acquisition
+1. **Reduced case preparation time** - Cost savings from automated document processing
+2. **AI-powered customer support** - Cost savings from automated client communications
+3. **Renewal detection** - Revenue from previously missed renewal opportunities
+4. **BD campaign automation** - Revenue from new client acquisition
 
 ### Year One Promise
 Firms partnering with GlobalCodio typically see a **3x return in year one** through reduced operational costs and significantly increased case volume.
@@ -99,13 +99,13 @@ Firms partnering with GlobalCodio typically see a **3x return in year one** thro
 ## 📞 Sample Pitch Openings
 
 ### Elevator Pitch (30 seconds)
-*"GlobalCodio is AI for global immigration — we help law firms and corporate immigration teams cut costs and grow revenue. We deploy our AI-powered case management platform, manage your technology operations end-to-end, and connect you to a global ecosystem of immigration partners. Our clients typically see a 3x return in year one."*
+*"GlobalCodio is AI for global immigration - we help law firms and corporate immigration teams cut costs and grow revenue. We deploy our AI-powered case management platform, manage your technology operations end-to-end, and connect you to a global ecosystem of immigration partners. Our clients typically see a 3x return in year one."*
 
 ### One-Liner
-*"GlobalCodio is the AI platform and ecosystem that helps immigration teams cut costs and grow revenue — built exclusively for law firms and corporate immigration departments."*
+*"GlobalCodio is the AI platform and ecosystem that helps immigration teams cut costs and grow revenue - built exclusively for law firms and corporate immigration departments."*
 
 ### Cold Outreach Opening
-*"Most immigration teams are leaving money on the table — not because they lack work, but because their technology can't keep up. GlobalCodio fixes that. We deploy AI, manage your operations, and connect you to the partners you need. Our clients average a 3x return in year one."*
+*"Most immigration teams are leaving money on the table - not because they lack work, but because their technology can't keep up. GlobalCodio fixes that. We deploy AI, manage your operations, and connect you to the partners you need. Our clients average a 3x return in year one."*
 
 ---
 
@@ -131,4 +131,4 @@ Firms partnering with GlobalCodio typically see a **3x return in year one** thro
 
 ---
 
-*GlobalCodio — AI for Global Immigration: Cut Costs, Grow Revenue.*
+*GlobalCodio - AI for Global Immigration: Cut Costs, Grow Revenue.*
