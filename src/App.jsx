@@ -10,8 +10,8 @@ import {
   AgentOrbit,
   Testimonial,
   Metrics,
-  PricingModel,
   ValueLevers,
+  Certifications,
   CTA,
   Footer,
   Tweaks,
@@ -168,7 +168,7 @@ export default function App() {
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '#value-levers .value-levers-grid > article',
+        '#value-levers .value-lever-card',
         { y: 24, opacity: 0 },
         {
           y: 0,
@@ -177,7 +177,7 @@ export default function App() {
           stagger: 0.07,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: '#value-levers .value-levers-grid',
+            trigger: '#value-levers .value-levers-columns',
             start: 'top 88%',
             toggleActions: 'play none none none',
           },
@@ -220,10 +220,10 @@ export default function App() {
         <OutcomesHeadline />
         <ValueProp />
         <AgentOrbit />
+        <Certifications />
         <AgentCatalog />
         <Testimonial />
         <HowItWorks />
-        <PricingModel />
         <ValueLevers />
         <Metrics />
         <CTA />

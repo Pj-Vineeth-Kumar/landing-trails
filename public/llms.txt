@@ -26,9 +26,22 @@ GlobalCodio gives immigration law firms and corporate immigration departments th
 - Immigration law firms (solo, mid-size, enterprise)
 - Corporate immigration departments and mobility teams
 
-## Pricing
+## Value Levers
 
-Base retainer plus performance share tied to cost savings and revenue growth. Typical year-one ROI: 3x.
+Cost savings from reduced case prep and AI-powered support. Revenue growth from renewal detection and BD automation - each tied to measurable agent outcomes. Typical year-one ROI: 3x.
+
+## Trust & Compliance
+
+Security and compliance standards immigration firms evaluate during vendor due diligence:
+
+- SOC 2 Type II and ISO 27001 security attestation
+- GDPR, UK GDPR, and CCPA/CPRA privacy controls
+- HIPAA-ready safeguards for immigration medical records
+- AES-256 encryption at rest and TLS 1.3 in transit
+- ABA-aligned AI governance with attorney supervision
+- Attorney-client privilege safeguards and no training on client data
+- Enterprise SSO, MFA, and role-based access control
+- Standard DPA and security documentation available on request
 
 ## Links
 

@@ -1,22 +1,31 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
+import { FileText, MessageCircle, RefreshCw, TrendingUp } from 'lucide-react';
 import { Logo } from './Nav.jsx';
 import { SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL } from '../config/siteNav.js';
 
-/** Caption nudge from badge center (px) - icons stay on orbit; labels only */
-const ORBIT_CAPTION_NUDGE = {
-  'p-ai': { dx: 0, dy: -51 },
+/** Caption offsets for inner MTO & ECO labels */
+const LEGACY_INNER_CAPTION_NUDGE = {
   'p-mto': { dx: 45, dy: -51 },
-  'p-eco': { dx: 0, dy: 51 },
-  'o-in': { dx: 3, dy: 43 },
-  'o-dc': { dx: 19, dy: 37 },
-  'o-fm': { dx: 0, dy: -43 },
-  'o-dl': { dx: -26, dy: -43 },
-  'o-cc': { dx: -8, dy: -43 },
-  'o-rn': { dx: 8, dy: 43 },
-  'o-bd': { dx: -19, dy: 37 },
-  'o-ec': { dx: 0, dy: 43 },
+  'p-eco': { dx: 32, dy: 51 },
+};
+
+/** Radial caption placement — clears badge using label size + angle */
+const estimateCaptionHalf = (label, ring, uiScale) => {
+  const halfH = (ring === 'inner' ? 14 : 13) * uiScale;
+  const charW = 5.8 * uiScale;
+  const padX = (ring === 'inner' ? 24 : 22) * uiScale;
+  const halfW = (label.length * charW + padX) / 2;
+  return { halfW, halfH };
+};
+
+const orbitCaptionOffset = (r, bd, uiScale, nx, ny, label, ring) => {
+  const gap = (ring === 'inner' ? 10 : 8) * uiScale;
+  const { halfW, halfH } = estimateCaptionHalf(label, ring, uiScale);
+  const inward = halfW * Math.abs(nx) + halfH * Math.abs(ny);
+  const dist = r + bd + gap + inward + 4 * uiScale;
+  return { lx: nx * dist, ly: ny * dist };
 };
 
 /** Overrides GSAP inline transform so card lift + border hover still works after scroll reveal */
@@ -31,9 +40,21 @@ const interactiveCardProps = {
   },
 };
 
+/** Orbit ring diameters (px, pre–ui-scale) — must match .orbit-ring inline sizes in AgentOrbit */
+const ORBIT_INNER_RADIUS = 384 / 2;
+const ORBIT_OUTER_RADIUS = 612 / 2;
+
+const readUiScale = () => {
+  if (typeof document === 'undefined') return 0.84;
+  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ui-scale')) || 0.84;
+};
+
 /* Agent orbit - dual ring: three pillars (inner) + workflow depth (outer) */
 export const AgentOrbit = () => {
   const rootRef = useRef(null);
+  const uiScale = readUiScale();
+  const innerRadius = ORBIT_INNER_RADIUS * uiScale;
+  const outerRadius = ORBIT_OUTER_RADIUS * uiScale;
 
   const innerPillars = [
     { id: 'p-ai', n: 'AI', label: 'AI Agents' },
@@ -54,11 +75,11 @@ export const AgentOrbit = () => {
   const orbitNodes = [
     ...innerPillars.map((a, i) => {
       const angle = (i / innerPillars.length) * Math.PI * 2 - Math.PI / 2;
-      return { ...a, r: 149, angle, ring: 'inner' };
+      return { ...a, r: innerRadius, angle, ring: 'inner' };
     }),
     ...outerCapabilities.map((a, i) => {
       const angle = (i / outerCapabilities.length) * Math.PI * 2 - Math.PI / 2 + Math.PI / outerCapabilities.length;
-      return { ...a, r: 238, angle, ring: 'outer' };
+      return { ...a, r: outerRadius, angle, ring: 'outer' };
     }),
   ];
 
@@ -138,7 +159,7 @@ export const AgentOrbit = () => {
           </div>
           </div>
 
-          {/* Labels: fixed nudge per node from badge - icons unchanged */}
+          {/* Labels: radial offset from badge — sized to avoid overlapping icons */}
           {orbitNodes.map((a) => {
             const { r, angle, ring } = a;
             const nx = Math.cos(angle);
@@ -147,9 +168,10 @@ export const AgentOrbit = () => {
             const y = ny * r;
             const bd = ring === 'inner' ? 27 : 24;
             const badgePx = a.n.length >= 3 ? 10 : 12;
-            const nudge = ORBIT_CAPTION_NUDGE[a.id] ?? { dx: 0, dy: ring === 'inner' ? -48 : -40 };
-            const lx = x + nudge.dx;
-            const ly = y + nudge.dy;
+            const legacyNudge = LEGACY_INNER_CAPTION_NUDGE[a.id];
+            const { lx, ly } = legacyNudge
+              ? { lx: x + legacyNudge.dx, ly: y + legacyNudge.dy }
+              : orbitCaptionOffset(r, bd, uiScale, nx, ny, a.label, ring);
 
             return (
               <div key={a.id} className={`orbit-node orbit-node--${ring}`} style={{ zIndex: ring === 'inner' ? 5 : 3 }}>
@@ -194,7 +216,7 @@ export const AgentOrbit = () => {
                   }}>{a.n}</div>
                 </button>
                 <div
-                  className="orbit-node-caption"
+                  className={`orbit-node-caption${ring === 'outer' ? ' orbit-node-caption--outer' : ''}`}
                   style={{
                     position: 'absolute',
                     left: '50%',
@@ -226,14 +248,18 @@ export const AgentOrbit = () => {
               height:clamp(calc(640px * var(--ui-scale)), calc(84vw * var(--ui-scale)), calc(780px * var(--ui-scale)));
               margin:0 auto;
               margin-bottom:clamp(calc(12px * var(--ui-scale)), calc(2vw * var(--ui-scale)), calc(28px * var(--ui-scale)));
-              padding:0 calc(8px * var(--ui-scale));
-              overflow:hidden;
+              padding:calc(12px * var(--ui-scale)) calc(8px * var(--ui-scale));
+              overflow:visible;
             }
             .orbit-stage-scaler{
               position:absolute;
               inset:0;
               width:100%;
               height:100%;
+              overflow:visible;
+            }
+            .orbit-node-caption--outer{
+              z-index:10;
             }
             .orbit-stage-core{
               position:absolute;inset:0;display:grid;place-items:center;
@@ -369,79 +395,134 @@ export const Metrics = () => (
   </section>
 );
 
-const VALUE_LEVERS = [
-  { tag: 'COST SAVINGS', h: 'Reduced case preparation time', b: 'Cost savings from Document, Forms, and Intake Agents' },
-  { tag: 'COST SAVINGS', h: 'AI-powered customer support', b: 'Cost savings from Client Comms Agent' },
-  { tag: 'REVENUE GROWTH', h: 'Renewal detection', b: 'Revenue from previously missed renewals (Renewal Agent)' },
-  { tag: 'REVENUE GROWTH', h: 'BD campaign automation', b: 'Revenue from new client acquisition (BD Agent)' },
+const VALUE_LEVER_GROUPS = [
+  {
+    tag: 'Cost Savings',
+    levers: [
+      {
+        Icon: FileText,
+        h: 'Reduced case preparation time',
+        b: 'Document extraction, form auto-fill, and intake validation cut hours of manual prep on every case.',
+        agent: 'Document, Forms & Intake Agents',
+      },
+      {
+        Icon: MessageCircle,
+        h: 'AI-powered customer support',
+        b: 'Proactive client updates, FAQ handling, and reminders without adding paralegal headcount.',
+        agent: 'Client Comms Agent',
+      },
+    ],
+  },
+  {
+    tag: 'Revenue Growth',
+    levers: [
+      {
+        Icon: RefreshCw,
+        h: 'Renewal detection',
+        b: 'Surface expiring visas and lapsed clients from existing records - revenue that used to slip through.',
+        agent: 'Renewal Agent',
+      },
+      {
+        Icon: TrendingUp,
+        h: 'BD campaign automation',
+        b: 'Revenue from new client acquisition (BD Agent)',
+        agent: 'BD Agent',
+        comingSoon: true,
+      },
+    ],
+  },
 ];
 
-export const PricingModel = () => (
-  <section id="pricing" className="sec sec-pricing">
+export const ValueLevers = () => (
+  <section id="value-levers" className="sec sec-levers">
     <div className="container">
-      <div className="reveal section-head-row">
-        <div className="section-copy">
-          <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-            Pricing Model - Base + Performance
-          </div>
-          <h2 className="display type-display-lg">
-            <span style={{ display: 'block' }}>Base + performance</span>
-            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>share model.</em>
-          </h2>
-          <p className="pricing-intro" style={{ fontSize: 'var(--text-body)', lineHeight: 1.6, color: 'var(--ink-3)', maxWidth: '58ch', marginTop: 'var(--space-md)' }}>
-            A predictable monthly base fee covers the platform and managed operations. A small performance share is
-            tied directly to measurable cost savings and revenue gains delivered. Firms only pay more when they earn
-            more or save more.
-          </p>
-        </div>
-        <a href={SUPPORT_MAILTO} className="btn btn-outline" style={{ flexShrink: 0 }}>
-          Email us
-        </a>
+      <div className="reveal section-head-wide">
+        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value Levers</div>
+        <h2 className="display type-display-lg">
+          <span style={{ display: 'block' }}>Where savings</span>
+          <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>and revenue come from.</em>
+        </h2>
+        <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.6, maxWidth: '62ch', marginTop: 'var(--space-lg)' }}>
+          Every agent ties to a measurable outcome - reduced prep time, lower support costs, captured renewals,
+          or new client revenue. We track what each lever delivers so your team sees the impact, not just the software.
+        </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-md)' }} className="pricing-grid">
-        {[
-          { tag: 'BASE RETAINER', h: 'Platform + managed operations' },
-          { tag: 'PERFORMANCE SHARE', h: 'Tied to measurable outcomes' },
-        ].map((c, i) => (
-          <article key={i} className="card card-compact" style={{ display: 'flex', flexDirection: 'column', gap: 'calc(8px * var(--ui-scale))' }} {...interactiveCardProps}>
-            <div className="mono" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--blue)' }}>
-              {c.tag}
+      <div className="value-levers-columns">
+        {VALUE_LEVER_GROUPS.map((group, gi) => (
+          <div key={group.tag} className={`value-levers-group reveal d${gi + 1}`}>
+            <div className="value-levers-group-head">
+              <span className="mono">{group.tag}</span>
             </div>
-            <h3 className="display text-card-sm">{c.h}</h3>
-          </article>
+            <div className="value-levers-group-grid">
+              {group.levers.map((lever) => (
+                <article
+                  key={lever.h}
+                  className={`card card-compact value-lever-card${lever.comingSoon ? ' value-lever-card--soon' : ''}`}
+                  {...(lever.comingSoon ? {} : interactiveCardProps)}
+                >
+                  <div className="value-lever-card-top">
+                    <div className="agent-icon" aria-hidden="true">
+                      <lever.Icon size={20} strokeWidth={1.75} />
+                    </div>
+                    {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
+                  </div>
+                  <h3 className="display text-card-sm">{lever.h}</h3>
+                  <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{lever.b}</p>
+                  <div
+                    className="mono value-lever-agent"
+                    style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)' }}
+                  >
+                    {lever.agent}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>
   </section>
 );
 
-export const ValueLevers = () => (
-  <section id="value-levers" className="sec sec-surface sec-levers">
-    <div className="container">
-      <div className="reveal section-head-row">
-        <div className="section-copy">
-          <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value Levers Measured</div>
-          <h2 className="display type-display-lg">
-            <span style={{ display: 'block' }}>Where savings</span>
-            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>and revenue come from.</em>
-          </h2>
-        </div>
-      </div>
+const CERT_GROUPS = [
+  { label: 'Security', items: ['SOC 2 Type II', 'ISO 27001'] },
+  { label: 'Privacy', items: ['GDPR', 'CCPA / CPRA', 'UK GDPR'] },
+  { label: 'Legal ethics', items: ['ABA-aligned AI governance', 'Attorney-client privilege', 'No training on client data'] },
+  { label: 'Controls', items: ['AES-256', 'TLS 1.3', 'SSO / MFA', 'HIPAA-ready'] },
+];
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-lg)' }} className="value-levers-grid">
-        {VALUE_LEVERS.map((c, i) => (
-          <article
-            key={i}
-            className="card card-compact"
-            style={{ display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))' }}
-            {...interactiveCardProps}
-          >
-            <div className="mono" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--blue)' }}>{c.tag}</div>
-            <h3 className="display text-card-sm">{c.h}</h3>
-            <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{c.b}</p>
-          </article>
-        ))}
+export const Certifications = () => (
+  <section id="certifications" className="sec sec-certifications" aria-labelledby="certifications-heading">
+    <div className="container">
+      <div className="how-grid cert-layout">
+        <div className="reveal cert-section-head" style={{ position: 'sticky', top: 'calc(120px * var(--ui-scale))' }}>
+          <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Trust & Compliance</div>
+          <h2 id="certifications-heading" className="display type-display-lg" style={{ marginBottom: 'var(--space-xl)' }}>
+            <span style={{ display: 'block' }}>Built to pass</span>
+            <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>firm-grade due diligence.</em>
+          </h2>
+          <p className="cert-intro">
+            The standards immigration firms ask for in vendor reviews - security attestation, privacy law,
+            ethical AI use, and enterprise controls.
+          </p>
+        </div>
+
+        <div className="cert-panel">
+          <dl className="reveal d1 cert-stack">
+            {CERT_GROUPS.map((group) => (
+              <div key={group.label} className="cert-row">
+                <dt className="mono cert-row-label">{group.label}</dt>
+                <dd className="cert-row-items">{group.items.join(' · ')}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <p className="reveal d2 cert-footnote">
+            SOC 2 report, standard DPA, and security questionnaire available on request.{' '}
+            <a href={SUPPORT_MAILTO}>Request security pack</a>
+          </p>
+        </div>
       </div>
     </div>
   </section>

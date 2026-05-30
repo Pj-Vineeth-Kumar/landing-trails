@@ -154,7 +154,7 @@ export function buildStructuredData() {
           price: '0',
           priceCurrency: 'USD',
           description: 'Base retainer plus value share tied to measurable cost savings and revenue growth',
-          url: `${SITE_URL}/#pricing`,
+          url: `${SITE_URL}/#certifications`,
         },
         provider: { '@id': orgId },
       },
@@ -226,16 +226,21 @@ export function buildStaticSeoHtml() {
     <ul>
       <li><a href="${SITE_URL}/#pillars">Three Pillars</a></li>
       <li><a href="${SITE_URL}/#platform">Platform</a></li>
+      <li><a href="${SITE_URL}/#certifications">Trust & Compliance</a></li>
       <li><a href="${SITE_URL}/#agents">AI Agents</a></li>
       <li><a href="${SITE_URL}/#customers">Teams</a></li>
       <li><a href="${SITE_URL}/#how">Questions</a></li>
-      <li><a href="${SITE_URL}/#pricing">Pricing</a></li>
+      <li><a href="${SITE_URL}/#value-levers">Outcomes</a></li>
       <li><a href="${SITE_URL}/#metrics">ROI</a></li>
     </ul>
   </nav>
   <section id="pillars">
     <h2>AI Agents, Managed Operations, and Global Immigration Ecosystem</h2>
     <ul>${pillarList}</ul>
+  </section>
+  <section id="certifications">
+    <h2>Trust and compliance for immigration law firms</h2>
+    <p>SOC 2 Type II, ISO 27001, GDPR, CCPA/CPRA, HIPAA-ready controls, AES-256 and TLS 1.3 encryption, ABA-aligned AI governance, attorney-client privilege safeguards, and enterprise SSO/MFA.</p>
   </section>
   <section id="agents">
     <h2>GlobalCodio AI Agents</h2>
@@ -245,9 +250,9 @@ export function buildStaticSeoHtml() {
     <h2>Common questions for immigration law firms and corporate teams</h2>
     <dl>${faqList}</dl>
   </section>
-  <section id="pricing">
-    <h2>Base retainer plus performance share</h2>
-    <p>Base retainer plus value share tied to measurable cost savings and revenue growth. Firms typically see 3x ROI in year one.</p>
+  <section id="value-levers">
+    <h2>Where savings and revenue come from</h2>
+    <p>Cost savings from reduced case prep and AI-powered support. Revenue growth from renewal detection and BD automation - each tied to measurable agent outcomes.</p>
   </section>
 </main>
 <footer>

@@ -5,7 +5,7 @@ export const SITE_NAV_LINKS = [
   { href: '#agents', label: 'Agents' },
   { href: '#customers', label: 'Teams' },
   { href: '#how', label: 'Questions' },
-  { href: '#pricing', label: 'Pricing' },
+  { href: '#value-levers', label: 'Outcomes' },
   { href: '#metrics', label: 'ROI' },
 ];
 

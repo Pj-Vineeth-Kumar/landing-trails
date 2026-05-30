@@ -57,22 +57,6 @@ export const Hero = () => (
           initial="hidden"
           animate="show"
         >
-        <motion.div className="reveal" style={{ textAlign: 'center', marginBottom: 'var(--space-sm)' }} variants={rise}>
-          <span className="pill">
-            <span
-              style={{
-                width: 5,
-                height: 5,
-                borderRadius: '50%',
-                background: 'var(--blue)',
-                boxShadow: '0 0 0 2px rgba(25,80,198,.15)',
-                animation: 'livepulse 2s infinite',
-              }}
-            />
-            Your AI workforce - built, deployed, and managed
-          </span>
-        </motion.div>
-
         <motion.h1
           className="reveal d1 display type-display-hero"
           style={{
@@ -83,7 +67,7 @@ export const Hero = () => (
           variants={headlineStagger}
         >
           <motion.span style={{ display: 'block' }} variants={rise}>
-            AI Workforce for Global Immigration.
+            AI Agents for Global Immigration
           </motion.span>
           <motion.em
             style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}
@@ -92,6 +76,18 @@ export const Hero = () => (
             Deployed and Managed.
           </motion.em>
         </motion.h1>
+
+        <motion.div
+          className="reveal hero-pill-row"
+          style={{ textAlign: 'center' }}
+          variants={rise}
+        >
+          {['Case Management', 'Forms', 'Managed Tech Operations'].map((label) => (
+            <span key={label} className="pill">
+              {label}
+            </span>
+          ))}
+        </motion.div>
 
         <motion.p
           className="reveal d2 type-lead hero-lead hero-lead-full"
@@ -105,7 +101,7 @@ export const Hero = () => (
         >
           GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce
           - built, deployed, and managed end-to-end. Our AI Agents handle case management, client communications,
-          renewals, and business development, while our team runs the entire technology operation. Connected to a
+          renewals, and business development, <strong>while our team runs the entire technology operation.</strong> Connected to a
           global ecosystem of immigration partners, we help your team cut costs and grow revenue - without ever
           managing technology again.
         </motion.p>
