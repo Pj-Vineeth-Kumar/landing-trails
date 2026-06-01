@@ -429,6 +429,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .outcomes-headline-section{padding:calc(40px * var(--ui-scale)) 0 calc(36px * var(--ui-scale));background:#fff;}
 .outcomes-headline-section .section-head-wide{margin-bottom:0;}
 
+/* Codio Operating System - typography-led narrative (tokens only, no new values) */
+#operating-system .section-head-wide{margin-bottom:0;}
+.os-narrative{display:flex;flex-direction:column;gap:var(--space-md);}
+.os-line{display:flex;align-items:baseline;gap:var(--space-2xs);line-height:1.08;font-size:var(--text-display-md);}
+.os-anchor{font-style:italic;}
+.os-predicate{font-family:var(--sans);font-weight:450;color:var(--ink);letter-spacing:-0.01em;}
+.os-lead{color:var(--muted);margin-bottom:var(--space-6xl);}
+.os-payoff{text-align:left;margin-top:var(--space-5xl);line-height:1.04;}
+.os-payoff-ink{color:var(--ink);font-style:normal;}
+.os-payoff-em{color:var(--blue);font-style:italic;}
+
 .navlink{font-family:var(--display);font-size:calc(17px * var(--ui-scale));color:var(--ink-3);font-weight:500;letter-spacing:-0.018em;transition:color .2s;}
 .navlink:hover{color:var(--ink);}
 .site-nav .navlink{color:var(--ink-2);font-weight:500;}
@@ -703,6 +714,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .section-head-row{flex-direction:column;align-items:flex-start;}
   .section-head-row .btn{align-self:flex-start;text-align:center;justify-content:center;}
   .section-head,.section-head-wide{margin-bottom:var(--space-4xl);}
+  #operating-system .os-lead{margin-bottom:var(--space-4xl);}
 }
 
 @media(max-width:768px){
@@ -883,6 +895,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .cta-nowrap{white-space:normal !important;}
 
   .ft-grid{grid-template-columns:1fr !important;}
+
+  #operating-system .os-line{flex-wrap:wrap;}
+  #operating-system .os-payoff{margin-top:var(--space-4xl);}
 }
 
 @media(max-width:480px){

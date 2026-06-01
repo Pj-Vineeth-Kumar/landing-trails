@@ -230,6 +230,7 @@ export function buildStaticSeoHtml() {
       <li><a href="${SITE_URL}/#agents">AI Agents</a></li>
       <li><a href="${SITE_URL}/#customers">Teams</a></li>
       <li><a href="${SITE_URL}/#how">Questions</a></li>
+      <li><a href="${SITE_URL}/#operating-system">Operating System</a></li>
       <li><a href="${SITE_URL}/#value-levers">Outcomes</a></li>
       <li><a href="${SITE_URL}/#metrics">ROI</a></li>
     </ul>
@@ -249,6 +250,10 @@ export function buildStaticSeoHtml() {
   <section id="how">
     <h2>Common questions for immigration law firms and corporate teams</h2>
     <dl>${faqList}</dl>
+  </section>
+  <section id="operating-system">
+    <h2>One platform. Complete control.</h2>
+    <p>Codio is your operating system. Codio manages your cases. Codio prepares your documents. Codio keeps clients informed. Codio drives execution. Codio prepares your filings. Codio fills your forms.</p>
   </section>
   <section id="value-levers">
     <h2>Where savings and revenue come from</h2>

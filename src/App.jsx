@@ -6,6 +6,7 @@ import { Nav } from './components/Nav.jsx';
 import { SeoHead } from './components/SeoHead.jsx';
 import { Hero } from './components/Hero.jsx';
 import { LogoStrip, OutcomesHeadline, ValueProp, AgentCatalog, HowItWorks } from './components/MarketingSections.jsx';
+import { OperatingSystem } from './components/OperatingSystem.jsx';
 import {
   AgentOrbit,
   Testimonial,
@@ -224,6 +225,7 @@ export default function App() {
         <AgentCatalog />
         <Testimonial />
         <HowItWorks />
+        <OperatingSystem />
         <ValueLevers />
         <Metrics />
         <CTA />
