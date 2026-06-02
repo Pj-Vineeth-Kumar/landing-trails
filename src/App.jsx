@@ -1,22 +1,25 @@
 import React, { useEffect } from 'react';
+import { Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Nav } from './components/Nav.jsx';
 import { SeoHead } from './components/SeoHead.jsx';
-import { Hero } from './components/Hero.jsx';
-import { LogoStrip, OutcomesHeadline, ValueProp, AgentCatalog, HowItWorks } from './components/MarketingSections.jsx';
-import { OperatingSystem } from './components/OperatingSystem.jsx';
-import {
-  AgentOrbit,
-  Testimonial,
-  Metrics,
-  ValueLevers,
-  Certifications,
-  CTA,
-  Footer,
-  Tweaks,
-} from './components/ContentSections.jsx';
+import { Footer, Tweaks } from './components/ContentSections.jsx';
+
+import Home from './pages/Home.jsx';
+import Platform from './pages/Platform.jsx';
+import Agents from './pages/Agents.jsx';
+import Network from './pages/Network.jsx';
+import Services from './pages/Services.jsx';
+import Rfp from './pages/Rfp.jsx';
+import Security from './pages/Security.jsx';
+import Firms from './pages/Firms.jsx';
+import Corporate from './pages/Corporate.jsx';
+import About from './pages/About.jsx';
+import Letter from './pages/Letter.jsx';
+import Audit from './pages/Audit.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ limitCallbacks: true });
@@ -33,49 +36,87 @@ const delayForReveal = (el) => {
 };
 
 const refreshScroll = () => {
-  requestAnimationFrame(() => {
-    ScrollTrigger.refresh();
-  });
+  requestAnimationFrame(() => ScrollTrigger.refresh());
 };
 
-export default function App() {
+/** Scroll to top on route change; honor in-page #anchors. */
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: REDUCED_MOTION() ? 'auto' : 'smooth' });
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+}
+
+function Layout() {
+  const { pathname } = useLocation();
   const [tweaks, setTweaks] = React.useState(window.__TWEAKS__);
   const [editMode, setEditMode] = React.useState(false);
 
+  /* Scroll reveals - re-run per route so new pages animate in. */
   useEffect(() => {
     if (REDUCED_MOTION()) {
-      document.querySelectorAll('section:not(.hero-full-viewport) .reveal').forEach((el) => {
+      document.querySelectorAll('section:not(.hero-full-viewport):not(.page-hero) .reveal').forEach((el) => {
         el.classList.add('is-in');
       });
       return undefined;
     }
 
-    const reveals = gsap.utils.toArray('section:not(.hero-full-viewport):not(.logo-strip-section) .reveal');
+    const reveals = gsap.utils.toArray(
+      'section:not(.hero-full-viewport):not(.page-hero):not(.logo-strip-section) .reveal'
+    );
     const ctx = gsap.context(() => {
       reveals.forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 28, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.95,
-            delay: delayForReveal(el),
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 91%',
-              toggleActions: 'play none none none',
-              onEnter: () => el.classList.add('is-in'),
-            },
-          }
-        );
+        // Elements already within (or above) the viewport on load must NOT be
+        // snapped to opacity:0 - that causes a one-frame flicker at the fold.
+        // Only arm the entrance animation for elements that start below the fold.
+        const startsBelowFold = el.getBoundingClientRect().top > window.innerHeight * 0.92;
+        if (!startsBelowFold) {
+          el.classList.add('is-in');
+          return;
+        }
+        gsap.from(el, {
+          y: 24,
+          opacity: 0,
+          duration: 0.8,
+          delay: delayForReveal(el),
+          ease: 'power3.out',
+          immediateRender: true, // hidden state set now (element is safely off-screen)
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+            onEnter: () => el.classList.add('is-in'),
+          },
+        });
       });
     });
 
-    return () => ctx.revert();
-  }, [tweaks]);
+    // Failsafe: reveal any in-view element the trigger somehow missed (route timing).
+    // No ScrollTrigger.refresh() here - it re-evaluates start states mid-scroll and
+    // is a source of jumpy reveals. The single refreshScroll() below is enough.
+    const failsafe = window.setTimeout(() => {
+      reveals.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
+      });
+    }, 450);
 
+    refreshScroll();
+    return () => {
+      window.clearTimeout(failsafe);
+      ctx.revert();
+    };
+  }, [tweaks, pathname]);
+
+  /* Accent token swap */
   useEffect(() => {
     const r = document.documentElement;
     const accents = {
@@ -89,22 +130,24 @@ export default function App() {
     r.style.setProperty('--blue-soft', accents.s);
   }, [tweaks.accent]);
 
-  /* Lenis + GSAP ticker sync - industry standard for jitter-free smooth scroll */
+  /* Lenis + GSAP ticker sync */
   useEffect(() => {
     if (REDUCED_MOTION()) return undefined;
 
     const lenis = new Lenis({
-      lerp: 0.1,
-      duration: 1.25,
+      // Use lerp ALONE (not lerp + duration - they conflict). A slightly higher
+      // lerp settles faster, so scroll feels responsive rather than draggy.
+      lerp: 0.12,
       smoothWheel: true,
-      wheelMultiplier: 0.88,
-      touchMultiplier: 1.05,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.1,
       syncTouch: true,
-      syncTouchLerp: 0.08,
+      syncTouchLerp: 0.1,
       autoRaf: false,
       prevent: (node) => node?.classList?.contains('nav-mobile-panel'),
     });
 
+    window.__lenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
 
     const onAnchorClick = (e) => {
@@ -124,10 +167,7 @@ export default function App() {
 
     document.addEventListener('click', onAnchorClick);
 
-    const onTick = (time) => {
-      lenis.raf(time * 1000);
-    };
-
+    const onTick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
 
@@ -135,7 +175,6 @@ export default function App() {
       lenis.resize();
       refreshScroll();
     };
-
     window.addEventListener('load', onLoad);
     document.fonts?.ready?.then(refreshScroll);
 
@@ -149,9 +188,17 @@ export default function App() {
       window.removeEventListener('load', onLoad);
       gsap.ticker.remove(onTick);
       lenis.destroy();
+      window.__lenis = undefined;
     };
   }, []);
 
+  /* On route change, reset Lenis to top + refresh triggers. */
+  useEffect(() => {
+    window.__lenis?.scrollTo(0, { immediate: true });
+    refreshScroll();
+  }, [pathname]);
+
+  /* Edit-mode bridge (unchanged) */
   useEffect(() => {
     const onMsg = (e) => {
       if (!e.data || !e.data.type) return;
@@ -163,46 +210,6 @@ export default function App() {
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
-  /* GSAP scroll accents - transform + opacity only for compositor-friendly motion */
-  useEffect(() => {
-    if (REDUCED_MOTION()) return undefined;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '#value-levers .value-lever-card',
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.75,
-          stagger: 0.07,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '#value-levers .value-levers-columns',
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-
-      gsap.from('.m-grid > div', {
-        y: 24,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.07,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.m-grid',
-          start: 'top 84%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-    });
-
-    return () => ctx.revert();
-  }, [tweaks]);
-
   const updateTweak = (k, v) => {
     const next = { ...tweaks, [k]: v };
     setTweaks(next);
@@ -213,25 +220,36 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to main content</a>
+      <ScrollManager />
       <SeoHead />
       <Nav />
       <main id="main-content">
-        <Hero />
-        <LogoStrip />
-        <OutcomesHeadline />
-        <ValueProp />
-        <AgentOrbit />
-        <Certifications />
-        <AgentCatalog />
-        <Testimonial />
-        <HowItWorks />
-        <OperatingSystem />
-        <ValueLevers />
-        <Metrics />
-        <CTA />
+        <Outlet />
       </main>
       <Footer />
       {editMode && <Tweaks tweaks={tweaks} onChange={updateTweak} />}
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/platform" element={<Platform />} />
+        <Route path="/ai-agents" element={<Agents />} />
+        <Route path="/network" element={<Network />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/rfp-response" element={<Rfp />} />
+        <Route path="/security" element={<Security />} />
+        <Route path="/for-law-firms" element={<Firms />} />
+        <Route path="/for-corporate-teams" element={<Corporate />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/letter-from-the-founder" element={<Letter />} />
+        <Route path="/free-tech-audit" element={<Audit />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }

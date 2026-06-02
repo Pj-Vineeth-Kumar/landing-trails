@@ -219,20 +219,20 @@ export function buildStaticSeoHtml() {
   <p><strong>${SITE_NAME}</strong> - ${SEO_TAGLINE}</p>
 </header>
 <main id="main-content">
-  <h1>${SEO_TAGLINE}</h1>
+  <h1>Win Cases. We'll Handle All the Technology.</h1>
+  <p><strong>${SEO_TAGLINE}</strong></p>
   <p>${SEO_BRAND_STATEMENT}</p>
-  <p><a href="${SITE_URL}/#cta">Schedule a call</a> · <a href="https://app.globalcodio.ai/login">Sign in</a></p>
-  <nav aria-label="Page sections">
+  <p><a href="${SITE_URL}/free-tech-audit">Book your free tech audit</a> · <a href="https://app.globalcodio.ai/login">Sign in</a></p>
+  <nav aria-label="Primary">
     <ul>
-      <li><a href="${SITE_URL}/#pillars">Three Pillars</a></li>
-      <li><a href="${SITE_URL}/#platform">Platform</a></li>
-      <li><a href="${SITE_URL}/#certifications">Trust & Compliance</a></li>
-      <li><a href="${SITE_URL}/#agents">AI Agents</a></li>
-      <li><a href="${SITE_URL}/#customers">Teams</a></li>
-      <li><a href="${SITE_URL}/#how">Questions</a></li>
-      <li><a href="${SITE_URL}/#operating-system">Operating System</a></li>
-      <li><a href="${SITE_URL}/#value-levers">Outcomes</a></li>
-      <li><a href="${SITE_URL}/#metrics">ROI</a></li>
+      <li><a href="${SITE_URL}/platform">Platform - CodioCMS &amp; CodioForms</a></li>
+      <li><a href="${SITE_URL}/ai-agents">Codio AI Agents</a></li>
+      <li><a href="${SITE_URL}/network">CodioNetwork</a></li>
+      <li><a href="${SITE_URL}/services">Services</a></li>
+      <li><a href="${SITE_URL}/security">Security &amp; Compliance</a></li>
+      <li><a href="${SITE_URL}/about">About</a></li>
+      <li><a href="${SITE_URL}/letter-from-the-founder">Letter from the Founder</a></li>
+      <li><a href="${SITE_URL}/free-tech-audit">Free Tech Audit</a></li>
     </ul>
   </nav>
   <section id="pillars">

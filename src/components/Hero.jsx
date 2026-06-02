@@ -29,10 +29,12 @@ const rise = {
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
 /* Static assets in /public */
-const heroBackgroundSrc = `${import.meta.env.BASE_URL}sky.png`;
 const dashboardPreviewSrc = `${import.meta.env.BASE_URL}assets/dashboard.png`;
 
-/* Hero - GoGetta structure: editorial headline, sub, CTAs, then dashboard preview below */
+/* Hero - editorial headline, sub, CTAs, then dashboard preview below.
+   Background: clean light base with a faint top-down blue wash; the premium
+   depth comes from .hero-aurora (blue/sky radials) + the dashboard glow,
+   so the serif headline stays crisp and legible (light-enterprise direction). */
 export const Hero = () => (
     <section
       className="hero-full-viewport hero-section"
@@ -42,13 +44,12 @@ export const Hero = () => (
         boxSizing: 'border-box',
         position: 'relative',
         isolation: 'isolate',
-        backgroundColor: '#eef3f8',
-        backgroundImage: `url(${heroBackgroundSrc})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
+        background:
+          'linear-gradient(180deg, #f4f8ff 0%, #fbfcff 46%, #ffffff 100%)',
       }}
     >
+      <div className="hero-aurora" aria-hidden="true" />
+      <div className="hero-grid-overlay" aria-hidden="true" />
       <div className="hero-copy-stack">
         <motion.div
           className="container"
@@ -57,23 +58,31 @@ export const Hero = () => (
           initial="hidden"
           animate="show"
         >
+        <motion.div className="reveal hero-eyebrow-row" style={{ textAlign: 'center' }} variants={rise}>
+          <span className="pill hero-eyebrow-pill">
+            <span className="hero-eyebrow-dot" aria-hidden="true" />
+            AI Agents for Global Immigration · Deployed and Managed
+          </span>
+        </motion.div>
+
         <motion.h1
           className="reveal d1 display type-display-hero"
           style={{
             textAlign: 'center',
             marginBottom: 'var(--space-sm)',
-            lineHeight: 1.04,
+            lineHeight: 1.12,
           }}
           variants={headlineStagger}
         >
           <motion.span style={{ display: 'block' }} variants={rise}>
-            AI Agents for Global Immigration
+            Win Cases.
           </motion.span>
           <motion.em
-            style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}
+            className="text-grad-blue"
+            style={{ display: 'block', fontStyle: 'italic' }}
             variants={rise}
           >
-            Deployed and Managed.
+            We&rsquo;ll Handle All the Technology.
           </motion.em>
         </motion.h1>
 
@@ -99,10 +108,10 @@ export const Hero = () => (
           }}
           variants={rise}
         >
-          GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce
-          - built, deployed, and managed end-to-end. Our AI Agents handle case management, client communications,
-          renewals, and business development, <strong>while our team runs the entire technology operation.</strong> Connected to a
-          global ecosystem of immigration partners, we help your team cut costs and grow revenue - without ever
+          GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce-built,
+          deployed, and managed end-to-end. Our AI Agents handle case management, client communications, renewals,
+          and business development, <strong>while our team runs the entire technology operation.</strong> Connected to
+          a global ecosystem of immigration partners, we help your team cut costs and grow revenue-without ever
           managing technology again.
         </motion.p>
 
@@ -116,8 +125,8 @@ export const Hero = () => (
           }}
           variants={rise}
         >
-          Your own AI workforce for immigration - built, deployed, and managed end-to-end. Cut costs and grow
-          revenue without ever managing technology again.
+          Your AI workforce for immigration-agents for cases, clients, renewals, and growth,{' '}
+          <strong>while our team runs the entire technology operation.</strong>
         </motion.p>
 
         <motion.div
@@ -125,18 +134,28 @@ export const Hero = () => (
           style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
           variants={rise}
         >
-          <motion.a href="#cta" className="btn btn-dark" {...btnTap}>
-            Schedule a call
+          <motion.a href="/free-tech-audit" className="btn btn-dark" {...btnTap}>
+            Book your free tech audit
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 8h10M9 4l4 4-4 4" />
             </svg>
           </motion.a>
+          <motion.a href="#operating-system" className="btn btn-glass" {...btnTap}>
+            See how it works
+          </motion.a>
+        </motion.div>
+
+        <motion.div className="reveal d4 hero-trust" variants={rise} aria-label="Trusted by immigration practices worldwide">
+          <span className="hero-trust-copy">
+            Built by the founder of <strong>INSZoom</strong> - trusted by 1,500+ immigration firms.
+          </span>
         </motion.div>
         </motion.div>
       </div>
 
       {/* Dashboard preview - hidden on mobile via .hero-dashboard-slot in global.css */}
       <div className="hero-dashboard-slot">
+        <div aria-hidden="true" className="blue-glow hero-dashboard-glow" />
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
           <HeroDashboard />
         </div>

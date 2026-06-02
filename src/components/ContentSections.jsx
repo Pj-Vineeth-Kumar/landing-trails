@@ -1,9 +1,20 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { FileText, MessageCircle, RefreshCw, TrendingUp } from 'lucide-react';
 import { Logo } from './Nav.jsx';
-import { SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL } from '../config/siteNav.js';
+import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../config/siteNav.js';
+
+/** Internal route → <Link>; external/anchor/mailto → <a>. */
+const FooterLink = ({ href, children, ...rest }) => {
+  const internal = href && href.startsWith('/') && !href.startsWith('//');
+  return internal ? (
+    <Link to={href} {...rest}>{children}</Link>
+  ) : (
+    <a href={href} {...rest}>{children}</a>
+  );
+};
 
 /** Caption offsets for inner MTO & ECO labels */
 const LEGACY_INNER_CAPTION_NUDGE = {
@@ -11,7 +22,7 @@ const LEGACY_INNER_CAPTION_NUDGE = {
   'p-eco': { dx: 32, dy: 51 },
 };
 
-/** Radial caption placement — clears badge using label size + angle */
+/** Radial caption placement - clears badge using label size + angle */
 const estimateCaptionHalf = (label, ring, uiScale) => {
   const halfH = (ring === 'inner' ? 14 : 13) * uiScale;
   const charW = 5.8 * uiScale;
@@ -28,19 +39,21 @@ const orbitCaptionOffset = (r, bd, uiScale, nx, ny, label, ring) => {
   return { lx: nx * dist, ly: ny * dist };
 };
 
-/** Overrides GSAP inline transform so card lift + border hover still works after scroll reveal */
+/** Overrides GSAP inline transform so card lift + branded shadow hover still works after scroll reveal */
 const interactiveCardProps = {
   onMouseEnter: (e) => {
-    e.currentTarget.style.borderColor = 'var(--blue)';
+    e.currentTarget.style.borderColor = 'var(--line-blue)';
     e.currentTarget.style.transform = 'translateY(-3px)';
+    e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)';
   },
   onMouseLeave: (e) => {
     e.currentTarget.style.borderColor = '';
     e.currentTarget.style.transform = 'translate(0px, 0px)';
+    e.currentTarget.style.boxShadow = '';
   },
 };
 
-/** Orbit ring diameters (px, pre–ui-scale) — must match .orbit-ring inline sizes in AgentOrbit */
+/** Orbit ring diameters (px, pre–ui-scale) - must match .orbit-ring inline sizes in AgentOrbit */
 const ORBIT_INNER_RADIUS = 384 / 2;
 const ORBIT_OUTER_RADIUS = 612 / 2;
 
@@ -58,8 +71,8 @@ export const AgentOrbit = () => {
 
   const innerPillars = [
     { id: 'p-ai', n: 'AI', label: 'AI Agents' },
-    { id: 'p-mto', n: 'MTO', label: 'Managed Technology Operations' },
-    { id: 'p-eco', n: 'ECO', label: 'Global Immigration Ecosystem' },
+    { id: 'p-mto', n: 'MTO', label: 'Techn Ops' },
+    { id: 'p-eco', n: 'ECO', label: 'Ecosystem' },
   ];
   const outerCapabilities = [
     { id: 'o-in', n: 'IN', label: 'Intake Agent' },
@@ -159,7 +172,7 @@ export const AgentOrbit = () => {
           </div>
           </div>
 
-          {/* Labels: radial offset from badge — sized to avoid overlapping icons */}
+          {/* Labels: radial offset from badge - sized to avoid overlapping icons */}
           {orbitNodes.map((a) => {
             const { r, angle, ring } = a;
             const nx = Math.cos(angle);
@@ -361,7 +374,7 @@ export const Testimonial = () => (
             body: 'In-house mobility, HR, and legal operations teams at mid-to-large employers managing employee visa cases. Pain points: scaling case volume, compliance, vendor management, and cost predictability.',
           },
         ].map((a, i) => (
-          <article key={i} className={`card reveal d${i + 1}`} {...interactiveCardProps}>
+          <article key={i} className={`card audience-card reveal d${i + 1}${i === 1 ? ' audience-card--tint' : ''}`} {...interactiveCardProps}>
             <h3 className="display" style={{ fontSize: 'var(--text-display-audience)', letterSpacing: '-0.02em', marginBottom: 'calc(14px * var(--ui-scale))' }}>{a.title}</h3>
             <blockquote style={{ fontSize: 'var(--text-body)', color: 'var(--ink)', lineHeight: 1.55, fontStyle: 'italic', margin: '0 0 calc(14px * var(--ui-scale))', paddingLeft: 'calc(12px * var(--ui-scale))', borderLeft: '2px solid var(--blue-soft)' }}>{a.quote}</blockquote>
             <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.6 }}>{a.body}</p>
@@ -440,9 +453,9 @@ export const ValueLevers = () => (
         <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value Levers</div>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>Where savings</span>
-          <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>and revenue come from.</em>
+          <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>and revenue come from.</em>
         </h2>
-        <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.6, maxWidth: '62ch', marginTop: 'var(--space-lg)' }}>
+        <p className="value-levers-intro">
           Every agent ties to a measurable outcome - reduced prep time, lower support costs, captured renewals,
           or new client revenue. We track what each lever delivers so your team sees the impact, not just the software.
         </p>
@@ -462,13 +475,13 @@ export const ValueLevers = () => (
                   {...(lever.comingSoon ? {} : interactiveCardProps)}
                 >
                   <div className="value-lever-card-top">
+                    {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
                     <div className="agent-icon" aria-hidden="true">
                       <lever.Icon size={20} strokeWidth={1.75} />
                     </div>
-                    {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
                   </div>
-                  <h3 className="display text-card-sm">{lever.h}</h3>
-                  <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{lever.b}</p>
+                  <h3 className="display text-card-sm feature-card-title">{lever.h}</h3>
+                  <p className="feature-card-body">{lever.b}</p>
                   <div
                     className="mono value-lever-agent"
                     style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)' }}
@@ -485,40 +498,72 @@ export const ValueLevers = () => (
   </section>
 );
 
-const CERT_GROUPS = [
-  { label: 'Security', items: ['SOC 2 Type II', 'ISO 27001'] },
-  { label: 'Privacy', items: ['GDPR', 'CCPA / CPRA', 'UK GDPR'] },
-  { label: 'Legal ethics', items: ['ABA-aligned AI governance', 'Attorney-client privilege', 'No training on client data'] },
-  { label: 'Controls', items: ['AES-256', 'TLS 1.3', 'SSO / MFA', 'HIPAA-ready'] },
+/* Real certification badge artwork lives in /public/assets.
+   `href` points to each standard's authoritative source. */
+const CERT_BADGES = [
+  { id: 'soc2', src: 'SOC-2-Type-2.png', name: 'SOC 2 Type II', label: 'SOC 2 Type II', sub: 'Audited annually', href: 'https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2' },
+  { id: 'iso', src: 'ISO.png', name: 'ISO/IEC 27001', label: 'ISO/IEC 27001', sub: 'Information security', href: 'https://www.iso.org/standard/27001' },
+  { id: 'gdpr', src: 'GDPR.png', name: 'GDPR', label: 'GDPR', sub: 'EU data protection', href: 'https://commission.europa.eu/law/law-topic/data-protection_en' },
+  { id: 'ccpa', src: 'CCPA.png', name: 'CCPA / CPRA', label: 'CCPA / CPRA', sub: 'US privacy law', href: 'https://oag.ca.gov/privacy/ccpa' },
 ];
+
+const CERT_ASSET = (src) => `${import.meta.env.BASE_URL}assets/${src}`;
+
+const CertArrow = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M3 8h10M9 4l4 4-4 4" />
+  </svg>
+);
+
+/** Reusable cert row - logos sit directly on the background (no chip);
+ *  mix-blend-mode:multiply drops the white image backgrounds so they blend.
+ *  Each logo has its standard name + a "Details →" link to the source. */
+export const CertLogos = ({ className = '', style }) => (
+  <div className={`cert-logos ${className}`.trim()} style={style}>
+    {CERT_BADGES.map(({ id, src, name, label, sub, href }) => (
+      <figure key={id} className="cert-item">
+        <img
+          className="cert-logo-img"
+          src={CERT_ASSET(src)}
+          alt={`${label} - ${sub}`}
+          title={`${label} - ${sub}`}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+        />
+        <figcaption className="cert-item-cap">
+          <span className="cert-item-name">{name}</span>
+          <a
+            className="cert-item-link"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${name} details (opens in a new tab)`}
+          >
+            Details <CertArrow />
+          </a>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+);
 
 export const Certifications = () => (
   <section id="certifications" className="sec sec-certifications" aria-labelledby="certifications-heading">
     <div className="container">
       <div className="how-grid cert-layout">
-        <div className="reveal cert-section-head" style={{ position: 'sticky', top: 'calc(120px * var(--ui-scale))' }}>
+        <div className="reveal cert-section-head">
           <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Trust & Compliance</div>
-          <h2 id="certifications-heading" className="display type-display-lg" style={{ marginBottom: 'var(--space-xl)' }}>
+          <h2 id="certifications-heading" className="display type-display-lg">
             <span style={{ display: 'block' }}>Built to pass</span>
             <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>firm-grade due diligence.</em>
           </h2>
-          <p className="cert-intro">
-            The standards immigration firms ask for in vendor reviews - security attestation, privacy law,
-            ethical AI use, and enterprise controls.
-          </p>
         </div>
 
         <div className="cert-panel">
-          <dl className="reveal d1 cert-stack">
-            {CERT_GROUPS.map((group) => (
-              <div key={group.label} className="cert-row">
-                <dt className="mono cert-row-label">{group.label}</dt>
-                <dd className="cert-row-items">{group.items.join(' · ')}</dd>
-              </div>
-            ))}
-          </dl>
+          <CertLogos className="reveal d1" />
 
-          <p className="reveal d2 cert-footnote">
+          <p className="reveal d3 cert-footnote">
             SOC 2 report, standard DPA, and security questionnaire available on request.{' '}
             <a href={SUPPORT_MAILTO}>Request security pack</a>
           </p>
@@ -541,8 +586,8 @@ export const CTA = () => (
         Walk through deployment, managed operations, and the global ecosystem on cases your team is running today.
       </p>
       <div className="reveal d2" style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
-        <a href={SUPPORT_MAILTO} className="btn btn-dark">Book a demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-        <a href="tel:+18004252346" className="btn btn-surface">Call +1 (800) GBL-CDIO</a>
+        <Link to={AUDIT_URL} className="btn btn-dark">Book your free tech audit <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></Link>
+        <a href={SUPPORT_MAILTO} className="btn btn-surface">Talk to our team</a>
       </div>
     </div>
   </section>
@@ -572,16 +617,22 @@ export const Footer = () => (
             </a>
           </div>
         </div>
-        {[['Solutions', ['AI Agents', 'Managed technology operations', 'Global immigration ecosystem']], ['For firms', ['Solo & small', 'Mid-size practices', 'Enterprise immigration']], ['Company', ['About', 'Customers', 'Careers', 'Contact']], ['Legal', ['Privacy', 'Terms', 'Security']]].map(([h, items]) => (
-          <div key={h}>
-            <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 14 }}>{h}</div>
-            <ul style={{ listStyle: 'none', display: 'grid', gap: 10, fontSize: 13.5 }}>{items.map((it) => <li key={it}><a href="#" style={{ color: 'var(--ink-3)' }}>{it}</a></li>)}</ul>
+        {FOOTER_COLUMNS.map((col) => (
+          <div key={col.title}>
+            <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 14 }}>{col.title}</div>
+            <ul style={{ listStyle: 'none', display: 'grid', gap: 10, fontSize: 13.5 }}>
+              {col.links.map((it) => (
+                <li key={it.label + it.href}>
+                  <FooterLink href={it.href} style={{ color: 'var(--ink-3)' }}>{it.label}</FooterLink>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
-      <div style={{ borderTop: '1px solid var(--line)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--muted)', flexWrap: 'wrap', gap: 12 }}>
-        <div>© 2026 GlobalCodio Inc. · San Francisco · Delhi · London</div>
-        <div className="mono" style={{ letterSpacing: '.05em' }}>v2026.2 · Apr 22, 2026</div>
+      <div style={{ borderTop: '1px solid var(--line)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: 'var(--muted)', flexWrap: 'wrap', gap: 12 }}>
+        <div>© 2026 GlobalCodio. All rights reserved. · San Francisco · Delhi · London</div>
+        <div className="mono" style={{ letterSpacing: '.05em', color: 'var(--blue)' }}>Win Cases. We&rsquo;ll Handle All the Technology.</div>
       </div>
       <div
         aria-hidden="true"

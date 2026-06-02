@@ -2,13 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
+  Bot,
   CalendarClock,
   ClipboardList,
   FileText,
   Globe,
   MessageCircle,
+  Network,
   PenLine,
   RefreshCw,
+  Settings,
   TrendingUp,
 } from 'lucide-react';
 
@@ -61,24 +64,35 @@ export const OutcomesHeadline = () => (
   </section>
 );
 
+const PILLARS = [
+  { n: '01', Icon: Bot, h: 'AI Agents', b: 'A suite of autonomous AI workers handling case management, client communications, renewals, and business development - purpose-built for immigration workflows.', featured: true },
+  { n: '02', Icon: Settings, h: 'Managed Technology Operations', b: 'We deploy, configure, monitor, and optimize the entire agent ecosystem within your firm. Updates, integrations, support, and ongoing improvements - fully managed by our team.' },
+  { n: '03', Icon: Network, h: 'Global Immigration Ecosystem', b: 'Curated network of pre-vetted immigration service providers worldwide - translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more - all accessible through one platform.' },
+];
+
 export const ValueProp = () => (
   <section className="sec sec-pillars" id="pillars">
     <div className="container">
       <div className="reveal section-head-wide">
         <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>The Three Pillars</div>
+        <h2 className="display type-display-lg">
+          <span style={{ display: 'block' }}>One operation,</span>
+          <em style={{ display: 'block', fontStyle: 'italic' }} className="text-grad-blue">three pillars working as one.</em>
+        </h2>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3xl)' }} className="vp-grid">
-        {[
-          { n: '01', h: 'AI Agents', b: 'A suite of autonomous AI workers handling case management, client communications, renewals, and business development - purpose-built for immigration workflows.' },
-          { n: '02', h: 'Managed Technology Operations', b: 'We deploy, configure, monitor, and optimize the entire agent ecosystem within your firm. Updates, integrations, support, and ongoing improvements - fully managed by our team.' },
-          { n: '03', h: 'Global Immigration Ecosystem', b: 'Curated network of pre-vetted immigration service providers worldwide - translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more - all accessible through one platform.' },
-        ].map((v, i) => (
-          <div key={i} className={`reveal d${i + 1}`}>
-            <div className="mono" style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--blue)', marginBottom: 'var(--space-md)', letterSpacing: '.08em' }}>/{v.n}</div>
-            <h3 style={{ fontSize: 'calc(24px * var(--ui-scale))', fontWeight: 650, letterSpacing: '-0.015em', marginBottom: 'calc(14px * var(--ui-scale))', lineHeight: 1.2 }}>{v.h}</h3>
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{v.b}</p>
-          </div>
+      <div className="pillars-grid vp-grid">
+        {PILLARS.map((v, i) => (
+          <article key={i} className={`pillar-card reveal d${i + 1}${v.featured ? ' pillar-card--featured' : ''}`}>
+            <div className="pillar-card-top">
+              <div className="agent-icon pillar-icon" aria-hidden="true">
+                <v.Icon size={20} strokeWidth={1.75} />
+              </div>
+              <span className="mono pillar-index">/{v.n}</span>
+            </div>
+            <h3 className="display pillar-title">{v.h}</h3>
+            <p className="pillar-body">{v.b}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -159,7 +173,7 @@ export const HowItWorks = () => {
     <section id="how" className="sec sec-surface" aria-labelledby="faq-heading">
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'var(--space-7xl)', alignItems: 'start' }} className="how-grid">
-          <div className="reveal" style={{ position: 'sticky', top: 'calc(120px * var(--ui-scale))' }}>
+          <div className="reveal">
             <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Common questions</div>
             <h2 id="faq-heading" className="display type-display-lg" style={{ marginBottom: 'var(--space-xl)' }}>
               <span style={{ display: 'block' }}>Straight answers,</span>

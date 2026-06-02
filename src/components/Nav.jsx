@@ -1,6 +1,143 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FOOTER_COLUMNS, SIGN_IN_URL, SITE_NAV_LINKS, SITE_URL } from '../config/siteNav.js';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { AUDIT_URL, FOOTER_COLUMNS, SIGN_IN_URL, SITE_NAV } from '../config/siteNav.js';
+
+/** Internal route → <Link>; external/anchor → <a>. */
+const NavItem = ({ href, className, children, onClick }) => {
+  const internal = href && href.startsWith('/') && !href.startsWith('//');
+  if (internal) {
+    return (
+      <Link to={href} className={className} onClick={onClick}>
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <a href={href} className={className} onClick={onClick}>
+      {children}
+    </a>
+  );
+};
+
+const DropChevron = () => (
+  <svg className="navlink-chev" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+/** Desktop nav entry: a plain link, or a hover/focus dropdown when it has children. */
+const NavGroup = ({ item }) => {
+  const [open, setOpen] = React.useState(false);
+  const closeT = React.useRef(null);
+  const { pathname } = useLocation();
+
+  React.useEffect(() => { setOpen(false); }, [pathname]);
+
+  if (!item.children) {
+    return <NavItem className="navlink" href={item.href}>{item.label}</NavItem>;
+  }
+
+  const isActive = item.children.some((c) => c.href === pathname) || item.href === pathname;
+  const cancelClose = () => closeT.current && clearTimeout(closeT.current);
+  const scheduleClose = () => {
+    cancelClose();
+    closeT.current = setTimeout(() => setOpen(false), 120);
+  };
+
+  return (
+    <div
+      className={`nav-group${open ? ' is-open' : ''}`}
+      onMouseEnter={() => { cancelClose(); setOpen(true); }}
+      onMouseLeave={scheduleClose}
+    >
+      <button
+        type="button"
+        className={`navlink navlink-trigger${isActive ? ' is-active' : ''}`}
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => (item.href ? null : setOpen((v) => !v))}
+        onFocus={() => { cancelClose(); setOpen(true); }}
+      >
+        {item.label}
+        <DropChevron />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="nav-dropdown"
+            role="menu"
+            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            onMouseEnter={cancelClose}
+            onMouseLeave={scheduleClose}
+          >
+            {item.children.map((c) => (
+              <Link key={c.href} to={c.href} className="nav-dropdown-item" role="menuitem">
+                <span className="nav-dropdown-item-label">{c.label}</span>
+                {c.desc && <span className="nav-dropdown-item-desc">{c.desc}</span>}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+/** Mobile nav: flat items are direct links; grouped items expand into sub-links. */
+const MobileNavList = ({ items, onNavigate }) => {
+  const [openIdx, setOpenIdx] = React.useState(null);
+  return (
+    <>
+      {items.map((item, i) => {
+        if (!item.children) {
+          return (
+            <NavItem key={item.label} className="nav-mobile-link" href={item.href} onClick={onNavigate}>
+              <span>{item.label}</span>
+              <ChevronRight />
+            </NavItem>
+          );
+        }
+        const open = openIdx === i;
+        return (
+          <div key={item.label} className={`nav-mobile-group${open ? ' is-open' : ''}`}>
+            <button
+              type="button"
+              className="nav-mobile-link nav-mobile-grouptrigger"
+              aria-expanded={open}
+              onClick={() => setOpenIdx(open ? null : i)}
+            >
+              <span>{item.label}</span>
+              <ChevronRight />
+            </button>
+            <AnimatePresence initial={false}>
+              {open && (
+                <motion.div
+                  className="nav-mobile-sub"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.32, ease: [0.2, 0.7, 0.2, 1] }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  {item.children.map((c) => (
+                    <NavItem key={c.href} className="nav-mobile-sublink" href={c.href} onClick={onNavigate}>
+                      {c.label}
+                    </NavItem>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </>
+  );
+};
 
 const logoSrc = `${import.meta.env.BASE_URL}logo.png`;
 
@@ -76,22 +213,26 @@ export const Nav = () => {
     };
   }, [menuOpen, closeMenu]);
 
+  /* Desktop glass promoted to the resting state (was transparent) - frosted at all times,
+     denser once scrolled. Mirrors the mobile glass treatment for one cohesive chrome. */
   const surface = scrolled || menuOpen
     ? {
         background:
-          'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.32) 100%)',
-        backdropFilter: 'blur(18px) saturate(150%) brightness(1.04)',
-        WebkitBackdropFilter: 'blur(18px) saturate(150%) brightness(1.04)',
-        border: '1px solid rgba(255,255,255,0.45)',
+          'linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.7) 100%)',
+        backdropFilter: 'blur(24px) saturate(150%) brightness(1.04)',
+        WebkitBackdropFilter: 'blur(24px) saturate(150%) brightness(1.04)',
+        border: '1px solid rgba(255,255,255,0.55)',
         boxShadow:
-          'inset 0 1px 0 0 rgba(255,255,255,0.7), 0 8px 32px -16px rgba(11,19,36,0.1)',
+          'inset 0 1px 0 0 rgba(255,255,255,0.7), 0 10px 36px -16px rgba(11,19,36,0.14)',
       }
     : {
-        background: 'transparent',
-        backdropFilter: 'none',
-        WebkitBackdropFilter: 'none',
-        border: '1px solid transparent',
-        boxShadow: 'none',
+        background:
+          'linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.38) 100%)',
+        backdropFilter: 'blur(20px) saturate(140%) brightness(1.03)',
+        WebkitBackdropFilter: 'blur(20px) saturate(140%) brightness(1.03)',
+        border: '1px solid rgba(255,255,255,0.45)',
+        boxShadow:
+          'inset 0 1px 0 0 rgba(255,255,255,0.55), 0 6px 24px -14px rgba(11,19,36,0.1)',
       };
 
   return (
@@ -127,20 +268,21 @@ export const Nav = () => {
           }}
         >
           <div className="nav-inner">
-            <a href={SITE_URL} className="nav-logo-link" aria-label="GlobalCodio home">
+            <Link to="/" className="nav-logo-link" aria-label="GlobalCodio home">
               <Logo className="nav-logo" />
-            </a>
+            </Link>
 
             <div className="navlinks navlinks-desktop">
-              {SITE_NAV_LINKS.map(({ href, label }) => (
-                <a key={href + label} className="navlink" href={href}>
-                  {label}
-                </a>
+              {SITE_NAV.map((item) => (
+                <NavGroup key={item.label} item={item} />
               ))}
             </div>
 
             <div className="nav-actions nav-actions-desktop">
-              <a href={SIGN_IN_URL} className="btn btn-dark nav-signin">
+              <Link to={AUDIT_URL} className="btn btn-primary nav-signin nav-audit-cta">
+                Free Tech Audit
+              </Link>
+              <a href={SIGN_IN_URL} className="btn btn-surface nav-signin">
                 Sign in
               </a>
             </div>
@@ -180,9 +322,9 @@ export const Nav = () => {
             transition={{ duration: 0.28, ease: drawerEase }}
           >
             <header className="nav-mobile-header">
-              <a href={SITE_URL} className="nav-mobile-logo-link" aria-label="GlobalCodio home" onClick={closeMenu}>
+              <Link to="/" className="nav-mobile-logo-link" aria-label="GlobalCodio home" onClick={closeMenu}>
                 <Logo className="nav-mobile-logo" />
-              </a>
+              </Link>
               <button
                 ref={closeBtnRef}
                 type="button"
@@ -197,24 +339,13 @@ export const Nav = () => {
             </header>
 
             <nav className="nav-mobile-list">
-              {SITE_NAV_LINKS.map(({ href, label }, i) => (
-                <a
-                  key={href + label}
-                  className="nav-mobile-link"
-                  href={href}
-                  onClick={closeMenu}
-                  style={{ animationDelay: `${0.03 + i * 0.035}s` }}
-                >
-                  <span>{label}</span>
-                  <ChevronRight />
-                </a>
-              ))}
+              <MobileNavList items={SITE_NAV} onNavigate={closeMenu} />
             </nav>
 
             <div className="nav-mobile-footer">
-              <a href="#cta" className="btn btn-dark nav-mobile-cta" onClick={closeMenu}>
-                Schedule a call
-              </a>
+              <Link to={AUDIT_URL} className="btn btn-primary nav-mobile-cta" onClick={closeMenu}>
+                Book your free tech audit
+              </Link>
               <a href={SIGN_IN_URL} className="btn btn-surface nav-mobile-signin" onClick={closeMenu}>
                 Sign in
               </a>

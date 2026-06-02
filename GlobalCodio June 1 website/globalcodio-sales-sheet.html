@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalCodio - Win Cases. We'll Handle All the Technology.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0A1628;
+            --navy-mid: #0F1E35;
+            --gold: #C9A84C;
+            --gold-light: #DFC07A;
+            --gold-pale: #F5E9CC;
+            --white: #FFFFFF;
+            --off-white: #F4F6F9;
+            --grey: #8A9BB0;
+            --text-dark: #1A2A3A;
+            --text-mid: #3D5068;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 44px 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 45%; height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.07) 100%);
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent 70%);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+        }
+        .company-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .company-name span { color: var(--gold); }
+        .secondary-tagline {
+            font-size: 10.5px;
+            font-weight: 400;
+            color: var(--grey);
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+        .primary-tagline { text-align: right; max-width: 360px; }
+        .primary-tagline h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 27px;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.3;
+        }
+        .primary-tagline h1 em { color: var(--gold); font-style: normal; }
+
+        /* ── HOOK ── */
+        .hook {
+            background: var(--navy-mid);
+            padding: 30px 60px;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+        }
+        .hook p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: #E8D8BC;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.65;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .hook p strong { color: var(--gold); font-style: normal; font-weight: 600; }
+
+        /* ── SHARED SECTION STYLES ── */
+        .section { padding: 44px 60px; }
+        .section-alt { background: var(--white); }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+        .section-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+        .section-rule {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(201,168,76,0.35), transparent);
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--text-mid);
+            margin-bottom: 28px;
+        }
+
+        /* ── PAIN POINTS ── */
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        .pain-card {
+            background: var(--off-white);
+            border: 1px solid #E2E8F0;
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            padding: 20px 18px;
+        }
+        .pain-number {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+        }
+        .pain-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+        .pain-desc {
+            font-size: 12px;
+            color: var(--text-mid);
+            line-height: 1.55;
+        }
+
+        /* ── SOLUTION PILLARS ── */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+        .solution-card {
+            background: var(--navy);
+            border-radius: 6px;
+            padding: 28px 22px;
+            position: relative;
+            overflow: hidden;
+        }
+        .solution-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--gold);
+        }
+        .solution-icon { font-size: 22px; margin-bottom: 14px; }
+        .solution-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .solution-desc {
+            font-size: 12px;
+            color: var(--grey);
+            line-height: 1.65;
+        }
+
+        /* ── AI AGENTS ── */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .agent-card {
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            border-top: 3px solid var(--gold);
+            border-radius: 5px;
+            padding: 18px 15px;
+        }
+        .agent-icon { font-size: 18px; margin-bottom: 10px; }
+        .agent-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 3px;
+        }
+        .agent-role {
+            font-size: 9.5px;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+        .agent-desc {
+            font-size: 11.5px;
+            color: var(--text-mid);
+            line-height: 1.5;
+        }
+        .agent-stat {
+            margin-top: 11px;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--navy);
+            background: var(--gold-pale);
+            padding: 4px 8px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        /* ── ECONOMICS ── */
+        .economics-section {
+            background: var(--navy);
+            padding: 48px 60px;
+        }
+        .economics-section .section-title { color: var(--white); }
+
+        .economics-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-top: 28px;
+        }
+        .cost-table { width: 100%; border-collapse: collapse; }
+        .cost-table th {
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--grey);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .cost-table th:last-child { text-align: right; }
+        .cost-table td {
+            font-size: 12.5px;
+            color: #C8D8E8;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .cost-table td:last-child { text-align: right; color: var(--grey); }
+        .cost-table tr.total td {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 14px;
+            border-top: 1px solid rgba(201,168,76,0.35);
+            border-bottom: none;
+            padding-top: 14px;
+        }
+        .cost-table tr.gc td { color: var(--gold); font-weight: 600; font-size: 13.5px; }
+        .cost-table tr.savings td { color: #5EDA9E; font-weight: 700; font-size: 15px; }
+
+        .roi-block {
+            text-align: center;
+            background: rgba(201,168,76,0.08);
+            border: 1px solid rgba(201,168,76,0.28);
+            border-radius: 8px;
+            padding: 40px 28px;
+        }
+        .roi-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .roi-label {
+            font-size: 13px;
+            color: var(--grey);
+            line-height: 1.55;
+            margin-bottom: 20px;
+        }
+        .roi-sub {
+            font-size: 11px;
+            color: rgba(201,168,76,0.65);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* ── PRICING ── */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+        .pricing-card {
+            background: var(--off-white);
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 28px 22px;
+        }
+        .pricing-card.featured {
+            background: var(--navy);
+            border-color: var(--gold);
+        }
+        .pricing-tier {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+        .pricing-audience {
+            font-size: 12px;
+            color: var(--grey);
+            margin-bottom: 20px;
+        }
+        .pricing-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .pricing-card.featured .pricing-price { color: var(--gold); }
+        .pricing-period {
+            font-size: 12px;
+            color: var(--grey);
+            margin-bottom: 20px;
+        }
+        .pricing-performance {
+            font-size: 12px;
+            color: var(--text-mid);
+            padding-top: 16px;
+            border-top: 1px solid #E2E8F0;
+            line-height: 1.5;
+        }
+        .pricing-card.featured .pricing-performance {
+            color: var(--grey);
+            border-top-color: rgba(255,255,255,0.1);
+        }
+        .perf-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        /* ── CTA FOOTER ── */
+        .cta-section {
+            background: linear-gradient(135deg, #0A1628 0%, #0E2248 100%);
+            padding: 48px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            border-top: 2px solid var(--gold);
+        }
+        .cta-left h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        .cta-left p {
+            font-size: 13px;
+            color: var(--grey);
+            max-width: 460px;
+            line-height: 1.65;
+        }
+        .cta-right { text-align: right; flex-shrink: 0; }
+        .cta-button {
+            background: var(--gold);
+            color: var(--navy);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            padding: 13px 26px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 18px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .contact-info {
+            font-size: 12.5px;
+            color: var(--grey);
+            line-height: 1.9;
+        }
+        .contact-info strong { color: var(--gold-light); }
+
+        /* ── PRINT ── */
+        @media print {
+            body { background: white; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-inner">
+            <div class="logo-block">
+                <div class="company-name">Global<span>Codio</span></div>
+                <div class="secondary-tagline">AI Agents for Global Immigration &nbsp;·&nbsp; Deployed and Managed</div>
+            </div>
+            <div class="primary-tagline">
+                <h1>Win Cases.<br><em>We'll Handle All the Technology.</em></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOOK -->
+    <div class="hook">
+        <p>Most immigration firms are leaving <strong>$50K–$300K in renewal revenue</strong> in their database every year - while their teams burn out managing technology that was never properly built. <strong>GlobalCodio fixes both.</strong></p>
+    </div>
+
+    <!-- THE PROBLEMS -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-label">The Problem</span>
+            <div class="section-rule"></div>
+        </div>
+        <div class="section-title">Six Challenges Holding Your Firm Back</div>
+        <div class="section-subtitle">If these sound familiar, you're not alone - and you're exactly who GlobalCodio was built for.</div>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-number">01</div>
+                <div class="pain-title">Wrong Tools, No IT Support</div>
+                <div class="pain-desc">Firms struggle to choose the right software and hardware - with no ongoing IT support for onboarding and offboarding staff smoothly.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-number">02</div>
+                <div class="pain-title">Software Never Configured Right</div>
+                <div class="pain-desc">Case management tools are adopted but never properly set up. Efficiency gains stay on the table while staff works around a broken system.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-number">03</div>
+                <div class="pain-title">AI Adoption Confusion</div>
+                <div class="pain-desc">The AI market is fragmented. Firms can't distinguish immigration-specific tools from generic AI - so they do nothing, or adopt the wrong thing.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-number">04</div>
+                <div class="pain-title">Staff Turnover & Lost Knowledge</div>
+                <div class="pain-desc">When staff leaves, institutional knowledge walks out the door. There's no reliable system to onboard the next hire on how the firm actually works.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-number">05</div>
+                <div class="pain-title">Undocumented Processes</div>
+                <div class="pain-desc">Most firms run on tribal knowledge. Without documented workflows, they can't configure software effectively or take advantage of AI automation.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-number">06</div>
+                <div class="pain-title">Burnout & Technology Fatigue</div>
+                <div class="pain-desc">Too many tools, too much change, not enough support. Staff are exhausted and resistant to any further technology adoption - even when it would help.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE SOLUTION -->
+    <div class="section section-alt">
+        <div class="section-header">
+            <span class="section-label">The Solution</span>
+            <div class="section-rule"></div>
+        </div>
+        <div class="section-title">One Partner. Every System. All Handled.</div>
+        <div class="section-subtitle">GlobalCodio delivers three integrated layers - working together as one complete managed operation for your firm.</div>
+        <div class="solution-grid">
+            <div class="solution-card">
+                <div class="solution-icon">🤖</div>
+                <div class="solution-title">Immigration AI Agents - Purpose-Built</div>
+                <div class="solution-desc">Eight specialized AI Agents handle intake, document processing, form preparation, deadline monitoring, client communications, renewal detection, and new business development. Not generic AI - built exclusively for immigration workflows, forms, and case types your firm works with every day.</div>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">⚙️</div>
+                <div class="solution-title">Complete Tech Stack - Configured & Managed</div>
+                <div class="solution-desc">We assess your firm, select the right tools, configure your case management platform to your exact workflows, document your processes, and manage your entire IT infrastructure - hardware, software, security, and support. All of it. One contract. One team.</div>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">💰</div>
+                <div class="solution-title">Revenue Mining From Your Database</div>
+                <div class="solution-desc">Our AI agents continuously scan your existing client database - surfacing visa renewals, green card upgrades, citizenship eligibility, and petition opportunities before they expire or go to a competitor. Most firms recover $50K–$300K in incremental annual revenue with zero new marketing spend.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI AGENTS -->
+    <div class="section">
+        <div class="section-header">
+            <span class="section-label">The AI Agents</span>
+            <div class="section-rule"></div>
+        </div>
+        <div class="section-title">Eight Specialized Agents. One Immigration Team.</div>
+        <div class="section-subtitle">Each Agent owns one domain. Together they cover the entire case lifecycle - 24 hours a day.</div>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-icon">📋</div>
+                <div class="agent-name">Intake Agent</div>
+                <div class="agent-role">Client Onboarding</div>
+                <div class="agent-desc">Captures client data, validates identity documents, opens and classifies cases, sends welcome packets automatically.</div>
+                <div class="agent-stat">45 min → 8 min per case</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">📑</div>
+                <div class="agent-name">Document Agent</div>
+                <div class="agent-role">Document Processing</div>
+                <div class="agent-desc">Extracts data from foreign documents, translates 40+ languages, classifies files, and flags missing documents before filing.</div>
+                <div class="agent-stat">10× faster than manual</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">✍️</div>
+                <div class="agent-name">Forms Agent</div>
+                <div class="agent-role">USCIS Forms Preparer</div>
+                <div class="agent-desc">Auto-fills I-130, I-485, H-1B, N-400, and more. Cross-references data across forms. Always uses current USCIS versions.</div>
+                <div class="agent-stat">70% faster form prep</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">📅</div>
+                <div class="agent-name">Deadline Agent</div>
+                <div class="agent-role">Compliance Monitor</div>
+                <div class="agent-desc">Tracks every case milestone, visa expiration, and filing deadline. Sends proactive alerts. 24/7 across all time zones.</div>
+                <div class="agent-stat">Zero missed deadlines</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">💬</div>
+                <div class="agent-name">Client Comms Agent</div>
+                <div class="agent-role">Client Relationship</div>
+                <div class="agent-desc">Sends case status updates, answers common questions 24/7, schedules appointments, collects missing documents from clients.</div>
+                <div class="agent-stat">80% fewer inbound calls</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">🔄</div>
+                <div class="agent-name">Renewal Agent</div>
+                <div class="agent-role">Revenue Recovery</div>
+                <div class="agent-desc">Continuously scans your database for renewals, upgrade eligibility, and dormant clients - triggering outreach at exactly the right time.</div>
+                <div class="agent-stat">$50K–$300K recovered/yr</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">📈</div>
+                <div class="agent-name">BD Agent</div>
+                <div class="agent-role">Business Development</div>
+                <div class="agent-desc">Runs automated outreach to prospective clients, qualifies leads by case type, and books consultations directly on attorney calendars.</div>
+                <div class="agent-stat">8–15 new cases/month</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon">🌐</div>
+                <div class="agent-name">Ecosystem Agent</div>
+                <div class="agent-role">Global Coordination</div>
+                <div class="agent-desc">Coordinates translators, authentication services, medical exams, foreign attorneys, and courier tracking across the case lifecycle.</div>
+                <div class="agent-stat">30% faster turnaround</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ECONOMICS -->
+    <div class="economics-section">
+        <div class="section-header">
+            <span class="section-label">The Economics</span>
+            <div class="section-rule" style="background: linear-gradient(90deg, rgba(201,168,76,0.4), transparent);"></div>
+        </div>
+        <div class="section-title">Less Than One Paralegal. More Productive Than Eight.</div>
+        <div class="economics-grid">
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>Human Equivalent Role</th>
+                        <th>Annual Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Intake Specialist</td><td>$50,000</td></tr>
+                    <tr><td>Document Specialist</td><td>$62,000</td></tr>
+                    <tr><td>Forms Specialist</td><td>$58,000</td></tr>
+                    <tr><td>Compliance Coordinator</td><td>$65,000</td></tr>
+                    <tr><td>Client Services Coordinator</td><td>$52,000</td></tr>
+                    <tr><td>Renewal BD Coordinator</td><td>$70,000</td></tr>
+                    <tr><td>BD Manager</td><td>$80,000</td></tr>
+                    <tr><td>Operations Coordinator</td><td>$62,000</td></tr>
+                    <tr class="total"><td>Total Annual Human Cost</td><td>$499,000</td></tr>
+                    <tr class="gc"><td>GlobalCodio - All-Inclusive</td><td>from $18,000 / yr</td></tr>
+                    <tr class="savings"><td>Annual Savings on Headcount Alone</td><td>$379,000+</td></tr>
+                </tbody>
+            </table>
+            <div class="roi-block">
+                <div class="roi-number">3×</div>
+                <div class="roi-label">Average ROI in Year One<br>across cost savings and recovered revenue</div>
+                <div class="roi-sub">AI Agents work 24/7.<br>They never quit, never need onboarding,<br>and improve with every case they handle.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="section section-alt">
+        <div class="section-header">
+            <span class="section-label">Pricing</span>
+            <div class="section-rule"></div>
+        </div>
+        <div class="section-title">Base + Performance. We Earn When You Earn.</div>
+        <div class="section-subtitle">A predictable monthly base covers your complete technology operation. Performance share is tied directly to measurable outcomes delivered.</div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-tier">Starter</div>
+                <div class="pricing-audience">Solo & Small Firms &nbsp;·&nbsp; 1–5 Attorneys</div>
+                <div class="pricing-price">$1,500</div>
+                <div class="pricing-period">per month base fee</div>
+                <div class="pricing-performance">
+                    <div class="perf-label">+ Performance Share</div>
+                    10% of cost savings generated<br>+ 2% of revenue growth delivered
+                </div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-tier">Professional</div>
+                <div class="pricing-audience">Mid-Size Firms &nbsp;·&nbsp; 5–20 Attorneys</div>
+                <div class="pricing-price">$3,500</div>
+                <div class="pricing-period">per month base fee</div>
+                <div class="pricing-performance">
+                    <div class="perf-label">+ Performance Share</div>
+                    10% of cost savings generated<br>+ 2% of revenue growth delivered
+                </div>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-tier">Enterprise</div>
+                <div class="pricing-audience">Large Firms & Corporate Depts &nbsp;·&nbsp; 20+</div>
+                <div class="pricing-price">$7,500+</div>
+                <div class="pricing-period">per month base fee</div>
+                <div class="pricing-performance">
+                    <div class="perf-label">+ Performance Share</div>
+                    8% of cost savings generated<br>+ 3% of revenue growth delivered
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA FOOTER -->
+    <div class="cta-section">
+        <div class="cta-left">
+            <h2>Start with a Free Tech Audit.</h2>
+            <p>In 30 minutes, we'll identify exactly where your firm is leaking cost and revenue - and show you what a fully managed technology operation would look like for your practice. No commitment required. No pressure. Just clarity.</p>
+        </div>
+        <div class="cta-right">
+            <div class="cta-button">Book Your Free Tech Audit &nbsp;→</div>
+            <div class="contact-info">
+                <strong>globalcodio.com</strong><br>
+                hello@globalcodio.com<br><br>
+                <em style="color: rgba(138,155,176,0.7); font-size: 11px;">AI Agents for Global Immigration. Deployed and Managed.</em>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
