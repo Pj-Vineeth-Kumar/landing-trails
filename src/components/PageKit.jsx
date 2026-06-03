@@ -178,14 +178,14 @@ export const FeatureGrid = ({ items, cols = 3, compact = false }) => (
   </div>
 );
 
-/** Numbered step rows. */
-export const StepList = ({ steps }) => (
+/** Numbered step rows. Set revealRows=false when the parent already has a scroll reveal. */
+export const StepList = ({ steps, revealRows = true }) => (
   <ol className="step-list">
     {steps.map((s, i) => (
-      <li key={i} className="reveal step-row">
+      <li key={i} className={`step-row${revealRows ? ' reveal' : ''}`}>
         <span className="mono step-index">{String(i + 1).padStart(2, '0')}</span>
         <div className="step-body">
-          <h4 className="display step-title">{s.h}</h4>
+          <h4 className="step-title">{s.h}</h4>
           {s.b && <p className="step-text">{s.b}</p>}
         </div>
       </li>

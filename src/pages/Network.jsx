@@ -12,6 +12,20 @@ const NETWORK_ITEMS = [
   { Icon: Building2, n: '06', h: 'Consular Coordinators', b: 'Appointment scheduling and consular liaison handled by experienced coordinators.', stat: 'CONSULAR LIAISON' },
 ];
 
+const PAIN_POINTS = [
+  { n: '01', label: 'Translators', geo: 'One country' },
+  { n: '02', label: 'Certified physicians', geo: 'Another country' },
+  { n: '03', label: 'Apostille services', geo: 'A third country' },
+  { n: '04', label: 'Foreign attorneys & couriers', geo: 'Multiple countries' },
+];
+
+const BENEFITS = [
+  { title: 'Vetted across every discipline', body: 'Every provider in CodioNetwork is credentialed and cleared — translators, physicians, attorneys, apostille, couriers, and consular coordinators.' },
+  { title: 'Standardized quality, case after case', body: 'No more variance between providers. Consistent standards across every country and service type, every time.' },
+  { title: 'Integrated with CodioCMS', body: 'Surface providers, assign them to cases, and track progress without leaving your workflow. No separate tools or email chains.' },
+  { title: 'One coordination layer', body: 'Replace dozens of manual handoffs with a single place to manage your entire global service operation.' },
+];
+
 export default function Network() {
   return (
     <>
@@ -30,60 +44,85 @@ export default function Network() {
         secondary={{ href: '/platform', label: 'See the platform' }}
       />
 
-      <Section
-        id="why-network"
-        tone=""
-        eyebrow="The Coordination Problem"
-        lead="Immigration is global."
-        emphasis="Your service providers should be too."
-      >
-        <div className="split-2" style={{ marginTop: 'var(--space-2xl)' }}>
-          <div className="reveal">
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7 }}>
-              Every immigration case is a coordination problem. Translators in one country. Certified physicians in
-              another. Apostille services in a third. Foreign attorneys, couriers, and consular logistics across
-              multiple countries.
-            </p>
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7, marginTop: 'var(--space-lg)' }}>
-              Most firms manage all of this manually - losing time, racking up costs, and risking compliance failures.
-            </p>
-            <hr className="rule-blue" style={{ margin: 'var(--space-xl) 0' }} />
-            <p className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              CodioNetwork brings the entire global immigration service ecosystem into{' '}
-              <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>one place.</em>
-            </p>
+      {/* ── The Coordination Problem ── */}
+      <section className="sec network-problem-sec" id="why-network">
+        <div className="container">
+
+          {/* Headline left, pull quote right */}
+          <div className="network-problem-head reveal">
+            <div className="eyebrow" style={{ color: 'var(--blue)' }}>The Coordination Problem</div>
+            <div className="network-problem-head-row">
+              <h2 className="display network-problem-title">
+                <span>Immigration is global.</span>
+                <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>Your providers should be too.</em>
+              </h2>
+              <div className="network-solution-pull reveal d1">
+                <p className="display network-solution-quote">
+                  CodioNetwork brings the entire global immigration service ecosystem into{' '}
+                  <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>one place.</em>
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="reveal d1 check-list-wrap">
-            <ul className="check-list">
-              {[
-                'Vetted providers across every immigration discipline',
-                'Standardized quality you can rely on, case after case',
-                'Integrated directly with your cases inside CodioCMS',
-                'One coordination layer instead of dozens of manual handoffs',
-              ].map((t, i) => (
-                <li key={i}>
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8" /><path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  {t}
+
+          {/* Pain left, benefit cards right */}
+          <div className="network-problem-body">
+            <div className="network-pain reveal d1">
+              <p className="network-pain-lead">
+                Every immigration case is a coordination problem spanning multiple countries, jurisdictions, and service providers.
+              </p>
+
+              <ol className="network-pain-list">
+                {PAIN_POINTS.map(p => (
+                  <li key={p.n} className="network-pain-item">
+                    <span className="mono network-pain-n">{p.n}</span>
+                    <div className="network-pain-item-body">
+                      <span className="network-pain-item-label">{p.label}</span>
+                      <span className="mono network-pain-item-geo">{p.geo}</span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+
+              <div className="network-pain-verdict">
+                <p>
+                  Most firms manage all of this manually — losing time, racking up costs, and risking compliance failures.
+                </p>
+              </div>
+            </div>
+
+            <ul className="network-benefits-list reveal d2">
+              {BENEFITS.map((b, i) => (
+                <li key={i} className="network-benefit-item">
+                  <div className="network-benefit-dot" aria-hidden="true" />
+                  <div>
+                    <p className="network-benefit-title">{b.title}</p>
+                    <p className="network-benefit-body">{b.body}</p>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-      </Section>
+      </section>
 
+      {/* ── The Ecosystem ── */}
       <Section
         id="whats-in-network"
+        tone="sec-surface"
         eyebrow="The Ecosystem"
         lead="What's in"
         emphasis="the Network."
         intro="A curated roster of certified, vetted providers spanning every step of a global immigration case - ready to engage from within your workflow."
         headAlign="center"
+        headInline
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={NETWORK_ITEMS} cols={3} />
         </div>
       </Section>
 
+      {/* ── Built into your platform ── */}
       <Section
         id="built-in"
         tone="sec-dark"

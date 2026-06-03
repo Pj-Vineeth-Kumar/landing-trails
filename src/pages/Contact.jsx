@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Seo } from '../components/Seo.jsx';
 import { PageHero, Section, CtaBand } from '../components/PageKit.jsx';
+import { HowItWorks } from '../components/MarketingSections.jsx';
 import { Mail, MapPin, ExternalLink, Navigation, ArrowRight } from 'lucide-react';
 
 const OFFICES = [
@@ -340,6 +341,8 @@ export default function Contact() {
           </div>
         </div>
       </Section>
+
+      <HowItWorks />
 
       <CtaBand
         lead="Ready to see what's possible"

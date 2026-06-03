@@ -34,6 +34,7 @@ export const SITE_NAV = [
       { href: '/about', label: 'About', desc: 'The next chapter in immigration tech' },
       { href: '/letter-from-the-founder', label: "Founder's Letter", desc: 'From Umesh Vaidyamath' },
       { href: '/blog', label: 'Blog', desc: 'Insights for immigration teams' },
+      { href: '/events', label: 'Events', desc: '2026 AILA conferences' },
     ],
   },
 ];
@@ -88,6 +89,7 @@ export const FOOTER_COLUMNS = [
       { href: '/about', label: 'About' },
       { href: '/letter-from-the-founder', label: 'Letter from the Founder' },
       { href: '/blog', label: 'Blog' },
+      { href: '/events', label: 'Events' },
       { href: '/contact', label: 'Contact Us' },
       { href: AUDIT_URL, label: 'Book Free Tech Audit' },
     ],

@@ -1,6 +1,17 @@
 import React from 'react';
 import { Seo } from '../components/Seo.jsx';
-import { PageHero, Section, StepList, CtaBand } from '../components/PageKit.jsx';
+import { PageHero, Section, SplitHeading, StepList, CtaBand } from '../components/PageKit.jsx';
+import {
+  BarChart3,
+  FileCheck,
+  Globe,
+  KeyRound,
+  Lock,
+  Plug,
+  RefreshCw,
+  ShieldCheck,
+  Workflow,
+} from 'lucide-react';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
@@ -21,6 +32,36 @@ const technicalSections = [
   'Vendor Management Processes',
   'Geographic & Multi-Jurisdictional Capacity',
   'Attorney-Client Privilege Protections',
+];
+
+const RFP_BUYER_ASKS = [
+  { Icon: Workflow, t: 'Case management & workflows' },
+  { Icon: ShieldCheck, t: 'SOC 2 & ISO compliance' },
+  { Icon: Lock, t: 'Encryption & data residency' },
+  { Icon: KeyRound, t: 'Access controls & SSO' },
+  { Icon: RefreshCw, t: 'DR & business continuity' },
+  { Icon: Plug, t: 'APIs & integrations' },
+  { Icon: FileCheck, t: 'HIPAA & GDPR posture' },
+  { Icon: Globe, t: 'Multi-jurisdiction & privilege' },
+  { Icon: BarChart3, t: 'Reporting & analytics' },
+];
+
+const RFP_STAKES = [
+  {
+    n: '01',
+    t: 'Partners spend weeks on answers they cannot verify',
+    d: 'Technical sections pull attorneys and ops leaders off billable work - with no guarantee the responses hold up under scrutiny.',
+  },
+  {
+    n: '02',
+    t: 'The response sounds uncertain to corporate procurement',
+    d: 'Vague or inconsistent security language signals risk. Scoring committees flag the firm before immigration expertise is ever evaluated.',
+  },
+  {
+    n: '03',
+    t: 'The mandate goes to a competitor - or the deal is declined',
+    d: 'Firms either fumble the RFP or skip it entirely, leaving seven-figure corporate relationships on the table.',
+  },
 ];
 
 const steps = [
@@ -48,23 +89,60 @@ export default function Rfp() {
         secondary={{ href: '/services', label: 'See all services' }}
       />
 
-      <Section
-        id="the-problem"
-        eyebrow="The Problem"
-        lead="Your Best Corporate Opportunity Just Hit Your Inbox."
-        emphasis="Now What?"
-      >
-        <div className="reveal d1" style={{ maxWidth: '70ch' }}>
-          <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7 }}>
-            Corporate immigration RFPs have changed. They now include detailed technical sections -
-            case management capabilities, data security protocols, SOC 2 compliance, encryption
-            standards, integration capacity, disaster recovery, GDPR compliance, ISO 27001
-            certification.
-          </p>
-          <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7, marginTop: 'var(--space-lg)' }}>
-            Most immigration law firms have no one on staff who can answer these questions credibly.
-            So they either fumble the response - or skip the deal entirely.
-          </p>
+      <Section id="the-problem">
+        <div className="rfp-problem-split reveal">
+          <div className="rfp-problem-head">
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
+              The Problem
+            </div>
+            <SplitHeading lead="Your Best Corporate Opportunity Just Hit Your Inbox." emphasis="Now What?" />
+            <div className="rfp-problem-intro">
+              <p>
+                Corporate immigration RFPs are no longer questionnaires about your legal team. They arrive as
+                50-page procurement packages - security exhibits, architecture diagrams, vendor due diligence,
+                and scored technical sections evaluated by IT and compliance stakeholders.
+              </p>
+              <p>
+                Most firms have outstanding immigration attorneys and paralegals. They rarely have a CIO, security
+                engineer, or operations lead who can speak fluently to encryption standards, penetration testing,
+                subprocessors, and audit evidence. The result is weeks of partner time spent on answers no one is
+                confident submitting - or the opportunity is passed to a competitor.
+              </p>
+            </div>
+          </div>
+
+          <div className="rfp-problem-panel reveal d1">
+            <div className="rfp-problem-panel-block">
+              <h3 className="display rfp-problem-panel-title">What corporate buyers now require</h3>
+              <div className="rfp-problem-asks-grid">
+                {RFP_BUYER_ASKS.map(({ Icon, t }) => (
+                  <div key={t} className="rfp-problem-ask-tile">
+                    <div className="rfp-problem-ask-icon" aria-hidden="true">
+                      <Icon size={16} strokeWidth={1.75} />
+                    </div>
+                    <div className="rfp-problem-ask-title">{t}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rfp-problem-panel-block">
+              <h3 className="display rfp-problem-panel-title">When firms cannot answer credibly</h3>
+              <div className="rfp-problem-stakes">
+                {RFP_STAKES.map((item, i, arr) => (
+                  <div
+                    key={item.n}
+                    className={`rfp-problem-stake${i < arr.length - 1 ? ' rfp-problem-stake--ruled' : ''}`}
+                  >
+                    <span className="mono rfp-problem-stake-num">{item.n}</span>
+                    <div>
+                      <div className="rfp-problem-stake-title">{item.t}</div>
+                      <p className="rfp-problem-stake-desc">{item.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -85,38 +163,43 @@ export default function Rfp() {
         </ul>
       </Section>
 
-      <Section
-        id="how-it-works"
-        eyebrow="How It Works"
-        lead="From Inbox to"
-        emphasis="Winning Response."
-      >
-        <div className="reveal d1" style={{ marginTop: 'var(--space-xl)' }}>
-          <StepList steps={steps} />
+      <Section id="how-it-works">
+        <div className="how-it-works-split reveal">
+          <div className="how-it-works-head">
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
+              How It Works
+            </div>
+            <SplitHeading lead="From Inbox to" emphasis="Winning Response." />
+          </div>
+          <div className="how-it-works-steps">
+            <StepList steps={steps} revealRows={false} />
+          </div>
         </div>
       </Section>
 
-      <Section
-        id="why"
-        tone="sec-dark"
-        eyebrow="Why This Service Exists"
-        lead="The Answers, Written"
-        emphasis="by a Partner."
-      >
-        <div className="reveal d1" style={{ maxWidth: '70ch' }}>
-          <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7 }}>
-            We built this service because we kept hearing the same story - immigration firms losing
-            seven-figure corporate accounts because they couldn't credibly answer the technical
-            sections of an RFP.
-          </p>
-          <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7, marginTop: 'var(--space-lg)' }}>
-            With GlobalCodio managing your technology operation, you don't just have the answers. You
-            have a partner who writes them for you.
-          </p>
-          <hr className="rule-blue" style={{ margin: 'var(--space-xl) 0' }} />
-          <p className="mono" style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.6, letterSpacing: '0.04em' }}>
-            RFP Response Support is available exclusively as a bundled add-on to GlobalCodio clients.
-          </p>
+      <Section id="why" tone="sec-dark">
+        <div className="rfp-why-split reveal">
+          <div className="rfp-why-head">
+            <div className="eyebrow" style={{ marginBottom: 'var(--space-md)' }}>
+              Why This Service Exists
+            </div>
+            <SplitHeading lead="The Answers, Written" emphasis="by a Partner." />
+          </div>
+          <div className="rfp-why-copy reveal d1">
+            <p>
+              We built this service because we kept hearing the same story - immigration firms losing
+              seven-figure corporate accounts because they couldn't credibly answer the technical
+              sections of an RFP.
+            </p>
+            <p>
+              With GlobalCodio managing your technology operation, you don't just have the answers. You
+              have a partner who writes them for you.
+            </p>
+            <hr className="rule-blue" />
+            <p className="mono rfp-why-note">
+              RFP Response Support is available exclusively as a bundled add-on to GlobalCodio clients.
+            </p>
+          </div>
         </div>
       </Section>
 

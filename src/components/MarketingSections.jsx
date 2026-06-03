@@ -204,8 +204,9 @@ export const HowItWorks = () => {
                   <span className="display type-display-md" style={{ flex: 1, color: open === i ? 'var(--ink)' : 'var(--muted)', transition: 'color 0.45s cubic-bezier(0.22, 1, 0.36, 1)' }}>{s.h}</span>
                   <motion.span
                     aria-hidden
-                    style={{ width: 'calc(32px * var(--ui-scale))', height: 'calc(32px * var(--ui-scale))', borderRadius: '50%', border: '1px solid var(--line-2)', display: 'grid', placeItems: 'center', flexShrink: 0 }}
-                    animate={{ backgroundColor: open === i ? 'var(--ink)' : '#ffffff', color: open === i ? '#ffffff' : 'var(--ink)' }}
+                    className="faq-toggle-icon"
+                    style={{ width: 'calc(32px * var(--ui-scale))', height: 'calc(32px * var(--ui-scale))', borderRadius: '50%', border: '1px solid var(--line-blue)', display: 'grid', placeItems: 'center', flexShrink: 0 }}
+                    animate={{ backgroundColor: open === i ? 'var(--blue)' : '#ffffff', color: open === i ? '#ffffff' : 'var(--blue)' }}
                     transition={{ backgroundColor: { duration: 0.48, ease: [0.22, 1, 0.36, 1] }, color: { duration: 0.48, ease: [0.22, 1, 0.36, 1] } }}
                   >
                     <motion.svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ display: 'block' }} animate={{ rotate: open === i ? 45 : 0 }} transition={{ type: 'spring', stiffness: 320, damping: 26, mass: 0.75 }}>

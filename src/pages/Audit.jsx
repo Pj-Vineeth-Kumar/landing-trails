@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Seo } from '../components/Seo.jsx';
-import { PageHero, Section, StepList, CtaBand, SmartLink } from '../components/PageKit.jsx';
+import { PageHero, Section, SplitHeading, StepList, CtaBand, SmartLink } from '../components/PageKit.jsx';
 import { UserCheck } from 'lucide-react';
 
 const HOW_DID_YOU_HEAR = ['LinkedIn', 'Google', 'Email', 'Webinar', 'Conference', 'Referral', 'Other'];
@@ -37,15 +37,15 @@ function AuditForm() {
 
   return (
     <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
-      <div style={{ paddingBottom: 'var(--space-lg)', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+      <div className="audit-form-header">
         <h3 className="display" style={{ fontSize: 'var(--text-display-sm)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>Book your free tech audit</h3>
         <p style={{ fontSize: 'calc(13px * var(--ui-scale))', color: '#e53e3e', fontWeight: 600, flexShrink: 0, textAlign: 'right' }}>Fields marked <span style={{ fontWeight: 800 }}>*</span> are required.</p>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)' }}>
+      <div className="audit-form-row">
         <label style={lbl}><span style={ltext}>Full Name <span style={{ color: 'var(--blue)' }}>*</span></span><input type="text" required placeholder="Jane Smith" value={form.fullName} onChange={set('fullName')} style={field} /></label>
         <label style={lbl}><span style={ltext}>Work Email <span style={{ color: 'var(--blue)' }}>*</span></span><input type="email" required placeholder="jane@yourfirm.com" value={form.workEmail} onChange={set('workEmail')} style={field} /></label>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)' }}>
+      <div className="audit-form-row">
         <label style={lbl}><span style={ltext}>Organization Name <span style={{ color: 'var(--blue)' }}>*</span></span><input type="text" required placeholder="Smith Immigration Law" value={form.orgName} onChange={set('orgName')} style={field} /></label>
         <label style={lbl}><span style={ltext}>Company Website <span style={{ color: 'var(--blue)' }}>*</span></span><input type="url" required placeholder="https://yourfirm.com" value={form.website} onChange={set('website')} style={field} /></label>
       </div>
@@ -166,46 +166,69 @@ export default function Audit() {
         </div>
       </Section>
 
-      <Section id="founder-access">
-        <div className="split-2 split-2--even">
-          <div className="reveal">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              Founder Access
-            </div>
-            <SplitHeadingInline />
-            <p
-              style={{
-                fontSize: 'var(--text-body)',
-                color: 'var(--ink-3)',
-                lineHeight: 1.6,
-                maxWidth: '52ch',
-                marginTop: 'var(--space-lg)',
-              }}
-            >
-              Mid-size and larger firms can request a tech audit conducted personally by our founder,
-              Umesh Vaidyamath. Indicate your preference when you book.
-            </p>
-            <div style={{ marginTop: 'var(--space-xl)' }}>
-              <SmartLink href="/contact" className="btn btn-primary">
-                Request founder-led audit
-              </SmartLink>
-            </div>
-          </div>
+      {/* Founder Access — redesigned with portrait */}
+      <section className="sec audit-founder-sec" id="founder-access" aria-labelledby="founder-access-heading">
+        <div className="container">
+          <div className="audit-founder-layout reveal">
 
-          <div className="card reveal d1" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-            <div className="agent-icon" aria-hidden="true">
-              <UserCheck size={20} strokeWidth={1.75} />
+            <div className="audit-founder-copy">
+              <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Founder Access</div>
+              <h2 className="display audit-founder-heading" id="founder-access-heading">
+                <span style={{ display: 'block' }}>Audit led by</span>
+                <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>the founder himself.</em>
+              </h2>
+              <p className="audit-founder-body">
+                Mid-size and larger firms can request a tech audit conducted personally by Umesh Vaidyamath —
+                founder of INSZoom, the immigration industry's first cloud-based case management platform,
+                built and led for over two decades before its 2020 acquisition by Mitratech.
+              </p>
+
+              <ul className="audit-founder-facts">
+                <li>
+                  <span className="mono audit-founder-fact-label">1999</span>
+                  Co-founded INSZoom — the industry's first cloud immigration platform
+                </li>
+                <li>
+                  <span className="mono audit-founder-fact-label">20 yrs</span>
+                  Leading immigration technology serving firms worldwide
+                </li>
+                <li>
+                  <span className="mono audit-founder-fact-label">2020</span>
+                  INSZoom acquired by Mitratech
+                </li>
+                <li>
+                  <span className="mono audit-founder-fact-label">2025</span>
+                  Founded GlobalCodio — the next chapter
+                </li>
+              </ul>
+
+              <div className="audit-founder-cta">
+                <SmartLink href="/contact" className="btn btn-primary">
+                  Request founder-led audit
+                </SmartLink>
+                <span className="mono audit-founder-avail">Mid-size &amp; larger firms · by request</span>
+              </div>
             </div>
-            <h3 className="display feature-card-title">Umesh Vaidyamath</h3>
-            <p className="feature-card-body">
-              Founder, GlobalCodio. For qualified firms, a direct, founder-level read on where your
-              technology operation stands and what a fully managed operation would unlock.
-            </p>
-            <hr className="rule-blue" />
-            <div className="mono feature-card-stat">Mid-size &amp; larger firms / by request</div>
+
+            <div className="audit-founder-portrait-wrap reveal d1">
+              <div className="audit-founder-portrait-frame">
+                <img
+                  src="/assets/Umesh.webp"
+                  alt="Umesh Vaidyamath, Founder and CEO of GlobalCodio"
+                  className="audit-founder-portrait-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="audit-founder-portrait-badge">
+                  <UserCheck size={15} strokeWidth={1.75} aria-hidden="true" />
+                  <span>Founder &amp; CEO</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-      </Section>
+      </section>
 
       <Section
         id="faq"
@@ -244,12 +267,7 @@ export default function Audit() {
       </Section>
 
       <Section id="book-audit" tone="sec-surface">
-        <div className="reveal" style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.8fr)',
-          gap: 'var(--space-4xl)',
-          alignItems: 'start',
-        }}>
+        <div className="audit-booking-grid reveal">
           <div>
             <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Free Tech Audit</div>
             <h2 className="display type-display-lg">
@@ -268,22 +286,11 @@ export default function Audit() {
               ))}
             </div>
           </div>
-          <div style={{ background: '#fff', border: '1.5px solid var(--line-2)', borderRadius: 'calc(20px * var(--ui-scale))', padding: 'calc(40px * var(--ui-scale))' }}>
+          <div className="audit-form-card">
             <AuditForm />
           </div>
         </div>
       </Section>
     </>
-  );
-}
-
-function SplitHeadingInline() {
-  return (
-    <h2 className="display type-display-lg">
-      <span style={{ display: 'block' }}>Founder access</span>
-      <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>
-        for qualified firms.
-      </em>
-    </h2>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Hero } from '../components/Hero.jsx';
-import { HowItWorks } from '../components/MarketingSections.jsx';
 // import { OperatingSystem } from '../components/OperatingSystem.jsx';
 import { AgentOrbit, Testimonial, Metrics, ValueLevers, Certifications, CTA } from '../components/ContentSections.jsx';
 import { Seo } from '../components/Seo.jsx';
@@ -143,7 +142,6 @@ export default function Home() {
       <Certifications />
       <RevenueEconomics />
       <Testimonial />
-      <HowItWorks />
       {/* <OperatingSystem /> */}
       <ValueLevers />
       <Metrics />

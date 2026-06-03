@@ -147,12 +147,7 @@ export default function Services() {
 
       {/* RFP Response — standalone callout */}
       <Section id="rfp-response" tone="sec-surface">
-        <div className="reveal" style={{
-          display: 'grid',
-          gridTemplateColumns: '1.5fr 1fr',
-          gap: 'var(--space-4xl)',
-          alignItems: 'center',
-        }}>
+        <div className="rfp-response-split reveal">
           <div>
             <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Add-on Service</div>
             <h2 className="display type-display-lg" style={{ whiteSpace: 'nowrap' }}>
@@ -168,27 +163,20 @@ export default function Services() {
               </SmartLink>
             </div>
           </div>
-          <div style={{
-            background: '#fff',
-            border: '1.5px solid var(--line-2)',
-            borderRadius: 'calc(16px * var(--ui-scale))',
-            padding: 'calc(32px * var(--ui-scale))',
-            display: 'flex', flexDirection: 'column', gap: 'calc(16px * var(--ui-scale))',
-          }}>
+          <div className="rfp-response-steps-card">
             {[
               { n: '01', t: 'Receive the RFP', d: 'Send us the corporate RFP or technical questionnaire.' },
               { n: '02', t: 'We draft the response', d: 'Our team writes technical answers grounded in the actual platform.' },
               { n: '03', t: 'Attorney review & sign-off', d: 'You review, approve, and submit under your firm\'s name.' },
             ].map((step, i, arr) => (
-              <div key={step.n} style={{
-                display: 'flex', gap: 'calc(14px * var(--ui-scale))',
-                paddingBottom: i < arr.length - 1 ? 'calc(16px * var(--ui-scale))' : 0,
-                borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-              }}>
-                <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 700, letterSpacing: '.06em', flexShrink: 0, paddingTop: 'calc(3px * var(--ui-scale))' }}>{step.n}</span>
+              <div
+                key={step.n}
+                className={`rfp-response-step${i < arr.length - 1 ? ' rfp-response-step--ruled' : ''}`}
+              >
+                <span className="mono rfp-response-step-num">{step.n}</span>
                 <div>
-                  <div style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)', lineHeight: 1.3 }}>{step.t}</div>
-                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55, marginTop: 'calc(3px * var(--ui-scale))' }}>{step.d}</div>
+                  <div className="rfp-response-step-title">{step.t}</div>
+                  <div className="rfp-response-step-desc">{step.d}</div>
                 </div>
               </div>
             ))}

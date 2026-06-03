@@ -3,6 +3,13 @@ import { Seo } from '../components/Seo.jsx';
 import { PageHero, Section, FeatureGrid, CtaBand } from '../components/PageKit.jsx';
 import { Users, Globe, Network, ShieldCheck, TrendingUp } from 'lucide-react';
 
+const Check = () => (
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+    <circle cx="10" cy="10" r="8" />
+    <path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const CHALLENGES = [
   'Scaling employee visa volume across multiple countries',
   'Coordinating dozens of outside counsel and service vendors',
@@ -70,30 +77,39 @@ export default function Corporate() {
 
       <Section
         id="challenges"
-        tone=""
         eyebrow="Your Challenges"
         lead="The realities of"
         emphasis="corporate immigration at scale."
-        intro="In-house mobility, HR, and legal operations teams face a familiar set of pressures as employee immigration spans more countries, more vendors, and more scrutiny."
       >
-        <ul
-          className="check-list"
-          style={{
-            marginTop: 'var(--space-2xl)',
-            gridTemplateColumns: 'repeat(2,1fr)',
-            gap: 'var(--space-lg)',
-          }}
-        >
-          {CHALLENGES.map((c, i) => (
-            <li key={i} className={`reveal${i ? ` d${Math.min(i, 3)}` : ''}`}>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-                <circle cx="10" cy="10" r="8" />
-                <path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              {c}
-            </li>
-          ))}
-        </ul>
+        <div className="split-2 corporate-challenges-split" style={{ marginTop: 'var(--space-3xl)' }}>
+          <div className="reveal">
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-2)', lineHeight: 1.6 }}>
+              In-house mobility, HR, and legal operations teams face a familiar set of pressures.
+            </p>
+            <ul className="check-list" style={{ marginTop: 'var(--space-lg)' }}>
+              {CHALLENGES.map((c) => (
+                <li key={c}>
+                  <Check />
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="reveal d1">
+            <p style={{ fontSize: 'calc(20px * var(--ui-scale))', color: 'var(--ink)', lineHeight: 1.55 }}>
+              When employee immigration spans more countries, more vendors, and more executive scrutiny,
+              fragmented tools and manual coordination stop scaling.
+            </p>
+            <hr className="rule-blue" style={{ margin: 'var(--space-xl) 0' }} />
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.6 }}>
+              GlobalCodio replaces the patchwork of outside counsel portals, spreadsheets, and disconnected
+              systems with one managed operation built for corporate mobility - CodioCMS for case workflow,
+              CodioForms across the countries you operate in, AI agents for routine case work, and CodioNetwork
+              for vendor coordination. Your team gets executive-ready reporting and compliance visibility without
+              stitching together another stack of point solutions.
+            </p>
+          </div>
+        </div>
       </Section>
 
       <Section
@@ -104,8 +120,8 @@ export default function Corporate() {
         emphasis="for global mobility."
         intro="From AI-driven case work to a single platform for every country, GlobalCodio turns the hardest parts of corporate immigration into a predictable, managed operation."
       >
-        <div style={{ marginTop: 'var(--space-3xl)' }}>
-          <FeatureGrid items={SOLUTIONS} cols={2} />
+        <div className="corporate-solutions-grid reveal" style={{ marginTop: 'var(--space-3xl)' }}>
+          <FeatureGrid items={SOLUTIONS} cols={3} />
         </div>
       </Section>
 
