@@ -20,6 +20,8 @@ import About from './pages/About.jsx';
 import Letter from './pages/Letter.jsx';
 import Audit from './pages/Audit.jsx';
 import Contact from './pages/Contact.jsx';
+import Blog from './pages/Blog.jsx';
+import BlogPost from './pages/BlogPost.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import NotFound from './pages/NotFound.jsx';
 
@@ -251,6 +253,8 @@ export default function App() {
         <Route path="/letter-from-the-founder" element={<Letter />} />
         <Route path="/free-tech-audit" element={<Audit />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Route>

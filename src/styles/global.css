@@ -2327,3 +2327,5 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
     gap:calc(20px * var(--ui-scale));
   }
 }
+
+.blog-email-input::placeholder{color:rgba(255,255,255,.6);}

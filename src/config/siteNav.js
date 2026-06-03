@@ -33,6 +33,7 @@ export const SITE_NAV = [
     children: [
       { href: '/about', label: 'About', desc: 'The next chapter in immigration tech' },
       { href: '/letter-from-the-founder', label: "Founder's Letter", desc: 'From Umesh Vaidyamath' },
+      { href: '/blog', label: 'Blog', desc: 'Insights for immigration teams' },
     ],
   },
 ];
@@ -86,6 +87,7 @@ export const FOOTER_COLUMNS = [
     links: [
       { href: '/about', label: 'About' },
       { href: '/letter-from-the-founder', label: 'Letter from the Founder' },
+      { href: '/blog', label: 'Blog' },
       { href: '/contact', label: 'Contact Us' },
       { href: AUDIT_URL, label: 'Book Free Tech Audit' },
     ],

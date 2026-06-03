@@ -13,6 +13,11 @@ import {
   Bot,
   FileText,
   Database,
+  Building2,
+  Network,
+  ShieldCheck,
+  ClipboardList,
+  BarChart3,
 } from 'lucide-react';
 
 const Check = () => (
@@ -27,37 +32,61 @@ const CMS_FEATURES = [
     Icon: Workflow,
     n: '01',
     h: 'End-to-end case lifecycle',
-    b: 'Full case lifecycle management for every immigration matter type, from intake through approval and beyond.',
+    b: 'Full case lifecycle management for every immigration matter type — from intake through filing to closure.',
   },
   {
     Icon: Users,
     n: '02',
-    h: 'Secure client portals',
-    b: 'Client portals for secure communication and document exchange between your firm and the people you serve.',
+    h: 'Applicant portal',
+    b: 'Secure portal for foreign nationals and beneficiaries to submit documents, answer questionnaires, and track their case status.',
+  },
+  {
+    Icon: Building2,
+    n: '03',
+    h: 'HR portal',
+    b: 'Dedicated portal for corporate HR and mobility teams to manage employee visa cases, track immigration health, and view workforce analytics.',
+  },
+  {
+    Icon: Network,
+    n: '04',
+    h: 'Service provider portal',
+    b: 'Controlled access portal for external service providers to receive assignments, submit deliverables, and coordinate directly within CodioCMS.',
+  },
+  {
+    Icon: ShieldCheck,
+    n: '05',
+    h: 'Role-based access control',
+    b: 'Granular permissions across 27 modules and 7 action types — attorney, HR admin, firm admin, provider, and super admin roles with data-scope isolation.',
+  },
+  {
+    Icon: ClipboardList,
+    n: '06',
+    h: 'Client questionnaires',
+    b: 'Structured intake and case questionnaires with conditional logic, prefill from case data, per-portal delivery, and attorney review workflows.',
   },
   {
     Icon: Globe,
-    n: '03',
+    n: '07',
     h: 'Global country support',
-    b: 'Case handling across every country you serve, in one unified system - with new countries added on demand.',
+    b: 'Case handling across every country you serve in one unified system — with new countries added on demand.',
   },
   {
     Icon: Settings,
-    n: '04',
+    n: '08',
     h: 'Customizable workflows',
-    b: 'Workflows configured to your firm’s specific operations - not a one-size-fits-all template.',
+    b: "Playbook templates and work-step automations configured to your firm's exact operations — not one-size-fits-all defaults.",
   },
   {
     Icon: GitMerge,
-    n: '05',
+    n: '09',
     h: 'Native integrations',
     b: 'Native integrations with email, calendar, e-signature, and accounting tools your team already relies on.',
   },
   {
-    Icon: TrendingUp,
-    n: '06',
+    Icon: BarChart3,
+    n: '10',
     h: 'Reporting & analytics',
-    b: 'Detailed reporting and analytics built specifically for immigration practice management.',
+    b: 'Executive reports, HR analytics dashboards, firm performance comparison, renewal pipeline, budget tracking, and bottleneck alerts.',
   },
 ];
 
@@ -104,6 +133,7 @@ const FORMS_CAPS = [
     b: 'Need a country we don’t ship yet? We scope, build, and release based on client demand - in days, not product quarters.',
   },
 ];
+
 
 
 const AI_ERA_POINTS = [
@@ -161,6 +191,153 @@ const MIGRATION_STEPS = [
 
 const MIGRATION_FROM = ['Legacy CMS', 'Spreadsheets', 'Other platforms'];
 
+/* ── CMS Bento ───────────────────────────────────────────
+   Hero card (left, spans full height) + 3 grouped columns (right)
+   Groups: Case Management · Portals & Access · Intelligence
+──────────────────────────────────────────────────────── */
+const CMS_GROUPS = [
+  {
+    tag: 'Case Management',
+    color: 'var(--blue)',
+    items: [
+      { Icon: Workflow, h: 'End-to-end case lifecycle', b: 'From intake through filing to closure — every matter type, one system.' },
+      { Icon: Settings, h: 'Customizable workflows', b: 'Playbook templates and automations built for your exact operations.' },
+      { Icon: Globe,    h: 'Global country support',  b: 'Every country you practice in, with new countries added on demand.' },
+    ],
+  },
+  {
+    tag: 'Portals & Access',
+    color: '#7c3aed',
+    items: [
+      { Icon: Users,     h: 'Applicant portal',          b: 'Foreign nationals submit documents, track status, and answer questionnaires.' },
+      { Icon: Building2, h: 'HR & employer portal',      b: 'Corporate HR teams manage employee visa cases and workforce analytics.' },
+      { Icon: Network,   h: 'Service provider portal',   b: 'Translators, physicians, and attorneys coordinate inside the same platform.' },
+    ],
+  },
+  {
+    tag: 'Intelligence',
+    color: '#0891b2',
+    items: [
+      { Icon: ClipboardList, h: 'Client questionnaires',      b: 'Conditional logic, case-data prefill, and attorney review workflows.' },
+      { Icon: ShieldCheck,   h: 'Role-based access control',  b: '27 permission modules, 7 action types, and full data-scope isolation.' },
+      { Icon: BarChart3,     h: 'Reporting & analytics',      b: 'Executive reports, HR dashboards, renewal pipeline, and bottleneck alerts.' },
+    ],
+  },
+];
+
+function CMSBento() {
+  return (
+    <div className="reveal" style={{
+      marginTop: 'var(--space-3xl)',
+      display: 'grid',
+      gridTemplateColumns: 'calc(300px * var(--ui-scale)) 1fr',
+      gap: 'calc(16px * var(--ui-scale))',
+      alignItems: 'stretch',
+    }}>
+      {/* ── Hero card ── */}
+      <div style={{
+        background: 'linear-gradient(145deg, var(--blue) 0%, var(--blue-ink) 100%)',
+        borderRadius: 'calc(20px * var(--ui-scale))',
+        padding: 'calc(40px * var(--ui-scale))',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        border: '1px solid rgba(255,255,255,.08)',
+        boxShadow: '0 0 60px rgba(25,80,198,.2)',
+      }}>
+        <div>
+          <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.14em', color: 'rgba(255,255,255,.5)', marginBottom: 'calc(16px * var(--ui-scale))' }}>
+            CODIOCMS
+          </div>
+          <div className="display" style={{ fontSize: 'calc(34px * var(--ui-scale))', fontStyle: 'italic', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+            Everything your firm needs.<br />
+            <em style={{ color: 'rgba(255,255,255,.65)' }}>Nothing it doesn't.</em>
+          </div>
+        </div>
+        <div style={{ marginTop: 'calc(32px * var(--ui-scale))' }}>
+          <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'rgba(255,255,255,.4)', marginBottom: 'calc(14px * var(--ui-scale))' }}>
+            10 CAPABILITIES
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(8px * var(--ui-scale))' }}>
+            {CMS_GROUPS.map(g => (
+              <div key={g.tag} style={{ display: 'flex', alignItems: 'center', gap: 'calc(10px * var(--ui-scale))' }}>
+                <span style={{ width: 'calc(8px * var(--ui-scale))', height: 'calc(8px * var(--ui-scale))', borderRadius: '50%', background: g.color, flexShrink: 0 }} />
+                <span style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'rgba(255,255,255,.7)', fontWeight: 500 }}>{g.tag}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Three category columns ── */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: 'calc(12px * var(--ui-scale))',
+      }}>
+        {CMS_GROUPS.map((group) => (
+          <div
+            key={group.tag}
+            style={{
+              background: '#fff',
+              border: '1.5px solid var(--line-2)',
+              borderRadius: 'calc(16px * var(--ui-scale))',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Group header */}
+            <div style={{
+              padding: 'calc(14px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+              borderBottom: '1px solid var(--line)',
+              display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))',
+              background: 'var(--surface)',
+            }}>
+              <span style={{ width: 'calc(8px * var(--ui-scale))', height: 'calc(8px * var(--ui-scale))', borderRadius: '50%', background: group.color, flexShrink: 0 }} />
+              <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--ink-2)', fontWeight: 700, textTransform: 'uppercase' }}>
+                {group.tag}
+              </span>
+            </div>
+
+            {/* Feature rows */}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {group.items.map((item, ii) => {
+                const Icon = item.Icon;
+                return (
+                  <div
+                    key={item.h}
+                    style={{
+                      padding: 'calc(16px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                      borderBottom: ii < group.items.length - 1 ? '1px solid var(--line)' : 'none',
+                      display: 'flex', flexDirection: 'column', gap: 'calc(6px * var(--ui-scale))',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
+                      <span style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        width: 'calc(26px * var(--ui-scale))', height: 'calc(26px * var(--ui-scale))',
+                        borderRadius: 'calc(6px * var(--ui-scale))',
+                        background: 'var(--blue-soft)', color: 'var(--blue)', flexShrink: 0,
+                      }}>
+                        <Icon size={13} strokeWidth={1.75} />
+                      </span>
+                      <span style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)', lineHeight: 1.2 }}>
+                        {item.h}
+                      </span>
+                    </div>
+                    <p style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55, margin: 0, paddingLeft: 'calc(34px * var(--ui-scale))' }}>
+                      {item.b}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Platform() {
   return (
     <>
@@ -191,7 +368,7 @@ export default function Platform() {
           </p>
         </div>
 
-        <FeatureGrid items={CMS_FEATURES} cols={3} />
+        <CMSBento />
       </Section>
 
       {/* CodioForms */}
@@ -308,6 +485,56 @@ export default function Platform() {
               Most platforms cover the US and stop. CodioForms centralizes every country you practice in -
               integrated directly with cases in <strong>CodioCMS</strong>.
             </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* CodioNetwork */}
+      <Section id="codionetwork" className="sec-codionetwork">
+        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4xl)', alignItems: 'start' }}>
+          {/* Left */}
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>CodioNetwork</div>
+            <h2 className="display type-display-lg">
+              <span>The global service provider network </span>
+              <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>for immigration.</em>
+            </h2>
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '48ch' }}>
+              A curated B2B network accessible directly through CodioCMS. One coordination layer instead of dozens of manual handoffs.
+            </p>
+            <div style={{ marginTop: 'var(--space-xl)' }}>
+              <SmartLink href="/network" className="feature-card-link" style={{ fontWeight: 600 }}>
+                Explore CodioNetwork
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" style={{ width: 14, height: 14 }}>
+                  <path d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
+              </SmartLink>
+            </div>
+          </div>
+          {/* Right — provider list inside one container */}
+          <div style={{
+            border: '1.5px solid var(--line-2)',
+            borderRadius: 'calc(16px * var(--ui-scale))',
+            overflow: 'hidden',
+            background: '#fff',
+          }}>
+            {[
+              { label: 'Certified Translators',  sub: '40+ languages' },
+              { label: 'Immigration Physicians',  sub: 'USCIS approved' },
+              { label: 'Apostille & Auth',        sub: 'Multi-country' },
+              { label: 'Foreign Attorneys',       sub: 'In-country counsel' },
+              { label: 'Specialized Couriers',    sub: 'Secure delivery' },
+              { label: 'Consular Coordinators',   sub: 'Appointment liaison' },
+            ].map((item, i, arr) => (
+              <div key={item.label} style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: 'calc(14px * var(--ui-scale)) calc(20px * var(--ui-scale))',
+                borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+              }}>
+                <span style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>{item.label}</span>
+                <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', letterSpacing: '.06em', fontWeight: 600 }}>{item.sub.toUpperCase()}</span>
+              </div>
+            ))}
           </div>
         </div>
       </Section>
