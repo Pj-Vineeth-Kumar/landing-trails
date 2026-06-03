@@ -1,6 +1,6 @@
 import React from 'react';
 import { Hero } from '../components/Hero.jsx';
-import { LogoStrip, HowItWorks } from '../components/MarketingSections.jsx';
+import { HowItWorks } from '../components/MarketingSections.jsx';
 // import { OperatingSystem } from '../components/OperatingSystem.jsx';
 import { AgentOrbit, Testimonial, Metrics, ValueLevers, Certifications, CTA } from '../components/ContentSections.jsx';
 import { Seo } from '../components/Seo.jsx';
@@ -9,7 +9,7 @@ import { Cpu, FileText, Bot, Network, Settings } from 'lucide-react';
 
 /* Founder credibility band */
 const FOUNDER_STATS = [
-  ['1,500+', 'law firms served by INSZoom'],
+  ['1,000+', 'law firms served by INSZoom'],
   ['20 yrs', 'inside immigration technology'],
   ['2020', 'INSZoom acquired'],
   ['2025', 'GlobalCodio founded'],
@@ -23,7 +23,7 @@ const FounderBand = () => (
         <SplitHeading lead="Built by the people" emphasis="who built immigration tech." />
         <p className="founder-intro">
           In 1999, Umesh Vaidyamath founded INSZoom - the immigration case management platform that grew to serve
-          more than 1,500 law firms worldwide before being acquired in 2020. After two decades inside immigration
+          more than 1,000 law firms worldwide before being acquired in 2020. After two decades inside immigration
           tech, he saw clearly what came next: not better software, but a complete technology operation, AI-powered
           and fully managed. GlobalCodio is that next chapter.
         </p>
@@ -49,14 +49,14 @@ const FounderBand = () => (
 const PAINS = [
   'Your case management software was never properly configured to your workflows',
   'Your team uses 20% of the features because nobody set up the other 80%',
-  'AI tools confuse more than they help - and you don’t know which to trust',
+  "AI tools confuse more than they help - and you don't know which to trust",
   'Staff turnover keeps resetting your operations and losing institutional knowledge',
-  'Corporate RFPs come in with deep technical questions you can’t credibly answer',
+  "Corporate RFPs come in with deep technical questions you can't credibly answer",
   'You have no IT support, no security posture, and no one managing your technology',
 ];
 
 const PainRecognition = () => (
-  <Section id="pain" eyebrow="Sound Familiar?" lead="If any of these describe your firm," emphasis="you’re exactly who GlobalCodio was built for.">
+  <Section id="pain" eyebrow="Sound Familiar?" lead="If any of these describe your firm," emphasis="you're exactly who GlobalCodio was built for.">
     <ul className="check-list pain-list" style={{ marginTop: 'var(--space-2xl)', gridTemplateColumns: 'repeat(2,1fr)', gap: 'var(--space-lg)' }}>
       {PAINS.map((p, i) => (
         <li key={i} className="reveal pain-item">
@@ -76,6 +76,8 @@ const LAYERS = [
   { Icon: Bot, h: 'Codio AI Agents', b: 'A team of AI agents handling intake, documents, forms, deadlines, communications, renewals, and business development.', links: [{ href: '/ai-agents', label: 'Meet the agents' }] },
   { Icon: Network, h: 'CodioNetwork', b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.', links: [{ href: '/network', label: 'See the network' }] },
   { Icon: Settings, h: 'GlobalCodio Services', b: 'Migration, configuration, IT support, security management, RFP response, and ongoing operations. We run your technology.', links: [{ href: '/services', label: 'Explore services' }] },
+  { Icon: Settings, h: 'Technology Audit', b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.", links: [{ href: '/contact', label: 'Request an audit' }] },
+  { Icon: Cpu, h: 'Audit & Consulting', b: 'Advisory and consulting services for immigration law firms and corporate teams. We help you understand what technology you need and how to get the most from it.', links: [{ href: '/contact', label: 'Talk to us' }] },
 ];
 
 const FiveLayers = () => (
@@ -85,12 +87,12 @@ const FiveLayers = () => (
     eyebrow="The Complete Operation"
     lead="One partner."
     emphasis="Your entire technology operation."
-    intro="GlobalCodio is not a software vendor. We’re the complete technology operation for your firm - a proprietary platform, AI workforce, global forms engine, service provider network, and full managed services layer. All built for immigration."
+    intro="GlobalCodio is not a software vendor. We're the complete technology operation for your firm - a proprietary platform, AI workforce, global forms engine, service provider network, full managed services, and expert consulting. All built for immigration."
   >
     <div style={{ marginTop: 'var(--space-3xl)' }}>
       <FeatureGrid items={LAYERS.slice(0, 3)} cols={3} />
       <div style={{ marginTop: 'var(--space-lg)' }}>
-        <FeatureGrid items={LAYERS.slice(3)} cols={2} />
+        <FeatureGrid items={LAYERS.slice(3)} cols={4} />
       </div>
     </div>
   </Section>
@@ -134,11 +136,10 @@ export default function Home() {
     <>
       <Seo path="/" />
       <Hero />
-      <LogoStrip />
       <FounderBand />
       <PainRecognition />
       <FiveLayers />
-      <AgentOrbit />
+      {/* <AgentOrbit /> */}
       <Certifications />
       <RevenueEconomics />
       <Testimonial />

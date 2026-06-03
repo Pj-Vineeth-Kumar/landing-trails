@@ -146,8 +146,8 @@ export const HowItWorks = () => {
     {
       t: '01',
       h: 'We already have case management software.',
-      b: 'We integrate with your existing tools and layer our platform on top - so you keep your systems and still get the outcomes. No rip-and-replace required.',
-      meta: ['Integrations', 'No rip-and-replace'],
+      b: 'Current case management platforms were not built for AI - they are not AI-native. CodioCMS is designed from the ground up to work seamlessly with AI agents; it is the platform immigration tech has been waiting for. Yes, you will need to migrate to our software. We manage the full technology operation: your team keeps working while we handle implementation, configuration, training, and transition. Afterwards, we continue to manage it for you.',
+      meta: ['AI-native platform', 'We manage the migration'],
     },
     {
       t: '02',
@@ -157,7 +157,7 @@ export const HowItWorks = () => {
     },
     {
       t: '03',
-      h: 'Will AI Agents replace our attorneys?',
+      h: 'Will AI Agents replace our staff?',
       b: 'No. Agents augment your team - handling repetitive case prep, comms, and renewals so attorneys focus on what only humans can do. Every extraction and draft remains attorney-reviewable before it leaves your firm.',
       meta: ['Augment, not replace', 'Attorney sign-off'],
     },
@@ -174,7 +174,7 @@ export const HowItWorks = () => {
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'var(--space-7xl)', alignItems: 'start' }} className="how-grid">
           <div className="reveal">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Common questions</div>
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>FAQ's</div>
             <h2 id="faq-heading" className="display type-display-lg" style={{ marginBottom: 'var(--space-xl)' }}>
               <span style={{ display: 'block' }}>Straight answers,</span>
               <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>before you commit.</em>

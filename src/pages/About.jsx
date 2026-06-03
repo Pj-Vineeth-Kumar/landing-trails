@@ -19,7 +19,7 @@ const TIMELINE = [
 
 const STATS = [
   ['20 yrs', 'building immigration tech'],
-  ['1,500+', 'law firms served'],
+  ['1,000+', 'law firms served'],
   ['2,000+', 'forms, updated in 24–48h'],
   ['2', 'continents - US & India'],
 ];
@@ -48,7 +48,7 @@ export default function About() {
         emphasis="built immigration tech."
         sub="GlobalCodio is the next chapter in immigration technology - designed by Umesh Vaidyamath, founder of INSZoom, drawing on two decades of building the platform that immigration firms worldwide ran on."
         primary={{ href: '/letter-from-the-founder', label: 'Read the founder’s letter' }}
-        secondary={{ href: '/free-tech-audit', label: 'Book a tech audit' }}
+        secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />
 
       {/* Stat band - full-width proof strip right under the hero */}
@@ -194,7 +194,7 @@ export default function About() {
         emphasis="from the founder."
         sub="Twenty years of lessons, in his own words - and what comes next for immigration practice."
         primary={{ href: '/letter-from-the-founder', label: 'Read the letter' }}
-        secondary={{ href: '/free-tech-audit', label: 'Book a tech audit' }}
+        secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />
     </>
   );

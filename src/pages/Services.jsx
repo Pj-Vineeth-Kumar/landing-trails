@@ -59,7 +59,7 @@ export default function Services() {
         lead="Your Complete"
         emphasis="Tech Partner."
         sub="GlobalCodio Services is the team behind your technology operation - migration, configuration, IT support, security, RFP response, and ongoing managed operations. One partner. Everything handled."
-        primary={{ href: '/free-tech-audit', label: 'Book a free tech audit' }}
+        primary={{ href: '/contact', label: 'Book a free tech audit' }}
         secondary={{ href: '/rfp-response', label: 'See the RFP service' }}
       />
 
@@ -79,7 +79,7 @@ export default function Services() {
       <CtaBand
         lead="Stop managing technology."
         emphasis="Start winning cases."
-        primary={{ href: '/free-tech-audit', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: 'mailto:info@globalcodio.ai', label: 'Talk to our team' }}
       />
     </>

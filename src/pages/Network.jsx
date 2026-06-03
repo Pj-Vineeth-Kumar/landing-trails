@@ -6,7 +6,7 @@ import { Languages, Stethoscope, Stamp, Scale, Truck, Building2, Globe, Network 
 const NETWORK_ITEMS = [
   { Icon: Languages, n: '01', h: 'Certified Translators', b: 'Document translation across 40+ languages, delivered to immigration-grade standards.', stat: '40+ LANGUAGES' },
   { Icon: Stethoscope, n: '02', h: 'Immigration Physicians', b: 'USCIS and foreign-authority-approved medical exams from credentialed panel physicians.', stat: 'USCIS APPROVED' },
-  { Icon: Stamp, n: '03', h: 'Apostille & Authentication', b: 'Document authentication and apostille services coordinated across jurisdictions.', stat: 'MULTI-JURISDICTION' },
+  { Icon: Stamp, n: '03', h: 'Apostille & Authentication', b: 'Document authentication and apostille services coordinated across countries.', stat: 'MULTI-COUNTRY' },
   { Icon: Scale, n: '04', h: 'Foreign Attorneys', b: 'In-country counsel for global immigration matters, vetted and ready to engage.', stat: 'IN-COUNTRY COUNSEL' },
   { Icon: Truck, n: '05', h: 'Specialized Couriers', b: 'Secure delivery to consulates and immigration authorities with full chain of custody.', stat: 'SECURE DELIVERY' },
   { Icon: Building2, n: '06', h: 'Consular Coordinators', b: 'Appointment scheduling and consular liaison handled by experienced coordinators.', stat: 'CONSULAR LIAISON' },
@@ -26,7 +26,7 @@ export default function Network() {
         lead="The Global Service Provider Network"
         emphasis="for Immigration."
         sub="A curated B2B network of certified translators, physicians, apostille services, foreign attorneys, courier services, and consular coordinators - accessible directly through CodioCMS."
-        primary={{ href: '/free-tech-audit', label: 'Request a walkthrough' }}
+        primary={{ href: '/contact', label: 'Request a walkthrough' }}
         secondary={{ href: '/platform', label: 'See the platform' }}
       />
 
@@ -42,7 +42,7 @@ export default function Network() {
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7 }}>
               Every immigration case is a coordination problem. Translators in one country. Certified physicians in
               another. Apostille services in a third. Foreign attorneys, couriers, and consular logistics across
-              multiple jurisdictions.
+              multiple countries.
             </p>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7, marginTop: 'var(--space-lg)' }}>
               Most firms manage all of this manually - losing time, racking up costs, and risking compliance failures.
@@ -96,7 +96,7 @@ export default function Network() {
           <FeatureGrid
             cols={3}
             items={[
-              { Icon: Globe, n: '01', h: 'Identify Providers', b: 'Surface the right vetted providers for each jurisdiction and service type, in seconds.' },
+              { Icon: Globe, n: '01', h: 'Identify Providers', b: 'Surface the right vetted providers for each country and service type, in seconds.' },
               { Icon: Workflow, n: '02', h: 'Coordinate Services', b: 'Engage and manage providers without leaving CodioCMS - no separate tools or email chains.' },
               { Icon: NetworkIcon, n: '03', h: 'Track Progress', b: 'Monitor every external service against the case, with full visibility into status and timing.' },
             ]}
@@ -110,7 +110,7 @@ export default function Network() {
       <CtaBand
         lead="Bring your global ecosystem"
         emphasis="into one platform."
-        primary={{ href: '/free-tech-audit', label: 'Request a walkthrough' }}
+        primary={{ href: '/contact', label: 'Request a walkthrough' }}
         secondary={{ href: 'mailto:info@globalcodio.ai', label: 'Talk to our team' }}
       />
     </>

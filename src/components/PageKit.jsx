@@ -29,8 +29,8 @@ export const SmartLink = ({ href, className, children, ...rest }) => {
 };
 
 /** Display heading with an italic gradient-blue emphasis line. */
-export const SplitHeading = ({ lead, emphasis, className = 'type-display-lg', as: Tag = 'h2', inline = false }) => (
-  <Tag className={`display ${className}`}>
+export const SplitHeading = ({ lead, emphasis, className = 'type-display-lg', as: Tag = 'h2', inline = false, style }) => (
+  <Tag className={`display ${className}`} style={style}>
     {lead && (
       <span style={inline ? { color: 'var(--ink)' } : { display: 'block' }}>
         {lead}
@@ -49,7 +49,7 @@ export const SplitHeading = ({ lead, emphasis, className = 'type-display-lg', as
 );
 
 /** Standard inner page hero: eyebrow + split headline + lead + optional CTAs, over an aurora wash. */
-export const PageHero = ({ eyebrow, lead, emphasis, sub, primary, secondary, children }) => (
+export const PageHero = ({ eyebrow, lead, emphasis, sub, primary, secondary, headInline, children }) => (
   <section className="page-hero">
     <div className="hero-aurora" aria-hidden="true" />
     <div className="hero-grid-overlay" aria-hidden="true" />
@@ -72,7 +72,7 @@ export const PageHero = ({ eyebrow, lead, emphasis, sub, primary, secondary, chi
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.06, ease }}
       >
-        <SplitHeading lead={lead} emphasis={emphasis} className="type-display-xl page-hero-title" as="h1" />
+        <SplitHeading lead={lead} emphasis={emphasis} className={`type-display-xl page-hero-title${headInline ? ' page-hero-title--inline' : ''}`} as="h1" inline={headInline} />
       </motion.div>
       {sub && (
         <motion.p
@@ -114,8 +114,8 @@ export const PageHero = ({ eyebrow, lead, emphasis, sub, primary, secondary, chi
 );
 
 /** Section wrapper with optional eyebrow + split heading + intro. */
-export const Section = ({ id, tone, eyebrow, lead, emphasis, intro, introMaxWidth = '64ch', headAlign = 'left', headInline = false, children, className = '' }) => (
-  <section id={id} className={`sec ${tone || ''} ${className}`.trim()}>
+export const Section = ({ id, tone, eyebrow, lead, emphasis, intro, introMaxWidth = '64ch', headAlign = 'left', headInline = false, children, className = '', style }) => (
+  <section id={id} className={`sec ${tone || ''} ${className}`.trim()} style={style}>
     <div className="container">
       {(eyebrow || lead || emphasis || intro) && (
         <div
@@ -157,7 +157,7 @@ export const FeatureGrid = ({ items, cols = 3, compact = false }) => (
         {it.Icon && (
           <div className="feature-card-top">
             <div className="agent-icon" aria-hidden="true">
-              <it.Icon size={20} strokeWidth={1.75} />
+              <it.Icon size={24} strokeWidth={1.6} />
             </div>
           </div>
         )}

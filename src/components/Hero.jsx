@@ -58,12 +58,7 @@ export const Hero = () => (
           initial="hidden"
           animate="show"
         >
-        <motion.div className="reveal hero-eyebrow-row" style={{ textAlign: 'center' }} variants={rise}>
-          <span className="pill hero-eyebrow-pill">
-            <span className="hero-eyebrow-dot" aria-hidden="true" />
-            AI Agents for Global Immigration · Deployed and Managed
-          </span>
-        </motion.div>
+
 
         <motion.h1
           className="reveal d1 display type-display-hero"
@@ -91,7 +86,7 @@ export const Hero = () => (
           style={{ textAlign: 'center' }}
           variants={rise}
         >
-          {['Case Management', 'Forms', 'Managed Tech Operations'].map((label) => (
+          {['Global Immigration Case Management', 'Global Immigration Forms', 'Managed Tech Operations', 'Audit & Consulting'].map((label) => (
             <span key={label} className="pill">
               {label}
             </span>
@@ -134,20 +129,20 @@ export const Hero = () => (
           style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
           variants={rise}
         >
-          <motion.a href="/free-tech-audit" className="btn btn-dark" {...btnTap}>
+          <motion.a href="/contact" className="btn btn-dark" {...btnTap}>
             Book your free tech audit
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M3 8h10M9 4l4 4-4 4" />
             </svg>
           </motion.a>
-          <motion.a href="#operating-system" className="btn btn-glass" {...btnTap}>
+          <motion.a href="#operation" className="btn btn-glass" {...btnTap}>
             See how it works
           </motion.a>
         </motion.div>
 
         <motion.div className="reveal d4 hero-trust" variants={rise} aria-label="Trusted by immigration practices worldwide">
           <span className="hero-trust-copy">
-            Built by the founder of <strong>INSZoom</strong> - trusted by 1,500+ immigration firms.
+            Built by the founder of <strong>INSZoom</strong> - trusted by 1,000+ immigration firms.
           </span>
         </motion.div>
         </motion.div>

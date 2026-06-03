@@ -4,12 +4,15 @@ import { PageHero, Section, FeatureGrid, CtaBand } from '../components/PageKit.j
 import {
   ClipboardList,
   FileText,
+  ScanText,
+  ShieldCheck,
   PenLine,
   CalendarClock,
   MessageCircle,
   RefreshCw,
   TrendingUp,
   Globe,
+  BellRing,
 } from 'lucide-react';
 
 const Check = () => (
@@ -28,53 +31,67 @@ const AGENTS = [
     stat: '45 MIN → 8 MIN PER CASE',
   },
   {
-    Icon: FileText,
+    Icon: ScanText,
     n: '02',
-    h: 'Document Agent',
-    b: 'Extracts data from foreign documents, translates 40+ languages, classifies files, and flags missing or expired documents before filing.',
+    h: 'Document Extraction Agent',
+    b: 'Extracts data from passports, visas, foreign records, and supporting documents. Translates 40+ languages and classifies files directly into the case.',
     stat: '10× FASTER THAN MANUAL REVIEW',
   },
   {
-    Icon: PenLine,
+    Icon: ShieldCheck,
     n: '03',
+    h: 'Document Validation Agent',
+    b: 'Cross-checks extracted documents for completeness, flags missing or expired items, and verifies authenticity before anything is filed.',
+    stat: 'ZERO MISSING DOCS AT FILING',
+  },
+  {
+    Icon: PenLine,
+    n: '04',
     h: 'Forms Agent',
     b: 'Auto-fills forms across CodioForms - USA, Canada, Netherlands, India and more. Cross-references data across forms and always uses current versions.',
     stat: '70% LESS FORM PREP TIME',
   },
   {
     Icon: CalendarClock,
-    n: '04',
+    n: '05',
     h: 'Deadline Agent',
     b: 'Tracks every case milestone, visa expiration, and filing deadline. Sends proactive alerts with 24/7 monitoring across all time zones.',
     stat: 'ZERO MISSED DEADLINES',
   },
   {
     Icon: MessageCircle,
-    n: '05',
+    n: '06',
     h: 'Client Comms Agent',
     b: 'Sends case status updates, answers common questions 24/7, schedules appointments, and collects missing documents - in multiple languages.',
     stat: '80% FEWER INBOUND CALLS',
   },
   {
     Icon: RefreshCw,
-    n: '06',
+    n: '07',
     h: 'Renewal Agent',
     b: 'Continuously scans your client database for visa renewals, green card upgrades, citizenship eligibility, and dormant cases worth reopening.',
     stat: '$50K-$300K RECOVERED ANNUALLY',
   },
   {
     Icon: TrendingUp,
-    n: '07',
+    n: '08',
     h: 'BD Agent',
     b: 'Runs automated outreach to prospective clients, qualifies leads by case type and urgency, and books consultations directly on attorney calendars.',
     stat: '8-15 NEW CASES PER MONTH',
   },
   {
     Icon: Globe,
-    n: '08',
+    n: '09',
     h: 'Ecosystem Agent',
     b: 'Coordinates translators, certified physicians, apostille services, foreign attorneys, and consular logistics through the CodioNetwork.',
     stat: '30% FASTER CASE TURNAROUND',
+  },
+  {
+    Icon: BellRing,
+    n: '10',
+    h: 'Government Notice Update Agent',
+    b: 'Monitors government portals, regulatory sources, and immigration authority announcements for policy changes, form revisions, and notice updates — alerting your firm to anything that affects open cases.',
+    stat: 'REAL-TIME POLICY ALERTS',
   },
 ];
 
@@ -126,7 +143,7 @@ export default function Agents() {
         lead="Not Generic AI."
         emphasis="Immigration AI."
         sub="Codio AI Agents are a team of specialized agents - built exclusively for immigration workflows, integrated natively with CodioCMS, deployed and managed by our team. Eight agents today. More added as your firm needs grow."
-        primary={{ href: '/free-tech-audit', label: 'Book a 30-minute demo' }}
+        primary={{ href: '/contact', label: 'Book a 30-minute demo' }}
         secondary={{ href: '/platform', label: 'See the platform' }}
       />
 
@@ -141,6 +158,31 @@ export default function Agents() {
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={AGENTS} cols={4} />
+          <div
+            className="reveal d1"
+            style={{
+              marginTop: 'var(--space-lg)',
+              border: '1.5px dashed var(--line-2)',
+              borderRadius: 'calc(16px * var(--ui-scale))',
+              padding: 'calc(28px * var(--ui-scale))',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 'var(--space-lg)',
+            }}
+          >
+            <div>
+              <div className="display" style={{ fontSize: 'calc(17px * var(--ui-scale))', fontWeight: 650, color: 'var(--ink-2)', letterSpacing: '-0.01em' }}>
+                More agents coming
+              </div>
+              <p style={{ fontSize: 'calc(14px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.5, marginTop: 'calc(4px * var(--ui-scale))' }}>
+                New agents are released as immigration workflows evolve. Existing clients get access automatically — no additional licensing or per-agent fees.
+              </p>
+            </div>
+            <span className="pill" style={{ flexShrink: 0, fontSize: 'calc(11px * var(--ui-scale))', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+              Coming soon
+            </span>
+          </div>
         </div>
       </Section>
 
@@ -229,7 +271,7 @@ export default function Agents() {
       <CtaBand
         lead="See Codio AI Agents in action."
         emphasis="On your real cases."
-        primary={{ href: '/free-tech-audit', label: 'Book a 30-minute demo' }}
+        primary={{ href: '/contact', label: 'Book a 30-minute demo' }}
         secondary={{ href: '/platform', label: 'Explore the platform' }}
       />
     </>

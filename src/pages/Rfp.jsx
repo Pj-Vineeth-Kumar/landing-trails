@@ -124,7 +124,7 @@ export default function Rfp() {
         lead="Have an RFP coming up?"
         emphasis="Send it over."
         primary={{ href: 'mailto:info@globalcodio.ai', label: 'Send us your RFP' }}
-        secondary={{ href: '/free-tech-audit', label: 'Book a tech audit' }}
+        secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />
     </>
   );

@@ -38,8 +38,8 @@ const CMS_FEATURES = [
   {
     Icon: Globe,
     n: '03',
-    h: 'Multi-jurisdictional handling',
-    b: 'Multi-jurisdictional case handling across every country you serve, in one unified system.',
+    h: 'Global country support',
+    b: 'Case handling across every country you serve, in one unified system - with new countries added on demand.',
   },
   {
     Icon: Settings,
@@ -62,7 +62,7 @@ const CMS_FEATURES = [
 ];
 
 const FORMS_STATS = [
-  { value: '4', label: 'jurisdictions live today' },
+  { value: '4', label: 'countries live today' },
   { value: 'Days', label: 'not quarters for new countries' },
   { value: '1', label: 'source of truth tied to CodioCMS' },
 ];
@@ -91,7 +91,7 @@ const FORMS_CAPS = [
   {
     n: '01',
     h: 'Online & offline',
-    b: 'Cloud collaboration for your team and clients, or export a print-ready PDF for traditional filing - same data, either path.',
+    b: 'Online forms are filled directly on government portals (USCIS, IRCC, etc.). Offline forms are pre-populated PDFs exported from CodioCMS for traditional paper submission. Same case data, either path.',
   },
   {
     n: '02',
@@ -105,25 +105,6 @@ const FORMS_CAPS = [
   },
 ];
 
-const FORMS_VS = [
-  {
-    title: 'Typical immigration software',
-    points: [
-      'US PDF libraries with manual version checks',
-      'Re-keying client data into every new form',
-      'Offline folders that drift from the case file',
-    ],
-  },
-  {
-    title: 'CodioForms',
-    featured: true,
-    points: [
-      'Global catalog with online and offline delivery',
-      'Case data prefilled from CodioCMS automatically',
-      'One version ledger across every jurisdiction you serve',
-    ],
-  },
-];
 
 const AI_ERA_POINTS = [
   {
@@ -158,7 +139,7 @@ const MIGRATION_STEPS = [
   {
     Icon: Database,
     h: 'Move your data',
-    b: 'Full export from your current platform-including INSZoom-imported into CodioCMS and verified.',
+    b: 'Full export from your current platform - imported into CodioCMS and verified before anything moves.',
   },
   {
     Icon: Workflow,
@@ -178,7 +159,7 @@ const MIGRATION_STEPS = [
   },
 ];
 
-const MIGRATION_FROM = ['INSZoom', 'Legacy CMS', 'Spreadsheets', 'Other platforms'];
+const MIGRATION_FROM = ['Legacy CMS', 'Spreadsheets', 'Other platforms'];
 
 export default function Platform() {
   return (
@@ -194,7 +175,7 @@ export default function Platform() {
         lead="The Platform Built by the People"
         emphasis="Who Built Immigration Tech."
         sub="CodioCMS and CodioForms are the foundation of GlobalCodio - a next-generation case management platform and global immigration forms engine, designed from the ground up for the AI era."
-        primary={{ href: '/free-tech-audit', label: 'Book a free tech audit' }}
+        primary={{ href: '/contact', label: 'Book a free tech audit' }}
         secondary={{ href: 'mailto:info@globalcodio.ai', label: 'Talk to us about migration' }}
       />
 
@@ -204,10 +185,9 @@ export default function Platform() {
           <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
             CodioCMS
           </div>
-          <SplitHeading lead="Proprietary immigration" emphasis="case management." />
+          <SplitHeading lead="Proprietary immigration" emphasis="case management software." />
           <p className="cms-head-intro">
-            Immigration case management for firms and corporate teams-built by Umesh Vaidyamath, founder of INSZoom. Not
-            generic legal tech: a modern platform with native AI agents, CodioForms, and our global services network.
+            Immigration case management for firms and corporate teams - built by the founder of the world's leading immigration case management platform. Not generic legal tech: a modern platform with native AI agents, CodioForms, and our global services network.
           </p>
         </div>
 
@@ -221,9 +201,9 @@ export default function Platform() {
             <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
               CodioForms
             </div>
-            <SplitHeading lead="Global immigration forms." emphasis="Online and offline." />
+            <SplitHeading lead="Global immigration forms" emphasis="and questionnaires." />
             <p className="forms-head-intro">
-              The only immigration forms engine built for multi-country practice - every edition authority-synced,
+              The only immigration forms and questionnaires engine built for multi-country practice - every edition authority-synced,
               prefilled from CodioCMS, and available online or as print-ready PDF.
             </p>
           </div>
@@ -303,36 +283,10 @@ export default function Platform() {
             </div>
           </div>
 
-          <div className="forms-compare reveal d1">
-            {FORMS_VS.map((col) => (
-              <article
-                key={col.title}
-                className={`forms-compare-col${col.featured ? ' forms-compare-col--featured' : ''}`}
-              >
-                <h3 className="display forms-compare-title">
-                  {col.featured ? (
-                    <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>
-                      {col.title}
-                    </em>
-                  ) : (
-                    col.title
-                  )}
-                </h3>
-                <ul className="check-list">
-                  {col.points.map((p) => (
-                    <li key={p}>
-                      <Check />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
 
           <div className="forms-juris reveal d2">
             <p className="forms-juris-lead">
-              Live today across four jurisdictions - new countries scoped and released on client priority.
+              Live today across four countries - new countries scoped and released on client priority.
             </p>
             <div className="forms-juris-grid">
               {JURISDICTIONS.map((j) => (
@@ -351,7 +305,7 @@ export default function Platform() {
               ))}
             </div>
             <p className="forms-juris-payoff">
-              Most platforms cover the US and stop. CodioForms centralizes every jurisdiction you practice in -
+              Most platforms cover the US and stop. CodioForms centralizes every country you practice in -
               integrated directly with cases in <strong>CodioCMS</strong>.
             </p>
           </div>
@@ -380,7 +334,7 @@ export default function Platform() {
             </div>
             <SplitHeading lead="Coming from another platform?" emphasis="We migrate you." />
             <p className="migration-head-intro">
-              On INSZoom or another CMS? Our team runs the full move-data, workflows, documentation, and parallel
+              On another CMS? Our team runs the full move - data, workflows, documentation, and parallel
               operations until you’re live on CodioCMS.
             </p>
           </div>
@@ -419,7 +373,7 @@ export default function Platform() {
       <CtaBand
         lead="See the platform on your live cases."
         emphasis="Not a generic demo."
-        primary={{ href: '/free-tech-audit', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/ai-agents', label: 'Explore the AI Agents' }}
       />
     </>

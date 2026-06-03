@@ -28,7 +28,7 @@ const layers = [
     Icon: Globe,
     n: '03',
     h: 'Data Residency',
-    b: 'Compliant regional infrastructure for regulated jurisdictions, with configurable data residency for global enterprise clients.',
+    b: 'Compliant regional infrastructure for regulated countries, with configurable data residency for global enterprise clients.',
   },
   {
     Icon: Eye,
@@ -81,7 +81,7 @@ export default function Security() {
         emphasis="We protect that trust."
         sub="Immigration law firms handle some of the most sensitive personal data in legal practice - identity documents, family information, medical records, employment history, immigration status. GlobalCodio is built on enterprise-grade security and compliance from day one."
         primary={{ href: 'mailto:info@globalcodio.ai', label: 'Request compliance docs' }}
-        secondary={{ href: '/free-tech-audit', label: 'Book a tech audit' }}
+        secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />
 
       <section id="standards" className="sec">

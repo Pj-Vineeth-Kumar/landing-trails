@@ -6,7 +6,7 @@ import { Users, Globe, Network, ShieldCheck, TrendingUp } from 'lucide-react';
 const CHALLENGES = [
   'Scaling employee visa volume across multiple countries',
   'Coordinating dozens of outside counsel and service vendors',
-  'Maintaining compliance across jurisdictions',
+  'Maintaining compliance across countries',
   'Controlling cost without sacrificing quality',
   'Reporting visibility to executives and HR leadership',
 ];
@@ -64,7 +64,7 @@ export default function Corporate() {
         lead="Built for Corporate Immigration Teams."
         emphasis="Designed for Global Scale."
         sub="GlobalCodio is the complete technology operation for in-house mobility, HR, and legal operations teams managing global employee immigration. CodioCMS, CodioForms, AI agents, and a worldwide service network - all built for the realities of corporate immigration."
-        primary={{ href: '/free-tech-audit', label: 'Book a discovery call' }}
+        primary={{ href: '/contact', label: 'Book a discovery call' }}
         secondary={{ href: '/platform', label: 'See the platform' }}
       />
 
@@ -102,7 +102,7 @@ export default function Corporate() {
         eyebrow="How GlobalCodio Solves Them"
         lead="One operation purpose-built"
         emphasis="for global mobility."
-        intro="From AI-driven case work to a single platform for every jurisdiction, GlobalCodio turns the hardest parts of corporate immigration into a predictable, managed operation."
+        intro="From AI-driven case work to a single platform for every country, GlobalCodio turns the hardest parts of corporate immigration into a predictable, managed operation."
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={SOLUTIONS} cols={2} />
@@ -113,7 +113,7 @@ export default function Corporate() {
         lead="Scale your corporate"
         emphasis="immigration operation."
         sub="Book a discovery call to see how GlobalCodio runs the technology behind your global mobility program."
-        primary={{ href: '/free-tech-audit', label: 'Book a discovery call' }}
+        primary={{ href: '/contact', label: 'Book a discovery call' }}
         secondary={{ href: '/security', label: 'See security & compliance' }}
       />
     </>

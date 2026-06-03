@@ -63,7 +63,7 @@ export default function Audit() {
         lead="Find out exactly where your firm is"
         emphasis="leaking cost and revenue."
         sub="In 30 minutes, we'll audit your firm's technology, identify gaps, and show you what a fully managed operation would look like. No commitment. No pressure. Just clarity."
-        primary={{ href: 'mailto:info@globalcodio.ai', label: 'Book your audit' }}
+        primary={{ href: '/contact', label: 'Book your audit' }}
         secondary={{ href: '/letter-from-the-founder', label: "Read the founder’s letter" }}
       />
 
@@ -116,7 +116,7 @@ export default function Audit() {
               Umesh Vaidyamath. Indicate your preference when you book.
             </p>
             <div style={{ marginTop: 'var(--space-xl)' }}>
-              <SmartLink href="mailto:info@globalcodio.ai" className="btn btn-primary">
+              <SmartLink href="/contact" className="btn btn-primary">
                 Request founder-led audit
               </SmartLink>
             </div>
@@ -176,7 +176,7 @@ export default function Audit() {
       <CtaBand
         lead="Ready to see what your firm’s"
         emphasis="technology could be?"
-        primary={{ href: 'mailto:info@globalcodio.ai', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: 'mailto:info@globalcodio.ai', label: 'Talk to our team' }}
       />
     </>

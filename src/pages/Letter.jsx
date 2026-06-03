@@ -24,7 +24,7 @@ export default function Letter() {
         lead="A letter from"
         emphasis="the founder."
         sub="Umesh Vaidyamath - Founder & CEO, GlobalCodio · Founder & CEO, INSZoom (1999-2020)"
-        primary={{ href: '/free-tech-audit', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/about', label: 'About GlobalCodio' }}
       />
 
@@ -42,7 +42,7 @@ export default function Letter() {
 
           <p className="reveal" style={proseStyle}>
             Over the next twenty years, we built INSZoom into the leading immigration case management
-            platform in the world, serving more than 1,500 law firms across every kind of immigration
+            platform in the world, serving more than 1,000 law firms across every kind of immigration
             practice. We watched solo attorneys grow into mid-size firms. We watched mid-size firms grow
             into enterprise practices. We watched corporate immigration teams scale to manage tens of
             thousands of cases. We learned what worked. And we learned, painfully sometimes, what didn't.
@@ -147,7 +147,7 @@ export default function Letter() {
       <CtaBand
         lead="Bring your hardest questions."
         emphasis="We’ll show you what’s possible."
-        primary={{ href: '/free-tech-audit', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/about', label: 'About GlobalCodio' }}
       />
     </>

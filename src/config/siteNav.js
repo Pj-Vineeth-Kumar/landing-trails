@@ -14,7 +14,7 @@ export const SITE_NAV = [
     label: 'Services',
     href: '/services',
     children: [
-      { href: '/services', label: 'Services Overview', desc: 'Migration, IT, managed ops' },
+      { href: '/services', label: 'Services Overview', desc: 'Migration, IT support, audit, managed ops' },
       { href: '/rfp-response', label: 'RFP Response', desc: 'We draft your technical answers' },
     ],
   },
@@ -26,6 +26,7 @@ export const SITE_NAV = [
     ],
   },
   { href: '/security', label: 'Security' },
+  { href: '/contact', label: 'Contact' },
   {
     label: 'Company',
     href: '/about',
@@ -73,19 +74,25 @@ export const FOOTER_COLUMNS = [
     ],
   },
   {
-    title: 'For You',
+    title: 'Solutions',
     links: [
       { href: '/for-law-firms', label: 'For Immigration Law Firms' },
       { href: '/for-corporate-teams', label: 'For Corporate Teams' },
       { href: '/security', label: 'Security & Compliance' },
-      { href: '/about', label: 'About' },
-      { href: '/letter-from-the-founder', label: 'Letter from the Founder' },
     ],
   },
   {
-    title: 'Contact',
+    title: 'Company',
     links: [
+      { href: '/about', label: 'About' },
+      { href: '/letter-from-the-founder', label: 'Letter from the Founder' },
+      { href: '/contact', label: 'Contact Us' },
       { href: AUDIT_URL, label: 'Book Free Tech Audit' },
+    ],
+  },
+  {
+    title: 'Connect',
+    links: [
       { href: SUPPORT_MAILTO, label: SUPPORT_EMAIL },
       { href: 'https://www.linkedin.com/company/globalcodio', label: 'LinkedIn' },
     ],

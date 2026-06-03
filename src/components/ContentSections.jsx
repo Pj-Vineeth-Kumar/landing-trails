@@ -2,44 +2,10 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { FileText, MessageCircle, RefreshCw, TrendingUp } from 'lucide-react';
+import { FileText, MessageCircle, RefreshCw, TrendingUp, ClipboardList, PenLine, CalendarClock, Globe, Megaphone } from 'lucide-react';
 import { Logo } from './Nav.jsx';
 import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../config/siteNav.js';
 
-/** Internal route → <Link>; external/anchor/mailto → <a>. */
-const FooterLink = ({ href, children, ...rest }) => {
-  const internal = href && href.startsWith('/') && !href.startsWith('//');
-  return internal ? (
-    <Link to={href} {...rest}>{children}</Link>
-  ) : (
-    <a href={href} {...rest}>{children}</a>
-  );
-};
-
-/** Caption offsets for inner MTO & ECO labels */
-const LEGACY_INNER_CAPTION_NUDGE = {
-  'p-mto': { dx: 45, dy: -51 },
-  'p-eco': { dx: 32, dy: 51 },
-};
-
-/** Radial caption placement - clears badge using label size + angle */
-const estimateCaptionHalf = (label, ring, uiScale) => {
-  const halfH = (ring === 'inner' ? 14 : 13) * uiScale;
-  const charW = 5.8 * uiScale;
-  const padX = (ring === 'inner' ? 24 : 22) * uiScale;
-  const halfW = (label.length * charW + padX) / 2;
-  return { halfW, halfH };
-};
-
-const orbitCaptionOffset = (r, bd, uiScale, nx, ny, label, ring) => {
-  const gap = (ring === 'inner' ? 10 : 8) * uiScale;
-  const { halfW, halfH } = estimateCaptionHalf(label, ring, uiScale);
-  const inward = halfW * Math.abs(nx) + halfH * Math.abs(ny);
-  const dist = r + bd + gap + inward + 4 * uiScale;
-  return { lx: nx * dist, ly: ny * dist };
-};
-
-/** Overrides GSAP inline transform so card lift + branded shadow hover still works after scroll reveal */
 const interactiveCardProps = {
   onMouseEnter: (e) => {
     e.currentTarget.style.borderColor = 'var(--line-blue)';
@@ -53,87 +19,55 @@ const interactiveCardProps = {
   },
 };
 
-/** Orbit ring diameters (px, pre–ui-scale) - must match .orbit-ring inline sizes in AgentOrbit */
-const ORBIT_INNER_RADIUS = 384 / 2;
-const ORBIT_OUTER_RADIUS = 612 / 2;
-
-const readUiScale = () => {
-  if (typeof document === 'undefined') return 0.84;
-  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ui-scale')) || 0.84;
+/** Internal route → <Link>; external/anchor/mailto → <a>. */
+const FooterLink = ({ href, children, ...rest }) => {
+  const internal = href && href.startsWith('/') && !href.startsWith('//');
+  return internal ? (
+    <Link to={href} {...rest}>{children}</Link>
+  ) : (
+    <a href={href} {...rest}>{children}</a>
+  );
 };
 
-/* Agent orbit - dual ring: three pillars (inner) + workflow depth (outer) */
+const AGENTS_BENTO = [
+  { Icon: ClipboardList, label: 'Intake Agent',       desc: 'Opens & classifies cases automatically.' },
+  { Icon: FileText,      label: 'Document Agent',     desc: 'Extracts, translates & validates documents.' },
+  { Icon: PenLine,       label: 'Forms Agent',        desc: 'Auto-fills forms across every country.' },
+  { Icon: CalendarClock, label: 'Deadline Agent',     desc: 'Tracks every filing window. Zero misses.' },
+  { Icon: MessageCircle, label: 'Client Comms Agent', desc: '24/7 status updates & document collection.' },
+  { Icon: RefreshCw,     label: 'Renewal Agent',      desc: 'Mines your database for dormant revenue.' },
+  { Icon: Megaphone,     label: 'BD Agent',           desc: 'Automates outreach & books consultations.' },
+  { Icon: Globe,         label: 'Ecosystem Agent',    desc: 'Coordinates translators, physicians & couriers.' },
+];
+
+const PILLARS = [
+  { label: 'AI Agents',        desc: '8 specialized agents working in concert' },
+  { label: 'Managed Tech Ops', desc: 'Our team runs your entire tech operation' },
+  { label: 'Ecosystem',        desc: 'Global network of immigration service providers' },
+];
+
+/* Agent bento - replaces the orbit visualization */
 export const AgentOrbit = () => {
   const rootRef = useRef(null);
-  const uiScale = readUiScale();
-  const innerRadius = ORBIT_INNER_RADIUS * uiScale;
-  const outerRadius = ORBIT_OUTER_RADIUS * uiScale;
-
-  const innerPillars = [
-    { id: 'p-ai', n: 'AI', label: 'AI Agents' },
-    { id: 'p-mto', n: 'MTO', label: 'Techn Ops' },
-    { id: 'p-eco', n: 'ECO', label: 'Ecosystem' },
-  ];
-  const outerCapabilities = [
-    { id: 'o-in', n: 'IN', label: 'Intake Agent' },
-    { id: 'o-dc', n: 'DC', label: 'Document Agent' },
-    { id: 'o-fm', n: 'FM', label: 'Forms Agent' },
-    { id: 'o-dl', n: 'DL', label: 'Deadline Agent' },
-    { id: 'o-cc', n: 'CC', label: 'Client Comms Agent' },
-    { id: 'o-rn', n: 'RN', label: 'Renewal Agent' },
-    { id: 'o-bd', n: 'BD', label: 'BD Agent' },
-    { id: 'o-ec', n: 'EC', label: 'Ecosystem Agent' },
-  ];
-
-  const orbitNodes = [
-    ...innerPillars.map((a, i) => {
-      const angle = (i / innerPillars.length) * Math.PI * 2 - Math.PI / 2;
-      return { ...a, r: innerRadius, angle, ring: 'inner' };
-    }),
-    ...outerCapabilities.map((a, i) => {
-      const angle = (i / outerCapabilities.length) * Math.PI * 2 - Math.PI / 2 + Math.PI / outerCapabilities.length;
-      return { ...a, r: outerRadius, angle, ring: 'outer' };
-    }),
-  ];
 
   useLayoutEffect(() => {
     const el = rootRef.current;
     if (!el) return;
     const ctx = gsap.context(() => {
-      gsap.from(el.querySelectorAll('.orbit-ring'), {
-        scale: 0.88,
+      gsap.from(el.querySelectorAll('.bento-agent-card'), {
         opacity: 0,
-        duration: 1.05,
-        stagger: 0.2,
+        y: 20,
+        duration: 0.5,
+        stagger: { each: 0.06, from: 'start' },
         ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 72%',
-          toggleActions: 'play none none none',
-        },
+        scrollTrigger: { trigger: el, start: 'top 72%', toggleActions: 'play none none none' },
       });
-      gsap.from(el.querySelectorAll('.orbit-hub'), {
-        scale: 0,
+      gsap.from(el.querySelectorAll('.bento-hub'), {
         opacity: 0,
-        duration: 0.85,
-        ease: 'elastic.out(1, 0.72)',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 70%',
-          toggleActions: 'play none none none',
-        },
-      });
-      gsap.from(el.querySelectorAll('.orbit-node'), {
-        opacity: 0,
-        scale: 0.5,
-        duration: 0.55,
-        stagger: { each: 0.07, from: 'random' },
-        ease: 'back.out(1.35)',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 68%',
-          toggleActions: 'play none none none',
-        },
+        scale: 0.95,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 74%', toggleActions: 'play none none none' },
       });
     }, el);
     return () => ctx.revert();
@@ -142,200 +76,122 @@ export const AgentOrbit = () => {
   return (
     <section ref={rootRef} className="sec sec-dark" id="platform">
       <div className="container">
-        <div className="reveal section-head-wide" style={{ textAlign: 'left' }}>
+
+        {/* Section header */}
+        <div className="reveal section-head-wide" style={{ textAlign: 'left', marginBottom: 'var(--space-3xl)' }}>
           <div className="eyebrow" style={{ color: 'var(--blue-hover)', marginBottom: 'var(--space-md)' }}>Platform</div>
           <h2 className="display type-display-xl" style={{ color: '#fff' }}>
-            <span style={{ display: 'block', textAlign: 'left' }}>Eight agents, three pillars,</span>
+            <span style={{ display: 'block' }}>Eight agents, three pillars,</span>
             <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue-hover)' }}>one case file.</em>
           </h2>
         </div>
 
-        <div className="reveal orbit-stage d1">
-          <div className="orbit-stage-scaler">
-          <div className="orbit-stage-core">
-          <div className="orbit-ring" style={{width:'calc(612px * var(--ui-scale))',height:'calc(612px * var(--ui-scale))',borderColor:'rgba(255,255,255,.09)'}}/>
-          <div className="orbit-ring" style={{width:'calc(384px * var(--ui-scale))',height:'calc(384px * var(--ui-scale))',borderColor:'rgba(255,255,255,.14)'}}/>
-          <span className="orbit-ring-legend orbit-ring-legend--inner">Three pillars</span>
-          <span className="orbit-ring-legend orbit-ring-legend--outer">Eight AI Agents</span>
+        {/* Bento grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0,1fr) minmax(0,2.2fr)',
+          gap: 'calc(16px * var(--ui-scale))',
+          alignItems: 'stretch',
+        }}>
 
-          {/* Center - one case file; pillars orbit inside, workflows outside */}
-          <div className="orbit-hub" style={{
-            width:'calc(152px * var(--ui-scale))',height:'calc(152px * var(--ui-scale))',borderRadius:'50%',
-            background:'linear-gradient(180deg, var(--blue), var(--blue-ink))',
-            display:'grid',placeItems:'center',zIndex:3,
-            boxShadow:'0 0 64px rgba(25,80,198,.42), 0 0 0 1px rgba(255,255,255,.1) inset',
+          {/* LEFT - hub card (commented out) */}
+          {/* <div className="bento-hub" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'calc(16px * var(--ui-scale))',
           }}>
-            <div style={{textAlign:'center',color:'#fff',padding:'0 10px'}}>
-              <div style={{fontSize:10.5,fontFamily:'var(--mono)',letterSpacing:'.14em',opacity:.72,marginBottom:6,lineHeight:1.2}}>CASE</div>
-              <div className="display" style={{fontSize:28,fontStyle:'italic',lineHeight:1}}>file</div>
-            </div>
-          </div>
-          </div>
-
-          {/* Labels: radial offset from badge - sized to avoid overlapping icons */}
-          {orbitNodes.map((a) => {
-            const { r, angle, ring } = a;
-            const nx = Math.cos(angle);
-            const ny = Math.sin(angle);
-            const x = nx * r;
-            const y = ny * r;
-            const bd = ring === 'inner' ? 27 : 24;
-            const badgePx = a.n.length >= 3 ? 10 : 12;
-            const legacyNudge = LEGACY_INNER_CAPTION_NUDGE[a.id];
-            const { lx, ly } = legacyNudge
-              ? { lx: x + legacyNudge.dx, ly: y + legacyNudge.dy }
-              : orbitCaptionOffset(r, bd, uiScale, nx, ny, a.label, ring);
-
-            return (
-              <div key={a.id} className={`orbit-node orbit-node--${ring}`} style={{ zIndex: ring === 'inner' ? 5 : 3 }}>
-                <button
-                  type="button"
-                  className="orbit-node-hit"
-                  aria-label={a.label}
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    width: (bd + 10) * 2,
-                    height: (bd + 10) * 2,
-                    transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
-                    display: 'grid',
-                    placeItems: 'center',
-                    padding: 0,
-                    margin: 0,
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'default',
-                  }}
-                >
-                  <div className="orbit-node-badge" style={{
-                    width: bd * 2,
-                    height: bd * 2,
-                    borderRadius: '50%',
-                    background: ring === 'inner' ? 'rgba(25,80,198,.42)' : 'rgba(255,255,255,.05)',
-                    border: ring === 'inner' ? '1px solid rgba(74,126,224,.7)' : '1px solid rgba(255,255,255,.1)',
-                    display: 'grid',
-                    placeItems: 'center',
-                    fontSize: badgePx,
-                    fontWeight: 650,
-                    color: ring === 'inner' ? '#fff' : 'rgba(255,255,255,.72)',
-                    fontFamily: 'var(--mono)',
-                    flexShrink: 0,
-                    boxShadow:
-                      ring === 'inner'
-                        ? '0 10px 24px -8px rgba(25,80,198,.55)'
-                        : 'none',
-                    transition: 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s cubic-bezier(.2,.7,.2,1), border-color .25s cubic-bezier(.2,.7,.2,1)',
-                  }}>{a.n}</div>
-                </button>
-                <div
-                  className={`orbit-node-caption${ring === 'outer' ? ' orbit-node-caption--outer' : ''}`}
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: `translate(${lx}px, ${ly}px) translate(-50%, -50%)`,
-                    padding: ring === 'inner' ? '7px 12px' : '6px 11px',
-                    borderRadius: 999,
-                    background: ring === 'inner' ? 'rgba(12,16,26,.92)' : 'rgba(12,16,26,.78)',
-                    border: ring === 'inner' ? '1px solid rgba(255,255,255,.14)' : '1px solid rgba(255,255,255,.1)',
-                    fontSize: ring === 'inner' ? 11 : 11,
-                    fontWeight: ring === 'inner' ? 560 : 500,
-                    lineHeight: 1,
-                    color: ring === 'inner' ? 'rgba(255,255,255,.95)' : 'rgba(255,255,255,.82)',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                    backdropFilter: 'blur(10px)',
-                    WebkitBackdropFilter: 'blur(10px)',
-                  }}
-                >{a.label}</div>
+            <div style={{
+              flex: 1,
+              background: 'linear-gradient(145deg, var(--blue) 0%, var(--blue-ink) 100%)',
+              borderRadius: 'calc(20px * var(--ui-scale))',
+              padding: 'calc(36px * var(--ui-scale))',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              border: '1px solid rgba(255,255,255,.1)',
+              boxShadow: '0 0 64px rgba(25,80,198,.35)',
+              minHeight: 'calc(200px * var(--ui-scale))',
+            }}>
+              <div>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.14em', color: 'rgba(255,255,255,.55)', marginBottom: 'calc(12px * var(--ui-scale))' }}>ONE CASE FILE</div>
+                <div className="display" style={{ fontSize: 'calc(42px * var(--ui-scale))', fontStyle: 'italic', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em' }}>Every agent.<br />One source<br />of truth.</div>
               </div>
-            );
-          })}
+              <div style={{ marginTop: 'calc(24px * var(--ui-scale))' }}>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'rgba(255,255,255,.45)', marginBottom: 'calc(10px * var(--ui-scale))' }}>THREE PILLARS</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(8px * var(--ui-scale))' }}>
+                  {PILLARS.map((p) => (
+                    <div key={p.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 'calc(10px * var(--ui-scale))' }}>
+                      <span style={{ width: 'calc(6px * var(--ui-scale))', height: 'calc(6px * var(--ui-scale))', borderRadius: '50%', background: 'rgba(255,255,255,.5)', flexShrink: 0, marginTop: 'calc(6px * var(--ui-scale))' }} />
+                      <div>
+                        <div style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 600, color: '#fff', lineHeight: 1.2 }}>{p.label}</div>
+                        <div style={{ fontSize: 'calc(11px * var(--ui-scale))', color: 'rgba(255,255,255,.5)', lineHeight: 1.4, marginTop: 'calc(2px * var(--ui-scale))' }}>{p.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+          {/* Agent grid - full width */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 'calc(12px * var(--ui-scale))',
+          }}>
+            {AGENTS_BENTO.map(({ Icon, label, desc }) => (
+              <div
+                key={label}
+                className="bento-agent-card"
+                style={{
+                  background: 'rgba(255,255,255,.04)',
+                  border: '1px solid rgba(255,255,255,.08)',
+                  borderRadius: 'calc(16px * var(--ui-scale))',
+                  padding: 'calc(22px * var(--ui-scale)) calc(20px * var(--ui-scale))',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'calc(12px * var(--ui-scale))',
+                  transition: 'background .2s, border-color .2s, transform .2s',
+                  cursor: 'default',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(25,80,198,.18)';
+                  e.currentTarget.style.borderColor = 'rgba(74,126,224,.45)';
+                  e.currentTarget.style.transform = 'translateY(-3px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,.04)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,.08)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 'calc(36px * var(--ui-scale))',
+                  height: 'calc(36px * var(--ui-scale))',
+                  borderRadius: 'calc(10px * var(--ui-scale))',
+                  background: 'rgba(25,80,198,.35)',
+                  border: '1px solid rgba(74,126,224,.4)',
+                  color: 'var(--blue-hover)',
+                  flexShrink: 0,
+                }}>
+                  <Icon size={16} strokeWidth={1.75} />
+                </span>
+                <div>
+                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 650, color: '#fff', lineHeight: 1.25, marginBottom: 'calc(5px * var(--ui-scale))' }}>{label}</div>
+                  <div style={{ fontSize: 'calc(11.5px * var(--ui-scale))', color: 'rgba(255,255,255,.5)', lineHeight: 1.5 }}>{desc}</div>
+                </div>
+              </div>
+            ))}
           </div>
-          <style>{`
-            .orbit-stage{
-              position:relative;
-              width:100%;
-              max-width:min(calc(940px * var(--ui-scale)),100%);
-              height:clamp(calc(640px * var(--ui-scale)), calc(84vw * var(--ui-scale)), calc(780px * var(--ui-scale)));
-              margin:0 auto;
-              margin-bottom:clamp(calc(12px * var(--ui-scale)), calc(2vw * var(--ui-scale)), calc(28px * var(--ui-scale)));
-              padding:calc(12px * var(--ui-scale)) calc(8px * var(--ui-scale));
-              overflow:visible;
-            }
-            .orbit-stage-scaler{
-              position:absolute;
-              inset:0;
-              width:100%;
-              height:100%;
-              overflow:visible;
-            }
-            .orbit-node-caption--outer{
-              z-index:10;
-            }
-            .orbit-stage-core{
-              position:absolute;inset:0;display:grid;place-items:center;
-              pointer-events:none;
-            }
-            .orbit-stage .orbit-node{
-              position:absolute;inset:0;pointer-events:none;
-            }
-            .orbit-stage .orbit-node-hit{
-              pointer-events:auto;
-              z-index:2;
-            }
-            .orbit-stage .orbit-node-hit:focus{
-              outline:none;
-            }
-            .orbit-stage .orbit-node-hit:focus-visible .orbit-node-badge{
-              outline:2px solid var(--blue-hover);
-              outline-offset:3px;
-            }
-            .orbit-stage .orbit-node-caption{
-              pointer-events:none;
-              z-index:8;
-              white-space:nowrap;
-            }
-            .orbit-stage .orbit-node:hover,
-            .orbit-stage .orbit-node:focus-within{
-              z-index:12;
-            }
-            .orbit-stage .orbit-node:hover .orbit-node-badge,
-            .orbit-stage .orbit-node:focus-within .orbit-node-badge{
-              transform:scale(1.06);
-            }
-            .orbit-stage .orbit-node--inner:hover .orbit-node-badge,
-            .orbit-stage .orbit-node--inner:focus-within .orbit-node-badge{
-              box-shadow:0 14px 32px -6px rgba(25,80,198,.65);
-              border-color:rgba(120,160,240,.95);
-            }
-            .orbit-ring-legend{
-              position:absolute;
-              left:50%;
-              top:50%;
-              font-family:var(--mono);
-              font-size:10px;
-              letter-spacing:.14em;
-              text-transform:uppercase;
-              color:rgba(255,255,255,.42);
-              white-space:nowrap;
-              pointer-events:none;
-              z-index:1;
-            }
-            .orbit-ring-legend--inner{
-              transform:translate(calc(-50% - 208px * var(--ui-scale)), -50%);
-              color:rgba(74,126,224,.75);
-            }
-            .orbit-ring-legend--outer{
-              transform:translate(calc(-50% + 322px * var(--ui-scale)), -50%);
-            }
-          `}</style>
         </div>
 
-        <div className="reveal d2 platform-cta" style={{ textAlign: 'center', marginTop: 0, padding: '0 var(--container-px)' }}>
+        {/* CTA */}
+        <div className="reveal d2" style={{ textAlign: 'center', marginTop: 'var(--space-3xl)' }}>
           <motion.a
-            href="#agents"
+            href="/ai-agents"
             className="btn btn-primary"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -365,18 +221,41 @@ export const Testimonial = () => (
         {[
           {
             title: 'Immigration Law Firms',
-            quote: 'GlobalCodio Agents handle case prep, deadlines, client comms, and renewals - so your attorneys focus on what matters.',
+            quote: 'GlobalCodio handles everything - AI agents for case prep, deadlines, client comms, and renewals, plus audit, consulting, configuration, and managed operations - so your attorneys focus on what matters.',
             body: 'Solo, mid-size, and large law firms practicing immigration law. Pain points: manual case preparation, scaling case volume, growing revenue from existing clients, and managing technology.',
+            services: [
+              { label: 'AI Agents', desc: 'Intake, documents, forms, deadlines, comms, renewals & BD' },
+              { label: 'Audit & Consulting', desc: 'Technology audit and immigration workflow advisory' },
+              { label: 'Configuration & Optimization', desc: 'CodioCMS configured to your exact firm workflows' },
+              { label: 'Managed Operations', desc: 'We run your entire tech operation day-to-day' },
+            ],
           },
           {
             title: 'Corporate Immigration Departments',
-            quote: 'GlobalCodio Agents handle visa case tracking, compliance monitoring, and vendor coordination - so your mobility team focuses on strategy.',
+            quote: 'GlobalCodio handles everything - AI agents for visa tracking, compliance monitoring, and vendor coordination, plus audit, consulting, configuration, and managed operations - so your mobility team focuses on strategy.',
             body: 'In-house mobility, HR, and legal operations teams at mid-to-large employers managing employee visa cases. Pain points: scaling case volume, compliance, vendor management, and cost predictability.',
+            services: [
+              { label: 'AI Agents', desc: 'Case tracking, compliance monitoring & vendor coordination' },
+              { label: 'Audit & Consulting', desc: 'Technology audit and corporate immigration advisory' },
+              { label: 'Configuration & Optimization', desc: 'Platform configured to your corporate workflows' },
+              { label: 'Managed Operations', desc: 'IT support, security, and ongoing operations handled' },
+            ],
           },
         ].map((a, i) => (
           <article key={i} className={`card audience-card reveal d${i + 1}${i === 1 ? ' audience-card--tint' : ''}`} {...interactiveCardProps}>
             <h3 className="display" style={{ fontSize: 'var(--text-display-audience)', letterSpacing: '-0.02em', marginBottom: 'calc(14px * var(--ui-scale))' }}>{a.title}</h3>
-            <blockquote style={{ fontSize: 'var(--text-body)', color: 'var(--ink)', lineHeight: 1.55, fontStyle: 'italic', margin: '0 0 calc(14px * var(--ui-scale))', paddingLeft: 'calc(12px * var(--ui-scale))', borderLeft: '2px solid var(--blue-soft)' }}>{a.quote}</blockquote>
+            <blockquote style={{ fontSize: 'var(--text-body)', color: 'var(--ink)', lineHeight: 1.55, fontStyle: 'italic', margin: '0 0 calc(20px * var(--ui-scale))', paddingLeft: 'calc(12px * var(--ui-scale))', borderLeft: '2px solid var(--blue-soft)' }}>{a.quote}</blockquote>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))', marginBottom: 'calc(18px * var(--ui-scale))' }}>
+              {a.services.map((s) => (
+                <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 'calc(10px * var(--ui-scale))' }}>
+                  <span style={{ width: 'calc(6px * var(--ui-scale))', height: 'calc(6px * var(--ui-scale))', borderRadius: '50%', background: 'var(--blue)', flexShrink: 0 }} />
+                  <div style={{ lineHeight: 1.4 }}>
+                    <span style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink-1)' }}>{s.label}</span>
+                    <span style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)' }}> - {s.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
             <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.6 }}>{a.body}</p>
           </article>
         ))}
@@ -390,7 +269,7 @@ export const Metrics = () => (
   <section className="sec sec-metrics" id="metrics">
     <div className="container">
       <div className="reveal m-grid">
-        {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['8', 'autonomous AI Agents'], ['2', 'audiences - firms & corporate']].map(([n, l], i) => (
+        {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['8+', 'autonomous AI Agents'], ['2', 'audiences - firms & corporate']].map(([n, l], i) => (
           <div key={i}>
             <div className="display type-display-metric metric-value" style={{ color: 'var(--blue)', letterSpacing: '-0.03em' }}>{n}</div>
             <div className="metric-label">{l}</div>
@@ -475,18 +354,20 @@ export const ValueLevers = () => (
                   {...(lever.comingSoon ? {} : interactiveCardProps)}
                 >
                   <div className="value-lever-card-top">
-                    {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
                     <div className="agent-icon" aria-hidden="true">
                       <lever.Icon size={20} strokeWidth={1.75} />
                     </div>
                   </div>
                   <h3 className="display text-card-sm feature-card-title">{lever.h}</h3>
                   <p className="feature-card-body">{lever.b}</p>
-                  <div
-                    className="mono value-lever-agent"
-                    style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)' }}
-                  >
-                    {lever.agent}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gridColumn: '1 / -1', gridRow: 3 }}>
+                    <div
+                      className="mono value-lever-agent"
+                      style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)' }}
+                    >
+                      {lever.agent}
+                    </div>
+                    {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
                   </div>
                 </article>
               ))}
@@ -597,7 +478,7 @@ export const CTA = () => (
 export const Footer = () => (
   <footer style={{ borderTop: '1px solid var(--line)', padding: '64px 0 36px', background: '#fff' }}>
     <div className="container">
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: 32, marginBottom: 48 }} className="ft-grid">
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr', gap: 32, marginBottom: 48 }} className="ft-grid">
         <div style={{ maxWidth: '32ch' }}>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16, lineHeight: 0 }}>
             <Logo height={36} />
@@ -612,26 +493,43 @@ export const Footer = () => (
             <a href={SUPPORT_MAILTO} style={{ color: 'var(--ink-3)', display: 'block' }}>
               {SUPPORT_EMAIL}
             </a>
-            <a href="tel:+18004252346" style={{ color: 'var(--ink-3)', display: 'block' }}>
-              +1 (800) GBL-CDIO
-            </a>
           </div>
         </div>
         {FOOTER_COLUMNS.map((col) => (
           <div key={col.title}>
             <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 14 }}>{col.title}</div>
             <ul style={{ listStyle: 'none', display: 'grid', gap: 10, fontSize: 13.5 }}>
-              {col.links.map((it) => (
-                <li key={it.label + it.href}>
-                  <FooterLink href={it.href} style={{ color: 'var(--ink-3)' }}>{it.label}</FooterLink>
-                </li>
-              ))}
+              {col.links.map((it) => {
+                const isExternal = it.href.startsWith('https://') && !it.href.startsWith('https://www.globalcodio');
+                return (
+                  <li key={it.label + it.href}>
+                    <FooterLink
+                      href={it.href}
+                      style={{ color: 'var(--ink-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    >
+                      {it.label}
+                      {isExternal && (
+                        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ width: 10, height: 10, opacity: 0.5, flexShrink: 0 }}>
+                          <path d="M1.5 8.5l7-7M4 1.5h4.5V6" />
+                        </svg>
+                      )}
+                    </FooterLink>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
       </div>
       <div style={{ borderTop: '1px solid var(--line)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: 'var(--muted)', flexWrap: 'wrap', gap: 12 }}>
-        <div>© 2026 GlobalCodio. All rights reserved. · San Francisco · Delhi · London</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <span>© 2026 GlobalCodio. All rights reserved.</span>
+          <span style={{ opacity: 0.4 }}>·</span>
+          <FooterLink href="/privacy-policy" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Privacy Policy</FooterLink>
+          <span style={{ opacity: 0.4 }}>·</span>
+          <span>California, USA · Bangalore, India</span>
+        </div>
         <div className="mono" style={{ letterSpacing: '.05em', color: 'var(--blue)' }}>Win Cases. We&rsquo;ll Handle All the Technology.</div>
       </div>
       <div
@@ -668,7 +566,7 @@ export const Footer = () => (
           }}
         />
       </div>
-      <style>{`@media(max-width:900px){.ft-grid{grid-template-columns:1fr 1fr !important;}}`}</style>
+      <style>{`@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr 1fr !important;}} @media(max-width:640px){.ft-grid{grid-template-columns:1fr 1fr !important;}}`}</style>
     </div>
   </footer>
 );

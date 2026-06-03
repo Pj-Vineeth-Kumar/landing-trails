@@ -46,7 +46,7 @@ export default function Firms() {
         lead="Built for Immigration Law Firms."
         emphasis="By the People Who’ve Built for You Before."
         sub="GlobalCodio is the complete technology operation for solo, mid-size, and large immigration law firms - designed by Umesh Vaidyamath, founder of INSZoom. The platform you’ve been waiting for is here."
-        primary={{ href: '/free-tech-audit', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/ai-agents', label: 'Meet the AI Agents' }}
       />
 
@@ -142,7 +142,7 @@ export default function Firms() {
       <CtaBand
         lead="See what GlobalCodio looks like"
         emphasis="for your firm."
-        primary={{ href: '/free-tech-audit', label: 'Book your free tech audit' }}
+        primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/letter-from-the-founder', label: 'Read the founder’s letter' }}
       />
     </>

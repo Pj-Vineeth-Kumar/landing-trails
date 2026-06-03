@@ -367,9 +367,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .agent-icon{
   display:grid;
   place-items:center;
-  width:calc(40px * var(--ui-scale));
-  height:calc(40px * var(--ui-scale));
-  border-radius:calc(10px * var(--ui-scale));
+  width:calc(52px * var(--ui-scale));
+  height:calc(52px * var(--ui-scale));
+  border-radius:calc(14px * var(--ui-scale));
   background:var(--blue-soft);
   color:var(--blue);
   flex-shrink:0;
@@ -601,7 +601,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   position:relative;
   isolation:isolate;
   overflow:hidden;
-  padding:calc(var(--nav-bar-total) + var(--space-4xl)) 0 calc(72px * var(--ui-scale));
+  padding:calc(var(--nav-bar-total) + var(--space-3xl)) 0 calc(32px * var(--ui-scale));
   background:linear-gradient(180deg,#f4f8ff 0%,#fbfcff 60%,#ffffff 100%);
 }
 .page-hero-inner{
@@ -618,6 +618,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
    (lead + emphasis) stays on ONE line - two lines total, never three.
    nowrap only above mobile; mobile is allowed to wrap (2 lines is impossible there). */
 .page-hero-title{max-width:none;width:100%;}
+.page-hero-title--inline > span,
+.page-hero-title--inline > em{display:inline !important;white-space:nowrap;}
 @media(min-width:769px){
   .page-hero-title > span,
   .page-hero-title > em{display:block;white-space:nowrap;}
@@ -1523,8 +1525,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   width:100%;
 }
 .hero-full-viewport .pill{
-  font-size:calc(10px * var(--ui-scale));
-  padding:calc(5px * var(--ui-scale)) calc(12px * var(--ui-scale));
+  font-size:calc(11px * var(--ui-scale));
+  padding:calc(7px * var(--ui-scale)) calc(16px * var(--ui-scale));
   gap:calc(6px * var(--ui-scale));
 }
 .hero-full-viewport .btn{

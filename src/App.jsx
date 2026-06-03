@@ -19,6 +19,8 @@ import Corporate from './pages/Corporate.jsx';
 import About from './pages/About.jsx';
 import Letter from './pages/Letter.jsx';
 import Audit from './pages/Audit.jsx';
+import Contact from './pages/Contact.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -248,6 +250,8 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/letter-from-the-founder" element={<Letter />} />
         <Route path="/free-tech-audit" element={<Audit />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

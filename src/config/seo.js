@@ -107,10 +107,8 @@ export function buildStructuredData() {
         logo: `${SITE_URL}/logo.png`,
         description: SEO_BRAND_STATEMENT,
         email: SUPPORT_EMAIL,
-        telephone: '+1-800-425-2346',
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+1-800-425-2346',
           email: SUPPORT_EMAIL,
           contactType: 'customer support',
           availableLanguage: ['English'],
@@ -261,7 +259,7 @@ export function buildStaticSeoHtml() {
   </section>
 </main>
 <footer>
-  <p>© 2026 GlobalCodio Inc. · <a href="${SITE_URL}">www.globalcodio.ai</a> · <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a> · <a href="tel:+18004252346">+1 (800) GBL-CDIO</a></p>
+  <p>© 2026 GlobalCodio Inc. · <a href="${SITE_URL}">www.globalcodio.ai</a> · <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a></p>
 </footer>`;
 }
 

@@ -12,7 +12,7 @@ export default function NotFound() {
         emphasis="a different route."
         sub="The page you’re looking for isn’t here. Let’s get you back on track."
         primary={{ href: '/', label: 'Back to home' }}
-        secondary={{ href: '/free-tech-audit', label: 'Book a tech audit' }}
+        secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />
     </>
   );
