@@ -30,7 +30,7 @@ const DIFFERENCE = [
   { Icon: Bot, n: '03', h: 'AI-native architecture', b: 'Designed for an AI workforce from day one, not bolted on after the fact.' },
   { Icon: Globe, n: '04', h: 'Global from day one', b: 'Built for worldwide immigration practice - not US-only.' },
   { Icon: TrendingUp, n: '05', h: 'Outcome-aligned pricing', b: 'We earn when you earn. Pricing tied to results, not seats.' },
-  { Icon: Library, n: '06', h: 'Built by the founder of INSZoom', b: 'Two decades of immigration-tech experience built into every decision.', featured: true },
+  { Icon: Library, n: '06', h: 'Built by an immigration tech founder', b: 'Two decades of immigration-tech experience built into every decision.', featured: true },
 ];
 
 export default function About() {
@@ -38,7 +38,7 @@ export default function About() {
     <>
       <Seo
         title="About"
-        description="GlobalCodio is the next chapter in immigration technology, designed by Umesh Vaidyamath, founder of INSZoom - the cloud platform that served immigration firms worldwide for two decades before its 2020 acquisition."
+        description="GlobalCodio is the next chapter in immigration technology, designed by Umesh Vaidyamath, founder of the world's leading immigration case management platform, that served immigration firms worldwide for two decades before its 2020 acquisition."
         path="/about"
       />
 
@@ -46,7 +46,7 @@ export default function About() {
         eyebrow="About GlobalCodio"
         lead="Built by the people who"
         emphasis="built immigration tech."
-        sub="GlobalCodio is the next chapter in immigration technology - designed by Umesh Vaidyamath, founder of INSZoom, drawing on two decades of building the platform that immigration firms worldwide ran on."
+        sub="GlobalCodio is the next chapter in immigration technology - designed by Umesh Vaidyamath, founder of the leading immigration case management platform, drawing on two decades of building the platform that immigration firms worldwide ran on."
         primary={{ href: '/letter-from-the-founder', label: 'Read the founder’s letter' }}
         secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />

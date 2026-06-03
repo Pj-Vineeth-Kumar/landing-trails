@@ -37,7 +37,7 @@ export default function Firms() {
     <>
       <Seo
         title="For Immigration Law Firms"
-        description="The complete technology operation for solo, mid-size, and large immigration law firms - platform, AI agents, global forms, network, and managed services. Designed by the founder of INSZoom."
+        description="The complete technology operation for solo, mid-size, and large immigration law firms - platform, AI agents, global forms, network, and managed services. Designed by the founder of the world's leading immigration platform."
         path="/for-law-firms"
       />
 
@@ -45,7 +45,7 @@ export default function Firms() {
         eyebrow="For Immigration Law Firms"
         lead="Built for Immigration Law Firms."
         emphasis="By the People Who’ve Built for You Before."
-        sub="GlobalCodio is the complete technology operation for solo, mid-size, and large immigration law firms - designed by Umesh Vaidyamath, founder of INSZoom. The platform you’ve been waiting for is here."
+        sub="GlobalCodio is the complete technology operation for solo, mid-size, and large immigration law firms - designed by Umesh Vaidyamath, founder of the world's leading immigration platform. The platform you’ve been waiting for is here."
         primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/ai-agents', label: 'Meet the AI Agents' }}
       />
