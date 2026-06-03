@@ -41,7 +41,7 @@ const AGENTS_BENTO = [
 ];
 
 const PILLARS = [
-  { label: 'AI Agents',        desc: '8 specialized agents working in concert' },
+  { label: 'AI Agents',        desc: '10 specialized agents working in concert' },
   { label: 'Managed Tech Ops', desc: 'Our team runs your entire tech operation' },
   { label: 'Ecosystem',        desc: 'Global network of immigration service providers' },
 ];
@@ -81,7 +81,7 @@ export const AgentOrbit = () => {
         <div className="reveal section-head-wide" style={{ textAlign: 'left', marginBottom: 'var(--space-3xl)' }}>
           <div className="eyebrow" style={{ color: 'var(--blue-hover)', marginBottom: 'var(--space-md)' }}>Platform</div>
           <h2 className="display type-display-xl" style={{ color: '#fff' }}>
-            <span style={{ display: 'block' }}>Eight agents, three pillars,</span>
+            <span style={{ display: 'block' }}>10 agents, three pillars,</span>
             <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue-hover)' }}>one case file.</em>
           </h2>
         </div>
@@ -269,7 +269,7 @@ export const Metrics = () => (
   <section className="sec sec-metrics" id="metrics">
     <div className="container">
       <div className="reveal m-grid">
-        {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['8+', 'autonomous AI Agents'], ['2', 'audiences - firms & corporate']].map(([n, l], i) => (
+        {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['10+', 'autonomous AI Agents'], ['2', 'audiences - firms & corporate']].map(([n, l], i) => (
           <div key={i}>
             <div className="display type-display-metric metric-value" style={{ color: 'var(--blue)', letterSpacing: '-0.03em' }}>{n}</div>
             <div className="metric-label">{l}</div>

@@ -6,7 +6,7 @@ export const SITE_NAV = [
     label: 'Product',
     children: [
       { href: '/platform', label: 'Platform', desc: 'CodioCMS & CodioForms' },
-      { href: '/ai-agents', label: 'Codio AI Agents', desc: 'Eight specialized agents' },
+      { href: '/ai-agents', label: 'Codio AI Agents', desc: '10+ specialized agents' },
       { href: '/network', label: 'CodioNetwork', desc: 'Global service providers' },
     ],
   },
