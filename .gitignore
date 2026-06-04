@@ -55,3 +55,4 @@ transcript2.txt
 # Next.js
 .next/
 next-env.d.ts
+.mcp.json

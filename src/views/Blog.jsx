@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { Section, SmartLink } from '../../components/ui/PageKit';
 import { motion } from 'framer-motion';
+import { urlFor } from '../../lib/sanity';
 
 const CATEGORIES = ['All', 'Product Updates', 'Immigration Tech', 'Guides', 'Case Studies'];
 
@@ -164,76 +165,95 @@ const GhostCard = ({ large = false }) => (
   </div>
 );
 
-/* ── Real post card ───────────────────────────────────── */
-const PostCard = ({ post, featured = false }) => (
-  <SmartLink
-    href={`/blog/${post.slug}`}
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      background: '#fff',
-      border: '1.5px solid var(--line-2)',
-      borderRadius: 'calc(16px * var(--ui-scale))',
-      overflow: 'hidden',
-      textDecoration: 'none',
-      transition: 'transform .2s, box-shadow .2s',
-      ...(featured ? { gridColumn: '1 / -1' } : {}),
-    }}
-    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)'; }}
-    onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-  >
-    {post.image && (
-      <div style={{
-        height: featured ? 'calc(320px * var(--ui-scale))' : 'calc(180px * var(--ui-scale))',
-        background: `url(${post.image}) center/cover no-repeat`,
-        flexShrink: 0,
-      }} />
-    )}
-    <div style={{ padding: 'calc(24px * var(--ui-scale))', display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))', flex: 1 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(10px * var(--ui-scale))' }}>
-        <span style={{
-          fontFamily: 'var(--mono)', fontSize: 'calc(10px * var(--ui-scale))',
-          letterSpacing: '.08em', textTransform: 'uppercase',
-          color: 'var(--blue)', fontWeight: 700,
-          padding: 'calc(3px * var(--ui-scale)) calc(10px * var(--ui-scale))',
-          background: 'var(--blue-soft)', borderRadius: 999,
-        }}>
-          {post.category}
-        </span>
-        <span style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--muted)', fontFamily: 'var(--mono)' }}>
-          {post.readTime} min read
-        </span>
-      </div>
-      <h3 className="display" style={{
-        fontSize: featured ? 'calc(28px * var(--ui-scale))' : 'calc(20px * var(--ui-scale))',
-        letterSpacing: '-0.02em', lineHeight: 1.2, color: 'var(--ink)',
-        margin: 0,
-      }}>
-        {post.title}
-      </h3>
-      <p style={{ fontSize: 'calc(14px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65, margin: 0 }}>
-        {post.excerpt}
-      </p>
-      <div style={{ marginTop: 'auto', paddingTop: 'calc(14px * var(--ui-scale))', borderTop: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-sm)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
-          <img src={post.author.image} alt={post.author.name} width={28} height={28} style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
-          <div>
-            <div style={{ fontSize: 'calc(12px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink-2)', lineHeight: 1.2 }}>{post.author.name}</div>
-            <div style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)', lineHeight: 1.2 }}>{post.date}</div>
-          </div>
-        </div>
-        <span style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 600, flexShrink: 0 }}>Read →</span>
-      </div>
-    </div>
-  </SmartLink>
-);
+/* ── Resolve image URL from either Sanity asset or plain string ─── */
+function resolveImageUrl(img, width = 800) {
+  if (!img) return null;
+  if (typeof img === 'string') return img;
+  try { return urlFor(img).width(width).auto('format').url(); } catch { return null; }
+}
 
-export default function Blog() {
+/* ── Real post card ───────────────────────────────────── */
+const PostCard = ({ post, featured = false }) => {
+  const imageUrl = resolveImageUrl(post.featuredImage ?? post.image, featured ? 1200 : 600);
+  const authorImageUrl = resolveImageUrl(post.author?.image, 80);
+  const formattedDate = post.date
+    ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    : post.publishedAt ?? post.date ?? '';
+
+  return (
+    <SmartLink
+      href={`/blog/${post.slug}`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        background: '#fff',
+        border: '1.5px solid var(--line-2)',
+        borderRadius: 'calc(16px * var(--ui-scale))',
+        overflow: 'hidden',
+        textDecoration: 'none',
+        transition: 'transform .2s, box-shadow .2s',
+        ...(featured ? { gridColumn: '1 / -1' } : {}),
+      }}
+      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)'; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+    >
+      {imageUrl && (
+        <div style={{
+          height: featured ? 'calc(320px * var(--ui-scale))' : 'calc(180px * var(--ui-scale))',
+          background: `url(${imageUrl}) center/cover no-repeat`,
+          flexShrink: 0,
+        }} />
+      )}
+      <div style={{ padding: 'calc(24px * var(--ui-scale))', display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))', flex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(10px * var(--ui-scale))' }}>
+          <span style={{
+            fontFamily: 'var(--mono)', fontSize: 'calc(10px * var(--ui-scale))',
+            letterSpacing: '.08em', textTransform: 'uppercase',
+            color: 'var(--blue)', fontWeight: 700,
+            padding: 'calc(3px * var(--ui-scale)) calc(10px * var(--ui-scale))',
+            background: 'var(--blue-soft)', borderRadius: 999,
+          }}>
+            {post.category}
+          </span>
+          <span style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--muted)', fontFamily: 'var(--mono)' }}>
+            {post.readTime} min read
+          </span>
+        </div>
+        <h3 className="display" style={{
+          fontSize: featured ? 'calc(28px * var(--ui-scale))' : 'calc(20px * var(--ui-scale))',
+          letterSpacing: '-0.02em', lineHeight: 1.2, color: 'var(--ink)',
+          margin: 0,
+        }}>
+          {post.title}
+        </h3>
+        <p style={{ fontSize: 'calc(14px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65, margin: 0 }}>
+          {post.excerpt}
+        </p>
+        <div style={{ marginTop: 'auto', paddingTop: 'calc(14px * var(--ui-scale))', borderTop: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-sm)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
+            {authorImageUrl && (
+              <img src={authorImageUrl} alt={post.author?.name} width={28} height={28} style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+            )}
+            <div>
+              <div style={{ fontSize: 'calc(12px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink-2)', lineHeight: 1.2 }}>{post.author?.name}</div>
+              <div style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)', lineHeight: 1.2 }}>{formattedDate}</div>
+            </div>
+          </div>
+          <span style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 600, flexShrink: 0 }}>Read →</span>
+        </div>
+      </div>
+    </SmartLink>
+  );
+};
+
+export default function Blog({ sanityPosts }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
-  const filtered = POSTS.filter(p => activeCategory === 'All' || p.category === activeCategory);
+  // Use live Sanity posts when available; fall back to static data
+  const allPosts = (sanityPosts && sanityPosts.length > 0) ? sanityPosts : POSTS;
+  const filtered = allPosts.filter(p => activeCategory === 'All' || p.category === activeCategory);
   const isEmpty = filtered.length === 0;
 
   return (

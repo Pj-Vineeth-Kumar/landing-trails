@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { PageHero, Section, CtaBand } from '../../components/ui/PageKit';
 import { HowItWorks } from '../components/MarketingSections.jsx';
@@ -124,6 +124,16 @@ export default function Contact() {
   const [error, setError] = useState('');
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  // Auto-reset form to initial state after 5 seconds
+  useEffect(() => {
+    if (!submitted) return;
+    const timer = setTimeout(() => {
+      setSubmitted(false);
+      setForm({ fullName: '', workEmail: '', orgName: '', website: '', howHeard: '', message: '' });
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [submitted]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
