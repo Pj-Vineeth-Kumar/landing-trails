@@ -1,5 +1,5 @@
 /* GlobalCodio - GoGetta structure × Coinbase discipline × brand blue */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap');
+/* Fonts loaded via next/font/google in app/layout.jsx — no @import needed */
 
 :root{
   /* Tuned for ~80% zoom feel at 100% browser zoom */
@@ -59,9 +59,9 @@
     0 calc(8px * var(--ui-scale)) calc(16px * var(--ui-scale)) calc(-6px * var(--ui-scale)) rgba(11,19,36,.10),
     0 calc(18px * var(--ui-scale)) calc(40px * var(--ui-scale)) calc(-14px * var(--ui-scale)) var(--blue-glow);
 
-  --display:'Instrument Serif', 'Times New Roman', serif;
-  --sans:'Inter', system-ui, sans-serif;
-  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --display:var(--font-instrument-serif), 'Instrument Serif', 'Times New Roman', serif;
+  --sans:var(--font-inter), 'Inter', system-ui, sans-serif;
+  --mono:var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
 
   --container-max:1320px;
   --container-narrow-max:900px;
@@ -565,6 +565,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 }
 .cert-item-link:hover{color:var(--blue-hover);}
 .cert-item-link:hover svg{transform:translateX(3px);}
+@media(max-width:768px){
+  .cert-logos{
+    justify-content:center;
+    gap:calc(20px * var(--ui-scale)) calc(28px * var(--ui-scale));
+    margin-top:calc(24px * var(--ui-scale));
+  }
+  .cert-logo-img{height:calc(80px * var(--ui-scale));}
+  .cert-item-cap{margin-top:calc(6px * var(--ui-scale));}
+}
 .cert-rule{margin:var(--space-xl) 0;}
 .cert-pills{
   display:flex;

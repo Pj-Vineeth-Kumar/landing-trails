@@ -1,10 +1,11 @@
+'use client';
 import React, { useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { gsap } from 'gsap';
 import { FileText, MessageCircle, RefreshCw, TrendingUp, ClipboardList, PenLine, CalendarClock, Globe, Megaphone } from 'lucide-react';
-import { Logo } from './Nav.jsx';
-import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../config/siteNav.js';
+import { Logo } from '../../components/layout/Nav';
+import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../../lib/navigation';
 
 const interactiveCardProps = {
   onMouseEnter: (e) => {
@@ -23,7 +24,7 @@ const interactiveCardProps = {
 const FooterLink = ({ href, children, ...rest }) => {
   const internal = href && href.startsWith('/') && !href.startsWith('//');
   return internal ? (
-    <Link to={href} {...rest}>{children}</Link>
+    <Link href={href} {...rest}>{children}</Link>
   ) : (
     <a href={href} {...rest}>{children}</a>
   );
@@ -388,7 +389,7 @@ const CERT_BADGES = [
   { id: 'ccpa', src: 'CCPA.png', name: 'CCPA / CPRA', label: 'CCPA / CPRA', sub: 'US privacy law', href: 'https://oag.ca.gov/privacy/ccpa' },
 ];
 
-const CERT_ASSET = (src) => `${import.meta.env.BASE_URL}assets/${src}`;
+const CERT_ASSET = (src) => `/assets/${src}`;
 
 const CertArrow = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -467,7 +468,7 @@ export const CTA = () => (
         Walk through deployment, managed operations, and the global ecosystem on cases your team is running today.
       </p>
       <div className="reveal d2" style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
-        <Link to={AUDIT_URL} className="btn btn-dark">Book your free tech audit <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></Link>
+        <Link href={AUDIT_URL} className="btn btn-dark">Book your free tech audit <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></Link>
         <a href={SUPPORT_MAILTO} className="btn btn-surface">Talk to our team</a>
       </div>
     </div>

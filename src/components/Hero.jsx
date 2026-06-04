@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -29,7 +30,7 @@ const rise = {
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
 /* Static assets in /public */
-const dashboardPreviewSrc = `${import.meta.env.BASE_URL}assets/dashboard.png`;
+const dashboardPreviewSrc = '/assets/dashboard.png';
 
 /* Hero - editorial headline, sub, CTAs, then dashboard preview below.
    Background: clean light base with a faint top-down blue wash; the premium
