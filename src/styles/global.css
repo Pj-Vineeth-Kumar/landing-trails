@@ -267,22 +267,29 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 /* Back-to-back sections each had full top + bottom padding (~2× --sec-py). */
 #main-content .sec + .sec{padding-top:var(--sec-py-between);}
 #main-content .sec:has(+ .sec){padding-bottom:var(--sec-py-between);}
-#main-content .page-hero + .sec{padding-top:var(--sec-py);}
+#main-content .page-hero + .sec:not(#letter){padding-top:var(--sec-py);}
 /* Page-specific tight tops (must beat .sec + .sec above) */
 #main-content .page-hero + .sec-founder{
   padding-top:calc(var(--sec-py) * 0.45);
 }
 #main-content .sec + #difference,
-#main-content .sec + #roadmap,
-#main-content .sec + .sec-codioops-problem{
+#main-content .sec + #roadmap{
   padding-top:calc(var(--sec-py) * 0.45);
 }
-#main-content .sec + #letter{padding-top:calc(var(--sec-py) * 0.02);}
+#main-content .sec + .sec-codioops-problem{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+#main-content .page-hero + #the-problem.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+#main-content .page-hero + section#letter.sec,
+#main-content .sec + section#letter{padding-top:calc(var(--sec-py) * 0.4);}
 #main-content .sec + .sec-codioops-problem{padding-bottom:calc(var(--sec-py) * 0.42);}
 #main-content #roadmap.sec:has(+ .sec){padding-bottom:calc(var(--sec-py) * 0.4);}
 /* Full section padding before CTA bands (Events and other short pages) */
 #main-content .sec:not(.sec-cta):has(+ .sec.sec-cta){padding-bottom:var(--sec-py);}
-#main-content .sec + .sec.sec-cta{padding-top:calc(var(--sec-py) * 0.2);}
+#main-content #article.sec:has(+ .sec.sec-cta){padding-bottom:calc(var(--sec-py) * 0.4);}
+#main-content .sec + .sec.sec-cta{padding-top:calc(var(--sec-py-cta) * 0.6);}
 @media(min-width:769px){
   :root{
     --sec-py:calc(184.8px * var(--ui-scale));
@@ -323,7 +330,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .sec-dark .rule-blue{background:linear-gradient(90deg,transparent,rgba(120,160,240,.5) 50%,transparent);}
 .sec-surface{background:var(--surface-2);}
 .sec-blue{background:var(--blue-soft);}
-.sec-cta{padding-top:calc(var(--sec-py) * 0.2);padding-bottom:var(--sec-py-cta);position:relative;overflow:hidden;}
+.sec-cta{
+  padding-top:calc(var(--sec-py-cta) * 0.6);
+  padding-bottom:calc(var(--sec-py-cta) * 0.6);
+  position:relative;
+  overflow:hidden;
+}
 /* CTA bands need room for the headline to sit on two lines, not three. */
 .sec-cta .container-narrow{max-width:min(calc(1180px * var(--ui-scale)),92%);}
 .sec-cta-glow{
@@ -1182,7 +1194,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 /* CodioOps - problem section: centered copy + horizontal evidence bar */
 .sec-codioops-problem{
   background:#fff;
-  padding-top:calc(var(--sec-py) * 0.45);
+  padding-top:calc(var(--sec-py) * 0.4);
   padding-bottom:calc(var(--sec-py) * 0.42);
 }
 .codioops-problem{
@@ -1713,7 +1725,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .split-2--even{grid-template-columns:1fr 1fr;gap:var(--space-lg);}
 
 /* ===================== About page ===================== */
-.about-statband-sec{padding:calc(var(--sec-py) * 0.6) 0;}
+.about-statband-sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+  padding-bottom:calc(var(--sec-py) * 0.6);
+}
+#main-content .page-hero + .about-statband-sec.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
 
 /* Origin - narrative head + timeline */
 #history,
@@ -1830,7 +1848,16 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 #difference{padding-top:calc(var(--sec-py) * 0.45);}
 
 /* Letter from the founder */
-#letter{padding-top:calc(var(--sec-py) * 0.02);}
+section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
+#letter .container{
+  margin-top:calc(var(--sec-py) * 0.4 * -0.6);
+}
+#letter .container > div:first-child > p:first-child{
+  margin-top:calc(var(--space-md) * 0.4) !important;
+}
+#main-content section#letter.sec:has(+ .sec.sec-cta){
+  padding-bottom:calc(var(--sec-py) * 0.2);
+}
 
 /* Agents - roadmap + following CTA (tighter vertical rhythm) */
 #roadmap{
@@ -1843,6 +1870,54 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   padding-bottom:calc(var(--sec-py-cta) * 0.45);
 }
 #roadmap + .sec.sec-cta .type-display-cta{margin-bottom:var(--space-xl);}
+
+/* Agents page — first section after hero */
+#main-content .page-hero + #agents.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+
+/* Services page — first section after hero */
+#main-content .page-hero + #service-layers.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+
+/* Firms page — first section after hero */
+#main-content .page-hero + #what-you-get.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+
+/* Corporate page — first section after hero */
+#main-content .page-hero + #challenges.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+
+/* Events page — first section after hero */
+#main-content .page-hero + #upcoming.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+#main-content #upcoming.sec:has(+ .sec.sec-cta){
+  padding-bottom:calc(var(--sec-py) * 0.5);
+}
+#main-content #upcoming.sec + .sec.sec-cta{
+  padding-top:calc(var(--sec-py-cta) * 0.3);
+}
+
+/* Contact page — first section after hero */
+#main-content .page-hero + #contact-form.sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+}
+
+/* Services — RFP callout: even vertical padding before CTA */
+#main-content #rfp-response.sec{
+  padding-top:var(--sec-py-between);
+  padding-bottom:var(--sec-py-between);
+}
+
+#case-assistant.sec{background:#fff;}
+
+/* FAQ — tighter bottom (often sits above CTA) */
+#main-content #faq.sec{padding-bottom:calc(var(--sec-py) * 0.45);}
+#main-content #faq.sec:has(+ .sec.sec-cta){padding-bottom:calc(var(--sec-py) * 0.35);}
 
 #case-assistant .section-head-wide{margin-left:auto;margin-right:auto;text-align:center;max-width:min(calc(900px * var(--ui-scale)),100%);}
 #case-assistant .case-assistant-head{margin-top:var(--space-lg);margin-bottom:var(--space-3xl);text-align:center;}
@@ -2072,6 +2147,51 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .letter-signature-name{font-style:italic;font-size:calc(26px * var(--ui-scale));line-height:1.15;}
 .letter-signature-role{color:var(--ink-3);margin:0;}
 
+/* Blog author signoff (matches codioops-foot / network-foot) */
+.author-signoff,
+.network-foot,
+.sec-codiocms .codioops-foot{
+  padding:var(--space-lg) var(--space-2xl);
+  border:1px solid var(--line);
+  border-radius:calc(14px * var(--ui-scale));
+  background:linear-gradient(180deg,#fff,var(--surface-2));
+}
+.author-signoff{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:var(--space-xl);
+  margin-top:var(--space-2xl);
+  align-items:flex-start;
+}
+.author-signoff-photo{
+  flex-shrink:0;
+  width:calc(80px * var(--ui-scale));height:calc(80px * var(--ui-scale));
+  border-radius:50%;object-fit:cover;display:block;
+  border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 calc(8px * var(--ui-scale)) calc(20px * var(--ui-scale)) calc(-8px * var(--ui-scale)) var(--blue-glow);
+}
+.author-signoff-body{min-width:0;display:flex;flex-direction:column;gap:calc(6px * var(--ui-scale));}
+.author-signoff-eyebrow{
+  font-size:calc(10px * var(--ui-scale));letter-spacing:.1em;
+  color:var(--blue);font-weight:700;margin:0;
+}
+.author-signoff-name{
+  font-size:calc(20px * var(--ui-scale));font-weight:700;color:var(--ink);
+  letter-spacing:-0.01em;line-height:1.2;margin:0;
+}
+.author-signoff-role{
+  font-size:calc(13px * var(--ui-scale));color:var(--blue);font-weight:500;margin:0;
+}
+.author-signoff-bio{
+  margin:calc(4px * var(--ui-scale)) 0 0;
+  font-size:var(--text-body-sm);color:var(--ink-3);line-height:1.45;
+}
+.author-signoff-link{
+  margin-top:calc(4px * var(--ui-scale));font-weight:600;
+  display:inline-flex;align-items:center;gap:calc(6px * var(--ui-scale));
+}
+.author-signoff-link svg{width:calc(13px * var(--ui-scale));height:calc(13px * var(--ui-scale));flex-shrink:0;}
+
 /* Leadership - founder profile + editorial quote */
 .about-founder-sec{
   padding-top:var(--sec-py);
@@ -2153,10 +2273,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   align-items:center;
   gap:var(--space-xl);
   margin-top:var(--space-2xl);
-  padding:var(--space-lg) var(--space-2xl);
-  border:1px solid var(--line);
-  border-radius:calc(14px * var(--ui-scale));
-  background:linear-gradient(180deg,#fff,var(--surface-2));
 }
 .codioops-foot-lead{
   margin:0;
@@ -2371,9 +2487,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .network-foot{
   display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;
   gap:var(--space-xl);
-  padding:var(--space-lg) var(--space-2xl);
-  border:1px solid var(--line);border-radius:calc(14px * var(--ui-scale));
-  background:linear-gradient(180deg,#fff,var(--surface-2));
 }
 .network-foot-lead{margin:0;font-size:var(--text-body-sm);color:var(--ink-3);line-height:1.45;max-width:none;}
 .network-foot-cta{flex-shrink:0;}
@@ -2789,7 +2902,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   .network-console-nav{border-right:none;border-bottom:1px solid var(--line);}
   .network-detail-callout{flex-direction:column;align-items:stretch;text-align:left;}
   .network-detail-callout-pill{align-self:flex-start;}
-  .network-foot{
+  .network-foot,
+  .author-signoff{
     grid-template-columns:1fr;
     gap:var(--space-md);
     padding:var(--space-lg);

@@ -448,12 +448,12 @@ export default function Blog({ sanityPosts }) {
                   fontFamily: 'var(--body)',
                   fontSize: 'calc(14px * var(--ui-scale))',
                   padding: 'calc(10px * var(--ui-scale)) calc(16px * var(--ui-scale))',
-                  borderRadius: 'calc(10px * var(--ui-scale))',
+                  borderRadius: 'calc(14px * var(--ui-scale))',
                   border: '1.5px solid rgba(255,255,255,.25)',
                   background: 'rgba(255,255,255,.12)',
                   color: '#fff',
                   outline: 'none',
-                  width: 'calc(220px * var(--ui-scale))',
+                  width: 'calc(308px * var(--ui-scale))',
                   boxSizing: 'border-box',
                 }}
               />

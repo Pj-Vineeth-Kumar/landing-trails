@@ -574,7 +574,6 @@ export default function Agents() {
 
       <Section
         id="case-assistant"
-        tone="sec-surface"
         eyebrow="Built Into Every Case"
         lead="Stop digging through tabs."
         emphasis="Just ask."

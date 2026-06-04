@@ -264,50 +264,28 @@ function AuthorSection({ author }) {
   const authorLink = author.link || '/letter-from-the-founder';
 
   return (
-    <div className="reveal" style={{
-      marginTop: 'var(--space-2xl)',
-      padding: 'calc(36px * var(--ui-scale))',
-      background: 'var(--surface)',
-      border: '1.5px solid var(--line-2)',
-      borderRadius: 'calc(20px * var(--ui-scale))',
-      display: 'flex',
-      gap: 'var(--space-xl)',
-      alignItems: 'flex-start',
-    }}>
+    <div className="author-signoff reveal">
       {imageUrl && (
         <img
           src={imageUrl}
           alt={author.name}
+          className="author-signoff-photo"
           width={80}
           height={80}
           loading="lazy"
           decoding="async"
-          style={{
-            borderRadius: '50%',
-            objectFit: 'cover',
-            flexShrink: 0,
-            border: '2px solid var(--blue-soft)',
-          }}
         />
       )}
-      <div style={{ flex: 1 }}>
-        <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--blue)', marginBottom: 'calc(6px * var(--ui-scale))', fontWeight: 700 }}>
-          ABOUT THE AUTHOR
-        </div>
-        <div className="display" style={{ fontSize: 'calc(20px * var(--ui-scale))', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-          {author.name}
-        </div>
-        <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 500, marginTop: 'calc(3px * var(--ui-scale))' }}>
-          {author.designation}
-        </div>
-        {author.bio && (
-          <p style={{ fontSize: 'calc(14px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'calc(10px * var(--ui-scale))' }}>
-            {author.bio}
-          </p>
+      <div className="author-signoff-body">
+        <span className="mono author-signoff-eyebrow">ABOUT THE AUTHOR</span>
+        <div className="display author-signoff-name">{author.name}</div>
+        {author.designation && (
+          <p className="author-signoff-role">{author.designation}</p>
         )}
-        <SmartLink href={authorLink} className="feature-card-link" style={{ fontWeight: 600, display: 'inline-flex', marginTop: 'calc(10px * var(--ui-scale))' }}>
+        {author.bio && <p className="author-signoff-bio">{author.bio}</p>}
+        <SmartLink href={authorLink} className="feature-card-link author-signoff-link">
           {author.link ? 'Learn more' : 'Read the founder\'s letter'}
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 13, height: 13 }}>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M3 8h10M9 4l4 4-4 4" />
           </svg>
         </SmartLink>
