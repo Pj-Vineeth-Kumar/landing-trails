@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { Cpu, FileText, Bot, Network, Settings, GitMerge, ClipboardList, PenLine, MessageCircle, TrendingUp, CheckSquare, History, GitBranch } from 'lucide-react';
 
 /* What You Get */
@@ -19,7 +20,7 @@ const DAY = [
   { h: 'A new client signs up.', b: 'The Intake Agent captures their information and opens the case.', agent: 'Intake Agent', Icon: ClipboardList },
   { h: 'Documents arrive.', b: 'The Document Agent extracts and translates their passport.', agent: 'Document Agent', Icon: FileText },
   { h: 'Filing begins.', b: 'The Forms Agent prepares the I-130 while the Deadline Agent monitors filing windows.', agent: 'Forms + Deadline', Icon: PenLine },
-  { h: 'Questions come in.', b: 'The Client Comms Agent answers them in the client’s native language.', agent: 'Client Comms Agent', Icon: MessageCircle },
+  { h: 'Questions come in.', b: "The Client Comms Agent answers them in the client's native language.", agent: 'Client Comms Agent', Icon: MessageCircle },
   { h: 'Meanwhile, revenue surfaces.', b: 'The Renewal Agent flags three dormant clients whose visas expire in 60 days, and the BD Agent books two consultations for next week.', agent: 'Renewal + BD', Icon: TrendingUp },
 ];
 
@@ -62,8 +63,8 @@ export default function Firms() {
       <PageHero
         eyebrow="For Immigration Law Firms"
         lead="Built for Immigration Law Firms."
-        emphasis="By the People Who’ve Built for You Before."
-        sub="GlobalCodio is the complete technology operation for solo, mid-size, and large immigration law firms - designed by Umesh Vaidyamath, founder of the world's leading immigration platform. The platform you’ve been waiting for is here."
+        emphasis="By the People Who've Built for You Before."
+        sub="GlobalCodio is the complete technology operation for solo, mid-size, and large immigration law firms - designed by Umesh Vaidyamath, founder of the world's leading immigration platform. The platform you've been waiting for is here."
         primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/ai-agents', label: 'Meet the AI Agents' }}
       />
@@ -234,11 +235,45 @@ export default function Firms() {
         </div>
       </Section>
 
+      <FaqAccordion
+        id="faq"
+        eyebrow="Common Questions"
+        lead="Questions from"
+        emphasis="immigration law firms."
+        items={[
+          {
+            q: 'What does GlobalCodio provide for immigration law firms?',
+            a: 'GlobalCodio provides a complete, managed technology operation for immigration law firms: CodioCMS (case management platform), CodioForms (global forms engine), 10 Codio AI Agents, CodioOps (dedicated operations team), and CodioNetwork (global service provider network). Everything is deployed and managed by GlobalCodio — your firm never manages technology again.',
+            meta: ['Full-stack operation', 'We manage everything'],
+          },
+          {
+            q: 'Is GlobalCodio suitable for solo immigration law practices?',
+            a: 'Yes. GlobalCodio serves solo, mid-size, and enterprise immigration law firms. Solo and small firms benefit most from AI agents that replace the work of multiple paralegals and the managed operations model that eliminates the need for any internal IT or technology management.',
+            meta: ['Solo to enterprise', 'No IT staff needed'],
+          },
+          {
+            q: 'How does GlobalCodio help immigration firms respond to corporate RFPs?',
+            a: 'GlobalCodio provides an RFP Response service that helps immigration law firms answer complex technical, security, and compliance questions from corporate clients. Firms on GlobalCodio can credibly document SOC 2 Type II, ISO 27001, GDPR, HIPAA-ready controls, and AI governance standards — exactly what corporate procurement teams require.',
+            meta: ['SOC 2 Type II', 'RFP response support'],
+          },
+          {
+            q: 'What is the typical ROI for immigration law firms using GlobalCodio?',
+            a: 'Immigration law firms using GlobalCodio typically achieve a 3× ROI in year one. This combines cost savings from 70% reduced case preparation time, eliminated staff overhead for routine work (equivalent of $499,000/year in salaries), and $50,000–$300,000 in recovered renewal revenue from dormant client reactivation.',
+            meta: ['3× ROI year one', '$50K–$300K renewal revenue'],
+          },
+          {
+            q: 'We already have case management software. Do we need to replace it?',
+            a: "Not necessarily. GlobalCodio integrates with existing tools and layers the AI workforce on top — no rip-and-replace required in many cases. Where migration to CodioCMS makes sense, GlobalCodio's team manages the entire process with zero disruption to active cases.",
+            meta: ['No rip-and-replace', 'Guided migration'],
+          },
+        ]}
+      />
+
       <CtaBand
         lead="See what GlobalCodio looks like"
         emphasis="for your firm."
         primary={{ href: '/contact', label: 'Book your free tech audit' }}
-        secondary={{ href: '/letter-from-the-founder', label: 'Read the founder’s letter' }}
+        secondary={{ href: '/letter-from-the-founder', label: "Read the founder's letter" }}
       />
     </>
   );

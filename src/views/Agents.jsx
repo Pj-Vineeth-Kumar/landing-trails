@@ -5,6 +5,7 @@ import { ReactFlow, Handle, Position, Background, MarkerType } from '@xyflow/rea
 import '@xyflow/react/dist/style.css';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import {
   ClipboardList,
   FileText,
@@ -781,6 +782,45 @@ export default function Agents() {
         </div>
       </Section>
 
+      <FaqAccordion
+        id="faq"
+        eyebrow="Common Questions"
+        lead="Questions about"
+        emphasis="Codio AI Agents."
+        tone="sec-surface"
+        items={[
+          {
+            q: 'What are Codio AI Agents?',
+            a: "Codio AI Agents are a team of 10 specialized autonomous AI workers purpose-built for immigration workflows. Each agent handles a specific stage of the immigration process: intake, document extraction, document validation, form preparation, deadline tracking, client communications, renewal detection, business development, ecosystem coordination, and government notice monitoring. They operate natively within CodioCMS, run 24/7, and are deployed and managed by GlobalCodio's team.",
+            meta: ['10 specialist agents', '24/7 operation'],
+          },
+          {
+            q: 'How do AI agents protect attorney-client privilege and client data?',
+            a: 'Codio AI Agents operate within the same role-based access controls as human staff — they cannot take any action requiring elevated permissions. All agent outputs are confidence-scored and flagged for attorney review before being applied to a case. GlobalCodio never trains AI models on client data. Every agent action is written to an immutable, cryptographically signed audit log.',
+            meta: ['RBAC-bound', 'Attorney review required'],
+          },
+          {
+            q: 'How much time do AI agents save on immigration case preparation?',
+            a: 'Immigration law firms on GlobalCodio typically see a 70% reduction in case preparation time. AI agents handle document extraction, form preparation, questionnaire processing, and deadline tracking — work that previously took hours takes minutes. The human equivalent of all 10 AI agents would cost approximately $499,000 per year in salaries.',
+            meta: ['70% time reduction', '$499K staff cost replaced'],
+          },
+          {
+            q: 'Can AI agents replace paralegals or case managers?',
+            a: 'AI agents handle the repetitive work paralegals and case managers currently do: document processing, form filling, deadline monitoring, client status updates, and renewal outreach. This frees your human team for strategy, client relationships, and complex legal judgment. Most firms scale their caseload significantly without adding headcount.',
+            meta: ['Augment, not replace', 'Scale without hiring'],
+          },
+          {
+            q: 'How does the Renewal Agent recover revenue from existing clients?',
+            a: 'The Renewal Agent continuously scans your existing client database for expiring visas, green card upgrade eligibility, citizenship eligibility, and dormant cases worth reopening. It identifies these opportunities, drafts personalized outreach automatically, and tracks response rates and revenue recovered. Most firms recover $50,000–$300,000 in additional annual revenue from clients already in their database.',
+            meta: ['$50K–$300K recovered', 'Zero new marketing spend'],
+          },
+          {
+            q: 'Do we need technical staff to set up or manage the AI agents?',
+            a: 'No. GlobalCodio deploys, configures, monitors, and manages all AI agents as part of the managed service. Your firm needs no IT staff, data scientists, or AI expertise. CodioOps — bundled with every engagement — handles all ongoing management and optimization.',
+            meta: ['Fully managed', 'No IT staff needed'],
+          },
+        ]}
+      />
       <CtaBand
         lead="See Codio AI Agents in action."
         emphasis="On your real cases."

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { Users, Globe, Network, ShieldCheck, TrendingUp, BarChart3, Activity, DollarSign, Building2, GitCompare, FileText } from 'lucide-react';
 
 const Check = () => (
@@ -234,6 +235,41 @@ export default function Corporate() {
           </div>
         </div>
       </Section>
+
+      <FaqAccordion
+        id="faq"
+        eyebrow="Common Questions"
+        lead="Questions from"
+        emphasis="corporate immigration teams."
+        tone="sec-surface"
+        items={[
+          {
+            q: 'What does GlobalCodio offer corporate immigration teams?',
+            a: 'GlobalCodio gives corporate mobility, HR, and legal operations teams a complete immigration technology operation: CodioCMS with a dedicated HR portal, workforce pipeline dashboards, immigration health scores, multi-firm performance comparison, budget tracking, AI agents for routine case work, and CodioNetwork for vendor coordination. Executive-ready reporting is built in.',
+            meta: ['HR portal built-in', 'Executive reporting'],
+          },
+          {
+            q: 'How does GlobalCodio help HR teams manage employee immigration without waiting on outside counsel?',
+            a: "GlobalCodio's HR portal allows HR and mobility teams to initiate immigration workflows, collect employee information, and build the case file independently — weeks before outside counsel is engaged. When the law firm is brought in, they inherit a complete file with no double data entry or coordination delay.",
+            meta: ['HR-led onboarding', 'No double data entry'],
+          },
+          {
+            q: 'Can GlobalCodio handle immigration across multiple countries?',
+            a: 'Yes. CodioCMS handles case management across every country the corporate team operates in. CodioForms covers the US, Canada, Netherlands, India, and additional countries added on demand. CodioNetwork provides in-country attorneys, translators, and service providers for global coordination.',
+            meta: ['Multi-country CMS', 'Global provider network'],
+          },
+          {
+            q: 'How does GlobalCodio help corporate teams manage multiple outside law firms?',
+            a: "GlobalCodio's multi-firm performance comparison dashboard gives HR and mobility teams objective data on every outside counsel firm: case throughput, turnaround time, and delivery quality — tracked automatically, not based on anecdote. Teams can benchmark all firms against the same standard.",
+            meta: ['Multi-firm dashboard', 'Data-driven oversight'],
+          },
+          {
+            q: 'How does GlobalCodio help with immigration budget predictability?',
+            a: 'CodioCMS tracks immigration spend in real time and alerts teams at 75% of budget before overruns occur. Renewal costs are projected automatically so finance and HR leadership are never surprised. This replaces unpredictable outside counsel billing with a structured managed service model.',
+            meta: ['Real-time spend tracking', '75% budget alerts'],
+          },
+        ]}
+      />
 
       <CtaBand
         lead="Ready to give your mobility team"

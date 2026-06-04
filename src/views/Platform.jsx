@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import {
   Workflow,
   Users,
@@ -134,7 +135,7 @@ const FORMS_CAPS = [
   {
     n: '03',
     h: 'Built on your priority',
-    b: 'Need a country we don’t ship yet? We scope, build, and release based on client demand - in days, not product quarters.',
+    b: "Need a country we don't ship yet? We scope, build, and release based on client demand - in days, not product quarters.",
   },
 ];
 
@@ -183,7 +184,7 @@ const MIGRATION_STEPS = [
   {
     Icon: FileText,
     h: 'Document processes',
-    b: 'Institutional knowledge captured in the system, not in people’s heads.',
+    b: "Institutional knowledge captured in the system, not in people's heads.",
   },
   {
     Icon: RefreshCw,
@@ -832,7 +833,7 @@ export default function Platform() {
             <SplitHeading lead="Coming from another platform?" emphasis="We migrate you." />
             <p className="migration-head-intro">
               On another CMS? Our team runs the full move - data, workflows, documentation, and parallel
-              operations until you’re live on CodioCMS.
+              operations until you're live on CodioCMS.
             </p>
           </div>
           <div className="migration-statband reveal d1" aria-label="Migration at a glance">
@@ -866,6 +867,40 @@ export default function Platform() {
           </SmartLink>
         </div>
       </Section>
+
+      <FaqAccordion
+        id="faq"
+        eyebrow="Common Questions"
+        lead="Questions about"
+        emphasis="the platform."
+        items={[
+          {
+            q: 'What is CodioCMS?',
+            a: "CodioCMS is a next-generation immigration case management platform built by the founder of INSZoom — the world's leading immigration CMS. It provides end-to-end case lifecycle management, five purpose-built portals (attorney, applicant, HR, service provider, admin), native AI agent integration, and global country support. Every engagement includes CodioOps — a dedicated team that configures and continuously optimizes the platform to your exact workflows.",
+            meta: ['Five-portal architecture', 'Native AI agents'],
+          },
+          {
+            q: 'What immigration forms does CodioForms support?',
+            a: 'CodioForms supports 180+ US forms (USCIS-synced), the full IRCC suite for Canada, Netherlands MVV and residence permits, and India visa and OCI forms. Every form edition is tracked to the issuing authority so your firm never files on a superseded version. New countries are scoped and built in days based on client priority.',
+            meta: ['180+ US forms', 'Multi-country'],
+          },
+          {
+            q: 'How does CodioCMS differ from other immigration case management software?',
+            a: "CodioCMS is the only immigration platform designed from the ground up for native AI agents — not legacy software with AI bolted on. It includes five dedicated role portals, a global forms engine, an Immigration Passport Vault giving applicants portable document ownership, and CodioOps managed services bundled with every engagement.",
+            meta: ['AI-native architecture', 'CodioOps bundled'],
+          },
+          {
+            q: 'Can we migrate from our current immigration software to CodioCMS?',
+            a: "Yes. GlobalCodio's team manages the full migration: data export from your current platform, mapping and verification, workflow reconstruction in CodioCMS, and parallel operations until your team is fully transitioned. Typical migration takes approximately six weeks with zero disruption to active cases.",
+            meta: ['~6 week migration', 'Zero case disruption'],
+          },
+          {
+            q: 'What is the Immigration Passport Vault?',
+            a: 'The Immigration Passport Vault is a personal document record within CodioCMS where applicants store passports, visas, permits, and supporting documents securely. Applicants control what they share and with whom. When they change employers or switch firms, their complete record travels with them — no re-submission or starting from scratch.',
+            meta: ['Applicant-owned', 'Portable across firms'],
+          },
+        ]}
+      />
 
       <CtaBand
         lead="We demo the features that solve"

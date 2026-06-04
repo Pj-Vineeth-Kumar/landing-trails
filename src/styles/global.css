@@ -486,8 +486,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   align-items:start;
 }
 
-/* Home FAQ (#how) — accordion +/- control */
-#how .faq-toggle-icon{border-color:var(--line-blue);}
+/* FAQ accordion toggle icon — applies to #how and all FaqAccordion instances */
+.faq-toggle-icon{border-color:var(--line-blue);}
+
+/* FaqAccordion wrapper — left col sticky on tall viewports */
+.faq-accordion-left{
+  position:sticky;
+  top:calc(var(--nav-bar-total) + var(--space-xl));
+  align-self:start;
+}
 .cert-section-head{
   max-width:none;
   margin-bottom:0;

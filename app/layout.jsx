@@ -2,6 +2,7 @@ import { Inter, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import 'lenis/dist/lenis.css';
 import '../src/styles/global.css';
 import { SiteShell } from '../components/layout/SiteShell';
+import { STRUCTURED_DATA_JSON } from '../lib/seo.js';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -70,6 +71,10 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: STRUCTURED_DATA_JSON }}
+        />
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

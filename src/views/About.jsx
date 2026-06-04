@@ -11,7 +11,7 @@ import { Cpu, Workflow, Bot, Globe, TrendingUp, Library, Settings } from 'lucide
    by Mitratech in Nov 2020. */
 
 const TIMELINE = [
-  { year: '1999', title: 'INSZoom founded', body: 'Umesh Vaidyamath, an engineer who came to the United States on an H-1B visa, co-founds INSZoom-the immigration industry’s first cloud-based case management platform-bootstrapped from his home.' },
+  { year: '1999', title: 'INSZoom founded', body: "Umesh Vaidyamath, an engineer who came to the United States on an H-1B visa, co-founds INSZoom-the immigration industry's first cloud-based case management platform-bootstrapped from his home." },
   { year: '2003', title: 'Profitable within three years', body: 'INSZoom reaches profitability early-a strong indicator of product–market fit in a specialized, highly regulated market.' },
   { year: '2010s', title: 'Industry-scale operations', body: 'The company grows to 125+ professionals across Pleasanton, California and Bangalore, India, with 2,000+ immigration forms maintained within 24–48 hours of each regulatory release.' },
   { year: '2020', title: 'Acquired by Mitratech', body: 'After twenty years as the leading independent immigration case management platform, INSZoom is acquired by Mitratech. The founder then works directly with firms to define requirements for what comes next.' },
@@ -43,7 +43,7 @@ export default function About() {
         lead="Built by the people who"
         emphasis="built immigration tech."
         sub="GlobalCodio is the next chapter in immigration technology - designed by Umesh Vaidyamath, founder of the leading immigration case management platform, drawing on two decades of building the platform that immigration firms worldwide ran on."
-        primary={{ href: '/letter-from-the-founder', label: 'Read the founder’s letter' }}
+        primary={{ href: '/letter-from-the-founder', label: "Read the founder's letter" }}
         secondary={{ href: '/contact', label: 'Book a tech audit' }}
       />
 

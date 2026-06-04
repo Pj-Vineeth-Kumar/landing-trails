@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { CertLogos } from '../components/ContentSections.jsx';
 import { Lock, KeyRound, Globe, Eye, Database, UserCheck, Bot, ScrollText, SlidersHorizontal } from 'lucide-react';
 
@@ -379,9 +380,43 @@ export default function Security() {
         </ul>
       </Section>
 
+      <FaqAccordion
+        id="faq"
+        eyebrow="Common Questions"
+        lead="Questions about"
+        emphasis="security and compliance."
+        items={[
+          {
+            q: 'What security certifications does GlobalCodio hold?',
+            a: 'GlobalCodio is SOC 2 Type II certified and ISO 27001 certified. The platform meets GDPR, UK GDPR, and CCPA/CPRA requirements, implements HIPAA-ready safeguards for immigration medical records, and follows ABA-aligned AI governance standards. Full compliance documentation is available to qualified prospects under NDA.',
+            meta: ['SOC 2 Type II', 'ISO 27001'],
+          },
+          {
+            q: 'How does GlobalCodio protect attorney-client privilege when using AI?',
+            a: 'GlobalCodio never trains AI models on client data. All AI agent outputs are confidence-scored and require attorney review before being applied to a case. Agents operate within role-based access controls and cannot take any action a human in their role could not. Every agent action is logged in an immutable, cryptographically signed audit trail.',
+            meta: ['No training on client data', 'Immutable audit log'],
+          },
+          {
+            q: 'What encryption does GlobalCodio use to protect immigration data?',
+            a: 'GlobalCodio uses AES-256 encryption for all data at rest and TLS 1.3 for all data in transit. Sensitive document workflows use end-to-end encryption. All audit log entries are cryptographically signed. Encrypted backups are stored across multiple geographic regions with tested disaster recovery plans.',
+            meta: ['AES-256 at rest', 'TLS 1.3 in transit'],
+          },
+          {
+            q: 'How does GlobalCodio handle data residency requirements?',
+            a: 'GlobalCodio provides compliant regional infrastructure for countries with data residency requirements and configurable data residency for global enterprise clients. Data processing agreements and subprocessor lists are available as part of the standard compliance documentation package.',
+            meta: ['Regional infrastructure', 'DPA available'],
+          },
+          {
+            q: 'What compliance documentation is available for vendor due diligence?',
+            a: 'GlobalCodio provides a full trust package to qualified prospects under NDA: SOC 2 Type II report, ISO 27001 certificate and Statement of Applicability, security architecture documentation, incident response plan, data processing agreements, and subprocessor list with vendor risk assessments.',
+            meta: ['Full trust package', 'Available under NDA'],
+          },
+        ]}
+      />
+
       <CtaBand
         lead="Security questionnaire incoming?"
-        emphasis="We’ve got the answers."
+        emphasis="We've got the answers."
         primary={{ href: 'mailto:info@globalcodio.ai', label: 'Request compliance documentation' }}
         secondary={{ href: '/rfp-response', label: 'See the RFP service' }}
       />
