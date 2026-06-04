@@ -19,6 +19,9 @@ import {
   ShieldCheck,
   ClipboardList,
   BarChart3,
+  Vault,
+  ArrowRightLeft,
+  UserCheck,
 } from 'lucide-react';
 
 const Check = () => (
@@ -39,7 +42,7 @@ const CMS_FEATURES = [
     Icon: Users,
     n: '02',
     h: 'Applicant portal',
-    b: 'Secure portal for foreign nationals and beneficiaries to submit documents, answer questionnaires, and track their case status.',
+    b: 'Secure portal for foreign nationals and beneficiaries to submit documents, answer questionnaires, track their case status — and own their immigration record across every matter they ever open.',
   },
   {
     Icon: Building2,
@@ -364,7 +367,163 @@ export default function Platform() {
         </div>
 
         <CMSBento />
+
+        {/* Passport Vault callout */}
+        <div
+          className="reveal d1"
+          style={{
+            marginTop: 'var(--space-2xl)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--space-3xl)',
+            padding: 'calc(40px * var(--ui-scale))',
+            background: 'linear-gradient(135deg, var(--blue) 0%, var(--blue-ink) 100%)',
+            borderRadius: 'calc(20px * var(--ui-scale))',
+            border: '1px solid rgba(255,255,255,.06)',
+            boxShadow: '0 0 60px rgba(25,80,198,.18)',
+            alignItems: 'center',
+          }}
+        >
+          {/* Left — copy */}
+          <div>
+            <div
+              className="mono"
+              style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.12em', color: 'rgba(255,255,255,.5)', marginBottom: 'calc(14px * var(--ui-scale))' }}
+            >
+              IMMIGRATION PASSPORT VAULT
+            </div>
+            <h3
+              className="display"
+              style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15, color: '#fff', marginBottom: 'var(--space-lg)' }}
+            >
+              Applicants own their record.{' '}
+              <em style={{ color: 'rgba(255,255,255,.65)', fontStyle: 'italic' }}>
+                Across every matter they ever open.
+              </em>
+            </h3>
+            <p style={{ fontSize: 'var(--text-body)', color: 'rgba(255,255,255,.7)', lineHeight: 1.65 }}>
+              Every document an applicant submits is stored in their personal Immigration Passport Vault.
+              They control what is shared, with whom, and for how long. When they change employers,
+              switch law firms, or start a new matter, they carry their complete record with them —
+              no re-submission, no starting from scratch, no lost history.
+            </p>
+          </div>
+
+          {/* Right — three properties */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+            {[
+              {
+                Icon: Vault,
+                title: 'Permanent personal record',
+                detail: 'Passports, visas, work permits, and supporting documents — stored securely and accessible to the applicant at any time, regardless of which firm they work with.',
+              },
+              {
+                Icon: UserCheck,
+                title: 'Granular, revocable consent',
+                detail: 'Applicants choose exactly what to share and with whom. Consent can be granted per-matter and revoked at any time. Their data, their control.',
+              },
+              {
+                Icon: ArrowRightLeft,
+                title: 'Portable across employers and firms',
+                detail: 'A new job, a new country, a new attorney — the vault travels with the applicant. No more repeating the same document collection from scratch.',
+              },
+            ].map((item, i, arr) => {
+              const Icon = item.Icon;
+              return (
+                <div
+                  key={item.title}
+                  style={{
+                    display: 'flex',
+                    gap: 'var(--space-md)',
+                    paddingBottom: i < arr.length - 1 ? 'var(--space-lg)' : 0,
+                    borderBottom: i < arr.length - 1 ? '1px solid rgba(255,255,255,.1)' : 'none',
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 'calc(36px * var(--ui-scale))',
+                      height: 'calc(36px * var(--ui-scale))',
+                      borderRadius: 'calc(9px * var(--ui-scale))',
+                      background: 'rgba(255,255,255,.12)',
+                      color: '#fff',
+                      flexShrink: 0,
+                      marginTop: 'calc(2px * var(--ui-scale))',
+                    }}
+                  >
+                    <Icon size={16} strokeWidth={1.75} />
+                  </span>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 'calc(13.5px * var(--ui-scale))',
+                        fontWeight: 700,
+                        color: '#fff',
+                        marginBottom: 'calc(3px * var(--ui-scale))',
+                      }}
+                    >
+                      {item.title}
+                    </div>
+                    <div style={{ fontSize: 'calc(12.5px * var(--ui-scale))', color: 'rgba(255,255,255,.65)', lineHeight: 1.55 }}>
+                      {item.detail}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </Section>
+
+      {/* CodioOps bundled callout */}
+      <section className="sec">
+        <div className="container">
+          <div
+            className="reveal"
+            style={{
+              padding: 'calc(36px * var(--ui-scale)) calc(40px * var(--ui-scale))',
+              background: 'var(--blue-soft)',
+              borderRadius: 'calc(20px * var(--ui-scale))',
+              border: '1px solid rgba(25,80,198,0.15)',
+              display: 'grid',
+              gridTemplateColumns: '1fr auto',
+              gap: 'var(--space-3xl)',
+              alignItems: 'center',
+            }}
+          >
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
+                Bundled with Every CodioCMS Engagement
+              </div>
+              <h3
+                className="display"
+                style={{
+                  fontSize: 'var(--text-display-md)',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.15,
+                  color: 'var(--ink)',
+                  marginBottom: 'var(--space-lg)',
+                }}
+              >
+                CodioOps
+              </h3>
+              <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, maxWidth: '72ch' }}>
+                Every CodioCMS engagement includes CodioOps — our dedicated Case Management Operations team.
+                CodioOps configures the platform to your exact workflows, builds your templates, documents your
+                processes, sets up your automations, and continuously tunes everything as your firm evolves.{' '}
+                <strong style={{ color: 'var(--ink-2)' }}>
+                  You don't just get software. You get the operations team that makes it work.
+                </strong>
+              </p>
+            </div>
+            <SmartLink href="/codioops" className="btn btn-primary" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
+              Learn more about CodioOps
+            </SmartLink>
+          </div>
+        </div>
+      </section>
 
       {/* CodioForms */}
       <Section id="codioforms" tone="sec-surface" className="sec-codioforms">
@@ -495,8 +654,46 @@ export default function Platform() {
               <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>for immigration.</em>
             </h2>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '48ch' }}>
-              A curated B2B network accessible directly through CodioCMS. One coordination layer instead of dozens of manual handoffs.
+              A curated B2B network accessible directly through CodioCMS. One coordination layer instead of dozens of manual handoffs — with structured workflows, field-level confidentiality, and a full history of every assignment.
             </p>
+
+            {/* Workflow capability rows */}
+            <div style={{ marginTop: 'var(--space-2xl)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+              {[
+                {
+                  title: 'Structured provider workflows',
+                  detail: 'Outsourcing is a managed workflow, not an email. Assign work, set deliverables, track revisions, and extend deadlines — all with a paper trail both parties can see.',
+                },
+                {
+                  title: 'Field-level confidentiality',
+                  detail: 'Send a translator exactly what they need — not salary details, not passport numbers, not case strategy. Confidentiality is enforced at the data field level, automatically.',
+                },
+                {
+                  title: 'Data-driven provider selection',
+                  detail: 'Every assignment builds history. Over time: "Which translator is fastest for technical documents?" becomes a query — not a judgment call based on memory.',
+                },
+                {
+                  title: 'Revisions and billing in one place',
+                  detail: 'Structured feedback on every deliverable, tracked for quality and billing. No disputed invoices, no lost revision threads in email.',
+                },
+              ].map((item, i, arr) => (
+                <div
+                  key={item.title}
+                  style={{
+                    paddingBottom: i < arr.length - 1 ? 'var(--space-md)' : 0,
+                    borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                  }}
+                >
+                  <div style={{ fontSize: 'calc(13.5px * var(--ui-scale))', fontWeight: 700, color: 'var(--ink)', marginBottom: 'calc(3px * var(--ui-scale))' }}>
+                    {item.title}
+                  </div>
+                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>
+                    {item.detail}
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div style={{ marginTop: 'var(--space-xl)' }}>
               <SmartLink href="/network" className="feature-card-link" style={{ fontWeight: 600 }}>
                 Explore CodioNetwork
@@ -506,30 +703,108 @@ export default function Platform() {
               </SmartLink>
             </div>
           </div>
-          {/* Right — provider list inside one container */}
-          <div style={{
-            border: '1.5px solid var(--line-2)',
-            borderRadius: 'calc(16px * var(--ui-scale))',
-            overflow: 'hidden',
-            background: '#fff',
-          }}>
-            {[
-              { label: 'Certified Translators',  sub: '40+ languages' },
-              { label: 'Immigration Physicians',  sub: 'USCIS approved' },
-              { label: 'Apostille & Auth',        sub: 'Multi-country' },
-              { label: 'Foreign Attorneys',       sub: 'In-country counsel' },
-              { label: 'Specialized Couriers',    sub: 'Secure delivery' },
-              { label: 'Consular Coordinators',   sub: 'Appointment liaison' },
-            ].map((item, i, arr) => (
-              <div key={item.label} style={{
+
+          {/* Right — provider list + assignment workflow mock */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(12px * var(--ui-scale))' }}>
+
+            {/* Provider roster */}
+            <div style={{
+              border: '1.5px solid var(--line-2)',
+              borderRadius: 'calc(16px * var(--ui-scale))',
+              overflow: 'hidden',
+              background: '#fff',
+            }}>
+              {[
+                { label: 'Certified Translators',  sub: '40+ languages' },
+                { label: 'Immigration Physicians',  sub: 'USCIS approved' },
+                { label: 'Apostille & Auth',        sub: 'Multi-country' },
+                { label: 'Foreign Attorneys',       sub: 'In-country counsel' },
+                { label: 'Specialized Couriers',    sub: 'Secure delivery' },
+                { label: 'Consular Coordinators',   sub: 'Appointment liaison' },
+              ].map((item, i, arr) => (
+                <div key={item.label} style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: 'calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                  borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                }}>
+                  <span style={{ fontSize: 'calc(13.5px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>{item.label}</span>
+                  <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', letterSpacing: '.06em', fontWeight: 600 }}>{item.sub.toUpperCase()}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Assignment workflow mock */}
+            <div style={{
+              border: '1.5px solid var(--line-2)',
+              borderRadius: 'calc(16px * var(--ui-scale))',
+              overflow: 'hidden',
+              background: '#fff',
+            }}>
+              {/* Header */}
+              <div style={{
+                padding: 'calc(11px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                borderBottom: '1px solid var(--line)',
+                background: 'var(--surface)',
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: 'calc(14px * var(--ui-scale)) calc(20px * var(--ui-scale))',
-                borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
               }}>
-                <span style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>{item.label}</span>
-                <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', letterSpacing: '.06em', fontWeight: 600 }}>{item.sub.toUpperCase()}</span>
+                <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--ink-2)', letterSpacing: '.06em', fontWeight: 600 }}>
+                  PROVIDER ASSIGNMENT · Matter #2241
+                </span>
+                <span style={{
+                  fontSize: 'calc(10px * var(--ui-scale))', fontWeight: 700,
+                  color: '#059669', background: '#f0fdf4',
+                  padding: '2px 8px', borderRadius: '4px',
+                  fontFamily: 'var(--mono)', letterSpacing: '.04em',
+                }}>IN PROGRESS</span>
               </div>
-            ))}
+
+              {/* Assignment rows */}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {[
+                  { provider: 'Elena Vasquez', type: 'Certified Translator', task: 'I-130 supporting docs · ES→EN', deadline: 'Due Jun 10', status: 'delivered', fields: 'Scoped: Name, DOB, doc type only' },
+                  { provider: 'Dr. Arjun Mehta', type: 'Immigration Physician', task: 'I-693 medical exam', deadline: 'Due Jun 14', status: 'pending', fields: 'Scoped: Case ref, client name only' },
+                ].map((row, i, arr) => (
+                  <div
+                    key={row.provider}
+                    style={{
+                      padding: 'calc(13px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                      borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                      display: 'flex', flexDirection: 'column', gap: 'calc(5px * var(--ui-scale))',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div>
+                        <span style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>{row.provider}</span>
+                        <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)', marginLeft: '8px' }}>{row.type.toUpperCase()}</span>
+                      </div>
+                      <span style={{
+                        fontSize: 'calc(10px * var(--ui-scale))', fontWeight: 700,
+                        color: row.status === 'delivered' ? '#059669' : 'var(--blue)',
+                        background: row.status === 'delivered' ? '#f0fdf4' : 'var(--blue-soft)',
+                        padding: '2px 8px', borderRadius: '4px',
+                        fontFamily: 'var(--mono)', letterSpacing: '.04em', textTransform: 'uppercase',
+                      }}>{row.status}</span>
+                    </div>
+                    <div style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--ink-2)' }}>{row.task}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)' }}>{row.fields}</span>
+                      <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 600 }}>{row.deadline}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer note */}
+              <div style={{
+                padding: 'calc(9px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                borderTop: '1px solid var(--line)',
+                background: 'var(--surface)',
+              }}>
+                <p className="mono" style={{ fontSize: 'calc(9.5px * var(--ui-scale))', color: 'var(--muted)', margin: 0, letterSpacing: '.04em' }}>
+                  PROVIDERS SEE ONLY SCOPED FIELDS · FULL CASE DATA NEVER SHARED
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </Section>

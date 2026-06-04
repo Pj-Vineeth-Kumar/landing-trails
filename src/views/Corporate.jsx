@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
-import { Users, Globe, Network, ShieldCheck, TrendingUp } from 'lucide-react';
+import { Users, Globe, Network, ShieldCheck, TrendingUp, BarChart3, Activity, DollarSign, Building2, GitCompare, FileText } from 'lucide-react';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
@@ -17,6 +17,46 @@ const CHALLENGES = [
   'Maintaining compliance across countries',
   'Controlling cost without sacrificing quality',
   'Reporting visibility to executives and HR leadership',
+];
+
+const VISIBILITY_ITEMS = [
+  {
+    Icon: BarChart3,
+    n: '01',
+    h: 'Workforce Pipeline Dashboards',
+    b: 'Your entire employee immigration population visible at a glance. Filter by country, visa type, status, or risk level. No more requesting reports from outside counsel.',
+  },
+  {
+    Icon: Activity,
+    n: '02',
+    h: 'Immigration Health Scores',
+    b: 'One number per visa program tells you if it\'s healthy or heading toward trouble. Drill into the breakdown when you need it. Problems surface before they become emergencies.',
+    featured: true,
+  },
+  {
+    Icon: GitCompare,
+    n: '03',
+    h: 'Multi-Firm Performance Comparison',
+    b: 'Managing more than one law firm? See who is actually delivering. Hold every outside counsel to the same standard, with data — not anecdote.',
+  },
+  {
+    Icon: DollarSign,
+    n: '04',
+    h: 'Budget Tracking & Forecasting',
+    b: 'Immigration spend tracked in real time. Alerts surface at 75% of budget — not after you\'ve overrun. Renewal costs projected automatically so surprises stay off the executive report.',
+  },
+  {
+    Icon: Building2,
+    n: '05',
+    h: 'Executive PDF Reports',
+    b: 'Stakeholders who never log into the platform still get the data they need. One-click executive reports, formatted for the boardroom — not the case manager\'s screen.',
+  },
+  {
+    Icon: FileText,
+    n: '06',
+    h: 'Versioned Immigration Policies',
+    b: 'Corporate immigration policies live versioned inside the platform — not buried in a SharePoint document. When guidelines change, the updated version flows through to active cases automatically.',
+  },
 ];
 
 const SOLUTIONS = [
@@ -108,8 +148,21 @@ export default function Corporate() {
       </Section>
 
       <Section
-        id="solutions"
+        id="visibility"
         tone="sec-surface"
+        eyebrow="Built for HR & Mobility Teams"
+        lead="Finally — immigration visibility"
+        emphasis="your executives actually expect."
+        intro="Most corporate mobility teams operate in the dark. Status updates come from email threads. Reports are built on request. Dashboards don't exist. GlobalCodio gives your team a dedicated HR portal — designed for what you actually need to do, not a lawyer's view with fields hidden."
+        introMaxWidth="76ch"
+      >
+        <div style={{ marginTop: 'var(--space-3xl)' }}>
+          <FeatureGrid items={VISIBILITY_ITEMS} cols={3} />
+        </div>
+      </Section>
+
+      <Section
+        id="solutions"
         eyebrow="How GlobalCodio Solves Them"
         lead="One operation purpose-built"
         emphasis="for global mobility."
@@ -118,12 +171,74 @@ export default function Corporate() {
         <div className="corporate-solutions-grid reveal" style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={SOLUTIONS} cols={3} />
         </div>
+
+        {/* Law firm independence callout */}
+        <div
+          className="reveal d1"
+          style={{
+            marginTop: 'var(--space-3xl)',
+            border: '1.5px solid var(--line-2)',
+            borderRadius: 'calc(20px * var(--ui-scale))',
+            padding: 'calc(40px * var(--ui-scale))',
+            background: 'var(--surface)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--space-3xl)',
+            alignItems: 'center',
+          }}
+        >
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
+              HR-Led Onboarding
+            </div>
+            <h3
+              className="display"
+              style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 'var(--space-lg)' }}
+            >
+              Start before the law firm{' '}
+              <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>is even engaged.</em>
+            </h3>
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65 }}>
+              GlobalCodio lets your HR team collect employee information and initiate the immigration
+              workflow weeks before outside counsel is brought in — so the law firm inherits a complete
+              file, not a blank intake form. No double data entry. No coordination delay.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+            {[
+              { n: '01', t: 'HR collects employee data', d: 'Your team initiates the process and gathers information through the HR portal — independently of the law firm.' },
+              { n: '02', t: 'Law firm inherits a complete file', d: 'When outside counsel is engaged, the case already has everything they need. No re-collection, no delays.' },
+              { n: '03', t: 'Policies stay versioned & current', d: 'Corporate immigration guidelines live inside the platform. When they change, every active case references the updated version automatically.' },
+            ].map((step, i, arr) => (
+              <div
+                key={step.n}
+                style={{
+                  display: 'flex',
+                  gap: 'var(--space-md)',
+                  paddingBottom: i < arr.length - 1 ? 'var(--space-lg)' : 0,
+                  borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                }}
+              >
+                <span
+                  className="mono"
+                  style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 700, flexShrink: 0, paddingTop: '2px', letterSpacing: '.06em' }}
+                >
+                  {step.n}
+                </span>
+                <div>
+                  <div style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)', marginBottom: 'calc(4px * var(--ui-scale))' }}>{step.t}</div>
+                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>{step.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
 
       <CtaBand
-        lead="Scale your corporate"
-        emphasis="immigration operation."
-        sub="Book a discovery call to see how GlobalCodio runs the technology behind your global mobility program."
+        lead="Ready to give your mobility team"
+        emphasis="the visibility it's been missing?"
+        sub="Book a discovery call. We'll show you the HR portal, the analytics dashboards, and the compliance architecture — in 30 minutes."
         primary={{ href: '/contact', label: 'Book a discovery call' }}
         secondary={{ href: '/security', label: 'See security & compliance' }}
       />

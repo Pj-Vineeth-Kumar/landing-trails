@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
-import { Cpu, FileText, Bot, Network, Settings, GitMerge, ClipboardList, PenLine, MessageCircle, TrendingUp } from 'lucide-react';
+import { Cpu, FileText, Bot, Network, Settings, GitMerge, ClipboardList, PenLine, MessageCircle, TrendingUp, CheckSquare, History, GitBranch } from 'lucide-react';
 
 /* What You Get */
 const WHAT_YOU_GET = [
@@ -21,6 +21,29 @@ const DAY = [
   { h: 'Filing begins.', b: 'The Forms Agent prepares the I-130 while the Deadline Agent monitors filing windows.', agent: 'Forms + Deadline', Icon: PenLine },
   { h: 'Questions come in.', b: 'The Client Comms Agent answers them in the client’s native language.', agent: 'Client Comms Agent', Icon: MessageCircle },
   { h: 'Meanwhile, revenue surfaces.', b: 'The Renewal Agent flags three dormant clients whose visas expire in 60 days, and the BD Agent books two consultations for next week.', agent: 'Renewal + BD', Icon: TrendingUp },
+];
+
+/* Workflow integrity — three pillars */
+const INTEGRITY_ITEMS = [
+  {
+    Icon: CheckSquare,
+    n: '01',
+    h: 'Approvals that can\'t skip steps',
+    b: 'Forms, support letters, and documents each have structured review workflows. A partner can comment on a specific paragraph, approve only what they\'ve reviewed, and see exactly which data source populated each field — before signing off. Approved fields can\'t be silently changed after the fact.',
+  },
+  {
+    Icon: GitBranch,
+    n: '02',
+    h: 'Case status that\'s always accurate',
+    b: 'Status is derived from what has actually happened in the case — not from whatever a paralegal last typed. Auto-derived status means no manual updates, no stale data in client reports, and no partner walking into a review meeting with the wrong picture.',
+    featured: true,
+  },
+  {
+    Icon: History,
+    n: '03',
+    h: 'Document history you can query',
+    b: '"Which version of the I-130 did we file last March?" is a one-click answer. Every document carries a full version lineage with timestamps. Every form field has an audit trail. Nothing gets quietly overwritten.',
+  },
 ];
 
 /* Why Firms Choose Us */
@@ -111,6 +134,83 @@ export default function Firms() {
               </div>
             </div>
           </aside>
+        </div>
+      </Section>
+
+      <Section
+        id="process-integrity"
+        eyebrow="Built-In Quality Control"
+        lead="The platform enforces process."
+        emphasis="So your team doesn't have to."
+        intro="Most case management platforms are passive record-keepers. CodioCMS enforces your process actively — steps can't be marked complete without required reviews, approvals are logged with full context, and nothing gets silently changed after a partner signs off."
+        introMaxWidth="76ch"
+      >
+        <div style={{ marginTop: 'var(--space-3xl)' }}>
+          <FeatureGrid items={INTEGRITY_ITEMS} cols={3} />
+        </div>
+
+        {/* Cross-case dependencies callout */}
+        <div
+          className="reveal d1"
+          style={{
+            marginTop: 'var(--space-2xl)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--space-3xl)',
+            padding: 'calc(36px * var(--ui-scale))',
+            border: '1.5px solid var(--line-2)',
+            borderRadius: 'calc(20px * var(--ui-scale))',
+            background: 'var(--surface)',
+            alignItems: 'center',
+          }}
+        >
+          <div>
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
+              Cross-Case Awareness
+            </div>
+            <h3
+              className="display"
+              style={{
+                fontSize: 'var(--text-display-md)',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.15,
+                marginBottom: 'var(--space-lg)',
+              }}
+            >
+              Family cases. Derivative cases.{' '}
+              <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>
+                All connected.
+              </em>
+            </h3>
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65 }}>
+              Dependent and derivative cases are first-class in CodioCMS — not a note in a text field
+              you have to remember to check. When a principal case changes, related cases know.
+              When a deadline in one case affects another, the system surfaces it — before it becomes
+              a problem.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+            {[
+              { label: 'Principal petitions', detail: 'Linked to all derivative beneficiaries — status changes propagate automatically.' },
+              { label: 'Family-based cases', detail: 'Spouse and dependent cases tracked together, with shared deadline visibility.' },
+              { label: 'Corporate transfers', detail: 'Prior visa history carried forward — no re-gathering what\'s already on file.' },
+            ].map((item, i, arr) => (
+              <div
+                key={item.label}
+                style={{
+                  paddingBottom: i < arr.length - 1 ? 'var(--space-md)' : 0,
+                  borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                }}
+              >
+                <div style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)', marginBottom: 'calc(3px * var(--ui-scale))' }}>
+                  {item.label}
+                </div>
+                <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>
+                  {item.detail}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 

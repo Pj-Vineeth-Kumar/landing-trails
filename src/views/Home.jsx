@@ -5,7 +5,7 @@ import { Hero } from '../components/Hero.jsx';
 import { AgentOrbit, Testimonial, Metrics, ValueLevers, Certifications, CTA } from '../components/ContentSections.jsx';
 
 import { Section, FeatureGrid, SmartLink, SplitHeading } from '../../components/ui/PageKit';
-import { Cpu, FileText, Bot, Network, Settings } from 'lucide-react';
+import { Cpu, FileText, Bot, Network, Settings, Scale, Users, Building2, Truck, ShieldCheck } from 'lucide-react';
 
 /* Founder credibility band */
 const FOUNDER_STATS = [
@@ -74,8 +74,8 @@ const LAYERS = [
   { Icon: Cpu, h: 'CodioCMS', b: 'The next-generation case management platform built by the founder of INSZoom. Configured to your exact workflows.', featured: true, links: [{ href: '/platform', label: 'Explore the platform' }] },
   { Icon: FileText, h: 'CodioForms', b: 'Online and offline immigration forms for USA, Canada, Netherlands, and India - with new countries added on demand.', links: [{ href: '/platform', label: 'See CodioForms' }] },
   { Icon: Bot, h: 'Codio AI Agents', b: 'A team of AI agents handling intake, documents, forms, deadlines, communications, renewals, and business development.', links: [{ href: '/ai-agents', label: 'Meet the agents' }] },
+  { Icon: Settings, h: 'CodioOps', b: 'The dedicated operations team that configures, optimizes, and continuously tunes CodioCMS to match exactly how your firm operates. Bundled with every engagement.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
   { Icon: Network, h: 'CodioNetwork', b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.', links: [{ href: '/network', label: 'See the network' }] },
-  { Icon: Settings, h: 'GlobalCodio Services', b: 'Migration, configuration, IT support, security management, RFP response, and ongoing operations. We run your technology.', links: [{ href: '/services', label: 'Explore services' }] },
   { Icon: Settings, h: 'Technology Audit', b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.", links: [{ href: '/contact', label: 'Request an audit' }] },
   { Icon: Cpu, h: 'Audit & Consulting', b: 'Advisory and consulting services for immigration law firms and corporate teams. We help you understand what technology you need and how to get the most from it.', links: [{ href: '/contact', label: 'Talk to us' }] },
 ];
@@ -94,6 +94,239 @@ const FiveLayers = () => (
       <div style={{ marginTop: 'var(--space-lg)' }}>
         <FeatureGrid items={LAYERS.slice(3)} cols={4} />
       </div>
+    </div>
+  </Section>
+);
+
+/* CodioOps callout section */
+const CodioOpsCallout = () => (
+  <Section
+    id="codioops-callout"
+    eyebrow="Why GlobalCodio Is Different"
+    lead="Software Doesn't Run a Firm."
+    emphasis="Operations Do."
+    intro="Every CodioCMS engagement includes CodioOps — a dedicated team that configures, optimizes, and continuously tunes the platform to match how your firm actually operates."
+    introMaxWidth="68ch"
+  >
+    <div
+      className="reveal"
+      style={{
+        marginTop: 'var(--space-3xl)',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: 'var(--space-xl)',
+      }}
+    >
+      {[
+        {
+          n: '01',
+          h: 'Setup',
+          b: 'Workflow configuration, template library, forms setup, process documentation — done by our team to match your firm exactly.',
+        },
+        {
+          n: '02',
+          h: 'Activation',
+          b: 'Automations, integrations, best practices, team training — turned on and tuned for your specific operations.',
+        },
+        {
+          n: '03',
+          h: 'Continuous Operations',
+          b: 'Ongoing optimization, quarterly business reviews, new workflows as your firm evolves. Not a project. An operations team.',
+        },
+      ].map((col, i) => (
+        <article
+          key={col.n}
+          className={`feature-card reveal d${i + 1}`}
+          style={{ padding: 'calc(28px * var(--ui-scale))', borderTop: '3px solid var(--blue)' }}
+        >
+          <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--blue)', marginBottom: 'var(--space-sm)' }}>{col.n}</div>
+          <h3 className="display" style={{ fontSize: 'calc(22px * var(--ui-scale))', letterSpacing: '-0.01em', lineHeight: 1.2, color: 'var(--ink)', marginBottom: 'var(--space-md)' }}>{col.h}</h3>
+          <p style={{ fontSize: 'calc(14px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65 }}>{col.b}</p>
+        </article>
+      ))}
+    </div>
+    <div className="reveal d3" style={{ marginTop: 'var(--space-2xl)' }}>
+      <SmartLink href="/codioops" className="feature-card-link">
+        Learn More About CodioOps
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+      </SmartLink>
+    </div>
+  </Section>
+);
+
+/* Five portals — one platform */
+const PORTALS = [
+  {
+    Icon: Scale,
+    role: 'Attorney / Case Manager',
+    tagline: 'Full case control, zero tab-switching.',
+    bullets: ['Complete case state at a glance', 'AI agent output surfaced inline', 'Workflow enforcement and filing tools'],
+    href: '/for-law-firms',
+    color: 'var(--blue)',
+  },
+  {
+    Icon: Users,
+    role: 'Applicant / Beneficiary',
+    tagline: 'Case status in language they understand.',
+    bullets: ['Plain-English case timeline', 'Document upload to the right slots', 'Questionnaires with conditional logic'],
+    href: '/platform',
+    color: '#7c3aed',
+  },
+  {
+    Icon: Building2,
+    role: 'HR / Employer',
+    tagline: 'Workforce visibility, not a lawyer\'s UI.',
+    bullets: ['Pipeline dashboards and health scores', 'Budget tracking and forecasting', 'Multi-firm performance comparison'],
+    href: '/for-corporate-teams',
+    color: '#0891b2',
+  },
+  {
+    Icon: Truck,
+    role: 'Service Provider',
+    tagline: 'Work orders, not shared email threads.',
+    bullets: ['Scoped access — only what they need', 'Deliverable submission and revision tracking', 'Deadline-aware coordination'],
+    href: '/network',
+    color: '#059669',
+  },
+  {
+    Icon: ShieldCheck,
+    role: 'Firm & Platform Admin',
+    tagline: 'Configure everything. No engineering tickets.',
+    bullets: ['RBAC, branding, and feature rollout', 'Playbook and template management', 'Audit log and compliance controls'],
+    href: '/security',
+    color: '#d97706',
+  },
+];
+
+const FivePortals = () => (
+  <Section
+    id="portals"
+    eyebrow="Built for Every Stakeholder"
+    lead="One platform."
+    emphasis="Purpose-built for each role."
+    intro="Most platforms give every user the same interface with some fields hidden. GlobalCodio provides five purpose-built portals — each designed for how that person actually works, with no clutter from the roles that don't apply to them."
+    introMaxWidth="72ch"
+    headAlign="center"
+  >
+    <div
+      className="reveal"
+      style={{
+        marginTop: 'var(--space-3xl)',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gap: 'calc(12px * var(--ui-scale))',
+      }}
+    >
+      {PORTALS.map((p) => {
+        const Icon = p.Icon;
+        return (
+          <SmartLink
+            key={p.role}
+            href={p.href}
+            style={{ textDecoration: 'none' }}
+          >
+            <article
+              className="feature-card"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-md)',
+                padding: 'calc(24px * var(--ui-scale))',
+                height: '100%',
+                cursor: 'pointer',
+                transition: 'box-shadow .18s, transform .18s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px -8px rgba(11,19,36,0.13)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
+            >
+              <span
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 'calc(40px * var(--ui-scale))',
+                  height: 'calc(40px * var(--ui-scale))',
+                  borderRadius: 'calc(10px * var(--ui-scale))',
+                  background: `${p.color}18`,
+                  color: p.color,
+                  flexShrink: 0,
+                }}
+              >
+                <Icon size={18} strokeWidth={1.75} />
+              </span>
+              <div>
+                <div
+                  className="mono"
+                  style={{
+                    fontSize: 'calc(9.5px * var(--ui-scale))',
+                    letterSpacing: '.08em',
+                    color: p.color,
+                    fontWeight: 700,
+                    marginBottom: 'calc(4px * var(--ui-scale))',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {p.role}
+                </div>
+                <p
+                  style={{
+                    fontSize: 'calc(13px * var(--ui-scale))',
+                    fontWeight: 600,
+                    color: 'var(--ink)',
+                    lineHeight: 1.35,
+                    margin: 0,
+                  }}
+                >
+                  {p.tagline}
+                </p>
+              </div>
+              <ul
+                style={{
+                  listStyle: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'calc(6px * var(--ui-scale))',
+                  marginTop: 'auto',
+                }}
+              >
+                {p.bullets.map((b) => (
+                  <li
+                    key={b}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 'calc(7px * var(--ui-scale))',
+                      fontSize: 'calc(12px * var(--ui-scale))',
+                      color: 'var(--ink-3)',
+                      lineHeight: 1.45,
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 'calc(14px * var(--ui-scale))',
+                        height: 'calc(14px * var(--ui-scale))',
+                        borderRadius: '50%',
+                        background: `${p.color}18`,
+                        color: p.color,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        marginTop: 'calc(1px * var(--ui-scale))',
+                      }}
+                    >
+                      <svg viewBox="0 0 10 10" fill="none" style={{ width: 7, height: 7 }}>
+                        <path d="M2 5l2 2L8 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </SmartLink>
+        );
+      })}
     </div>
   </Section>
 );
@@ -169,6 +402,8 @@ export default function Home() {
       <FounderBand />
       <PainRecognition />
       <FiveLayers />
+      <CodioOpsCallout />
+      <FivePortals />
       {/* <AgentOrbit /> */}
       <Certifications />
       <RevenueEconomics />

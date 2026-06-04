@@ -3,7 +3,7 @@ import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { CertLogos } from '../components/ContentSections.jsx';
-import { Lock, KeyRound, Globe, Eye, Database, UserCheck } from 'lucide-react';
+import { Lock, KeyRound, Globe, Eye, Database, UserCheck, Bot, ScrollText, SlidersHorizontal } from 'lucide-react';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
@@ -104,6 +104,226 @@ export default function Security() {
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={layers} cols={3} />
+        </div>
+      </Section>
+
+      <Section
+        id="ai-governance"
+        tone="sec-surface"
+        eyebrow="AI Governance"
+        lead="AI agents that can't go rogue."
+        emphasis="Because the data is too important."
+        intro="When AI operates on sensitive immigration data, the compliance question isn't just 'Is the platform secure?' — it's 'What can the AI actually do, and can you prove it?' GlobalCodio has a specific answer."
+        introMaxWidth="72ch"
+      >
+        <div
+          className="reveal"
+          style={{
+            marginTop: 'var(--space-3xl)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--space-3xl)',
+            alignItems: 'start',
+          }}
+        >
+          {/* Left — three properties */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+            {[
+              {
+                Icon: SlidersHorizontal,
+                title: 'Permission-bound',
+                body: 'Agents operate within the same role-based access control as your human team. If an action requires elevated permissions, the agent cannot take it — full stop. No agent can exceed what your RBAC policy already authorises.',
+              },
+              {
+                Icon: ScrollText,
+                title: 'Fully auditable',
+                body: 'Every agent action is written to the immutable audit log with timestamps and before/after diffs — the same trail you would show a regulator or respond to a client challenge. You can reconstruct exactly what changed, when, and which agent triggered it.',
+              },
+              {
+                Icon: Bot,
+                title: 'Confidence-scored outputs',
+                body: 'Agent outputs pass through structured validation before anything is applied to a case. Low-confidence fields are flagged for human review rather than silently written. Attorneys stay in control of what gets filed.',
+              },
+            ].map((item, i, arr) => {
+              const Icon = item.Icon;
+              return (
+                <div
+                  key={item.title}
+                  style={{
+                    display: 'flex',
+                    gap: 'var(--space-lg)',
+                    paddingBottom: i < arr.length - 1 ? 'var(--space-lg)' : 0,
+                    borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 'calc(40px * var(--ui-scale))',
+                      height: 'calc(40px * var(--ui-scale))',
+                      borderRadius: 'calc(10px * var(--ui-scale))',
+                      background: 'var(--blue-soft)',
+                      color: 'var(--blue)',
+                      flexShrink: 0,
+                      marginTop: 'calc(2px * var(--ui-scale))',
+                    }}
+                  >
+                    <Icon size={17} strokeWidth={1.75} />
+                  </span>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 'calc(15px * var(--ui-scale))',
+                        fontWeight: 700,
+                        color: 'var(--ink)',
+                        marginBottom: 'calc(6px * var(--ui-scale))',
+                        letterSpacing: '-0.01em',
+                      }}
+                    >
+                      {item.title}
+                    </div>
+                    <p style={{ fontSize: 'calc(13.5px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65, margin: 0 }}>
+                      {item.body}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right — audit log mock */}
+          <div
+            style={{
+              border: '1.5px solid var(--line-2)',
+              borderRadius: 'calc(20px * var(--ui-scale))',
+              overflow: 'hidden',
+              background: '#fff',
+              boxShadow: '0 4px 32px -8px rgba(11,19,36,0.08)',
+            }}
+          >
+            {/* Header */}
+            <div
+              style={{
+                padding: 'calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                borderBottom: '1px solid var(--line)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'var(--surface)',
+              }}
+            >
+              <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--ink-2)', letterSpacing: '.06em', fontWeight: 600 }}>
+                IMMUTABLE AUDIT LOG
+              </span>
+              <span className="mono" style={{ fontSize: 'calc(9.5px * var(--ui-scale))', color: 'var(--blue)', letterSpacing: '.06em' }}>
+                TAMPER-PROOF
+              </span>
+            </div>
+
+            {/* Log entries */}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {[
+                {
+                  agent: 'Forms Agent',
+                  action: 'Auto-filled I-129 · 47 fields mapped',
+                  meta: 'Confidence ≥ 0.92 on all fields · 3 amber fields flagged for review',
+                  time: '09:14:22',
+                  type: 'write',
+                },
+                {
+                  agent: 'Document Agent',
+                  action: 'Extracted passport data · 31 fields',
+                  meta: 'Read-only · No case data modified',
+                  time: '09:13:57',
+                  type: 'read',
+                },
+                {
+                  agent: 'Follow-Up Agent',
+                  action: 'Attempted status change → BLOCKED',
+                  meta: 'Action requires attorney role · Permission denied by RBAC',
+                  time: '09:11:04',
+                  type: 'blocked',
+                },
+                {
+                  agent: 'Deadline Agent',
+                  action: 'Set 90-day alert · Matter #2241',
+                  meta: 'Visa expiry 14 Oct 2025 · Alert scheduled',
+                  time: '09:08:31',
+                  type: 'write',
+                },
+                {
+                  agent: 'Case Assistant',
+                  action: 'Query answered · Blocking items surfaced',
+                  meta: 'Read-only · Sources cited in response',
+                  time: '09:06:18',
+                  type: 'read',
+                },
+              ].map((entry, i, arr) => {
+                const typeColor = entry.type === 'blocked' ? '#dc2626' : entry.type === 'write' ? 'var(--blue)' : '#059669';
+                const typeBg = entry.type === 'blocked' ? '#fef2f2' : entry.type === 'write' ? 'var(--blue-soft)' : '#f0fdf4';
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      padding: 'calc(14px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                      borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 'calc(4px * var(--ui-scale))',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-sm)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
+                        <span
+                          style={{
+                            fontSize: 'calc(10px * var(--ui-scale))',
+                            fontWeight: 700,
+                            color: typeColor,
+                            background: typeBg,
+                            padding: '2px 7px',
+                            borderRadius: '4px',
+                            letterSpacing: '.04em',
+                            textTransform: 'uppercase',
+                            fontFamily: 'var(--mono)',
+                            flexShrink: 0,
+                          }}
+                        >
+                          {entry.type}
+                        </span>
+                        <span style={{ fontSize: 'calc(12.5px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>
+                          {entry.agent}
+                        </span>
+                      </div>
+                      <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)', flexShrink: 0 }}>
+                        {entry.time}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--ink-2)', paddingLeft: 'calc(2px * var(--ui-scale))' }}>
+                      {entry.action}
+                    </div>
+                    <div className="mono" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', color: 'var(--muted)', lineHeight: 1.4 }}>
+                      {entry.meta}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Footer */}
+            <div
+              style={{
+                padding: 'calc(10px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                borderTop: '1px solid var(--line)',
+                background: 'var(--surface)',
+              }}
+            >
+              <p className="mono" style={{ fontSize: 'calc(9.5px * var(--ui-scale))', color: 'var(--muted)', margin: 0, letterSpacing: '.04em' }}>
+                ALL ENTRIES CRYPTOGRAPHICALLY SIGNED · DIFFS STORED · EXPORTABLE FOR AUDIT
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 

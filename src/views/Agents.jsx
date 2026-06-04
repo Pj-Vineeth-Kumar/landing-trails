@@ -456,6 +456,250 @@ export default function Agents() {
       </Section>
 
       <Section
+        id="case-assistant"
+        tone="sec-surface"
+        eyebrow="Built Into Every Case"
+        lead="Stop digging through tabs."
+        emphasis="Just ask."
+        intro="Every case in CodioCMS has a built-in Case Assistant — a conversational AI that knows the full case context. Ask in plain English, get an answer with sources in seconds."
+        introMaxWidth="64ch"
+      >
+        <div
+          className="reveal"
+          style={{
+            marginTop: 'var(--space-3xl)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'var(--space-3xl)',
+            alignItems: 'center',
+          }}
+        >
+          {/* Left — conversation mock */}
+          <div
+            style={{
+              border: '1.5px solid var(--line-2)',
+              borderRadius: 'calc(20px * var(--ui-scale))',
+              overflow: 'hidden',
+              background: '#fff',
+              boxShadow: '0 4px 32px -8px rgba(11,19,36,0.08)',
+            }}
+          >
+            {/* Chrome bar */}
+            <div
+              style={{
+                padding: 'calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale))',
+                borderBottom: '1px solid var(--line)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'calc(8px * var(--ui-scale))',
+                background: 'var(--surface)',
+              }}
+            >
+              <span
+                style={{
+                  width: 'calc(8px * var(--ui-scale))',
+                  height: 'calc(8px * var(--ui-scale))',
+                  borderRadius: '50%',
+                  background: 'var(--blue)',
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                className="mono"
+                style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--ink-2)', letterSpacing: '.06em', fontWeight: 600 }}
+              >
+                CASE ASSISTANT · Matter #2241 · H-1B Transfer
+              </span>
+            </div>
+
+            {/* Messages */}
+            <div
+              style={{
+                padding: 'calc(24px * var(--ui-scale))',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'calc(16px * var(--ui-scale))',
+              }}
+            >
+              {[
+                {
+                  who: 'attorney',
+                  text: "What's blocking this case right now?",
+                },
+                {
+                  who: 'assistant',
+                  text: "Two items are open: (1) I-129 support letter is awaiting partner review — assigned to Sarah Chen, last updated 3 days ago. (2) Client's passport expires within 90 days of the requested start date, which will trigger an RFE. Recommend requesting a renewed passport before filing.",
+                  source: 'Source: Step 4 review log · Document vault · USCIS policy §214.2(h)',
+                },
+                {
+                  who: 'attorney',
+                  text: 'When does the current H-1B status expire?',
+                },
+                {
+                  who: 'assistant',
+                  text: 'Current status expires October 14, 2025. Filing window opens July 1. The Deadline Agent has already set alerts at 90, 60, and 30 days.',
+                  source: 'Source: Visa record · Deadline Agent log',
+                },
+              ].map((msg, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: msg.who === 'attorney' ? 'flex-end' : 'flex-start',
+                    gap: 'calc(4px * var(--ui-scale))',
+                  }}
+                >
+                  <div
+                    style={{
+                      maxWidth: '88%',
+                      padding: 'calc(10px * var(--ui-scale)) calc(14px * var(--ui-scale))',
+                      borderRadius: msg.who === 'attorney'
+                        ? 'calc(14px * var(--ui-scale)) calc(14px * var(--ui-scale)) calc(4px * var(--ui-scale)) calc(14px * var(--ui-scale))'
+                        : 'calc(14px * var(--ui-scale)) calc(14px * var(--ui-scale)) calc(14px * var(--ui-scale)) calc(4px * var(--ui-scale))',
+                      background: msg.who === 'attorney'
+                        ? 'linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 100%)'
+                        : 'var(--surface)',
+                      border: msg.who === 'assistant' ? '1px solid var(--line-2)' : 'none',
+                      fontSize: 'calc(13px * var(--ui-scale))',
+                      color: msg.who === 'attorney' ? '#fff' : 'var(--ink)',
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    {msg.text}
+                  </div>
+                  {msg.source && (
+                    <div
+                      className="mono"
+                      style={{
+                        fontSize: 'calc(9.5px * var(--ui-scale))',
+                        color: 'var(--blue)',
+                        letterSpacing: '.04em',
+                        paddingLeft: 'calc(4px * var(--ui-scale))',
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {msg.source}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Input bar */}
+            <div
+              style={{
+                margin: 'calc(0px * var(--ui-scale)) calc(16px * var(--ui-scale)) calc(16px * var(--ui-scale))',
+                padding: 'calc(10px * var(--ui-scale)) calc(14px * var(--ui-scale))',
+                border: '1.5px solid var(--line-2)',
+                borderRadius: 'calc(12px * var(--ui-scale))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: 'var(--surface)',
+              }}
+            >
+              <span style={{ fontSize: 'calc(12.5px * var(--ui-scale))', color: 'var(--muted)' }}>
+                Ask anything about this case…
+              </span>
+              <span
+                style={{
+                  width: 'calc(24px * var(--ui-scale))',
+                  height: 'calc(24px * var(--ui-scale))',
+                  borderRadius: 'calc(6px * var(--ui-scale))',
+                  background: 'var(--blue)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <svg viewBox="0 0 16 16" fill="none" style={{ width: 12, height: 12 }}>
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          {/* Right — value props */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
+            <div>
+              <h3
+                className="display"
+                style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 'var(--space-lg)' }}
+              >
+                The interface above the agents.{' '}
+                <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>
+                  Every answer has a source.
+                </em>
+              </h3>
+              <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65 }}>
+                Behind the Case Assistant, a network of specialist sub-agents handles the work — each
+                expert in its domain. The Assistant is the interface. The agents are the engine. Every
+                answer is grounded in actual case data, not a model hallucination.
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+              {[
+                {
+                  q: '"What\'s blocking this case?"',
+                  a: 'Surfaces open steps, pending reviews, and document gaps — with the exact person and timestamp responsible.',
+                },
+                {
+                  q: '"When does the visa expire?"',
+                  a: 'Pulls from the document vault and cross-checks against the case timeline. Deadline alerts already set.',
+                },
+                {
+                  q: '"Is this RFE response complete?"',
+                  a: 'Checks every required document against the RFE requirements and flags anything missing before you file.',
+                },
+              ].map((item, i, arr) => (
+                <div
+                  key={i}
+                  style={{
+                    paddingBottom: i < arr.length - 1 ? 'var(--space-md)' : 0,
+                    borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                  }}
+                >
+                  <div
+                    className="mono"
+                    style={{
+                      fontSize: 'calc(11px * var(--ui-scale))',
+                      color: 'var(--blue)',
+                      fontWeight: 700,
+                      marginBottom: 'calc(4px * var(--ui-scale))',
+                      letterSpacing: '.03em',
+                    }}
+                  >
+                    {item.q}
+                  </div>
+                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>
+                    {item.a}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div
+              style={{
+                padding: 'calc(16px * var(--ui-scale)) calc(20px * var(--ui-scale))',
+                background: 'var(--blue-soft)',
+                borderRadius: 'calc(12px * var(--ui-scale))',
+                border: '1px solid rgba(25,80,198,0.12)',
+              }}
+            >
+              <p style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-2)', lineHeight: 1.6, margin: 0 }}>
+                <strong style={{ color: 'var(--blue)' }}>No more status-update calls.</strong>{' '}
+                Attorneys, case managers, and partners can get the answer themselves in seconds.
+                The entire premise of the 5-minute "what's the status?" call is eliminated.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section
         id="difference"
         tone="sec-surface"
         eyebrow="Why It Matters"
