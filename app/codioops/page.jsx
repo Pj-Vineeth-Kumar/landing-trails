@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'CodioOps — Managed Case Management Operations | GlobalCodio',
+  title: 'CodioOps - Managed Case Management Operations | GlobalCodio',
   description:
     'CodioOps is the dedicated team that configures, optimizes, and continuously tunes your CodioCMS platform to match exactly how your firm operates. Bundled with every GlobalCodio engagement.',
   keywords: [
@@ -10,7 +10,7 @@ export const metadata = {
     'Managed case management services',
   ],
   openGraph: {
-    title: 'CodioOps — Managed Case Management Operations | GlobalCodio',
+    title: 'CodioOps - Managed Case Management Operations | GlobalCodio',
     description:
       'CodioOps is the dedicated team that configures, optimizes, and continuously tunes your CodioCMS platform to match exactly how your firm operates.',
     url: 'https://globalcodio.ai/codioops',

@@ -206,7 +206,7 @@ const portableComponents = {
             color: 'var(--blue)',
             letterSpacing: '.06em',
           }}>
-            — {value.attribution}
+            - {value.attribution}
           </p>
         )}
       </div>

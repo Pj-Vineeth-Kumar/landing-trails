@@ -24,19 +24,19 @@ const DAY = [
   { h: 'Meanwhile, revenue surfaces.', b: 'The Renewal Agent flags three dormant clients whose visas expire in 60 days, and the BD Agent books two consultations for next week.', agent: 'Renewal + BD', Icon: TrendingUp },
 ];
 
-/* Workflow integrity — three pillars */
+/* Workflow integrity - three pillars */
 const INTEGRITY_ITEMS = [
   {
     Icon: CheckSquare,
     n: '01',
     h: 'Approvals that can\'t skip steps',
-    b: 'Forms, support letters, and documents each have structured review workflows. A partner can comment on a specific paragraph, approve only what they\'ve reviewed, and see exactly which data source populated each field — before signing off. Approved fields can\'t be silently changed after the fact.',
+    b: 'Forms, support letters, and documents each have structured review workflows. A partner can comment on a specific paragraph, approve only what they\'ve reviewed, and see exactly which data source populated each field - before signing off. Approved fields can\'t be silently changed after the fact.',
   },
   {
     Icon: GitBranch,
     n: '02',
     h: 'Case status that\'s always accurate',
-    b: 'Status is derived from what has actually happened in the case — not from whatever a paralegal last typed. Auto-derived status means no manual updates, no stale data in client reports, and no partner walking into a review meeting with the wrong picture.',
+    b: 'Status is derived from what has actually happened in the case - not from whatever a paralegal last typed. Auto-derived status means no manual updates, no stale data in client reports, and no partner walking into a review meeting with the wrong picture.',
     featured: true,
   },
   {
@@ -75,6 +75,7 @@ export default function Firms() {
         lead="Everything your firm runs on,"
         emphasis="built and managed for you."
         intro="One partner delivers the platform, the AI workforce, the forms engine, the service network, and the people who keep it all running - all built for immigration."
+        headAlign="center"
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={WHAT_YOU_GET} cols={3} />
@@ -143,72 +144,40 @@ export default function Firms() {
         eyebrow="Built-In Quality Control"
         lead="The platform enforces process."
         emphasis="So your team doesn't have to."
-        intro="Most case management platforms are passive record-keepers. CodioCMS enforces your process actively — steps can't be marked complete without required reviews, approvals are logged with full context, and nothing gets silently changed after a partner signs off."
+        intro="Most case management platforms are passive record-keepers. CodioCMS enforces your process actively - steps can't be marked complete without required reviews, approvals are logged with full context, and nothing gets silently changed after a partner signs off."
         introMaxWidth="76ch"
+        headAlign="center"
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={INTEGRITY_ITEMS} cols={3} />
         </div>
 
         {/* Cross-case dependencies callout */}
-        <div
-          className="reveal d1"
-          style={{
-            marginTop: 'var(--space-2xl)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--space-3xl)',
-            padding: 'calc(36px * var(--ui-scale))',
-            border: '1.5px solid var(--line-2)',
-            borderRadius: 'calc(20px * var(--ui-scale))',
-            background: 'var(--surface)',
-            alignItems: 'center',
-          }}
-        >
+        <div className="reveal d1 integrity-crosscase">
           <div>
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              Cross-Case Awareness
-            </div>
-            <h3
-              className="display"
-              style={{
-                fontSize: 'var(--text-display-md)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.15,
-                marginBottom: 'var(--space-lg)',
-              }}
-            >
+            <div className="eyebrow integrity-crosscase-eyebrow">Cross-Case Awareness</div>
+            <h3 className="display integrity-crosscase-title">
               Family cases. Derivative cases.{' '}
               <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>
                 All connected.
               </em>
             </h3>
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65 }}>
-              Dependent and derivative cases are first-class in CodioCMS — not a note in a text field
+            <p className="integrity-crosscase-lead">
+              Dependent and derivative cases are first-class in CodioCMS - not a note in a text field
               you have to remember to check. When a principal case changes, related cases know.
-              When a deadline in one case affects another, the system surfaces it — before it becomes
+              When a deadline in one case affects another, the system surfaces it - before it becomes
               a problem.
             </p>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+          <div className="integrity-crosscase-list">
             {[
-              { label: 'Principal petitions', detail: 'Linked to all derivative beneficiaries — status changes propagate automatically.' },
+              { label: 'Principal petitions', detail: 'Linked to all derivative beneficiaries - status changes propagate automatically.' },
               { label: 'Family-based cases', detail: 'Spouse and dependent cases tracked together, with shared deadline visibility.' },
-              { label: 'Corporate transfers', detail: 'Prior visa history carried forward — no re-gathering what\'s already on file.' },
-            ].map((item, i, arr) => (
-              <div
-                key={item.label}
-                style={{
-                  paddingBottom: i < arr.length - 1 ? 'var(--space-md)' : 0,
-                  borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-                }}
-              >
-                <div style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)', marginBottom: 'calc(3px * var(--ui-scale))' }}>
-                  {item.label}
-                </div>
-                <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>
-                  {item.detail}
-                </div>
+              { label: 'Corporate transfers', detail: 'Prior visa history carried forward - no re-gathering what\'s already on file.' },
+            ].map((item) => (
+              <div key={item.label} className="integrity-crosscase-item">
+                <div className="integrity-crosscase-item-label">{item.label}</div>
+                <div className="integrity-crosscase-item-detail">{item.detail}</div>
               </div>
             ))}
           </div>
@@ -243,7 +212,7 @@ export default function Firms() {
         items={[
           {
             q: 'What does GlobalCodio provide for immigration law firms?',
-            a: 'GlobalCodio provides a complete, managed technology operation for immigration law firms: CodioCMS (case management platform), CodioForms (global forms engine), 10 Codio AI Agents, CodioOps (dedicated operations team), and CodioNetwork (global service provider network). Everything is deployed and managed by GlobalCodio — your firm never manages technology again.',
+            a: 'GlobalCodio provides a complete, managed technology operation for immigration law firms: CodioCMS (case management platform), CodioForms (global forms engine), 10 Codio AI Agents, CodioOps (dedicated operations team), and CodioNetwork (global service provider network). Everything is deployed and managed by GlobalCodio - your firm never manages technology again.',
             meta: ['Full-stack operation', 'We manage everything'],
           },
           {
@@ -253,7 +222,7 @@ export default function Firms() {
           },
           {
             q: 'How does GlobalCodio help immigration firms respond to corporate RFPs?',
-            a: 'GlobalCodio provides an RFP Response service that helps immigration law firms answer complex technical, security, and compliance questions from corporate clients. Firms on GlobalCodio can credibly document SOC 2 Type II, ISO 27001, GDPR, HIPAA-ready controls, and AI governance standards — exactly what corporate procurement teams require.',
+            a: 'GlobalCodio provides an RFP Response service that helps immigration law firms answer complex technical, security, and compliance questions from corporate clients. Firms on GlobalCodio can credibly document SOC 2 Type II, ISO 27001, GDPR, HIPAA-ready controls, and AI governance standards - exactly what corporate procurement teams require.',
             meta: ['SOC 2 Type II', 'RFP response support'],
           },
           {
@@ -263,7 +232,7 @@ export default function Firms() {
           },
           {
             q: 'We already have case management software. Do we need to replace it?',
-            a: "Not necessarily. GlobalCodio integrates with existing tools and layers the AI workforce on top — no rip-and-replace required in many cases. Where migration to CodioCMS makes sense, GlobalCodio's team manages the entire process with zero disruption to active cases.",
+            a: "Not necessarily. GlobalCodio integrates with existing tools and layers the AI workforce on top - no rip-and-replace required in many cases. Where migration to CodioCMS makes sense, GlobalCodio's team manages the entire process with zero disruption to active cases.",
             meta: ['No rip-and-replace', 'Guided migration'],
           },
         ]}

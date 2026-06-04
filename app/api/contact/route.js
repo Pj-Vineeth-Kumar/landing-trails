@@ -142,7 +142,7 @@ export async function POST(request) {
     return Response.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  // Save to Sanity first (non-blocking on failure — email is the critical path)
+  // Save to Sanity first (non-blocking on failure - email is the critical path)
   try {
     await saveFormSubmission({ fullName, workEmail, orgName, website, howHeard, message });
   } catch (err) {
@@ -155,7 +155,7 @@ export async function POST(request) {
       from: process.env.RESEND_FROM_EMAIL || 'GlobalCodio Contact <onboarding@resend.dev>',
       to: process.env.CONTACT_TO_EMAIL || 'itadmin@medicodio.ai',
       replyTo: workEmail,
-      subject: `New enquiry from ${fullName} — ${orgName}`,
+      subject: `New enquiry from ${fullName} - ${orgName}`,
       html: buildEmailHtml({ fullName, workEmail, orgName, website, howHeard, message }),
     });
     return Response.json({ ok: true });

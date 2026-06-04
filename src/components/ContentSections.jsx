@@ -211,7 +211,10 @@ export const AgentOrbit = () => {
 export const Testimonial = () => (
   <section className="sec" id="customers">
     <div className="container">
-      <div className="reveal section-head">
+      <div
+        className="reveal section-head"
+        style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}
+      >
         <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Two Audiences</div>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>Built for law firms</span>
@@ -344,9 +347,6 @@ export const ValueLevers = () => (
       <div className="value-levers-columns">
         {VALUE_LEVER_GROUPS.map((group, gi) => (
           <div key={group.tag} className={`value-levers-group reveal d${gi + 1}`}>
-            <div className="value-levers-group-head">
-              <span className="mono">{group.tag}</span>
-            </div>
             <div className="value-levers-group-grid">
               {group.levers.map((lever) => (
                 <article

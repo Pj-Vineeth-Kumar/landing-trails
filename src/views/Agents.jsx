@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ReactFlow, Handle, Position, Background, MarkerType } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -18,6 +18,9 @@ import {
   TrendingUp,
   Globe,
   BellRing,
+  User,
+  Sparkles,
+  Send,
 } from 'lucide-react';
 
 const Check = () => (
@@ -26,6 +29,114 @@ const Check = () => (
     <path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+
+const CASE_ASSISTANT_MESSAGES = [
+  {
+    who: 'attorney',
+    text: "What's blocking this case right now?",
+  },
+  {
+    who: 'assistant',
+    text: "Two items are open: (1) I-129 support letter is awaiting partner review - assigned to Sarah Chen, last updated 3 days ago. (2) Client's passport expires within 90 days of the requested start date, which will trigger an RFE. Recommend requesting a renewed passport before filing.",
+  },
+  {
+    who: 'attorney',
+    text: 'When does the current H-1B status expire?',
+  },
+  {
+    who: 'assistant',
+    text: 'Current status expires October 14, 2025. Filing window opens July 1. The Deadline Agent has already set alerts at 90, 60, and 30 days.',
+  },
+];
+
+const CASE_ASSISTANT_EXAMPLES = [
+  {
+    q: '"Is this RFE response complete?"',
+    a: 'Checks every required document against the RFE requirements and flags anything missing before you file.',
+  },
+  {
+    q: '"Who still needs to sign off?"',
+    a: 'Lists pending approvers across paralegal, attorney, and HR - with days waiting and reminders ready to send.',
+  },
+  {
+    q: '"Which documents are still outstanding?"',
+    a: 'Scans the checklist against uploads in the vault and shows exactly what the client or firm still owes.',
+  },
+  {
+    q: '"What changed on this case last week?"',
+    a: 'Summarizes filings, status moves, new uploads, and assignment updates - pulled from the case audit log.',
+  },
+];
+
+const caseAssistantMessage = {
+  hidden: { opacity: 0, y: 10, scale: 0.98 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { delay: 0.12 + i * 0.07, duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+const CaseAssistantMock = () => {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <div className="case-assistant-mock" aria-hidden="true">
+      <header className="case-assistant-mock__head">
+        <div className="case-assistant-mock__brand">
+          <span className="case-assistant-mock__logo">
+            <img src="/favicon.ico" alt="" width={18} height={18} draggable={false} />
+          </span>
+          <div className="case-assistant-mock__meta">
+            <span className="case-assistant-mock__title">Case Assistant</span>
+            <span className="mono case-assistant-mock__matter">Matter #2241 · H-1B Transfer</span>
+          </div>
+        </div>
+        <span className="case-assistant-mock__live mono">
+          <span className="case-assistant-mock__pulse" aria-hidden="true" />
+          Live on case
+        </span>
+      </header>
+
+      <div className="case-assistant-mock__thread">
+        {CASE_ASSISTANT_MESSAGES.map((msg, i) => {
+          const isAttorney = msg.who === 'attorney';
+          return (
+            <motion.div
+              key={i}
+              className={`case-assistant-msg${isAttorney ? ' case-assistant-msg--user' : ' case-assistant-msg--ai'}`}
+              custom={i}
+              variants={caseAssistantMessage}
+              initial={reduceMotion ? false : 'hidden'}
+              animate="show"
+            >
+              <span className={`case-assistant-msg__avatar${isAttorney ? ' case-assistant-msg__avatar--user' : ''}`} aria-hidden="true">
+                {isAttorney ? <User size={13} strokeWidth={2} /> : <Sparkles size={13} strokeWidth={2} />}
+              </span>
+              <div className="case-assistant-msg__stack">
+                <div className="case-assistant-msg__bubble">{msg.text}</div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <footer className="case-assistant-mock__composer">
+        <Sparkles size={14} strokeWidth={1.75} className="case-assistant-mock__composer-icon" aria-hidden="true" />
+        <span className="case-assistant-mock__composer-placeholder">Ask anything…</span>
+        <motion.span
+          className="case-assistant-mock__send"
+          whileHover={reduceMotion ? undefined : { scale: 1.06 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+          transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+        >
+          <Send size={13} strokeWidth={2.25} aria-hidden="true" />
+        </motion.span>
+      </footer>
+    </div>
+  );
+};
 
 const AGENTS = [
   {
@@ -54,7 +165,7 @@ const AGENTS = [
   },
   {
     Icon: PenLine, n: '04', h: 'Forms',
-    b: 'Auto-fills forms across CodioForms — USA, Canada, Netherlands, India and more. Cross-references data across forms and always uses current versions.',
+    b: 'Auto-fills forms across CodioForms - USA, Canada, Netherlands, India and more. Cross-references data across forms and always uses current versions.',
     stat: '70% LESS FORM PREP TIME',
     bullets: ['Auto-fills government forms from CodioCMS case data', 'Cross-references data across all forms in a package', 'Always uses the current authority-synced version', 'Supports USA, Canada, Netherlands, India and more', 'Exports print-ready PDFs for traditional submission'],
     steps: ['Pull case data', 'Map to form fields', 'Cross-reference', 'Export ready'],
@@ -70,7 +181,7 @@ const AGENTS = [
   },
   {
     Icon: MessageCircle, n: '06', h: 'Client Comms',
-    b: 'Sends case status updates, answers common questions 24/7, schedules appointments, and collects missing documents — in multiple languages.',
+    b: 'Sends case status updates, answers common questions 24/7, schedules appointments, and collects missing documents - in multiple languages.',
     stat: '80% FEWER INBOUND CALLS',
     bullets: ['Sends proactive case status updates at key milestones', 'Answers common immigration questions 24/7', 'Schedules consultations directly on attorney calendars', 'Collects missing documents via secure upload links', 'Communicates in the client\'s preferred language'],
     steps: ['Trigger event', 'Draft message', 'Send to client', 'Log response'],
@@ -102,7 +213,7 @@ const AGENTS = [
   },
   {
     Icon: BellRing, n: '10', h: 'Government Notice Update',
-    b: 'Monitors government portals and immigration authority announcements for policy changes, form revisions, and notice updates — alerting your firm to anything that affects open cases.',
+    b: 'Monitors government portals and immigration authority announcements for policy changes, form revisions, and notice updates - alerting your firm to anything that affects open cases.',
     stat: 'REAL-TIME POLICY ALERTS',
     bullets: ['Monitors USCIS, IRCC, IND, and other authority portals', 'Detects form version changes before your firm is caught out', 'Alerts attorneys to policy changes affecting open cases', 'Summarises regulatory updates in plain language', 'Logs all notices to the relevant case records'],
     steps: ['Monitor portals', 'Detect changes', 'Match to cases', 'Alert attorney'],
@@ -244,16 +355,31 @@ function StatBadge({ stat }) {
 }
 
 /* ── Panel transition ────────────────────────────────── */
+const panelEase = [0.16, 1, 0.3, 1];
 const panelVariants = {
-  enter: { opacity: 0, y: 6 },
+  enter: { opacity: 0, y: 12 },
+  center: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: panelEase },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] },
+  },
+};
+const panelVariantsReduced = {
+  enter: { opacity: 1, y: 0 },
   center: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -4 },
+  exit: { opacity: 1, y: 0 },
 };
 
 /* ── Main AgentPanel ────────────────────────────────── */
 function AgentPanel() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   React.useEffect(() => {
     if (paused) return;
@@ -267,16 +393,7 @@ function AgentPanel() {
   const Icon = agent.Icon;
 
   return (
-    <div
-      className="reveal"
-      style={{
-        marginTop: 'var(--space-3xl)',
-        border: '1.5px solid var(--line-2)',
-        borderRadius: 'calc(20px * var(--ui-scale))',
-        overflow: 'hidden', background: '#fff',
-        boxShadow: '0 4px 32px -8px rgba(11,19,36,0.08)',
-      }}
-    >
+    <div className="reveal agent-panel">
       {/* ── Top: tab strip ── */}
       <div style={{
         display: 'flex', flexWrap: 'wrap', gap: 'calc(6px * var(--ui-scale))',
@@ -333,19 +450,18 @@ function AgentPanel() {
       </div>
 
       {/* ── Middle: detail panel ── */}
-      <div style={{ position: 'relative', overflow: 'hidden', minHeight: 'calc(300px * var(--ui-scale))' }}>
-        <AnimatePresence mode="wait">
+      <div className="agent-panel-detail">
+        <AnimatePresence initial={false}>
           <motion.div
             key={active}
-            variants={panelVariants}
+            className="agent-panel-detail__content"
+            variants={reduceMotion ? panelVariantsReduced : panelVariants}
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            style={{ padding: 'calc(44px * var(--ui-scale))', display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)', height: '100%' }}
           >
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 'var(--space-lg)' }}>
+            <div className="agent-panel-header">
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-md)' }}>
                 <span style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -355,11 +471,11 @@ function AgentPanel() {
                 }}>
                   <Icon size={24} strokeWidth={1.6} />
                 </span>
-                <div>
+                <div className="agent-panel-header-copy">
                   <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.12em', color: 'var(--blue)', marginBottom: 'calc(4px * var(--ui-scale))' }}>
                     AGENT {String(active + 1).padStart(2, '0')} · {agent.tag}
                   </div>
-                  <h3 className="display" style={{ fontSize: 'calc(26px * var(--ui-scale))', letterSpacing: '-0.02em', lineHeight: 1.15, color: 'var(--ink)' }}>
+                  <h3 className="display agent-panel-title">
                     {agent.h}
                   </h3>
                 </div>
@@ -368,11 +484,11 @@ function AgentPanel() {
             </div>
 
             {/* Description */}
-            <p style={{ fontSize: 'calc(15px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.7, maxWidth: '68ch' }}>
+            <p className="agent-panel-desc">
               {agent.b}
             </p>
 
-            {/* HOW IT WORKS — React Flow */}
+            {/* HOW IT WORKS - React Flow */}
             <div>
               <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--muted)', marginBottom: 'calc(8px * var(--ui-scale))' }}>
                 HOW IT WORKS
@@ -381,7 +497,7 @@ function AgentPanel() {
             </div>
 
             {/* WHAT IT DOES */}
-            <div style={{ flex: 1 }}>
+            <div className="agent-panel-bullets-wrap">
               <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--muted)', marginBottom: 'calc(14px * var(--ui-scale))' }}>
                 WHAT IT DOES
               </div>
@@ -420,7 +536,7 @@ function AgentPanel() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-lg)',
         }}>
           <p style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.5 }}>
-            <strong style={{ color: 'var(--ink-2)' }}>More agents coming</strong> — released as immigration workflows evolve. Existing clients get access automatically, no additional fees.
+            <strong style={{ color: 'var(--ink-2)' }}>More agents coming</strong> - released as immigration workflows evolve. Existing clients get access automatically, no additional fees.
           </p>
           <span className="pill" style={{ flexShrink: 0, fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.08em', textTransform: 'uppercase' }}>
             Coming soon
@@ -462,238 +578,52 @@ export default function Agents() {
         eyebrow="Built Into Every Case"
         lead="Stop digging through tabs."
         emphasis="Just ask."
-        intro="Every case in CodioCMS has a built-in Case Assistant — a conversational AI that knows the full case context. Ask in plain English, get an answer with sources in seconds."
-        introMaxWidth="64ch"
+        headInline
+        headAlign="center"
       >
-        <div
-          className="reveal"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--space-3xl)',
-            alignItems: 'center',
-          }}
-        >
-          {/* Left — conversation mock */}
-          <div
-            style={{
-              border: '1.5px solid var(--line-2)',
-              borderRadius: 'calc(20px * var(--ui-scale))',
-              overflow: 'hidden',
-              background: '#fff',
-              boxShadow: '0 4px 32px -8px rgba(11,19,36,0.08)',
-            }}
-          >
-            {/* Chrome bar */}
-            <div
-              style={{
-                padding: 'calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                borderBottom: '1px solid var(--line)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'calc(8px * var(--ui-scale))',
-                background: 'var(--surface)',
-              }}
-            >
-              <span
-                style={{
-                  width: 'calc(8px * var(--ui-scale))',
-                  height: 'calc(8px * var(--ui-scale))',
-                  borderRadius: '50%',
-                  background: 'var(--blue)',
-                  flexShrink: 0,
-                }}
-              />
-              <span
-                className="mono"
-                style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--ink-2)', letterSpacing: '.06em', fontWeight: 600 }}
-              >
-                CASE ASSISTANT · Matter #2241 · H-1B Transfer
-              </span>
-            </div>
+        <div className="reveal case-assistant-head">
+          <p className="case-assistant-head-lead">
+            Every case in CodioCMS has a built-in Case Assistant - a conversational AI that knows the full case context:
+            documents, workflow steps, deadlines, assignments, and every change logged against the matter. Ask in plain
+            English from inside the case - what&apos;s blocking progress, when a visa expires, whether an RFE response is
+            complete, who still needs to sign off - and get a direct answer in seconds, grounded in your actual case data
+            rather than generic model output.
+          </p>
+        </div>
 
-            {/* Messages */}
-            <div
-              style={{
-                padding: 'calc(24px * var(--ui-scale))',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'calc(16px * var(--ui-scale))',
-              }}
-            >
-              {[
-                {
-                  who: 'attorney',
-                  text: "What's blocking this case right now?",
-                },
-                {
-                  who: 'assistant',
-                  text: "Two items are open: (1) I-129 support letter is awaiting partner review — assigned to Sarah Chen, last updated 3 days ago. (2) Client's passport expires within 90 days of the requested start date, which will trigger an RFE. Recommend requesting a renewed passport before filing.",
-                  source: 'Source: Step 4 review log · Document vault · USCIS policy §214.2(h)',
-                },
-                {
-                  who: 'attorney',
-                  text: 'When does the current H-1B status expire?',
-                },
-                {
-                  who: 'assistant',
-                  text: 'Current status expires October 14, 2025. Filing window opens July 1. The Deadline Agent has already set alerts at 90, 60, and 30 days.',
-                  source: 'Source: Visa record · Deadline Agent log',
-                },
-              ].map((msg, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: msg.who === 'attorney' ? 'flex-end' : 'flex-start',
-                    gap: 'calc(4px * var(--ui-scale))',
-                  }}
-                >
-                  <div
-                    style={{
-                      maxWidth: '88%',
-                      padding: 'calc(10px * var(--ui-scale)) calc(14px * var(--ui-scale))',
-                      borderRadius: msg.who === 'attorney'
-                        ? 'calc(14px * var(--ui-scale)) calc(14px * var(--ui-scale)) calc(4px * var(--ui-scale)) calc(14px * var(--ui-scale))'
-                        : 'calc(14px * var(--ui-scale)) calc(14px * var(--ui-scale)) calc(14px * var(--ui-scale)) calc(4px * var(--ui-scale))',
-                      background: msg.who === 'attorney'
-                        ? 'linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 100%)'
-                        : 'var(--surface)',
-                      border: msg.who === 'assistant' ? '1px solid var(--line-2)' : 'none',
-                      fontSize: 'calc(13px * var(--ui-scale))',
-                      color: msg.who === 'attorney' ? '#fff' : 'var(--ink)',
-                      lineHeight: 1.55,
-                    }}
-                  >
-                    {msg.text}
-                  </div>
-                  {msg.source && (
-                    <div
-                      className="mono"
-                      style={{
-                        fontSize: 'calc(9.5px * var(--ui-scale))',
-                        color: 'var(--blue)',
-                        letterSpacing: '.04em',
-                        paddingLeft: 'calc(4px * var(--ui-scale))',
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {msg.source}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+        <div className="reveal case-assistant-grid">
+          <CaseAssistantMock />
 
-            {/* Input bar */}
-            <div
-              style={{
-                margin: 'calc(0px * var(--ui-scale)) calc(16px * var(--ui-scale)) calc(16px * var(--ui-scale))',
-                padding: 'calc(10px * var(--ui-scale)) calc(14px * var(--ui-scale))',
-                border: '1.5px solid var(--line-2)',
-                borderRadius: 'calc(12px * var(--ui-scale))',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                background: 'var(--surface)',
-              }}
-            >
-              <span style={{ fontSize: 'calc(12.5px * var(--ui-scale))', color: 'var(--muted)' }}>
-                Ask anything about this case…
-              </span>
-              <span
-                style={{
-                  width: 'calc(24px * var(--ui-scale))',
-                  height: 'calc(24px * var(--ui-scale))',
-                  borderRadius: 'calc(6px * var(--ui-scale))',
-                  background: 'var(--blue)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                <svg viewBox="0 0 16 16" fill="none" style={{ width: 12, height: 12 }}>
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </div>
-          </div>
-
-          {/* Right — value props */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
-            <div>
-              <h3
-                className="display"
-                style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 'var(--space-lg)' }}
-              >
-                The interface above the agents.{' '}
-                <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>
-                  Every answer has a source.
-                </em>
+          <div className="case-assistant-copy">
+            <div className="case-assistant-copy-head">
+              <h3 className="display case-assistant-copy-title">
+                <span>The interface above the agents.</span>{' '}
+                <em className="text-grad-blue">Every answer has a source.</em>
               </h3>
-              <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65 }}>
-                Behind the Case Assistant, a network of specialist sub-agents handles the work — each
-                expert in its domain. The Assistant is the interface. The agents are the engine. Every
-                answer is grounded in actual case data, not a model hallucination.
+              <p className="case-assistant-copy-lead">
+                Behind the Case Assistant, specialist sub-agents handle the work - each expert in its domain.
+                The Assistant is the interface; the agents are the engine. Every answer is grounded in actual
+                case data, not a model hallucination.
               </p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-              {[
-                {
-                  q: '"What\'s blocking this case?"',
-                  a: 'Surfaces open steps, pending reviews, and document gaps — with the exact person and timestamp responsible.',
-                },
-                {
-                  q: '"When does the visa expire?"',
-                  a: 'Pulls from the document vault and cross-checks against the case timeline. Deadline alerts already set.',
-                },
-                {
-                  q: '"Is this RFE response complete?"',
-                  a: 'Checks every required document against the RFE requirements and flags anything missing before you file.',
-                },
-              ].map((item, i, arr) => (
-                <div
-                  key={i}
-                  style={{
-                    paddingBottom: i < arr.length - 1 ? 'var(--space-md)' : 0,
-                    borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-                  }}
-                >
-                  <div
-                    className="mono"
-                    style={{
-                      fontSize: 'calc(11px * var(--ui-scale))',
-                      color: 'var(--blue)',
-                      fontWeight: 700,
-                      marginBottom: 'calc(4px * var(--ui-scale))',
-                      letterSpacing: '.03em',
-                    }}
-                  >
-                    {item.q}
+            <div className="case-assistant-examples-panel">
+              <div className="mono case-assistant-examples-label">Try asking</div>
+              <div className="case-assistant-examples">
+                {CASE_ASSISTANT_EXAMPLES.map((item) => (
+                  <div key={item.q} className="case-assistant-example">
+                    <div className="mono case-assistant-example-q">{item.q}</div>
+                    <div className="case-assistant-example-a">{item.a}</div>
                   </div>
-                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>
-                    {item.a}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            <div
-              style={{
-                padding: 'calc(16px * var(--ui-scale)) calc(20px * var(--ui-scale))',
-                background: 'var(--blue-soft)',
-                borderRadius: 'calc(12px * var(--ui-scale))',
-                border: '1px solid rgba(25,80,198,0.12)',
-              }}
-            >
-              <p style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-2)', lineHeight: 1.6, margin: 0 }}>
-                <strong style={{ color: 'var(--blue)' }}>No more status-update calls.</strong>{' '}
-                Attorneys, case managers, and partners can get the answer themselves in seconds.
-                The entire premise of the 5-minute "what's the status?" call is eliminated.
+            <div className="case-assistant-callout">
+              <p className="case-assistant-callout-text">
+                <strong>No more status-update calls.</strong>{' '}
+                Attorneys, case managers, and partners get the answer themselves in seconds -
+                the entire premise of the 5-minute &ldquo;what&apos;s the status?&rdquo; call is eliminated.
               </p>
             </div>
           </div>
@@ -796,12 +726,12 @@ export default function Agents() {
           },
           {
             q: 'How do AI agents protect attorney-client privilege and client data?',
-            a: 'Codio AI Agents operate within the same role-based access controls as human staff — they cannot take any action requiring elevated permissions. All agent outputs are confidence-scored and flagged for attorney review before being applied to a case. GlobalCodio never trains AI models on client data. Every agent action is written to an immutable, cryptographically signed audit log.',
+            a: 'Codio AI Agents operate within the same role-based access controls as human staff - they cannot take any action requiring elevated permissions. All agent outputs are confidence-scored and flagged for attorney review before being applied to a case. GlobalCodio never trains AI models on client data. Every agent action is written to an immutable, cryptographically signed audit log.',
             meta: ['RBAC-bound', 'Attorney review required'],
           },
           {
             q: 'How much time do AI agents save on immigration case preparation?',
-            a: 'Immigration law firms on GlobalCodio typically see a 70% reduction in case preparation time. AI agents handle document extraction, form preparation, questionnaire processing, and deadline tracking — work that previously took hours takes minutes. The human equivalent of all 10 AI agents would cost approximately $499,000 per year in salaries.',
+            a: 'Immigration law firms on GlobalCodio typically see a 70% reduction in case preparation time. AI agents handle document extraction, form preparation, questionnaire processing, and deadline tracking - work that previously took hours takes minutes. The human equivalent of all 10 AI agents would cost approximately $499,000 per year in salaries.',
             meta: ['70% time reduction', '$499K staff cost replaced'],
           },
           {
@@ -816,7 +746,7 @@ export default function Agents() {
           },
           {
             q: 'Do we need technical staff to set up or manage the AI agents?',
-            a: 'No. GlobalCodio deploys, configures, monitors, and manages all AI agents as part of the managed service. Your firm needs no IT staff, data scientists, or AI expertise. CodioOps — bundled with every engagement — handles all ongoing management and optimization.',
+            a: 'No. GlobalCodio deploys, configures, monitors, and manages all AI agents as part of the managed service. Your firm needs no IT staff, data scientists, or AI expertise. CodioOps - bundled with every engagement - handles all ongoing management and optimization.',
             meta: ['Fully managed', 'No IT staff needed'],
           },
         ]}

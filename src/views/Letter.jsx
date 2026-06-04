@@ -45,7 +45,7 @@ export default function Letter() {
 
           <p className="reveal" style={proseStyle}>
             When INSZoom was acquired in 2020, I stepped back. Within weeks, my phone started ringing.
-            Firms I had worked with for years were reaching out — not because I had contacted them, but
+            Firms I had worked with for years were reaching out - not because I had contacted them, but
             because they needed help. They were struggling with the same problems, and they remembered
             who had built the tools they relied on. The answers they gave me were remarkably consistent.
           </p>

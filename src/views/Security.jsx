@@ -6,6 +6,37 @@ import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { CertLogos } from '../components/ContentSections.jsx';
 import { Lock, KeyRound, Globe, Eye, Database, UserCheck, Bot, ScrollText, SlidersHorizontal } from 'lucide-react';
 
+const AUDIT_LOG_ENTRIES = [
+  {
+    agent: 'Forms Agent',
+    action: 'Auto-filled I-129 · 47 fields mapped',
+    meta: 'Confidence ≥ 0.92 on all fields · 3 amber fields flagged for review',
+    time: '09:14:22',
+    type: 'write',
+  },
+  {
+    agent: 'Document Agent',
+    action: 'Extracted passport data · 31 fields',
+    meta: 'Read-only · No case data modified',
+    time: '09:13:57',
+    type: 'read',
+  },
+  {
+    agent: 'Follow-Up Agent',
+    action: 'Attempted status change → BLOCKED',
+    meta: 'Action requires attorney role · Permission denied by RBAC',
+    time: '09:11:04',
+    type: 'blocked',
+  },
+  {
+    agent: 'Case Assistant',
+    action: 'Query answered · Blocking items surfaced',
+    meta: 'Read-only · Sources cited in response',
+    time: '09:06:18',
+    type: 'read',
+  },
+];
+
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
     <circle cx="10" cy="10" r="8" />
@@ -102,6 +133,8 @@ export default function Security() {
         eyebrow="Defense in Depth"
         lead="Security built into"
         emphasis="every layer."
+        headAlign="center"
+        headInline
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={layers} cols={3} />
@@ -114,8 +147,9 @@ export default function Security() {
         eyebrow="AI Governance"
         lead="AI agents that can't go rogue."
         emphasis="Because the data is too important."
-        intro="When AI operates on sensitive immigration data, the compliance question isn't just 'Is the platform secure?' — it's 'What can the AI actually do, and can you prove it?' GlobalCodio has a specific answer."
+        intro="When AI operates on sensitive immigration data, the compliance question isn't just 'Is the platform secure?' - it's 'What can the AI actually do, and can you prove it?' GlobalCodio has a specific answer."
         introMaxWidth="72ch"
+        headAlign="center"
       >
         <div
           className="reveal"
@@ -127,18 +161,18 @@ export default function Security() {
             alignItems: 'start',
           }}
         >
-          {/* Left — three properties */}
+          {/* Left - three properties */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
             {[
               {
                 Icon: SlidersHorizontal,
                 title: 'Permission-bound',
-                body: 'Agents operate within the same role-based access control as your human team. If an action requires elevated permissions, the agent cannot take it — full stop. No agent can exceed what your RBAC policy already authorises.',
+                body: 'Agents operate within the same role-based access control as your human team. If an action requires elevated permissions, the agent cannot take it - full stop. No agent can exceed what your RBAC policy already authorises.',
               },
               {
                 Icon: ScrollText,
                 title: 'Fully auditable',
-                body: 'Every agent action is written to the immutable audit log with timestamps and before/after diffs — the same trail you would show a regulator or respond to a client challenge. You can reconstruct exactly what changed, when, and which agent triggered it.',
+                body: 'Every agent action is written to the immutable audit log with timestamps and before/after diffs - the same trail you would show a regulator or respond to a client challenge. You can reconstruct exactly what changed, when, and which agent triggered it.',
               },
               {
                 Icon: Bot,
@@ -194,136 +228,45 @@ export default function Security() {
             })}
           </div>
 
-          {/* Right — audit log mock */}
-          <div
-            style={{
-              border: '1.5px solid var(--line-2)',
-              borderRadius: 'calc(20px * var(--ui-scale))',
-              overflow: 'hidden',
-              background: '#fff',
-              boxShadow: '0 4px 32px -8px rgba(11,19,36,0.08)',
-            }}
-          >
-            {/* Header */}
-            <div
-              style={{
-                padding: 'calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                borderBottom: '1px solid var(--line)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                background: 'var(--surface)',
-              }}
-            >
-              <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--ink-2)', letterSpacing: '.06em', fontWeight: 600 }}>
-                IMMUTABLE AUDIT LOG
+          {/* Right - audit log mock */}
+          <div className="audit-log-mock">
+            <header className="audit-log-mock__head">
+              <div className="audit-log-mock__brand">
+                <span className="audit-log-mock__icon" aria-hidden="true">
+                  <ScrollText size={16} strokeWidth={1.75} />
+                </span>
+                <div className="audit-log-mock__meta">
+                  <span className="audit-log-mock__title">Immutable Audit Log</span>
+                  <span className="mono audit-log-mock__sub">Every agent action · matter-wide</span>
+                </div>
+              </div>
+              <span className="audit-log-mock__badge mono">
+                <span className="audit-log-mock__pulse" aria-hidden="true" />
+                Tamper-proof
               </span>
-              <span className="mono" style={{ fontSize: 'calc(9.5px * var(--ui-scale))', color: 'var(--blue)', letterSpacing: '.06em' }}>
-                TAMPER-PROOF
-              </span>
-            </div>
+            </header>
 
-            {/* Log entries */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {[
-                {
-                  agent: 'Forms Agent',
-                  action: 'Auto-filled I-129 · 47 fields mapped',
-                  meta: 'Confidence ≥ 0.92 on all fields · 3 amber fields flagged for review',
-                  time: '09:14:22',
-                  type: 'write',
-                },
-                {
-                  agent: 'Document Agent',
-                  action: 'Extracted passport data · 31 fields',
-                  meta: 'Read-only · No case data modified',
-                  time: '09:13:57',
-                  type: 'read',
-                },
-                {
-                  agent: 'Follow-Up Agent',
-                  action: 'Attempted status change → BLOCKED',
-                  meta: 'Action requires attorney role · Permission denied by RBAC',
-                  time: '09:11:04',
-                  type: 'blocked',
-                },
-                {
-                  agent: 'Deadline Agent',
-                  action: 'Set 90-day alert · Matter #2241',
-                  meta: 'Visa expiry 14 Oct 2025 · Alert scheduled',
-                  time: '09:08:31',
-                  type: 'write',
-                },
-                {
-                  agent: 'Case Assistant',
-                  action: 'Query answered · Blocking items surfaced',
-                  meta: 'Read-only · Sources cited in response',
-                  time: '09:06:18',
-                  type: 'read',
-                },
-              ].map((entry, i, arr) => {
-                const typeColor = entry.type === 'blocked' ? '#dc2626' : entry.type === 'write' ? 'var(--blue)' : '#059669';
-                const typeBg = entry.type === 'blocked' ? '#fef2f2' : entry.type === 'write' ? 'var(--blue-soft)' : '#f0fdf4';
-                return (
-                  <div
-                    key={i}
-                    style={{
-                      padding: 'calc(14px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                      borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 'calc(4px * var(--ui-scale))',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-sm)' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
-                        <span
-                          style={{
-                            fontSize: 'calc(10px * var(--ui-scale))',
-                            fontWeight: 700,
-                            color: typeColor,
-                            background: typeBg,
-                            padding: '2px 7px',
-                            borderRadius: '4px',
-                            letterSpacing: '.04em',
-                            textTransform: 'uppercase',
-                            fontFamily: 'var(--mono)',
-                            flexShrink: 0,
-                          }}
-                        >
-                          {entry.type}
-                        </span>
-                        <span style={{ fontSize: 'calc(12.5px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>
-                          {entry.agent}
-                        </span>
-                      </div>
-                      <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)', flexShrink: 0 }}>
-                        {entry.time}
-                      </span>
-                    </div>
-                    <div style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--ink-2)', paddingLeft: 'calc(2px * var(--ui-scale))' }}>
-                      {entry.action}
-                    </div>
-                    <div className="mono" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', color: 'var(--muted)', lineHeight: 1.4 }}>
-                      {entry.meta}
-                    </div>
+            <div className="audit-log-mock__body">
+              {AUDIT_LOG_ENTRIES.map((entry) => (
+                <article key={`${entry.agent}-${entry.time}`} className={`audit-log-row audit-log-row--${entry.type}`}>
+                  <div className="audit-log-row__top">
+                    <span className="audit-log-row__type mono">{entry.type}</span>
+                    <span className="audit-log-row__agent">{entry.agent}</span>
+                    <time className="audit-log-row__time mono" dateTime={`2025-01-01T${entry.time}`}>
+                      {entry.time}
+                    </time>
                   </div>
-                );
-              })}
+                  <p className="audit-log-row__action">{entry.action}</p>
+                  <p className="audit-log-row__meta mono">{entry.meta}</p>
+                </article>
+              ))}
             </div>
 
-            {/* Footer */}
-            <div
-              style={{
-                padding: 'calc(10px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                borderTop: '1px solid var(--line)',
-                background: 'var(--surface)',
-              }}
-            >
-              <p className="mono" style={{ fontSize: 'calc(9.5px * var(--ui-scale))', color: 'var(--muted)', margin: 0, letterSpacing: '.04em' }}>
-                ALL ENTRIES CRYPTOGRAPHICALLY SIGNED · DIFFS STORED · EXPORTABLE FOR AUDIT
-              </p>
-            </div>
+            <footer className="audit-log-mock__foot">
+              <span className="audit-log-mock__foot-item">Cryptographically signed</span>
+              <span className="audit-log-mock__foot-item">Diffs stored</span>
+              <span className="audit-log-mock__foot-item">Exportable for audit</span>
+            </footer>
           </div>
         </div>
       </Section>
@@ -334,6 +277,7 @@ export default function Security() {
         eyebrow="Why It Matters"
         lead="Why this matters for"
         emphasis="immigration law."
+        headAlign="center"
       >
         <div className="split-2" style={{ marginTop: 'var(--space-3xl)' }}>
           <div className="reveal">
@@ -369,6 +313,7 @@ export default function Security() {
         lead="Available to qualified"
         emphasis="prospects under NDA."
         intro="Our complete security and compliance documentation is available to qualified prospects under NDA."
+        headAlign="center"
       >
         <ul className="check-list check-cols reveal" style={{ marginTop: 'var(--space-3xl)' }}>
           {docs.map((d) => (

@@ -56,7 +56,7 @@ const PAINS = [
 ];
 
 const PainRecognition = () => (
-  <Section id="pain" eyebrow="Sound Familiar?" lead="If any of these describe your firm," emphasis="you're exactly who GlobalCodio was built for.">
+  <Section id="pain" eyebrow="Sound Familiar?" lead="If any of these describe your firm," emphasis="you're exactly who GlobalCodio was built for." headAlign="center">
     <ul className="check-list pain-list" style={{ marginTop: 'var(--space-2xl)', gridTemplateColumns: 'repeat(2,1fr)', gap: 'var(--space-lg)' }}>
       {PAINS.map((p, i) => (
         <li key={i} className="reveal pain-item">
@@ -88,6 +88,7 @@ const FiveLayers = () => (
     lead="One partner."
     emphasis="Your entire technology operation."
     intro="GlobalCodio is not a software vendor. We're the complete technology operation for your firm - a proprietary platform, AI workforce, global forms engine, service provider network, full managed services, and expert consulting. All built for immigration."
+    headAlign="center"
   >
     <div style={{ marginTop: 'var(--space-3xl)' }}>
       <FeatureGrid items={LAYERS.slice(0, 3)} cols={3} />
@@ -98,6 +99,12 @@ const FiveLayers = () => (
   </Section>
 );
 
+const CODIOOPS_STEPS = [
+  { n: '01', h: 'Setup', b: 'Workflow configuration, template library, forms setup, process documentation - done by our team to match your firm exactly.' },
+  { n: '02', h: 'Activation', b: 'Automations, integrations, best practices, team training - turned on and tuned for your specific operations.' },
+  { n: '03', h: 'Continuous Operations', b: 'Ongoing optimization, quarterly business reviews, new workflows as your firm evolves. Not a project. An operations team.' },
+];
+
 /* CodioOps callout section */
 const CodioOpsCallout = () => (
   <Section
@@ -105,47 +112,24 @@ const CodioOpsCallout = () => (
     eyebrow="Why GlobalCodio Is Different"
     lead="Software Doesn't Run a Firm."
     emphasis="Operations Do."
-    intro="Every CodioCMS engagement includes CodioOps — a dedicated team that configures, optimizes, and continuously tunes the platform to match how your firm actually operates."
+    intro="Every CodioCMS engagement includes CodioOps - a dedicated team that configures, optimizes, and continuously tunes the platform to match how your firm actually operates."
     introMaxWidth="68ch"
+    headAlign="center"
   >
-    <div
-      className="reveal"
-      style={{
-        marginTop: 'var(--space-3xl)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 'var(--space-xl)',
-      }}
-    >
-      {[
-        {
-          n: '01',
-          h: 'Setup',
-          b: 'Workflow configuration, template library, forms setup, process documentation — done by our team to match your firm exactly.',
-        },
-        {
-          n: '02',
-          h: 'Activation',
-          b: 'Automations, integrations, best practices, team training — turned on and tuned for your specific operations.',
-        },
-        {
-          n: '03',
-          h: 'Continuous Operations',
-          b: 'Ongoing optimization, quarterly business reviews, new workflows as your firm evolves. Not a project. An operations team.',
-        },
-      ].map((col, i) => (
-        <article
-          key={col.n}
-          className={`feature-card reveal d${i + 1}`}
-          style={{ padding: 'calc(28px * var(--ui-scale))', borderTop: '3px solid var(--blue)' }}
-        >
-          <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--blue)', marginBottom: 'var(--space-sm)' }}>{col.n}</div>
-          <h3 className="display" style={{ fontSize: 'calc(22px * var(--ui-scale))', letterSpacing: '-0.01em', lineHeight: 1.2, color: 'var(--ink)', marginBottom: 'var(--space-md)' }}>{col.h}</h3>
-          <p style={{ fontSize: 'calc(14px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65 }}>{col.b}</p>
-        </article>
+    <ol className="process-rail reveal" style={{ marginTop: 'var(--space-3xl)' }}>
+      {CODIOOPS_STEPS.map((step, i) => (
+        <li key={step.n} className={`process-rail-step reveal d${i + 1}`}>
+          <div className="process-rail-marker">
+            <span className="mono process-rail-num">{step.n}</span>
+          </div>
+          <div className="process-rail-body">
+            <h3 className="display process-rail-title">{step.h}</h3>
+            <p className="process-rail-text">{step.b}</p>
+          </div>
+        </li>
       ))}
-    </div>
-    <div className="reveal d3" style={{ marginTop: 'var(--space-2xl)' }}>
+    </ol>
+    <div className="codioops-callout-foot reveal d3">
       <SmartLink href="/codioops" className="feature-card-link">
         Learn More About CodioOps
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
@@ -154,7 +138,7 @@ const CodioOpsCallout = () => (
   </Section>
 );
 
-/* Five portals — one platform */
+/* Five portals - one platform */
 const PORTALS = [
   {
     Icon: Scale,
@@ -184,7 +168,7 @@ const PORTALS = [
     Icon: Truck,
     role: 'Service Provider',
     tagline: 'Work orders, not shared email threads.',
-    bullets: ['Scoped access — only what they need', 'Deliverable submission and revision tracking', 'Deadline-aware coordination'],
+    bullets: ['Scoped access - only what they need', 'Deliverable submission and revision tracking', 'Deadline-aware coordination'],
     href: '/network',
     color: '#059669',
   },
@@ -204,7 +188,7 @@ const FivePortals = () => (
     eyebrow="Built for Every Stakeholder"
     lead="One platform."
     emphasis="Purpose-built for each role."
-    intro="Most platforms give every user the same interface with some fields hidden. GlobalCodio provides five purpose-built portals — each designed for how that person actually works, with no clutter from the roles that don't apply to them."
+    intro="Most platforms give every user the same interface with some fields hidden. GlobalCodio provides five purpose-built portals - each designed for how that person actually works, with no clutter from the roles that don't apply to them."
     introMaxWidth="72ch"
     headAlign="center"
   >
@@ -335,7 +319,8 @@ const FivePortals = () => (
 const RevenueEconomics = () => (
   <Section id="economics" tone="sec-surface" eyebrow="The Revenue Hook"
     lead="Where the return"
-    emphasis="actually comes from.">
+    emphasis="actually comes from."
+    headAlign="center">
     <div className="split-2--even reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4xl)', alignItems: 'stretch' }}>
       <article className="feature-card feature-card--featured" style={{ padding: 'calc(36px * var(--ui-scale))' }}>
         <h3 className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 'var(--space-md)' }}>
@@ -346,6 +331,9 @@ const RevenueEconomics = () => (
           Codio AI Agents continuously mine your database and surface these before they expire. Most firms recover
           <strong> $50K-$300K</strong> in incremental annual revenue. Zero new marketing spend.
         </p>
+        <div className="mono" style={{ marginTop: 'auto', paddingTop: 'var(--space-lg)', fontSize: 'calc(12px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)' }}>
+          $50K&ndash;$300K TYPICAL ANNUAL RECOVERY
+        </div>
       </article>
       <article className="feature-card" style={{ padding: 'calc(36px * var(--ui-scale))' }}>
         <h3 className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 'var(--space-md)' }}>
@@ -365,9 +353,9 @@ const RevenueEconomics = () => (
 );
 
 const AI_SAVINGS = [
-  { stat: '70%', label: 'reduction in case preparation time', detail: 'AI agents handle document extraction, form prep, and questionnaire processing — work that used to take hours takes minutes.' },
+  { stat: '70%', label: 'reduction in case preparation time', detail: 'AI agents handle document extraction, form prep, and questionnaire processing - work that used to take hours takes minutes.' },
   { stat: '$499K', label: 'in annual staff costs replaced', detail: 'The human equivalents of our 8 AI agents would cost nearly half a million dollars a year in salaries alone.' },
-  { stat: '24/7', label: 'agents working, zero overtime', detail: 'Unlike staff, AI agents run in parallel around the clock — no sick days, no handoffs, no missed deadlines.' },
+  { stat: '24/7', label: 'agents working, zero overtime', detail: 'Unlike staff, AI agents run in parallel around the clock - no sick days, no handoffs, no missed deadlines.' },
   { stat: '0', label: 'missed renewal deadlines', detail: 'The Deadline Agent monitors every case window automatically, flagging risks before they become failures.' },
 ];
 
@@ -378,7 +366,7 @@ const AiSavings = () => (
     eyebrow="Cost Savings by AI Agents"
     lead="What AI agents"
     emphasis="actually save your firm."
-    intro="Beyond recovering dormant revenue, Codio AI Agents replace hours of manual work every day — cutting operational costs, eliminating errors, and scaling your capacity without adding headcount."
+    intro="Beyond recovering dormant revenue, Codio AI Agents replace hours of manual work every day - cutting operational costs, eliminating errors, and scaling your capacity without adding headcount."
     introMaxWidth="72ch"
     headAlign="center"
   >

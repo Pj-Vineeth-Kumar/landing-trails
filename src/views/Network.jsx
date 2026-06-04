@@ -21,7 +21,7 @@ const PAIN_POINTS = [
 ];
 
 const BENEFITS = [
-  { title: 'Vetted across every discipline', body: 'Every provider in CodioNetwork is credentialed and cleared — translators, physicians, attorneys, apostille, couriers, and consular coordinators.' },
+  { title: 'Vetted across every discipline', body: 'Every provider in CodioNetwork is credentialed and cleared - translators, physicians, attorneys, apostille, couriers, and consular coordinators.' },
   { title: 'Standardized quality, case after case', body: 'No more variance between providers. Consistent standards across every country and service type, every time.' },
   { title: 'Integrated with CodioCMS', body: 'Surface providers, assign them to cases, and track progress without leaving your workflow. No separate tools or email chains.' },
   { title: 'One coordination layer', body: 'Replace dozens of manual handoffs with a single place to manage your entire global service operation.' },
@@ -81,7 +81,7 @@ export default function Network() {
 
               <div className="network-pain-verdict">
                 <p>
-                  Most firms manage all of this manually — losing time, racking up costs, and risking compliance failures.
+                  Most firms manage all of this manually - losing time, racking up costs, and risking compliance failures.
                 </p>
               </div>
             </div>

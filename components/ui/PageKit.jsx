@@ -20,7 +20,7 @@ export const SmartLink = ({ href, className, children, ...rest }) => {
 };
 
 export const SplitHeading = ({ lead, emphasis, className = 'type-display-lg', as: Tag = 'h2', inline = false, style }) => (
-  <Tag className={`display ${className}`} style={style}>
+  <Tag className={`display ${className}${inline ? ' split-heading--inline' : ''}`.trim()} style={style}>
     {lead && <span style={inline ? { color: 'var(--ink)' } : { display: 'block' }}>{lead}{inline && emphasis ? ' ' : null}</span>}
     {emphasis && <em className="text-grad-blue" style={{ ...(inline ? {} : { display: 'block' }), fontStyle: 'italic' }}>{emphasis}</em>}
   </Tag>

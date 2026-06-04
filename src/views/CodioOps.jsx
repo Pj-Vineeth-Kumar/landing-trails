@@ -12,55 +12,59 @@ import {
 } from 'lucide-react';
 import { PageHero, Section, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 
+const PROBLEM_GAPS = [
+  'Templates don\'t reflect your case types',
+  'Workflows don\'t follow your process',
+  'Automations are never turned on',
+  'Best practices are never documented',
+];
+
 const DELIVERABLES = [
   {
     Icon: GitBranch,
-    n: '01',
     h: 'Workflow Configuration',
-    b: 'We map your firm\'s case lifecycle and configure CodioCMS workflows to match exactly how you operate — not generic out-of-the-box defaults.',
+    b: 'We map your firm\'s case lifecycle and configure CodioCMS workflows to match exactly how you operate - not generic out-of-the-box defaults.',
   },
   {
     Icon: LayoutTemplate,
-    n: '02',
     h: 'Template Library',
-    b: 'We build out your firm\'s full template library — case types, jurisdictions, client communications, forms packages, and document standards.',
+    b: 'We build out your firm\'s full template library - case types, jurisdictions, client communications, forms packages, and document standards.',
   },
   {
     Icon: ClipboardList,
-    n: '03',
     h: 'Forms Setup',
     b: 'We configure CodioForms for the countries you practice in and integrate forms directly into your case workflows.',
   },
   {
     Icon: BookOpen,
-    n: '04',
     h: 'Process Documentation',
     b: 'We capture the tribal knowledge that lives in your team\'s heads and turn it into documented workflows that survive any staff turnover.',
   },
   {
     Icon: Zap,
-    n: '05',
     h: 'Automation Setup',
-    b: 'We turn on the rules engine, reminders, escalations, integrations, and triggers — the automation work most firms never get to.',
+    b: 'We turn on the rules engine, reminders, escalations, integrations, and triggers - the automation work most firms never get to.',
   },
   {
     Icon: Award,
-    n: '06',
     h: 'Best Practice Implementation',
-    b: 'We bring in immigration-specific best practices informed by two decades of working with 1,500+ firms — so you start ahead.',
+    b: 'We bring in immigration-specific best practices informed by two decades of working with 1,500+ firms - so you start ahead.',
   },
   {
     Icon: TrendingUp,
-    n: '07',
     h: 'Continuous Optimization',
     b: 'As your firm evolves, CodioOps continuously tunes workflows, automations, and templates. This is not a one-time project. It\'s an ongoing service.',
   },
   {
     Icon: BarChart3,
-    n: '08',
     h: 'Quarterly Business Reviews',
-    b: 'Every quarter, we audit platform usage, identify gaps, and recommend optimizations — keeping your firm at peak operational efficiency.',
+    b: 'Every quarter, we audit platform usage, identify gaps, and recommend optimizations - keeping your firm at peak operational efficiency.',
   },
+];
+
+const DELIVERABLE_GROUPS = [
+  { label: 'Configured at setup', items: DELIVERABLES.slice(0, 4) },
+  { label: 'Activated & ongoing', items: DELIVERABLES.slice(4) },
 ];
 
 const PHASES = [
@@ -90,6 +94,11 @@ const PHASES = [
   },
 ];
 
+const PHASE_GROUPS = [
+  { label: 'Weeks 1–4 · Build', phases: PHASES.slice(0, 2) },
+  { label: 'Weeks 5+ · Launch & run', phases: PHASES.slice(2) },
+];
+
 const COMPARISON_COLS = [
   {
     title: 'Traditional Implementation',
@@ -103,7 +112,7 @@ const COMPARISON_COLS = [
   {
     title: 'Generic Customer Support',
     points: [
-      'Reactive — fixes things when broken',
+      'Reactive - fixes things when broken',
       'Answers tickets, doesn\'t optimize',
       'No firm-specific knowledge',
       'Often gated behind tiers',
@@ -141,110 +150,75 @@ export default function CodioOps() {
       />
 
       {/* Problem section */}
-      <Section
-        id="the-problem"
-        tone="sec-surface"
-        eyebrow="The Problem"
-        lead="Most Firms Buy Software."
-        emphasis="Few Ever Use It Well."
-      >
-        <div
-          className="reveal"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            maxWidth: '72ch',
-          }}
-        >
-          <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7, marginBottom: 'var(--space-lg)' }}>
-            The biggest hidden problem in immigration law firms isn't bad software. It's software that was never
-            configured to match how the firm actually operates. Templates don't reflect your case types. Workflows
-            don't follow your process. Automations are never turned on. Best practices are never documented. The
-            result: your firm uses 20% of what the platform can do — and your team works around the rest.
-          </p>
-          <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink)', lineHeight: 1.7, fontWeight: 600 }}>
-            CodioOps is how we solve that. Permanently.
-          </p>
+      <Section id="the-problem" tone="sec-surface" className="sec-codioops-problem">
+        <div className="reveal codioops-problem">
+          <div className="codioops-problem-head">
+            <div className="eyebrow codioops-problem-eyebrow">The Problem</div>
+            <SplitHeading lead="Most Firms Buy Software." emphasis="Few Ever Use It Well." />
+            <p className="codioops-problem-lead">
+              The biggest hidden problem in immigration law firms isn&apos;t bad software - it&apos;s software that was
+              never configured to match how the firm actually operates.
+            </p>
+          </div>
+
+          <div className="codioops-problem-panel reveal d1">
+            <div className="codioops-problem-stat">
+              <span className="display codioops-problem-stat-value">20%</span>
+              <span className="codioops-problem-stat-label">
+                Typical platform utilization when configuration is left to the firm alone
+              </span>
+            </div>
+            <ul className="codioops-problem-gaps">
+              {PROBLEM_GAPS.map((gap) => (
+                <li key={gap} className="codioops-problem-gap">
+                  <span className="codioops-problem-gap-mark" aria-hidden="true" />
+                  <span>{gap}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="codioops-problem-payoff reveal d2">
+              <strong>CodioOps is how we solve that.</strong> Permanently.
+            </p>
+          </div>
         </div>
       </Section>
 
       {/* 8 Deliverables */}
       <Section
         id="what-is-included"
+        className="sec sec-codioops-deliverables"
         eyebrow="What CodioOps Delivers"
         lead="Your Dedicated"
         emphasis="Operations Team."
-        intro="Eight things CodioOps does for every CodioCMS firm — at setup and continuously thereafter."
+        intro="Eight things CodioOps does for every CodioCMS firm - at setup and continuously thereafter."
         introMaxWidth="64ch"
         headAlign="center"
+        headInline
       >
-        <div
-          className="reveal"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 'calc(16px * var(--ui-scale))',
-          }}
-        >
-          {DELIVERABLES.map((d, i) => {
-            const Icon = d.Icon;
-            return (
-              <article
-                key={d.n}
-                className={`feature-card reveal d${(i % 4) + 1}`}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-md)',
-                  padding: 'calc(28px * var(--ui-scale))',
-                  borderTop: '3px solid var(--blue)',
-                }}
-              >
-                <span
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 'calc(44px * var(--ui-scale))',
-                    height: 'calc(44px * var(--ui-scale))',
-                    borderRadius: 'calc(12px * var(--ui-scale))',
-                    background: 'var(--blue-soft)',
-                    color: 'var(--blue)',
-                    flexShrink: 0,
-                  }}
-                >
-                  <Icon size={20} strokeWidth={1.6} />
-                </span>
-                <div>
-                  <div
-                    className="mono"
-                    style={{
-                      fontSize: 'calc(10px * var(--ui-scale))',
-                      letterSpacing: '.1em',
-                      color: 'var(--blue)',
-                      marginBottom: 'calc(6px * var(--ui-scale))',
-                    }}
-                  >
-                    {d.n}
-                  </div>
-                  <h3
-                    className="display"
-                    style={{
-                      fontSize: 'calc(18px * var(--ui-scale))',
-                      letterSpacing: '-0.01em',
-                      lineHeight: 1.2,
-                      color: 'var(--ink)',
-                    }}
-                  >
-                    {d.h}
-                  </h3>
-                </div>
-                <p style={{ fontSize: 'calc(13.5px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.6, marginTop: 'auto' }}>
-                  {d.b}
-                </p>
-              </article>
-            );
-          })}
+        <div className="codioops-deliverables reveal">
+          <div className="codioops-deliverables-grid">
+            {DELIVERABLE_GROUPS.map((group, gi) => (
+              <div key={group.label} className={`codioops-deliverables-col reveal d${gi + 1}`}>
+                <div className="mono codioops-deliverables-label">{group.label}</div>
+                <ul className="codioops-deliverables-list">
+                  {group.items.map((d) => {
+                    const Icon = d.Icon;
+                    return (
+                      <li key={d.h} className="codioops-deliverable">
+                        <span className="codioops-deliverable-icon" aria-hidden="true">
+                          <Icon size={18} strokeWidth={1.65} />
+                        </span>
+                        <div className="codioops-deliverable-copy">
+                          <h3 className="display codioops-deliverable-title">{d.h}</h3>
+                          <p className="codioops-deliverable-text">{d.b}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 
@@ -281,21 +255,21 @@ export default function CodioOps() {
                 fontSize: 'var(--text-body)',
                 color: 'var(--ink-3)',
                 lineHeight: 1.75,
-                textAlign: 'left',
+                textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 'var(--space-lg)',
               }}
             >
               <p>
-                After two decades building INSZoom — and watching 1,500+ immigration firms adopt case management
-                software — we saw the same pattern again and again: firms bought platforms they never fully used.
+                After two decades building INSZoom - and watching 1,500+ immigration firms adopt case management
+                software - we saw the same pattern again and again: firms bought platforms they never fully used.
                 They blamed the software. The software wasn't the problem.
               </p>
               <p>
                 The problem was that no one was responsible for making the platform actually fit the firm. So we
                 built CodioOps. A dedicated team that owns the configuration, optimization, and operational fit of
-                CodioCMS to your firm — at setup and forever after.
+                CodioCMS to your firm - at setup and forever after.
               </p>
               <p>
                 This is not a one-time implementation engagement that ends. This is your operations team. For as
@@ -309,6 +283,7 @@ export default function CodioOps() {
                 borderTop: '1px solid var(--line)',
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 'var(--space-md)',
               }}
             >
@@ -333,7 +308,7 @@ export default function CodioOps() {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
-              <div style={{ textAlign: 'left' }}>
+              <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>
                   Umesh Vaidyamath
                 </div>
@@ -403,81 +378,36 @@ export default function CodioOps() {
       {/* 4-phase timeline */}
       <Section
         id="how-it-works"
+        className="sec-codioops-engagement"
         tone="sec-surface"
         eyebrow="How CodioOps Works"
         lead="The CodioOps"
         emphasis="Engagement Model."
+        headAlign="center"
+        headInline
       >
-        <div
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 'calc(16px * var(--ui-scale))',
-          }}
-        >
-          {PHASES.map((p, i) => (
-            <div
-              key={p.phase}
-              className={`reveal d${i + 1}`}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--space-md)',
-                padding: 'calc(28px * var(--ui-scale))',
-                background: '#fff',
-                border: '1.5px solid var(--line-2)',
-                borderRadius: 'calc(16px * var(--ui-scale))',
-                boxShadow: 'var(--shadow-ambient)',
-                position: 'relative',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--space-sm)',
-                  marginBottom: 'var(--space-xs)',
-                }}
-              >
-                <span
-                  className="mono"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 'calc(36px * var(--ui-scale))',
-                    height: 'calc(36px * var(--ui-scale))',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 100%)',
-                    color: '#fff',
-                    fontSize: 'calc(12px * var(--ui-scale))',
-                    fontWeight: 700,
-                    flexShrink: 0,
-                  }}
-                >
-                  {p.phase}
-                </span>
-                <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--blue)' }}>
-                  {p.span.toUpperCase()}
-                </span>
+        <div className="codioops-phases reveal">
+          <div className="codioops-phases-grid">
+            {PHASE_GROUPS.map((group, gi) => (
+              <div key={group.label} className={`codioops-phases-col reveal d${gi + 1}`}>
+                <div className="mono codioops-phases-label">{group.label}</div>
+                <ol className="codioops-phases-list">
+                  {group.phases.map((p) => (
+                    <li key={p.phase} className="codioops-phase">
+                      <span className="mono codioops-phase-marker" aria-hidden="true">
+                        {p.phase}
+                      </span>
+                      <div className="codioops-phase-copy">
+                        <span className="mono codioops-phase-span">{p.span}</span>
+                        <h3 className="display codioops-phase-title">{p.title}</h3>
+                        <p className="codioops-phase-text">{p.body}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
               </div>
-              <h3
-                className="display"
-                style={{
-                  fontSize: 'calc(20px * var(--ui-scale))',
-                  letterSpacing: '-0.015em',
-                  lineHeight: 1.2,
-                  color: 'var(--ink)',
-                }}
-              >
-                Phase {p.phase} — {p.title}
-              </h3>
-              <p style={{ fontSize: 'calc(13.5px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65 }}>
-                {p.body}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Section>
 
@@ -511,7 +441,7 @@ export default function CodioOps() {
             </h2>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.7, marginBottom: 'var(--space-lg)' }}>
               CodioOps is not an add-on. It is not a separate purchase. It is the operations team that comes with
-              every CodioCMS engagement — because we don't believe in selling software you'll never fully use.
+              every CodioCMS engagement - because we don't believe in selling software you'll never fully use.
             </p>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-2)', lineHeight: 1.7, fontWeight: 500 }}>
               This is the difference between GlobalCodio and every other immigration tech vendor. They sell you a

@@ -16,13 +16,13 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   try {
     const post = await getPostBySlug(slug);
-    if (!post) return { title: 'Blog — GlobalCodio' };
+    if (!post) return { title: 'Blog - GlobalCodio' };
     return {
-      title: `${post.title} — GlobalCodio`,
+      title: `${post.title} - GlobalCodio`,
       description: post.excerpt,
     };
   } catch {
-    return { title: 'Blog — GlobalCodio' };
+    return { title: 'Blog - GlobalCodio' };
   }
 }
 

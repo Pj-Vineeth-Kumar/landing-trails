@@ -80,7 +80,7 @@ export default function Audit() {
                 <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>the founder himself.</em>
               </h2>
               <p className="audit-founder-body">
-                Mid-size and larger firms can request a tech audit conducted personally by Umesh Vaidyamath —
+                Mid-size and larger firms can request a tech audit conducted personally by Umesh Vaidyamath -
                 founder of INSZoom, the immigration industry's first cloud-based case management platform,
                 built and led for over two decades before its 2020 acquisition by Mitratech.
               </p>
@@ -88,7 +88,7 @@ export default function Audit() {
               <ul className="audit-founder-facts">
                 <li>
                   <span className="mono audit-founder-fact-label">1999</span>
-                  Co-founded INSZoom — the industry's first cloud immigration platform
+                  Co-founded INSZoom - the industry's first cloud immigration platform
                 </li>
                 <li>
                   <span className="mono audit-founder-fact-label">20 yrs</span>
@@ -100,7 +100,7 @@ export default function Audit() {
                 </li>
                 <li>
                   <span className="mono audit-founder-fact-label">2025</span>
-                  Founded GlobalCodio — the next chapter
+                  Founded GlobalCodio - the next chapter
                 </li>
               </ul>
 
@@ -134,7 +134,7 @@ export default function Audit() {
       <CtaBand
         lead="Ready to see what's"
         emphasis="possible?"
-        sub="Book your free tech audit on our contact page. Our team will be in touch within one business day to schedule your 30-minute call — no cost, no commitment."
+        sub="Book your free tech audit on our contact page. Our team will be in touch within one business day to schedule your 30-minute call - no cost, no commitment."
         primary={{ href: '/contact#contact-form', label: 'Book your free tech audit' }}
         secondary={{ href: '/letter-from-the-founder', label: "Read the founder's letter" }}
       />

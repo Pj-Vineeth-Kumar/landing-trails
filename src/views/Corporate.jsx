@@ -38,25 +38,25 @@ const VISIBILITY_ITEMS = [
     Icon: GitCompare,
     n: '03',
     h: 'Multi-Firm Performance Comparison',
-    b: 'Managing more than one law firm? See who is actually delivering. Hold every outside counsel to the same standard, with data — not anecdote.',
+    b: 'Managing more than one law firm? See who is actually delivering. Hold every outside counsel to the same standard, with data - not anecdote.',
   },
   {
     Icon: DollarSign,
     n: '04',
     h: 'Budget Tracking & Forecasting',
-    b: 'Immigration spend tracked in real time. Alerts surface at 75% of budget — not after you\'ve overrun. Renewal costs projected automatically so surprises stay off the executive report.',
+    b: 'Immigration spend tracked in real time. Alerts surface at 75% of budget - not after you\'ve overrun. Renewal costs projected automatically so surprises stay off the executive report.',
   },
   {
     Icon: Building2,
     n: '05',
     h: 'Executive PDF Reports',
-    b: 'Stakeholders who never log into the platform still get the data they need. One-click executive reports, formatted for the boardroom — not the case manager\'s screen.',
+    b: 'Stakeholders who never log into the platform still get the data they need. One-click executive reports, formatted for the boardroom - not the case manager\'s screen.',
   },
   {
     Icon: FileText,
     n: '06',
     h: 'Versioned Immigration Policies',
-    b: 'Corporate immigration policies live versioned inside the platform — not buried in a SharePoint document. When guidelines change, the updated version flows through to active cases automatically.',
+    b: 'Corporate immigration policies live versioned inside the platform - not buried in a SharePoint document. When guidelines change, the updated version flows through to active cases automatically.',
   },
 ];
 
@@ -116,6 +116,7 @@ export default function Corporate() {
         eyebrow="Your Challenges"
         lead="The realities of"
         emphasis="corporate immigration at scale."
+        headAlign="center"
       >
         <div className="split-2 corporate-challenges-split" style={{ marginTop: 'var(--space-3xl)' }}>
           <div className="reveal">
@@ -152,10 +153,11 @@ export default function Corporate() {
         id="visibility"
         tone="sec-surface"
         eyebrow="Built for HR & Mobility Teams"
-        lead="Finally — immigration visibility"
+        lead="Finally - immigration visibility"
         emphasis="your executives actually expect."
-        intro="Most corporate mobility teams operate in the dark. Status updates come from email threads. Reports are built on request. Dashboards don't exist. GlobalCodio gives your team a dedicated HR portal — designed for what you actually need to do, not a lawyer's view with fields hidden."
-        introMaxWidth="76ch"
+        intro="Most corporate mobility teams operate in the dark. Status updates come from email threads. Reports are built on request. Dashboards don't exist. GlobalCodio gives your team a dedicated HR portal - designed for what you actually need to do, not a lawyer's view with fields hidden."
+        introMaxWidth="calc(76ch * 1.3)"
+        headAlign="center"
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={VISIBILITY_ITEMS} cols={3} />
@@ -168,6 +170,7 @@ export default function Corporate() {
         lead="One operation purpose-built"
         emphasis="for global mobility."
         intro="From AI-driven case work to a single platform for every country, GlobalCodio turns the hardest parts of corporate immigration into a predictable, managed operation."
+        headAlign="center"
       >
         <div className="corporate-solutions-grid reveal" style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid items={SOLUTIONS} cols={3} />
@@ -178,10 +181,11 @@ export default function Corporate() {
           className="reveal d1"
           style={{
             marginTop: 'var(--space-3xl)',
-            border: '1.5px solid var(--line-2)',
-            borderRadius: 'calc(20px * var(--ui-scale))',
+            border: '1px solid var(--line-blue)',
+            borderRadius: 'calc(16px * var(--ui-scale))',
             padding: 'calc(40px * var(--ui-scale))',
-            background: 'var(--surface)',
+            background: 'linear-gradient(160deg,#fff 0%,var(--blue-tint-2) 150%)',
+            boxShadow: 'var(--shadow-ambient)',
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: 'var(--space-3xl)',
@@ -201,13 +205,13 @@ export default function Corporate() {
             </h3>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65 }}>
               GlobalCodio lets your HR team collect employee information and initiate the immigration
-              workflow weeks before outside counsel is brought in — so the law firm inherits a complete
+              workflow weeks before outside counsel is brought in - so the law firm inherits a complete
               file, not a blank intake form. No double data entry. No coordination delay.
             </p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
             {[
-              { n: '01', t: 'HR collects employee data', d: 'Your team initiates the process and gathers information through the HR portal — independently of the law firm.' },
+              { n: '01', t: 'HR collects employee data', d: 'Your team initiates the process and gathers information through the HR portal - independently of the law firm.' },
               { n: '02', t: 'Law firm inherits a complete file', d: 'When outside counsel is engaged, the case already has everything they need. No re-collection, no delays.' },
               { n: '03', t: 'Policies stay versioned & current', d: 'Corporate immigration guidelines live inside the platform. When they change, every active case references the updated version automatically.' },
             ].map((step, i, arr) => (
@@ -250,7 +254,7 @@ export default function Corporate() {
           },
           {
             q: 'How does GlobalCodio help HR teams manage employee immigration without waiting on outside counsel?',
-            a: "GlobalCodio's HR portal allows HR and mobility teams to initiate immigration workflows, collect employee information, and build the case file independently — weeks before outside counsel is engaged. When the law firm is brought in, they inherit a complete file with no double data entry or coordination delay.",
+            a: "GlobalCodio's HR portal allows HR and mobility teams to initiate immigration workflows, collect employee information, and build the case file independently - weeks before outside counsel is engaged. When the law firm is brought in, they inherit a complete file with no double data entry or coordination delay.",
             meta: ['HR-led onboarding', 'No double data entry'],
           },
           {
@@ -260,7 +264,7 @@ export default function Corporate() {
           },
           {
             q: 'How does GlobalCodio help corporate teams manage multiple outside law firms?',
-            a: "GlobalCodio's multi-firm performance comparison dashboard gives HR and mobility teams objective data on every outside counsel firm: case throughput, turnaround time, and delivery quality — tracked automatically, not based on anecdote. Teams can benchmark all firms against the same standard.",
+            a: "GlobalCodio's multi-firm performance comparison dashboard gives HR and mobility teams objective data on every outside counsel firm: case throughput, turnaround time, and delivery quality - tracked automatically, not based on anecdote. Teams can benchmark all firms against the same standard.",
             meta: ['Multi-firm dashboard', 'Data-driven oversight'],
           },
           {
@@ -274,7 +278,7 @@ export default function Corporate() {
       <CtaBand
         lead="Ready to give your mobility team"
         emphasis="the visibility it's been missing?"
-        sub="Book a discovery call. We'll show you the HR portal, the analytics dashboards, and the compliance architecture — in 30 minutes."
+        sub="Book a discovery call. We'll show you the HR portal, the analytics dashboards, and the compliance architecture - in 30 minutes."
         primary={{ href: '/contact', label: 'Book a discovery call' }}
         secondary={{ href: '/security', label: 'See security & compliance' }}
       />

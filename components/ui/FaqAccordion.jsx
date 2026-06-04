@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 /**
- * FaqAccordion — matches the HowItWorks accordion style from MarketingSections.
+ * FaqAccordion - matches the HowItWorks accordion style from MarketingSections.
  *
  * Props:
  *   items   – array of { q: string, a: string, meta?: string[] }
@@ -46,7 +46,7 @@ export function FaqAccordion({
           }}
           className="how-grid"
         >
-          {/* Left — heading (sticky so it stays visible while scrolling long answer lists) */}
+          {/* Left - heading (sticky so it stays visible while scrolling long answer lists) */}
           <div className="reveal faq-accordion-left">
             <div
               className="eyebrow"
@@ -68,7 +68,7 @@ export function FaqAccordion({
             </h2>
           </div>
 
-          {/* Right — accordion */}
+          {/* Right - accordion */}
           <div role="list">
             {items.map((item, i) => (
               <div

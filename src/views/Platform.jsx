@@ -23,6 +23,11 @@ import {
   Vault,
   ArrowRightLeft,
   UserCheck,
+  Languages,
+  Stethoscope,
+  Stamp,
+  Scale,
+  Truck,
 } from 'lucide-react';
 
 const Check = () => (
@@ -37,13 +42,13 @@ const CMS_FEATURES = [
     Icon: Workflow,
     n: '01',
     h: 'End-to-end case lifecycle',
-    b: 'Full case lifecycle management for every immigration matter type — from intake through filing to closure.',
+    b: 'Full case lifecycle management for every immigration matter type - from intake through filing to closure.',
   },
   {
     Icon: Users,
     n: '02',
     h: 'Applicant portal',
-    b: 'Secure portal for foreign nationals and beneficiaries to submit documents, answer questionnaires, track their case status — and own their immigration record across every matter they ever open.',
+    b: 'Secure portal for foreign nationals and beneficiaries to submit documents, answer questionnaires, track their case status - and own their immigration record across every matter they ever open.',
   },
   {
     Icon: Building2,
@@ -61,7 +66,7 @@ const CMS_FEATURES = [
     Icon: ShieldCheck,
     n: '05',
     h: 'Role-based access control',
-    b: 'Granular permissions across 27 modules and 7 action types — attorney, HR admin, firm admin, provider, and super admin roles with data-scope isolation.',
+    b: 'Granular permissions across 27 modules and 7 action types - attorney, HR admin, firm admin, provider, and super admin roles with data-scope isolation.',
   },
   {
     Icon: ClipboardList,
@@ -73,13 +78,13 @@ const CMS_FEATURES = [
     Icon: Globe,
     n: '07',
     h: 'Global country support',
-    b: 'Case handling across every country you serve in one unified system — with new countries added on demand.',
+    b: 'Case handling across every country you serve in one unified system - with new countries added on demand.',
   },
   {
     Icon: Settings,
     n: '08',
     h: 'Customizable workflows',
-    b: "Playbook templates and work-step automations configured to your firm's exact operations — not one-size-fits-all defaults.",
+    b: "Playbook templates and work-step automations configured to your firm's exact operations - not one-size-fits-all defaults.",
   },
   {
     Icon: GitMerge,
@@ -140,6 +145,64 @@ const FORMS_CAPS = [
 ];
 
 
+
+const CODIOOPS_STATS = [
+  { value: 'Setup', label: 'Workflow & template configuration' },
+  { value: 'Activation', label: 'Automations & team training' },
+  { value: 'Ongoing', label: 'Continuous platform tuning' },
+];
+
+const NETWORK_STATS = [
+  { value: '6', label: 'Vetted provider disciplines' },
+  { value: '40+', label: 'Translation languages' },
+  { value: 'Field-level', label: 'Confidentiality on every assignment' },
+];
+
+const NETWORK_PROVIDERS = [
+  { Icon: Languages, label: 'Certified Translators', tag: '40+ languages' },
+  { Icon: Stethoscope, label: 'Immigration Physicians', tag: 'USCIS approved' },
+  { Icon: Stamp, label: 'Apostille & Auth', tag: 'Multi-country' },
+  { Icon: Scale, label: 'Foreign Attorneys', tag: 'In-country counsel' },
+  { Icon: Truck, label: 'Specialized Couriers', tag: 'Secure delivery' },
+  { Icon: Building2, label: 'Consular Coordinators', tag: 'Appointment liaison' },
+];
+
+const NETWORK_ASSIGNMENTS = [
+  {
+    provider: 'Elena Vasquez',
+    type: 'Certified Translator',
+    task: 'I-130 supporting docs · ES→EN',
+    deadline: 'Due Jun 10',
+    status: 'delivered',
+    scope: 'Scoped: Name, DOB, doc type only',
+  },
+  {
+    provider: 'Dr. Arjun Mehta',
+    type: 'Immigration Physician',
+    task: 'I-693 medical exam',
+    deadline: 'Due Jun 14',
+    status: 'pending',
+    scope: 'Scoped: Case ref, client name only',
+  },
+];
+
+const NETWORK_CAPS = [
+  {
+    n: '01',
+    h: 'Structured provider workflows',
+    b: 'Outsourcing is a managed workflow, not an email. Assign work, set deliverables, track revisions, and extend deadlines - all with a paper trail both parties can see.',
+  },
+  {
+    n: '02',
+    h: 'Field-level confidentiality',
+    b: 'Send a translator exactly what they need - not salary details, not passport numbers, not case strategy. Confidentiality is enforced at the data field level, automatically.',
+  },
+  {
+    n: '03',
+    h: 'Data-driven provider selection',
+    b: 'Every assignment builds history - with structured feedback, billing, and revisions tracked in one place. No disputed invoices or lost email threads.',
+  },
+];
 
 const AI_ERA_POINTS = [
   {
@@ -205,7 +268,7 @@ const CMS_GROUPS = [
     tag: 'Case Management',
     color: 'var(--blue)',
     items: [
-      { Icon: Workflow, h: 'End-to-end case lifecycle', b: 'From intake through filing to closure — every matter type, one system.' },
+      { Icon: Workflow, h: 'End-to-end case lifecycle', b: 'From intake through filing to closure - every matter type, one system.' },
       { Icon: Settings, h: 'Customizable workflows', b: 'Playbook templates and automations built for your exact operations.' },
       { Icon: Globe,    h: 'Global country support',  b: 'Every country you practice in, with new countries added on demand.' },
     ],
@@ -232,42 +295,23 @@ const CMS_GROUPS = [
 
 function CMSBento() {
   return (
-    <div className="reveal" style={{
-      marginTop: 'var(--space-3xl)',
-      display: 'grid',
-      gridTemplateColumns: 'calc(300px * var(--ui-scale)) 1fr',
-      gap: 'calc(16px * var(--ui-scale))',
-      alignItems: 'stretch',
-    }}>
+    <div className="cms-bento reveal">
       {/* ── Hero card ── */}
-      <div style={{
-        background: 'linear-gradient(145deg, var(--blue) 0%, var(--blue-ink) 100%)',
-        borderRadius: 'calc(20px * var(--ui-scale))',
-        padding: 'calc(40px * var(--ui-scale))',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        border: '1px solid rgba(255,255,255,.08)',
-        boxShadow: '0 0 60px rgba(25,80,198,.2)',
-      }}>
+      <div className="cms-bento-hero">
         <div>
-          <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.14em', color: 'rgba(255,255,255,.5)', marginBottom: 'calc(16px * var(--ui-scale))' }}>
-            CODIOCMS
-          </div>
-          <div className="display" style={{ fontSize: 'calc(34px * var(--ui-scale))', fontStyle: 'italic', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+          <div className="mono cms-bento-hero-label">CODIOCMS</div>
+          <div className="display cms-bento-hero-title">
             Everything your firm needs.<br />
-            <em style={{ color: 'rgba(255,255,255,.65)' }}>Nothing it doesn't.</em>
+            <em>Nothing it doesn&apos;t.</em>
           </div>
         </div>
         <div style={{ marginTop: 'calc(32px * var(--ui-scale))' }}>
-          <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'rgba(255,255,255,.4)', marginBottom: 'calc(14px * var(--ui-scale))' }}>
-            10 CAPABILITIES
-          </div>
+          <div className="mono cms-bento-hero-cap-label">10 CAPABILITIES</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(8px * var(--ui-scale))' }}>
             {CMS_GROUPS.map(g => (
-              <div key={g.tag} style={{ display: 'flex', alignItems: 'center', gap: 'calc(10px * var(--ui-scale))' }}>
+              <div key={g.tag} className="cms-bento-hero-cap-item">
                 <span style={{ width: 'calc(8px * var(--ui-scale))', height: 'calc(8px * var(--ui-scale))', borderRadius: '50%', background: g.color, flexShrink: 0 }} />
-                <span style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'rgba(255,255,255,.7)', fontWeight: 500 }}>{g.tag}</span>
+                <span>{g.tag}</span>
               </div>
             ))}
           </div>
@@ -275,63 +319,25 @@ function CMSBento() {
       </div>
 
       {/* ── Three category columns ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 'calc(12px * var(--ui-scale))',
-      }}>
+      <div className="cms-bento-cols">
         {CMS_GROUPS.map((group) => (
-          <div
-            key={group.tag}
-            style={{
-              background: '#fff',
-              border: '1.5px solid var(--line-2)',
-              borderRadius: 'calc(16px * var(--ui-scale))',
-              overflow: 'hidden',
-            }}
-          >
-            {/* Group header */}
-            <div style={{
-              padding: 'calc(14px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-              borderBottom: '1px solid var(--line)',
-              display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))',
-              background: 'var(--surface)',
-            }}>
-              <span style={{ width: 'calc(8px * var(--ui-scale))', height: 'calc(8px * var(--ui-scale))', borderRadius: '50%', background: group.color, flexShrink: 0 }} />
-              <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--ink-2)', fontWeight: 700, textTransform: 'uppercase' }}>
-                {group.tag}
-              </span>
+          <div key={group.tag} className="cms-bento-col">
+            <div className="cms-bento-col-head">
+              <span className="cms-bento-col-dot" style={{ background: group.color }} />
+              <span className="mono">{group.tag}</span>
             </div>
-
-            {/* Feature rows */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {group.items.map((item, ii) => {
+            <div className="cms-bento-col-rows">
+              {group.items.map((item) => {
                 const Icon = item.Icon;
                 return (
-                  <div
-                    key={item.h}
-                    style={{
-                      padding: 'calc(16px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                      borderBottom: ii < group.items.length - 1 ? '1px solid var(--line)' : 'none',
-                      display: 'flex', flexDirection: 'column', gap: 'calc(6px * var(--ui-scale))',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
-                      <span style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        width: 'calc(26px * var(--ui-scale))', height: 'calc(26px * var(--ui-scale))',
-                        borderRadius: 'calc(6px * var(--ui-scale))',
-                        background: 'var(--blue-soft)', color: 'var(--blue)', flexShrink: 0,
-                      }}>
+                  <div key={item.h} className="cms-bento-col-row">
+                    <div className="cms-bento-col-row-top">
+                      <span className="cms-bento-col-row-icon" aria-hidden="true">
                         <Icon size={13} strokeWidth={1.75} />
                       </span>
-                      <span style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)', lineHeight: 1.2 }}>
-                        {item.h}
-                      </span>
+                      <span className="cms-bento-col-row-title">{item.h}</span>
                     </div>
-                    <p style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55, margin: 0, paddingLeft: 'calc(34px * var(--ui-scale))' }}>
-                      {item.b}
-                    </p>
+                    <p className="cms-bento-col-row-body">{item.b}</p>
                   </div>
                 );
               })}
@@ -370,53 +376,27 @@ export default function Platform() {
         <CMSBento />
 
         {/* Passport Vault callout */}
-        <div
-          className="reveal d1"
-          style={{
-            marginTop: 'var(--space-2xl)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--space-3xl)',
-            padding: 'calc(40px * var(--ui-scale))',
-            background: 'linear-gradient(135deg, var(--blue) 0%, var(--blue-ink) 100%)',
-            borderRadius: 'calc(20px * var(--ui-scale))',
-            border: '1px solid rgba(255,255,255,.06)',
-            boxShadow: '0 0 60px rgba(25,80,198,.18)',
-            alignItems: 'center',
-          }}
-        >
-          {/* Left — copy */}
+        <div className="cms-passport-vault reveal d1">
           <div>
-            <div
-              className="mono"
-              style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.12em', color: 'rgba(255,255,255,.5)', marginBottom: 'calc(14px * var(--ui-scale))' }}
-            >
-              IMMIGRATION PASSPORT VAULT
-            </div>
-            <h3
-              className="display"
-              style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15, color: '#fff', marginBottom: 'var(--space-lg)' }}
-            >
+            <div className="mono cms-passport-vault-label">IMMIGRATION PASSPORT VAULT</div>
+            <h3 className="display cms-passport-vault-title">
               Applicants own their record.{' '}
-              <em style={{ color: 'rgba(255,255,255,.65)', fontStyle: 'italic' }}>
-                Across every matter they ever open.
-              </em>
+              <em>Across every matter they ever open.</em>
             </h3>
-            <p style={{ fontSize: 'var(--text-body)', color: 'rgba(255,255,255,.7)', lineHeight: 1.65 }}>
+            <p className="cms-passport-vault-body">
               Every document an applicant submits is stored in their personal Immigration Passport Vault.
               They control what is shared, with whom, and for how long. When they change employers,
-              switch law firms, or start a new matter, they carry their complete record with them —
+              switch law firms, or start a new matter, they carry their complete record with them -
               no re-submission, no starting from scratch, no lost history.
             </p>
           </div>
 
-          {/* Right — three properties */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+          <div className="cms-passport-vault-features">
             {[
               {
                 Icon: Vault,
                 title: 'Permanent personal record',
-                detail: 'Passports, visas, work permits, and supporting documents — stored securely and accessible to the applicant at any time, regardless of which firm they work with.',
+                detail: 'Passports, visas, work permits, and supporting documents - stored securely and accessible to the applicant at any time, regardless of which firm they work with.',
               },
               {
                 Icon: UserCheck,
@@ -426,105 +406,43 @@ export default function Platform() {
               {
                 Icon: ArrowRightLeft,
                 title: 'Portable across employers and firms',
-                detail: 'A new job, a new country, a new attorney — the vault travels with the applicant. No more repeating the same document collection from scratch.',
+                detail: 'A new job, a new country, a new attorney - the vault travels with the applicant. No more repeating the same document collection from scratch.',
               },
-            ].map((item, i, arr) => {
+            ].map((item) => {
               const Icon = item.Icon;
               return (
-                <div
-                  key={item.title}
-                  style={{
-                    display: 'flex',
-                    gap: 'var(--space-md)',
-                    paddingBottom: i < arr.length - 1 ? 'var(--space-lg)' : 0,
-                    borderBottom: i < arr.length - 1 ? '1px solid rgba(255,255,255,.1)' : 'none',
-                  }}
-                >
-                  <span
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: 'calc(36px * var(--ui-scale))',
-                      height: 'calc(36px * var(--ui-scale))',
-                      borderRadius: 'calc(9px * var(--ui-scale))',
-                      background: 'rgba(255,255,255,.12)',
-                      color: '#fff',
-                      flexShrink: 0,
-                      marginTop: 'calc(2px * var(--ui-scale))',
-                    }}
-                  >
+                <div key={item.title} className="cms-passport-vault-feature">
+                  <span className="cms-passport-vault-feature-icon" aria-hidden="true">
                     <Icon size={16} strokeWidth={1.75} />
                   </span>
                   <div>
-                    <div
-                      style={{
-                        fontSize: 'calc(13.5px * var(--ui-scale))',
-                        fontWeight: 700,
-                        color: '#fff',
-                        marginBottom: 'calc(3px * var(--ui-scale))',
-                      }}
-                    >
-                      {item.title}
-                    </div>
-                    <div style={{ fontSize: 'calc(12.5px * var(--ui-scale))', color: 'rgba(255,255,255,.65)', lineHeight: 1.55 }}>
-                      {item.detail}
-                    </div>
+                    <div className="cms-passport-vault-feature-title">{item.title}</div>
+                    <div className="cms-passport-vault-feature-detail">{item.detail}</div>
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
-      </Section>
 
-      {/* CodioOps bundled callout */}
-      <section className="sec">
-        <div className="container">
-          <div
-            className="reveal"
-            style={{
-              padding: 'calc(36px * var(--ui-scale)) calc(40px * var(--ui-scale))',
-              background: 'var(--blue-soft)',
-              borderRadius: 'calc(20px * var(--ui-scale))',
-              border: '1px solid rgba(25,80,198,0.15)',
-              display: 'grid',
-              gridTemplateColumns: '1fr auto',
-              gap: 'var(--space-3xl)',
-              alignItems: 'center',
-            }}
-          >
-            <div>
-              <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-                Bundled with Every CodioCMS Engagement
+        <div className="codioops-foot reveal d2">
+          <div className="codioops-statband codioops-statband--foot" aria-label="CodioOps at a glance">
+            {CODIOOPS_STATS.map((s) => (
+              <div key={s.label} className="codioops-stat">
+                <span className="display codioops-stat-value">{s.value}</span>
+                <span className="codioops-stat-label">{s.label}</span>
               </div>
-              <h3
-                className="display"
-                style={{
-                  fontSize: 'var(--text-display-md)',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.15,
-                  color: 'var(--ink)',
-                  marginBottom: 'var(--space-lg)',
-                }}
-              >
-                CodioOps
-              </h3>
-              <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, maxWidth: '72ch' }}>
-                Every CodioCMS engagement includes CodioOps — our dedicated Case Management Operations team.
-                CodioOps configures the platform to your exact workflows, builds your templates, documents your
-                processes, sets up your automations, and continuously tunes everything as your firm evolves.{' '}
-                <strong style={{ color: 'var(--ink-2)' }}>
-                  You don't just get software. You get the operations team that makes it work.
-                </strong>
-              </p>
-            </div>
-            <SmartLink href="/codioops" className="btn btn-primary" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
-              Learn more about CodioOps
-            </SmartLink>
+            ))}
           </div>
+          <p className="codioops-foot-lead">
+            Every CodioCMS engagement includes CodioOps - dedicated operations that configure your workflows,
+            templates, and automations, then continuously tune the platform as your firm evolves.
+          </p>
+          <SmartLink href="/codioops" className="btn btn-blue-outline codioops-foot-cta">
+            Learn more about CodioOps
+          </SmartLink>
         </div>
-      </section>
+      </Section>
 
       {/* CodioForms */}
       <Section id="codioforms" tone="sec-surface" className="sec-codioforms">
@@ -553,7 +471,12 @@ export default function Platform() {
           <div className="forms-bento-grid">
             <div className="reveal forms-catalog" aria-label="CodioForms catalog preview">
               <div className="forms-catalog-head">
-                <span className="forms-catalog-brand">CodioForms</span>
+                <span className="forms-catalog-brand">
+                  <span className="forms-catalog-brand-icon" aria-hidden="true">
+                    <FileText size={15} strokeWidth={1.75} />
+                  </span>
+                  CodioForms
+                </span>
                 <span className="mono forms-catalog-matter">Matter #1847 · Chen family</span>
                 <div className="forms-catalog-mode" role="group" aria-label="Filling mode">
                   <span className="forms-catalog-mode-on">Online</span>
@@ -581,8 +504,9 @@ export default function Platform() {
                     <h3 className="forms-detail-title">I-130 · Petition for Alien Relative</h3>
                     <span className="mono forms-detail-edition">Edition 04/01/24 · USCIS current</span>
                   </div>
-                  <p className="mono forms-detail-sync">
-                    Prefilled from CodioCMS · 847 fields mapped · last sync 2m ago
+                  <p className="forms-detail-sync">
+                    <span className="forms-detail-sync-dot" aria-hidden="true" />
+                    <span className="mono">Prefilled from CodioCMS · 847 fields mapped · last sync 2m ago</span>
                   </p>
                   <dl className="forms-field-rows">
                     {ACTIVE_FORM_FIELDS.map(([label, value]) => (
@@ -599,8 +523,14 @@ export default function Platform() {
                 </div>
               </div>
 
-              <div className="mono forms-catalog-foot">
-                Synced with USCIS · IRCC · IND · MEA / FRRO
+              <div className="forms-catalog-foot">
+                <span className="forms-catalog-foot-live" aria-hidden="true" />
+                <span className="mono forms-catalog-foot-label">Live authority sync</span>
+                <div className="forms-catalog-foot-tags" aria-label="Synced authorities">
+                  {['USCIS', 'IRCC', 'IND', 'MEA / FRRO'].map((authority) => (
+                    <span key={authority} className="forms-catalog-foot-tag">{authority}</span>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -646,166 +576,112 @@ export default function Platform() {
 
       {/* CodioNetwork */}
       <Section id="codionetwork" className="sec-codionetwork">
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4xl)', alignItems: 'start' }}>
-          {/* Left */}
-          <div>
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>CodioNetwork</div>
-            <h2 className="display type-display-lg">
-              <span>The global service provider network </span>
-              <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>for immigration.</em>
-            </h2>
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '48ch' }}>
-              A curated B2B network accessible directly through CodioCMS. One coordination layer instead of dozens of manual handoffs — with structured workflows, field-level confidentiality, and a full history of every assignment.
+        <div className="network-head reveal">
+          <div className="section-head-wide network-head-copy">
+            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
+              CodioNetwork
+            </div>
+            <SplitHeading lead="The global service provider network" emphasis="for immigration." />
+            <p className="network-head-intro">
+              A curated B2B network accessible directly through CodioCMS. One coordination layer instead of
+              dozens of manual handoffs - with structured workflows, field-level confidentiality, and a full
+              history of every assignment.
             </p>
+          </div>
+        </div>
 
-            {/* Workflow capability rows */}
-            <div style={{ marginTop: 'var(--space-2xl)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-              {[
-                {
-                  title: 'Structured provider workflows',
-                  detail: 'Outsourcing is a managed workflow, not an email. Assign work, set deliverables, track revisions, and extend deadlines — all with a paper trail both parties can see.',
-                },
-                {
-                  title: 'Field-level confidentiality',
-                  detail: 'Send a translator exactly what they need — not salary details, not passport numbers, not case strategy. Confidentiality is enforced at the data field level, automatically.',
-                },
-                {
-                  title: 'Data-driven provider selection',
-                  detail: 'Every assignment builds history. Over time: "Which translator is fastest for technical documents?" becomes a query — not a judgment call based on memory.',
-                },
-                {
-                  title: 'Revisions and billing in one place',
-                  detail: 'Structured feedback on every deliverable, tracked for quality and billing. No disputed invoices, no lost revision threads in email.',
-                },
-              ].map((item, i, arr) => (
-                <div
-                  key={item.title}
-                  style={{
-                    paddingBottom: i < arr.length - 1 ? 'var(--space-md)' : 0,
-                    borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-                  }}
-                >
-                  <div style={{ fontSize: 'calc(13.5px * var(--ui-scale))', fontWeight: 700, color: 'var(--ink)', marginBottom: 'calc(3px * var(--ui-scale))' }}>
-                    {item.title}
+        <div className="network-bento">
+          <div className="network-bento-grid">
+            <div className="reveal network-console" aria-label="CodioNetwork coordination preview">
+              <div className="network-console-head">
+                <span className="network-console-brand">CodioNetwork</span>
+                <span className="mono network-console-matter">Matter #2241 · Vasquez family</span>
+                <span className="network-console-status">2 active</span>
+              </div>
+
+              <div className="network-console-body">
+                <nav className="network-console-nav" aria-label="Provider disciplines">
+                  {NETWORK_PROVIDERS.map((p) => {
+                    const Icon = p.Icon;
+                    return (
+                      <div
+                        key={p.label}
+                        className={`network-console-item${p.active ? ' is-active' : ''}`}
+                        aria-current={p.active ? 'true' : undefined}
+                      >
+                        <span className="network-console-icon" aria-hidden="true">
+                          <Icon size={14} strokeWidth={1.75} />
+                        </span>
+                        <span className="network-console-name">{p.label}</span>
+                        <span className="mono network-console-tag">{p.tag.toUpperCase()}</span>
+                      </div>
+                    );
+                  })}
+                </nav>
+
+                <div className="network-console-detail">
+                  <div className="network-detail-head">
+                    <h3 className="network-detail-title">Provider assignments</h3>
+                    <span className="mono network-detail-edition">Structured workflows · scoped fields only</span>
                   </div>
-                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.55 }}>
-                    {item.detail}
+
+                  <div className="network-assignment-list">
+                    {NETWORK_ASSIGNMENTS.map((row) => (
+                      <article key={row.provider} className="network-assignment">
+                        <div className="network-assignment-top">
+                          <div className="network-assignment-who">
+                            <span className="network-assignment-name">{row.provider}</span>
+                            <span className="mono network-assignment-type">{row.type.toUpperCase()}</span>
+                          </div>
+                          <span className={`network-assignment-badge network-assignment-badge--${row.status}`}>
+                            {row.status}
+                          </span>
+                        </div>
+                        <p className="network-assignment-task">{row.task}</p>
+                        <div className="network-assignment-meta">
+                          <span className="mono network-assignment-scope">{row.scope}</span>
+                          <span className="mono network-assignment-deadline">{row.deadline}</span>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+
+                  <div className="network-detail-callout">
+                    <p className="network-detail-callout-text">
+                      <strong>Vetted providers</strong> · assignment history · billing in one place
+                    </p>
+                    <span className="pill network-detail-callout-pill">In CodioCMS</span>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
 
-            <div style={{ marginTop: 'var(--space-xl)' }}>
-              <SmartLink href="/network" className="feature-card-link" style={{ fontWeight: 600 }}>
-                Explore CodioNetwork
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" style={{ width: 14, height: 14 }}>
-                  <path d="M3 8h10M9 4l4 4-4 4" />
-                </svg>
-              </SmartLink>
+            <div className="network-cap-stack">
+              {NETWORK_CAPS.map((cap, i) => (
+                <article key={cap.h} className={`network-cap-card reveal d${i + 1}`}>
+                  <span className="mono network-cap-n">{cap.n}</span>
+                  <h3 className="display network-cap-title">{cap.h}</h3>
+                  <p className="network-cap-text">{cap.b}</p>
+                </article>
+              ))}
             </div>
           </div>
 
-          {/* Right — provider list + assignment workflow mock */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(12px * var(--ui-scale))' }}>
-
-            {/* Provider roster */}
-            <div style={{
-              border: '1.5px solid var(--line-2)',
-              borderRadius: 'calc(16px * var(--ui-scale))',
-              overflow: 'hidden',
-              background: '#fff',
-            }}>
-              {[
-                { label: 'Certified Translators',  sub: '40+ languages' },
-                { label: 'Immigration Physicians',  sub: 'USCIS approved' },
-                { label: 'Apostille & Auth',        sub: 'Multi-country' },
-                { label: 'Foreign Attorneys',       sub: 'In-country counsel' },
-                { label: 'Specialized Couriers',    sub: 'Secure delivery' },
-                { label: 'Consular Coordinators',   sub: 'Appointment liaison' },
-              ].map((item, i, arr) => (
-                <div key={item.label} style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: 'calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                  borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-                }}>
-                  <span style={{ fontSize: 'calc(13.5px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>{item.label}</span>
-                  <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', letterSpacing: '.06em', fontWeight: 600 }}>{item.sub.toUpperCase()}</span>
+          <div className="network-foot reveal d1">
+            <div className="network-statband network-statband--foot" aria-label="CodioNetwork at a glance">
+              {NETWORK_STATS.map((s) => (
+                <div key={s.label} className="network-stat">
+                  <span className="display network-stat-value">{s.value}</span>
+                  <span className="network-stat-label">{s.label}</span>
                 </div>
               ))}
             </div>
-
-            {/* Assignment workflow mock */}
-            <div style={{
-              border: '1.5px solid var(--line-2)',
-              borderRadius: 'calc(16px * var(--ui-scale))',
-              overflow: 'hidden',
-              background: '#fff',
-            }}>
-              {/* Header */}
-              <div style={{
-                padding: 'calc(11px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                borderBottom: '1px solid var(--line)',
-                background: 'var(--surface)',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              }}>
-                <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--ink-2)', letterSpacing: '.06em', fontWeight: 600 }}>
-                  PROVIDER ASSIGNMENT · Matter #2241
-                </span>
-                <span style={{
-                  fontSize: 'calc(10px * var(--ui-scale))', fontWeight: 700,
-                  color: '#059669', background: '#f0fdf4',
-                  padding: '2px 8px', borderRadius: '4px',
-                  fontFamily: 'var(--mono)', letterSpacing: '.04em',
-                }}>IN PROGRESS</span>
-              </div>
-
-              {/* Assignment rows */}
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {[
-                  { provider: 'Elena Vasquez', type: 'Certified Translator', task: 'I-130 supporting docs · ES→EN', deadline: 'Due Jun 10', status: 'delivered', fields: 'Scoped: Name, DOB, doc type only' },
-                  { provider: 'Dr. Arjun Mehta', type: 'Immigration Physician', task: 'I-693 medical exam', deadline: 'Due Jun 14', status: 'pending', fields: 'Scoped: Case ref, client name only' },
-                ].map((row, i, arr) => (
-                  <div
-                    key={row.provider}
-                    style={{
-                      padding: 'calc(13px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                      borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
-                      display: 'flex', flexDirection: 'column', gap: 'calc(5px * var(--ui-scale))',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div>
-                        <span style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink)' }}>{row.provider}</span>
-                        <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)', marginLeft: '8px' }}>{row.type.toUpperCase()}</span>
-                      </div>
-                      <span style={{
-                        fontSize: 'calc(10px * var(--ui-scale))', fontWeight: 700,
-                        color: row.status === 'delivered' ? '#059669' : 'var(--blue)',
-                        background: row.status === 'delivered' ? '#f0fdf4' : 'var(--blue-soft)',
-                        padding: '2px 8px', borderRadius: '4px',
-                        fontFamily: 'var(--mono)', letterSpacing: '.04em', textTransform: 'uppercase',
-                      }}>{row.status}</span>
-                    </div>
-                    <div style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--ink-2)' }}>{row.task}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--muted)' }}>{row.fields}</span>
-                      <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', color: 'var(--blue)', fontWeight: 600 }}>{row.deadline}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Footer note */}
-              <div style={{
-                padding: 'calc(9px * var(--ui-scale)) calc(18px * var(--ui-scale))',
-                borderTop: '1px solid var(--line)',
-                background: 'var(--surface)',
-              }}>
-                <p className="mono" style={{ fontSize: 'calc(9.5px * var(--ui-scale))', color: 'var(--muted)', margin: 0, letterSpacing: '.04em' }}>
-                  PROVIDERS SEE ONLY SCOPED FIELDS · FULL CASE DATA NEVER SHARED
-                </p>
-              </div>
-            </div>
+            <p className="network-foot-lead">
+              Replace dozens of manual handoffs with one coordination layer inside CodioCMS.
+            </p>
+            <SmartLink href="/network" className="btn btn-blue-outline network-foot-cta">
+              Explore CodioNetwork
+            </SmartLink>
           </div>
         </div>
       </Section>
@@ -876,7 +752,7 @@ export default function Platform() {
         items={[
           {
             q: 'What is CodioCMS?',
-            a: "CodioCMS is a next-generation immigration case management platform built by the founder of INSZoom — the world's leading immigration CMS. It provides end-to-end case lifecycle management, five purpose-built portals (attorney, applicant, HR, service provider, admin), native AI agent integration, and global country support. Every engagement includes CodioOps — a dedicated team that configures and continuously optimizes the platform to your exact workflows.",
+            a: "CodioCMS is a next-generation immigration case management platform built by the founder of INSZoom - the world's leading immigration CMS. It provides end-to-end case lifecycle management, five purpose-built portals (attorney, applicant, HR, service provider, admin), native AI agent integration, and global country support. Every engagement includes CodioOps - a dedicated team that configures and continuously optimizes the platform to your exact workflows.",
             meta: ['Five-portal architecture', 'Native AI agents'],
           },
           {
@@ -886,7 +762,7 @@ export default function Platform() {
           },
           {
             q: 'How does CodioCMS differ from other immigration case management software?',
-            a: "CodioCMS is the only immigration platform designed from the ground up for native AI agents — not legacy software with AI bolted on. It includes five dedicated role portals, a global forms engine, an Immigration Passport Vault giving applicants portable document ownership, and CodioOps managed services bundled with every engagement.",
+            a: "CodioCMS is the only immigration platform designed from the ground up for native AI agents - not legacy software with AI bolted on. It includes five dedicated role portals, a global forms engine, an Immigration Passport Vault giving applicants portable document ownership, and CodioOps managed services bundled with every engagement.",
             meta: ['AI-native architecture', 'CodioOps bundled'],
           },
           {
@@ -896,7 +772,7 @@ export default function Platform() {
           },
           {
             q: 'What is the Immigration Passport Vault?',
-            a: 'The Immigration Passport Vault is a personal document record within CodioCMS where applicants store passports, visas, permits, and supporting documents securely. Applicants control what they share and with whom. When they change employers or switch firms, their complete record travels with them — no re-submission or starting from scratch.',
+            a: 'The Immigration Passport Vault is a personal document record within CodioCMS where applicants store passports, visas, permits, and supporting documents securely. Applicants control what they share and with whom. When they change employers or switch firms, their complete record travels with them - no re-submission or starting from scratch.',
             meta: ['Applicant-owned', 'Portable across firms'],
           },
         ]}

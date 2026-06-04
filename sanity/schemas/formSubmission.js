@@ -2,7 +2,7 @@ export const formSubmission = {
   name: 'formSubmission',
   title: 'Form Submission',
   type: 'document',
-  // Read-only in Studio — nobody edits these, they only review them
+  // Read-only in Studio - nobody edits these, they only review them
   __experimental_actions: ['update', 'publish', 'delete'],
   fields: [
     {
@@ -48,7 +48,7 @@ export const formSubmission = {
       rows: 5,
       readOnly: true,
     },
-    // Internal CRM-style status field — the one thing editors CAN update
+    // Internal CRM-style status field - the one thing editors CAN update
     {
       name: 'status',
       title: 'Status',

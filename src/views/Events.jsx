@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { PageHero, Section, CtaBand, SmartLink } from '../../components/ui/PageKit';
 import { MapPin, Calendar, ExternalLink, Clock } from 'lucide-react';
 
-/* ─── All events — past + upcoming ─── */
+/* ─── All events - past + upcoming ─── */
 const ALL_EVENTS = [
   /* ── UPCOMING ── */
   {
@@ -20,8 +20,8 @@ const ALL_EVENTS = [
     format: 'In-person & online webcast',
     topics: ['Family immigration', 'Business immigration', 'Removal defense'],
     special: [
-      'Global Migration Forum — June 15–16',
-      'Welcome Taco Party — June 17',
+      'Global Migration Forum - June 15–16',
+      'Welcome Taco Party - June 17',
       'Saturday Night Party at the San Diego Zoo',
     ],
     website: 'https://www.aila.org/ac26',
@@ -147,7 +147,7 @@ export default function Events() {
         eyebrow="Events"
         lead="Come and meet us"
         emphasis="in person."
-        sub="GlobalCodio attends immigration conferences, industry summits, and trade events throughout the year. Find out where we'll be — and come say hello."
+        sub="GlobalCodio attends immigration conferences, industry summits, and trade events throughout the year. Find out where we'll be - and come say hello."
         primary={{ href: '/contact', label: 'Schedule a meeting' }}
         secondary={{ href: '/free-tech-audit', label: 'Book a free tech audit' }}
       />
@@ -160,7 +160,7 @@ export default function Events() {
         emphasis="be next."
         headAlign="center"
         headInline
-        intro="We'll be at the following events in 2026. Reach out before you arrive to schedule time with our team — or find us on the floor."
+        intro="We'll be at the following events in 2026. Reach out before you arrive to schedule time with our team - or find us on the floor."
       >
         <div className="events-grid">
           {UPCOMING.map((ev, i) => <EventCard key={ev.id} event={ev} index={i} />)}
@@ -204,7 +204,7 @@ export default function Events() {
       <CtaBand
         lead="Want to meet our team"
         emphasis="at an event?"
-        sub="Book a 30-minute slot before you arrive — or reach out and we'll make time on the floor."
+        sub="Book a 30-minute slot before you arrive - or reach out and we'll make time on the floor."
         primary={{ href: '/contact', label: 'Schedule a meeting' }}
         secondary={{ href: '/free-tech-audit', label: 'Book a free tech audit' }}
       />

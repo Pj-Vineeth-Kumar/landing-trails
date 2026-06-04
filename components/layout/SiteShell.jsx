@@ -44,7 +44,14 @@ export function SiteShell({ children }) {
     const ctx = gsap.context(() => {
       reveals.forEach((el) => {
         const startsBelowFold = el.getBoundingClientRect().top > window.innerHeight * 0.92;
-        if (!startsBelowFold) { el.classList.add('is-in'); return; }
+        if (!startsBelowFold) {
+          gsap.from(el, {
+            y: 18, opacity: 0, duration: 0.7, delay: 0.05 + delayForReveal(el),
+            ease: 'power3.out', immediateRender: true,
+            onComplete: () => el.classList.add('is-in'),
+          });
+          return;
+        }
         gsap.from(el, {
           y: 24, opacity: 0, duration: 0.8, delay: delayForReveal(el),
           ease: 'power3.out', immediateRender: true,
@@ -60,7 +67,7 @@ export function SiteShell({ children }) {
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
       });
-    }, 450);
+    }, 900);
     requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => { window.clearTimeout(failsafe); ctx.revert(); };
   }, [pathname, tweaks]);

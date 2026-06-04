@@ -9,7 +9,7 @@ const SERVICE_LAYERS = [
     Icon: ScanSearch,
     n: '01',
     h: 'Technology Audit',
-    b: "A comprehensive audit of your firm's current tech stack, workflows, and operations before onboarding begins. We identify gaps, risks, and opportunities — so every decision that follows is grounded in what's actually there.",
+    b: "A comprehensive audit of your firm's current tech stack, workflows, and operations before onboarding begins. We identify gaps, risks, and opportunities - so every decision that follows is grounded in what's actually there.",
     stat: 'Free for qualifying firms',
     links: [{ href: '/contact', label: 'Request an audit' }],
   },
@@ -46,14 +46,14 @@ const SERVICE_LAYERS = [
     Icon: HeadphonesIcon,
     n: '06',
     h: 'Customer Support',
-    b: 'Dedicated support for your staff and clients. Helpdesk, onboarding assistance, and day-to-day issue resolution handled by our team — so your firm never waits on a support ticket queue.',
+    b: 'Dedicated support for your staff and clients. Helpdesk, onboarding assistance, and day-to-day issue resolution handled by our team - so your firm never waits on a support ticket queue.',
     stat: 'Dedicated support team',
   },
   {
     Icon: Server,
     n: '07',
     h: 'IT Support Services',
-    b: 'Full IT support for your firm — helpdesk, device procurement and management, employee onboarding and offboarding, software provisioning, and network and security monitoring.',
+    b: 'Full IT support for your firm - helpdesk, device procurement and management, employee onboarding and offboarding, software provisioning, and network and security monitoring.',
     stat: 'Optional add-on',
     optional: true,
   },
@@ -94,7 +94,7 @@ export default function Services() {
                 key={svc.h}
                 className="service-layer-row"
               >
-                {/* Left — name + icon + stat */}
+                {/* Left - name + icon + stat */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'calc(14px * var(--ui-scale))' }}>
                   <span style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -125,7 +125,7 @@ export default function Services() {
                   </div>
                 </div>
 
-                {/* Right — description + inline links */}
+                {/* Right - description + inline links */}
                 <div>
                   <p style={{ fontSize: 'calc(15px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.7, margin: 0 }}>
                     {svc.b}
@@ -148,7 +148,7 @@ export default function Services() {
         </div>
       </Section>
 
-      {/* RFP Response — standalone callout */}
+      {/* RFP Response - standalone callout */}
       <Section id="rfp-response" tone="sec-surface">
         <div className="rfp-response-split reveal">
           <div>
@@ -157,7 +157,7 @@ export default function Services() {
               <span style={{ color: 'var(--ink)' }}>RFP Response </span><em className="text-grad-blue" style={{ fontStyle: 'italic' }}>Support.</em>
             </h2>
             <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '48ch' }}>
-              When corporate clients send RFPs with deep technical and security questions, we draft your responses — written by the same team that built and runs the platform. Available as a bundled add-on.
+              When corporate clients send RFPs with deep technical and security questions, we draft your responses - written by the same team that built and runs the platform. Available as a bundled add-on.
             </p>
             <div style={{ marginTop: 'var(--space-xl)', display: 'flex', gap: 'var(--space-sm)' }}>
               <SmartLink href="/rfp-response" className="btn btn-primary">

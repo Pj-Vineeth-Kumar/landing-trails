@@ -28,7 +28,7 @@ const STATS = [
 const DIFFERENCE = [
   { Icon: Cpu, n: '01', h: 'Purpose-built for immigration', b: 'Not adapted legal tech - engineered from the ground up for immigration workflows.' },
   { Icon: Workflow, n: '02', h: 'End-to-end managed', b: 'Not self-serve software - a complete, fully managed technology operation.' },
-  { Icon: Settings, n: '03', h: 'CodioOps included with every engagement', b: 'A dedicated operations team configuring and optimizing your platform — not software you figure out yourself.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
+  { Icon: Settings, n: '03', h: 'CodioOps included with every engagement', b: 'A dedicated operations team configuring and optimizing your platform - not software you figure out yourself.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
   { Icon: Bot, n: '04', h: 'AI-native architecture', b: 'Designed for an AI workforce from day one, not bolted on after the fact.' },
   { Icon: Globe, n: '05', h: 'Global from day one', b: 'Built for worldwide immigration practice - not US-only.' },
   { Icon: TrendingUp, n: '06', h: 'Outcome-aligned pricing', b: 'We earn when you earn. Pricing tied to results, not seats.' },
