@@ -598,8 +598,8 @@ export default function Platform() {
       </Section>
 
       <CtaBand
-        lead="See the platform on your live cases."
-        emphasis="Not a generic demo."
+        lead="We demo the features that solve"
+        emphasis="your challenges. Not a generic demo."
         primary={{ href: '/contact', label: 'Book your free tech audit' }}
         secondary={{ href: '/ai-agents', label: 'Explore the AI Agents' }}
       />

@@ -68,7 +68,7 @@ export default function Firms() {
         eyebrow="A Day in the Life"
         lead="What a day looks like"
         emphasis="with GlobalCodio."
-        intro="From the first client intake to filing, client questions, and renewal outreach-specialized AI agents run routine work in parallel all day, so your attorneys stay focused on strategy and advocacy."
+        intro="From the first client intake to filing, client questions, and renewal outreach-specialized AI agents run routine work in parallel all day, so your staff stay focused on strategy and advocacy."
         introMaxWidth="76ch"
         headAlign="center"
       >
@@ -96,7 +96,7 @@ export default function Firms() {
             <div className="day-payoff-inner">
               <div className="day-payoff-copy">
                 <p className="display day-payoff-title">
-                  Your attorneys focus on strategy, advocacy, and{' '}
+                  Your staff focus on strategy, advocacy, and{' '}
                   <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>the work only humans can do.</em>
                 </p>
                 <p className="day-payoff-text">

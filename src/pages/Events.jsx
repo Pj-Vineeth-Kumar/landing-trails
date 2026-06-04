@@ -1,69 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Seo } from '../components/Seo.jsx';
 import { PageHero, Section, CtaBand, SmartLink } from '../components/PageKit.jsx';
-import { MapPin, Calendar, Monitor, ExternalLink } from 'lucide-react';
+import { MapPin, Calendar, ExternalLink, Clock } from 'lucide-react';
 
-const EVENTS = [
+/* ─── All events — past + upcoming ─── */
+const ALL_EVENTS = [
+  /* ── UPCOMING ── */
   {
     id: 'aila-ac26',
-    badge: 'National Flagship',
+    status: 'upcoming',
+    badge: 'National',
     badgeTone: 'blue',
     month: 'June 2026',
     name: 'AILA Annual Conference & Webcast',
-    abbr: 'AILA AC26',
     dates: 'June 17 – 20, 2026',
-    location: 'San Diego, California',
+    location: 'San Diego, CA',
     venues: ['Marriott Marquis San Diego Marina', 'Manchester Grand Hyatt San Diego'],
     format: 'In-person & online webcast',
-    scope: 'National & international',
-    sessions: '110+ CLE-eligible sessions',
     topics: ['Family immigration', 'Business immigration', 'Removal defense'],
     special: [
       'Global Migration Forum — June 15–16',
-      'San Diego Chapter Welcome Taco Party — June 17',
+      'Welcome Taco Party — June 17',
       'Saturday Night Party at the San Diego Zoo',
     ],
-    website: '#',
-    websiteLabel: 'AILA AC26 Conference Portal',
-    accentColor: 'var(--blue)',
+    website: 'https://www.aila.org/ac26',
+    websiteLabel: 'AILA AC26 Portal',
   },
   {
     id: 'aila-ca26',
-    badge: 'Regional Deep-Dive',
+    status: 'upcoming',
+    badge: 'Regional',
     badgeTone: 'ink',
     month: 'November 2026',
-    name: '39th Annual AILA California Chapters Conference',
-    abbr: 'AILA CA Chapters',
+    name: 'AILA California Chapters Conference',
     dates: 'November 5 – 7, 2026',
-    location: 'San Francisco, California',
+    location: 'San Francisco, CA',
     venues: ['Hyatt Regency San Francisco Downtown-SOMA'],
     format: 'In-person & online webcast',
-    scope: 'Regional & advanced',
-    sessions: 'Advanced West Coast strategy tracks',
-    topics: ['Ninth Circuit updates', 'Regional enforcement priorities', 'Specialized compliance panels'],
+    topics: ['Ninth Circuit updates', 'Regional enforcement priorities', 'Compliance panels'],
     special: [],
-    website: '#',
-    websiteLabel: 'AILA CA Chapters Conference Page',
-    accentColor: 'var(--ink-2)',
+    website: 'https://www.aila.org/shop/products/view/california-chapters-conference',
+    websiteLabel: 'AILA CA Chapters Page',
+  },
+  /* ── PAST ── */
+  {
+    id: 'aila-ac25',
+    status: 'past',
+    badge: 'National',
+    badgeTone: 'muted',
+    month: 'June 2025',
+    name: 'AILA Annual Conference & Webcast',
+    dates: 'June 2025',
+    location: 'Chicago, IL',
+    venues: [],
+    format: 'In-person & online webcast',
+    topics: [],
+    special: [],
+    website: 'https://www.aila.org/ac25',
+    websiteLabel: 'AILA AC25 Portal',
   },
 ];
 
-const COMPARISON = [
-  { label: 'Scope', june: 'National & international', nov: 'Regional & advanced' },
-  { label: 'Venues', june: 'Multi-property', nov: 'Single-property boutique' },
-  { label: 'Sessions', june: '110+ CLE-eligible sessions', nov: 'Advanced West Coast tracks' },
-  { label: 'Format', june: 'In-person & webcast', nov: 'In-person & webcast' },
-];
+const UPCOMING = ALL_EVENTS.filter(e => e.status === 'upcoming');
+// const PAST = ALL_EVENTS.filter(e => e.status === 'past');
 
 function EventCard({ event, index }) {
+  const isPast = event.status === 'past';
   return (
-    <article className={`event-card reveal d${(index % 3) + 1}`} aria-labelledby={`event-title-${event.id}`}>
+    <article
+      className={`event-card reveal d${(index % 3) + 1}${isPast ? ' event-card--past' : ''}`}
+      aria-labelledby={`event-title-${event.id}`}
+    >
       <div className="event-card-top">
         <div className="event-card-badges">
           <span className={`event-badge event-badge--${event.badgeTone}`}>{event.badge}</span>
+          {isPast && <span className="event-badge event-badge--past">Past</span>}
           <span className="event-month mono">{event.month}</span>
         </div>
-        <h2 className="display event-card-title" id={`event-title-${event.id}`}>{event.name}</h2>
+        <h3 className="display event-card-title" id={`event-title-${event.id}`}>{event.name}</h3>
       </div>
 
       <div className="event-card-meta">
@@ -75,42 +89,48 @@ function EventCard({ event, index }) {
           <MapPin size={14} strokeWidth={1.75} aria-hidden="true" />
           <span>{event.location}</span>
         </div>
-        <div className="event-meta-row">
-          <Monitor size={14} strokeWidth={1.75} aria-hidden="true" />
-          <span>{event.format}</span>
-        </div>
       </div>
 
-      <hr className="rule-blue" />
-
-      <div className="event-card-body">
-        <div className="event-venues">
-          <span className="event-section-label mono">Venue{event.venues.length > 1 ? 's' : ''}</span>
-          <ul className="event-venue-list">
-            {event.venues.map(v => <li key={v}>{v}</li>)}
-          </ul>
-        </div>
-
-        <div className="event-offerings">
-          <span className="event-section-label mono">Key Offerings</span>
-          <p className="event-sessions-lead">{event.sessions}</p>
-          <ul className="event-topic-list">
-            {event.topics.map(t => <li key={t}>{t}</li>)}
-          </ul>
-        </div>
-
-        {event.special.length > 0 && (
-          <div className="event-special">
-            <span className="event-section-label mono">Special Events</span>
-            <ul className="event-special-list">
-              {event.special.map(s => <li key={s}>{s}</li>)}
-            </ul>
+      {!isPast && (
+        <>
+          <hr className="rule-blue" />
+          <div className="event-card-body">
+            {event.venues.length > 0 && (
+              <div className="event-venues">
+                <span className="event-section-label mono">Venue{event.venues.length > 1 ? 's' : ''}</span>
+                <ul className="event-venue-list">
+                  {event.venues.map(v => <li key={v}>{v}</li>)}
+                </ul>
+              </div>
+            )}
+            {event.topics.length > 0 && (
+              <div className="event-offerings">
+                <span className="event-section-label mono">Topics</span>
+                <ul className="event-topic-list">
+                  {event.topics.map(t => <li key={t}>{t}</li>)}
+                </ul>
+              </div>
+            )}
+            {event.special.length > 0 && (
+              <div className="event-special">
+                <span className="event-section-label mono">Special Events</span>
+                <ul className="event-special-list">
+                  {event.special.map(s => <li key={s}>{s}</li>)}
+                </ul>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
 
       <div className="event-card-footer">
-        <SmartLink href={event.website} className="event-website-link">
+        <SmartLink
+          href={event.website}
+          className="event-website-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${event.websiteLabel} (opens in a new tab)`}
+        >
           <ExternalLink size={13} strokeWidth={1.75} aria-hidden="true" />
           {event.websiteLabel}
         </SmartLink>
@@ -124,71 +144,72 @@ export default function Events() {
     <>
       <Seo
         title="Events"
-        description="GlobalCodio at the 2026 AILA conferences — June Annual Conference in San Diego and the November California Chapters Conference in San Francisco. Find us at both."
+        description="Meet the GlobalCodio team in person — conferences, immigration summits, and industry events. See where we'll be next and where we've been."
         path="/events"
       />
 
       <PageHero
-        eyebrow="Events & Conferences"
-        lead="Find us at AILA"
-        emphasis="2026."
-        headInline
-        sub="GlobalCodio will be at both major 2026 AILA conferences. Meet our team, see the platform in action, and book a 30-minute tech audit on-site."
+        eyebrow="Events"
+        lead="Come and meet us"
+        emphasis="in person."
+        sub="GlobalCodio attends immigration conferences, industry summits, and trade events throughout the year. Find out where we'll be — and come say hello."
         primary={{ href: '/contact', label: 'Schedule a meeting' }}
         secondary={{ href: '/free-tech-audit', label: 'Book a free tech audit' }}
       />
 
-      {/* Event cards */}
+      {/* Upcoming */}
       <Section
-        id="conferences"
-        eyebrow="2026 Conferences"
-        lead="Two events,"
-        emphasis="one platform."
+        id="upcoming"
+        eyebrow="Upcoming Events"
+        lead="Where we'll"
+        emphasis="be next."
         headAlign="center"
         headInline
-        intro="Both conferences offer in-person and webcast access. GlobalCodio will be present at each — reach out before the event to schedule time with our team."
+        intro="We'll be at the following events in 2026. Reach out before you arrive to schedule time with our team — or find us on the floor."
       >
         <div className="events-grid">
-          {EVENTS.map((ev, i) => <EventCard key={ev.id} event={ev} index={i} />)}
+          {UPCOMING.map((ev, i) => <EventCard key={ev.id} event={ev} index={i} />)}
         </div>
       </Section>
 
-      {/* Comparison table */}
+      {/* Past */}
+      {/*
       <Section
-        id="comparison"
+        id="past"
         tone="sec-surface"
-        eyebrow="At a Glance"
-        lead="June vs."
-        emphasis="November."
+        eyebrow="Past Events"
+        lead="Where we've"
+        emphasis="been."
         headAlign="center"
         headInline
       >
-        <div className="events-compare reveal" style={{ marginTop: 'var(--space-3xl)' }}>
-          <div className="events-compare-head">
-            <div className="events-compare-label-col" />
-            <div className="events-compare-col-head">
-              <span className="mono" style={{ color: 'var(--blue)' }}>June — San Diego</span>
-              <span className="display events-compare-col-title">AILA Annual</span>
-            </div>
-            <div className="events-compare-col-head">
-              <span className="mono" style={{ color: 'var(--ink-3)' }}>November — San Francisco</span>
-              <span className="display events-compare-col-title">CA Chapters</span>
-            </div>
-          </div>
-          {COMPARISON.map(row => (
-            <div key={row.label} className="events-compare-row">
-              <div className="events-compare-label mono">{row.label}</div>
-              <div className="events-compare-cell">{row.june}</div>
-              <div className="events-compare-cell">{row.nov}</div>
+        <div className="events-past-grid reveal" style={{ marginTop: 'var(--space-3xl)' }}>
+          {PAST.map((ev, i) => (
+            <div key={ev.id} className="event-past-row">
+              <div className="event-past-meta">
+                <span className="mono event-past-month">{ev.month}</span>
+                <div>
+                  <p className="event-past-name">{ev.name}</p>
+                  <span className="event-past-loc">
+                    <MapPin size={11} strokeWidth={1.75} aria-hidden="true" />
+                    {ev.location}
+                  </span>
+                </div>
+              </div>
+              <SmartLink href={ev.website} className="event-website-link">
+                <ExternalLink size={12} strokeWidth={1.75} aria-hidden="true" />
+                {ev.websiteLabel}
+              </SmartLink>
             </div>
           ))}
         </div>
       </Section>
+      */}
 
       <CtaBand
-        lead="Attending an AILA"
-        emphasis="conference this year?"
-        sub="Book a 30-minute slot with our team before you arrive — or stop by and find us on the floor."
+        lead="Want to meet our team"
+        emphasis="at an event?"
+        sub="Book a 30-minute slot before you arrive — or reach out and we'll make time on the floor."
         primary={{ href: '/contact', label: 'Schedule a meeting' }}
         secondary={{ href: '/free-tech-audit', label: 'Book a free tech audit' }}
       />

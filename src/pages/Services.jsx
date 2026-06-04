@@ -1,7 +1,7 @@
 import React from 'react';
 import { Seo } from '../components/Seo.jsx';
 import { PageHero, Section, CtaBand, SmartLink } from '../components/PageKit.jsx';
-import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch } from 'lucide-react';
+import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon } from 'lucide-react';
 
 const SERVICE_LAYERS = [
   {
@@ -34,23 +34,31 @@ const SERVICE_LAYERS = [
     stat: 'Survives staff turnover',
   },
   {
-    Icon: Server,
-    n: '05',
-    h: 'IT Support Services',
-    b: 'Full IT support for your firm. Helpdesk, device procurement and management, employee onboarding and offboarding, software provisioning, network and security monitoring. You stop being your own IT department.',
-    stat: 'Replaces your IT department',
-  },
-  {
     Icon: Workflow,
-    n: '06',
+    n: '05',
     h: 'Managed Operations',
     b: 'Ongoing day-to-day management of your complete GlobalCodio technology operation. Platform updates, AI agent tuning, network coordination, performance monitoring, and proactive support - handled by our team continuously.',
     stat: 'Fully managed, ongoing',
     featured: true,
   },
   {
-    Icon: FileCheck,
+    Icon: HeadphonesIcon,
+    n: '06',
+    h: 'Customer Support',
+    b: 'Dedicated support for your staff and clients. Helpdesk, onboarding assistance, and day-to-day issue resolution handled by our team — so your firm never waits on a support ticket queue.',
+    stat: 'Dedicated support team',
+  },
+  {
+    Icon: Server,
     n: '07',
+    h: 'IT Support Services',
+    b: 'Full IT support for your firm — helpdesk, device procurement and management, employee onboarding and offboarding, software provisioning, and network and security monitoring.',
+    stat: 'Optional add-on',
+    optional: true,
+  },
+  {
+    Icon: FileCheck,
+    n: '08',
     h: 'RFP Response Support',
     b: 'When corporate clients send you RFPs with deep technical and security questions, we draft your responses. Available as a bundled add-on.',
     links: [{ href: '/rfp-response', label: 'Learn more' }],
@@ -78,25 +86,18 @@ export default function Services() {
       <Section
         id="service-layers"
         eyebrow="What We Handle"
-        lead="Seven layers."
+        lead="Eight layers."
         emphasis="One partner."
         headInline
         headAlign="center"
       >
         <div className="reveal" style={{ marginTop: 'var(--space-3xl)', borderTop: '1px solid var(--line)' }}>
-          {SERVICE_LAYERS.filter(s => s.n !== '07').map((svc) => {
+          {SERVICE_LAYERS.filter(s => s.n !== '08').map((svc) => {
             const Icon = svc.Icon;
             return (
               <div
                 key={svc.h}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 2fr',
-                  gap: 'var(--space-3xl)',
-                  padding: 'calc(28px * var(--ui-scale)) 0',
-                  borderBottom: '1px solid var(--line)',
-                  alignItems: 'start',
-                }}
+                className="service-layer-row"
               >
                 {/* Left — name + icon + stat */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'calc(14px * var(--ui-scale))' }}>
@@ -114,11 +115,18 @@ export default function Services() {
                     <div className="display" style={{ fontSize: 'calc(24px * var(--ui-scale))', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
                       {svc.h}
                     </div>
-                    {svc.stat && (
-                      <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)', fontWeight: 600, marginTop: 'calc(5px * var(--ui-scale))' }}>
-                        {svc.stat.toUpperCase()}
-                      </div>
-                    )}
+                    <div style={{ display: 'flex', gap: 'calc(8px * var(--ui-scale))', marginTop: 'calc(5px * var(--ui-scale))', flexWrap: 'wrap' }}>
+                      {svc.stat && (
+                        <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.06em', color: svc.optional ? 'var(--muted)' : 'var(--blue)', fontWeight: 600 }}>
+                          {svc.stat.toUpperCase()}
+                        </span>
+                      )}
+                      {svc.optional && (
+                        <span className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--muted)', fontWeight: 600, background: 'var(--surface)', borderRadius: '4px', padding: '1px 6px' }}>
+                          OPTIONAL
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 

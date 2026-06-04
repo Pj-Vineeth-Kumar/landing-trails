@@ -130,6 +130,37 @@ const RevenueEconomics = () => (
   </Section>
 );
 
+const AI_SAVINGS = [
+  { stat: '70%', label: 'reduction in case preparation time', detail: 'AI agents handle document extraction, form prep, and questionnaire processing — work that used to take hours takes minutes.' },
+  { stat: '$499K', label: 'in annual staff costs replaced', detail: 'The human equivalents of our 8 AI agents would cost nearly half a million dollars a year in salaries alone.' },
+  { stat: '24/7', label: 'agents working, zero overtime', detail: 'Unlike staff, AI agents run in parallel around the clock — no sick days, no handoffs, no missed deadlines.' },
+  { stat: '0', label: 'missed renewal deadlines', detail: 'The Deadline Agent monitors every case window automatically, flagging risks before they become failures.' },
+];
+
+/* Cost Savings by AI Agents */
+const AiSavings = () => (
+  <Section
+    id="ai-savings"
+    eyebrow="Cost Savings by AI Agents"
+    lead="What AI agents"
+    emphasis="actually save your firm."
+    intro="Beyond recovering dormant revenue, Codio AI Agents replace hours of manual work every day — cutting operational costs, eliminating errors, and scaling your capacity without adding headcount."
+    introMaxWidth="72ch"
+    headAlign="center"
+  >
+    <div className="ai-savings-grid reveal" style={{ marginTop: 'var(--space-3xl)' }}>
+      {AI_SAVINGS.map((s, i) => (
+        <article key={i} className={`ai-savings-card reveal d${(i % 4) + 1}`}>
+          <div className="display ai-savings-stat">{s.stat}</div>
+          <p className="ai-savings-label">{s.label}</p>
+          <hr className="rule-blue" />
+          <p className="ai-savings-detail">{s.detail}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+);
+
 export default function Home() {
   return (
     <>
@@ -141,6 +172,7 @@ export default function Home() {
       {/* <AgentOrbit /> */}
       <Certifications />
       <RevenueEconomics />
+      <AiSavings />
       <Testimonial />
       {/* <OperatingSystem /> */}
       <ValueLevers />
