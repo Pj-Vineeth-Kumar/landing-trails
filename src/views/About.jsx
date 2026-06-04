@@ -1,8 +1,7 @@
 'use client';
-import React from 'react';
 
 import { PageHero, Section, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
-import { Cpu, Workflow, Bot, Globe, TrendingUp, Library, Settings } from 'lucide-react';
+import { Cpu, Workflow, Settings, Bot, Globe, TrendingUp } from 'lucide-react';
 
 /* Verified history: Umesh Vaidyamath came to the US on an H-1B as an engineer;
    launched INSZoom (co-founded with brother Raj) from home in 1999 as the
@@ -26,13 +25,12 @@ const STATS = [
 ];
 
 const DIFFERENCE = [
-  { Icon: Cpu, n: '01', h: 'Purpose-built for immigration', b: 'Not adapted legal tech - engineered from the ground up for immigration workflows.' },
-  { Icon: Workflow, n: '02', h: 'End-to-end managed', b: 'Not self-serve software - a complete, fully managed technology operation.' },
-  { Icon: Settings, n: '03', h: 'CodioOps included with every engagement', b: 'A dedicated operations team configuring and optimizing your platform - not software you figure out yourself.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
-  { Icon: Bot, n: '04', h: 'AI-native architecture', b: 'Designed for an AI workforce from day one, not bolted on after the fact.' },
-  { Icon: Globe, n: '05', h: 'Global from day one', b: 'Built for worldwide immigration practice - not US-only.' },
-  { Icon: TrendingUp, n: '06', h: 'Outcome-aligned pricing', b: 'We earn when you earn. Pricing tied to results, not seats.' },
-  { Icon: Library, n: '07', h: 'Built by an immigration tech founder', b: 'Two decades of immigration-tech experience built into every decision.', featured: true },
+  { Icon: Cpu,        h: 'Purpose-built for immigration',        b: 'Not adapted legal tech - engineered from the ground up for immigration workflows.' },
+  { Icon: Workflow,   h: 'End-to-end managed',                   b: 'Not self-serve software - a complete, fully managed technology operation.' },
+  { Icon: Settings,   h: 'CodioOps included with every engagement', b: 'A dedicated operations team configuring and optimizing your platform - not software you figure out yourself.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
+  { Icon: Bot,        h: 'AI-native architecture',               b: 'Designed for an AI workforce from day one, not bolted on after the fact.' },
+  { Icon: Globe,      h: 'Global from day one',                  b: 'Built for worldwide immigration practice - not US-only.' },
+  { Icon: TrendingUp, h: 'Outcome-aligned pricing',              b: 'We earn when you earn. Pricing tied to results, not seats.' },
 ];
 
 export default function About() {
@@ -127,7 +125,7 @@ export default function About() {
       </section>
 
       {/* What makes us different */}
-      <Section id="difference" eyebrow="The Difference" lead="What makes" emphasis="us different ?" headInline>
+      <Section id="difference" eyebrow="The Difference" lead="What makes" emphasis="us different ?" headAlign="center" headInline>
         <div style={{ marginTop: 'var(--space-3xl)' }}>
           <FeatureGrid cols={3} items={DIFFERENCE} />
         </div>

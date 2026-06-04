@@ -267,7 +267,19 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 /* Back-to-back sections each had full top + bottom padding (~2× --sec-py). */
 #main-content .sec + .sec{padding-top:var(--sec-py-between);}
 #main-content .sec:has(+ .sec){padding-bottom:var(--sec-py-between);}
-#main-content .page-hero + .sec:not(#letter){padding-top:var(--sec-py);}
+#main-content .page-hero + .sec:not(
+  #letter,
+  #codiocms,
+  #agents,
+  #service-layers,
+  #what-you-get,
+  #challenges,
+  #upcoming,
+  #contact-form,
+  #the-problem,
+  #why-network,
+  .about-statband-sec
+){padding-top:var(--sec-py);}
 /* Page-specific tight tops (must beat .sec + .sec above) */
 #main-content .page-hero + .sec-founder{
   padding-top:calc(var(--sec-py) * 0.45);
@@ -287,7 +299,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 #main-content .sec + .sec-codioops-problem{padding-bottom:calc(var(--sec-py) * 0.42);}
 #main-content #roadmap.sec:has(+ .sec){padding-bottom:calc(var(--sec-py) * 0.4);}
 /* Full section padding before CTA bands (Events and other short pages) */
-#main-content .sec:not(.sec-cta):has(+ .sec.sec-cta){padding-bottom:var(--sec-py);}
+#main-content .sec:not(.sec-cta):not(.about-founder-sec):has(+ .sec.sec-cta){padding-bottom:var(--sec-py);}
 #main-content #article.sec:has(+ .sec.sec-cta){padding-bottom:calc(var(--sec-py) * 0.4);}
 #main-content .sec + .sec.sec-cta{padding-top:calc(var(--sec-py-cta) * 0.6);}
 @media(min-width:769px){
@@ -350,6 +362,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   pointer-events:none;
 }
 .sec-metrics{padding:calc(56px * var(--ui-scale)) 0;}
+#main-content #metrics.sec:has(+ #cta.sec-cta){
+  padding-bottom:calc(var(--sec-py) * 0.5);
+}
+#main-content #metrics.sec + #cta.sec-cta{
+  padding-top:calc(var(--sec-py-cta) * 0.3);
+}
 .sec-pillars{padding-top:calc(80px * var(--ui-scale));}
 .sec-pillars .section-head-wide{margin-bottom:var(--space-4xl);}
 .pillars-grid{
@@ -1726,11 +1744,11 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 
 /* ===================== About page ===================== */
 .about-statband-sec{
-  padding-top:calc(var(--sec-py) * 0.4);
+  padding-top:calc(var(--sec-py) * 0.25);
   padding-bottom:calc(var(--sec-py) * 0.6);
 }
-#main-content .page-hero + .about-statband-sec.sec{
-  padding-top:calc(var(--sec-py) * 0.4);
+#main-content .page-hero + section.about-statband-sec.sec{
+  padding-top:calc(var(--sec-py) * 0.25);
 }
 
 /* Origin - narrative head + timeline */
@@ -1871,8 +1889,8 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 }
 #roadmap + .sec.sec-cta .type-display-cta{margin-bottom:var(--space-xl);}
 
-/* Agents page — first section after hero */
-#main-content .page-hero + #agents.sec{
+/* Agents page — first section after hero (60% less than full --sec-py) */
+#main-content .page-hero + section#agents.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
 
@@ -2192,11 +2210,98 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 }
 .author-signoff-link svg{width:calc(13px * var(--ui-scale));height:calc(13px * var(--ui-scale));flex-shrink:0;}
 
-/* Leadership - founder profile + editorial quote */
-.about-founder-sec{
+/* What makes us different — manifesto 2-col */
+.diff-sec{
   padding-top:var(--sec-py);
   padding-bottom:var(--sec-py);
+}
+.diff-head{
+  margin-bottom:var(--space-3xl);
+}
+.diff-head .eyebrow{
+  display:block;
+  margin-bottom:var(--space-sm);
+}
+.diff-heading{
+  margin:0;
+  line-height:1.1;
+}
+.diff-manifesto{
+  list-style:none;
+  padding:0;
+  margin:0;
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   border-top:1px solid var(--line);
+}
+/* vertical centre line */
+.diff-manifesto::before{
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:1px;
+  background:var(--line);
+  pointer-events:none;
+}
+.diff-item{
+  display:flex;
+  flex-direction:column;
+  gap:calc(10px * var(--ui-scale));
+  padding:calc(44px * var(--ui-scale)) calc(52px * var(--ui-scale)) calc(44px * var(--ui-scale)) 0;
+  border-bottom:1px solid var(--line);
+}
+.diff-item:nth-child(even){
+  padding-left:calc(52px * var(--ui-scale));
+  padding-right:0;
+}
+.diff-item-n{
+  font-size:calc(11px * var(--ui-scale));
+  letter-spacing:.07em;
+  color:var(--blue);
+  line-height:1;
+  margin-bottom:calc(2px * var(--ui-scale));
+}
+.diff-item-title{
+  font-family:var(--display);
+  font-size:clamp(calc(20px * var(--ui-scale)),1.7vw,calc(24px * var(--ui-scale)));
+  font-weight:700;
+  letter-spacing:-0.025em;
+  line-height:1.18;
+  color:var(--ink);
+  margin:0;
+}
+.diff-item-body{
+  font-size:var(--text-body-sm);
+  color:var(--ink-3);
+  line-height:1.65;
+  margin:0;
+  max-width:40ch;
+}
+.diff-link{
+  margin-top:calc(2px * var(--ui-scale));
+}
+@media(max-width:720px){
+  .diff-manifesto{grid-template-columns:1fr;}
+  .diff-manifesto::before{display:none;}
+  .diff-item,
+  .diff-item:nth-child(even){padding:calc(28px * var(--ui-scale)) 0;}
+  .diff-item-body{max-width:none;}
+}
+
+/* Leadership - founder profile + editorial quote */
+.about-founder-sec{
+  padding-top:calc(var(--sec-py) * 0.4);
+  padding-bottom:calc(var(--sec-py) * 0.16);
+  border-top:1px solid var(--line);
+}
+#main-content section.about-founder-sec.sec:has(+ .sec.sec-cta){
+  padding-bottom:calc(var(--sec-py) * 0.4);
+}
+#main-content .about-founder-sec + .sec.sec-cta{
+  padding-top:calc(var(--sec-py-cta) * 0.4);
 }
 .about-founder{
   display:grid;
@@ -3134,10 +3239,10 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 }
 .section-head-row{display:flex;justify-content:space-between;align-items:end;margin-bottom:var(--space-5xl);flex-wrap:wrap;gap:var(--space-lg);}
 
-/* CodioCMS - merged intro */
-#main-content .page-hero + .sec.sec-codiocms,
-.sec-codiocms{
-  padding-top:calc(var(--sec-py) * 0.25);
+/* CodioCMS - merged intro (tight below platform hero; beats .page-hero + .sec) */
+#main-content .page-hero + #codiocms.sec,
+#codiocms.sec.sec-codiocms{
+  padding-top:calc(var(--sec-py) * 0.4);
   padding-bottom:calc(var(--sec-py) * 0.45);
 }
 .sec-codiocms .cms-head-copy{
@@ -3146,7 +3251,7 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   text-align:center;
 }
 .sec-codiocms .cms-head-copy > .eyebrow{
-  margin-top:calc(24px * var(--ui-scale));
+  margin-top:calc(9.6px * var(--ui-scale));
 }
 .cms-head-intro{
   font-size:var(--text-body);color:var(--ink-3);line-height:1.65;
@@ -4334,7 +4439,10 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 /* ============================================================
    CodioNetwork - Coordination Problem section
    ============================================================ */
-.network-problem-sec{padding-top:var(--sec-py);padding-bottom:var(--sec-py);}
+.network-problem-sec{padding-top:calc(var(--sec-py) * 0.6);padding-bottom:var(--sec-py);}
+#main-content .page-hero + section#why-network.sec{
+  padding-top:calc(var(--sec-py) * 0.6);
+}
 
 /* Head - eyebrow full width; title + pull quote matched height */
 .network-problem-head{

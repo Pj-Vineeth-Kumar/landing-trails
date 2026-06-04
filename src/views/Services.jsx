@@ -81,7 +81,7 @@ export default function Services() {
       <Section
         id="service-layers"
         eyebrow="What We Handle"
-        lead="Eight layers."
+        lead="Seven layers."
         emphasis="One partner."
         headInline
         headAlign="center"

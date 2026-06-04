@@ -125,6 +125,7 @@ export default function Network() {
         lead="Built into your platform."
         emphasis="Available to your firm."
         intro="CodioNetwork is accessible directly through CodioCMS for GlobalCodio clients. Your team can identify providers, coordinate services, and track progress - all within the same workflow as your case management."
+        headAlign="center"
       >
         <div style={{ marginTop: 'var(--space-2xl)' }}>
           <FeatureGrid
