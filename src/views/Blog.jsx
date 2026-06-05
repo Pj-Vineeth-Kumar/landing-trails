@@ -194,11 +194,11 @@ const PostCard = ({ post, featured = false }) => {
         borderRadius: 'calc(16px * var(--ui-scale))',
         overflow: 'hidden',
         textDecoration: 'none',
-        transition: 'transform .2s, box-shadow .2s',
+        transition: 'border-color .18s, transform .18s, box-shadow .18s',
         ...(featured ? { gridColumn: '1 / -1' } : {}),
       }}
-      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)'; }}
-      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(calc(-3px * var(--ui-scale)))'; e.currentTarget.style.borderColor = 'var(--line-blue)'; e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)'; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
     >
       {imageUrl && (
         <div style={{

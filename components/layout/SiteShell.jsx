@@ -67,7 +67,7 @@ export function SiteShell({ children }) {
             {
               y: 0, opacity: 1, filter: 'blur(0px)',
               duration: 0.7, delay: 0.04 + delayForReveal(el),
-              ease: 'power3.out', clearProps: 'filter',
+              ease: 'power3.out', clearProps: 'translate,rotate,scale,transform,filter',
               onComplete: () => el.classList.add('is-in'),
             }
           );
@@ -80,7 +80,7 @@ export function SiteShell({ children }) {
           {
             y: 0, opacity: 1, filter: 'blur(0px)',
             duration: 0.75, delay: delayForReveal(el),
-            ease: 'power3.out', clearProps: 'filter',
+            ease: 'power3.out', clearProps: 'translate,rotate,scale,transform,filter',
             scrollTrigger: {
               trigger: el,
               // "top N%" = element top hits N% down from viewport top.
@@ -101,7 +101,7 @@ export function SiteShell({ children }) {
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight && r.bottom > 0 && !el.classList.contains('is-in')) {
           el.classList.add('is-in');
-          gsap.set(el, { opacity: 1, y: 0, filter: 'blur(0px)', clearProps: 'filter' });
+          gsap.set(el, { opacity: 1, clearProps: 'translate,rotate,scale,transform,filter' });
         }
       });
     };

@@ -44,7 +44,7 @@ CodioOps is the fifth product line in the Codio family. Update the brand archite
 ```
 GlobalCodio  (master brand)
 │
-├── CodioCMS              - Proprietary Immigration Case Management Platform
+├── CodioCMS              - Global immigration Case Management Platform
 ├── CodioForms            - Global Immigration Forms (Online + Offline)
 ├── Codio AI Agents       - Specialized AI Workforce
 ├── CodioNetwork          - Global Service Provider Marketplace
@@ -87,7 +87,7 @@ Add "CodioOps" to the products column in the footer.
 ### 3. Home Page - Five Integrated Layers Section
 The home page currently shows five pillars. Update them so CodioOps replaces (or is added alongside) the previous Services pillar. Use these exact five pillars in order:
 
-1. **CodioCMS** - Proprietary Immigration Case Management
+1. **CodioCMS** - Global immigration Case Management
 2. **CodioForms** - Global Immigration Forms Engine
 3. **Codio AI Agents** - Your Specialized AI Workforce
 4. **CodioOps** - Managed Case Management Operations  ← NEW

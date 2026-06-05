@@ -9,7 +9,7 @@ This file indexes all memory entries saved for the Trailers project.
 ### project-color-system
 - **File:** `project_color_system.md`
 - **Type:** project
-- **Description:** Complementary color palette added in June 2025 — teal, violet, amber, rose, warm neutrals — to reduce blue dominance.
+- **Description:** Complementary color palette added in June 2025 - teal, violet, amber, rose, warm neutrals - to reduce blue dominance.
 - **Summary:** Three-accent palette (teal, violet, amber) introduced into `global.css` and `tokens.js`. Brand blue (#1950C6) preserved. Each accent carries a semantic role: teal = active/data/live, violet = premium/featured, amber = urgency/callouts, rose = error states, warm neutrals replace blue-tint backgrounds.
 
 ---

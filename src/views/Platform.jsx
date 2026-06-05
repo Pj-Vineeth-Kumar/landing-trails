@@ -351,7 +351,7 @@ export default function Platform() {
       <Section id="codiocms" className="sec-codiocms">
         <div className="reveal section-head-wide cms-head-copy">
           <SectionEyebrow align="center">CodioCMS</SectionEyebrow>
-          <SplitHeading lead="Proprietary immigration" emphasis="case management software." />
+          <SplitHeading lead="Global immigration" emphasis="case management software." />
           <p className="section-intro">
             Immigration case management for firms and corporate teams - built by the founder of the world's leading immigration case management platform. Not generic legal tech: a modern platform with native AI agents, CodioForms, and our global services network.
           </p>
@@ -665,7 +665,7 @@ export default function Platform() {
         </div>
       </Section>
 
-      {/* Migration */}
+      {/* Migration
       <Section id="migration" tone="sec-surface" className="sec-migration">
         <div className="migration-head-row reveal">
           <div className="section-head-wide migration-head-copy">
@@ -707,6 +707,7 @@ export default function Platform() {
           </SmartLink>
         </div>
       </Section>
+      */}
 
       <FaqAccordion
         id="faq"

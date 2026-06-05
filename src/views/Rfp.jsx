@@ -149,6 +149,7 @@ export default function Rfp() {
         eyebrow="What We Cover"
         lead="The Technical Sections"
         emphasis="We Draft for You."
+        headAlign="center"
       >
         <ul className="check-list check-cols reveal d1" style={{ marginTop: 'var(--space-xl)' }}>
           {technicalSections.map((item) => (

@@ -9,18 +9,6 @@ import { SectionEyebrow } from '../../components/ui/PageKit';
 import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../../lib/navigation';
 import { ICON_PALETTE } from '../../lib/tokens';
 
-const interactiveCardProps = {
-  onMouseEnter: (e) => {
-    e.currentTarget.style.borderColor = 'var(--line-blue)';
-    e.currentTarget.style.transform = 'translateY(-3px)';
-    e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)';
-  },
-  onMouseLeave: (e) => {
-    e.currentTarget.style.borderColor = '';
-    e.currentTarget.style.transform = 'translate(0px, 0px)';
-    e.currentTarget.style.boxShadow = '';
-  },
-};
 
 /** Internal route → <Link>; external/anchor/mailto → <a>. */
 const FooterLink = ({ href, children, ...rest }) => {
@@ -160,12 +148,14 @@ export const AgentOrbit = () => {
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'rgba(25,80,198,.18)';
                   e.currentTarget.style.borderColor = 'rgba(74,126,224,.45)';
-                  e.currentTarget.style.transform = 'translateY(-3px)';
+                  e.currentTarget.style.transform = 'translateY(calc(-3px * var(--ui-scale)))';
+                  e.currentTarget.style.boxShadow = '0 8px 24px -8px rgba(25,80,198,.35)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'rgba(255,255,255,.04)';
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,.08)';
                   e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '';
                 }}
               >
                 <span style={{
@@ -248,7 +238,7 @@ export const Testimonial = () => (
             ],
           },
         ].map((a, i) => (
-          <article key={i} className={`card audience-card reveal d${i + 1}${i === 1 ? ' audience-card--tint' : ''}`} {...interactiveCardProps}>
+          <article key={i} className={`card audience-card reveal d${i + 1}${i === 1 ? ' audience-card--tint' : ''}`}>
             <h3 className="display" style={{ fontSize: 'var(--text-display-audience)', letterSpacing: '-0.02em', marginBottom: 'calc(14px * var(--ui-scale))' }}>{a.title}</h3>
             <blockquote style={{ fontSize: 'var(--text-body)', color: 'var(--ink)', lineHeight: 1.55, fontStyle: 'italic', margin: '0 0 calc(20px * var(--ui-scale))', paddingLeft: 'calc(12px * var(--ui-scale))', borderLeft: '2px solid var(--blue-soft)' }}>{a.quote}</blockquote>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))', marginBottom: 'calc(18px * var(--ui-scale))' }}>
@@ -365,7 +355,6 @@ export const ValueLevers = () => (
                     <article
                       key={lever.h}
                       className={`card card-compact value-lever-card${lever.comingSoon ? ' value-lever-card--soon' : ''}`}
-                      {...(lever.comingSoon ? {} : interactiveCardProps)}
                     >
                       <div className="value-lever-card-top">
                         <div
@@ -488,7 +477,7 @@ export const CTA = () => (
       </p>
       <div className="reveal d2" style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
         <Link href={AUDIT_URL} className="btn btn-dark">Book your free tech audit <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></Link>
-        <a href={SUPPORT_MAILTO} className="btn btn-surface">Talk to our team</a>
+        <Link href="/contact#contact-form" className="btn btn-surface">Talk to our team</Link>
       </div>
     </div>
   </section>

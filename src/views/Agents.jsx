@@ -253,7 +253,7 @@ const COMPARISON = [
   },
 ];
 
-/* ── Flow steps (static DOM — crisp on mobile; same visuals as prior nodes) ── */
+/* ── Flow steps (static DOM - crisp on mobile; same visuals as prior nodes) ── */
 const FlowConnector = () => (
   <svg className="agent-flow-connector" viewBox="0 0 40 12" width="40" height="12" aria-hidden="true">
     <line className="agent-flow-connector__line" x1="0" y1="6" x2="28" y2="6" />
@@ -293,7 +293,7 @@ function StatBadge({ stat }) {
   );
 }
 
-/* ── Panel transition (opacity only — no y shift; keeps container size stable) ── */
+/* ── Panel transition (opacity only - no y shift; keeps container size stable) ── */
 const panelEase = [0.16, 1, 0.3, 1];
 const panelVariants = {
   enter: { opacity: 0 },
