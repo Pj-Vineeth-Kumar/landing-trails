@@ -85,7 +85,7 @@ const ONBOARDING_STEPS = [
 ];
 
 const CS_OUTCOMES = [
-  { stat: '4am–5pm PT', label: 'Mon – Fri support coverage' },
+  { stat: '4am–5pm PST', label: 'Mon – Fri support coverage' },
   { stat: 'Same day', label: 'response for urgent case issues' },
   { stat: 'Whole team', label: 'onboarded before go-live' },
   { stat: 'Proactive', label: 'check-ins, not just reactive tickets' },

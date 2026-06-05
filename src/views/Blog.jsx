@@ -328,12 +328,7 @@ export default function Blog({ sanityPosts }) {
           /* ── Empty state ── */
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-3xl)' }}>
             {/* Ghost skeleton grid */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 'calc(20px * var(--ui-scale))',
-              width: '100%',
-            }}>
+            <div className="blog-posts-grid" style={{ width: '100%' }}>
               <GhostCard large />
               <GhostCard />
               <GhostCard />
@@ -396,11 +391,7 @@ export default function Blog({ sanityPosts }) {
           </div>
         ) : (
           /* ── Posts grid ── */
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'calc(20px * var(--ui-scale))',
-          }}>
+          <div className="blog-posts-grid">
             {filtered.map((post, i) => (
               <div key={post.slug} className={`reveal d${(i % 3) + 1}`}>
                 <PostCard post={post} featured={i === 0} />

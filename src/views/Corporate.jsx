@@ -177,7 +177,7 @@ export default function Corporate() {
 
         {/* Law firm independence callout */}
         <div
-          className="reveal d1"
+          className="reveal d1 split-2--even"
           style={{
             marginTop: 'var(--space-3xl)',
             border: '1px solid var(--line-blue)',
@@ -185,9 +185,6 @@ export default function Corporate() {
             padding: 'calc(40px * var(--ui-scale))',
             background: 'linear-gradient(160deg,#fff 0%,var(--blue-tint-2) 150%)',
             boxShadow: 'var(--shadow-ambient)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--space-3xl)',
             alignItems: 'center',
           }}
         >

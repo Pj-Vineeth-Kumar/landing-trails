@@ -1,8 +1,6 @@
 'use client';
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ReactFlow, Handle, Position, Background, MarkerType } from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
@@ -19,7 +17,6 @@ import {
   Globe,
   BellRing,
   User,
-  Sparkles,
   Send,
 } from 'lucide-react';
 
@@ -86,7 +83,7 @@ const CaseAssistantMock = () => {
       <header className="case-assistant-mock__head">
         <div className="case-assistant-mock__brand">
           <span className="case-assistant-mock__logo">
-            <img src="/favicon.ico" alt="" width={18} height={18} draggable={false} />
+            <img src="/assets/codio.svg" alt="" width={22} height={22} draggable={false} />
           </span>
           <div className="case-assistant-mock__meta">
             <span className="case-assistant-mock__title">Case Assistant</span>
@@ -111,8 +108,8 @@ const CaseAssistantMock = () => {
               initial={reduceMotion ? false : 'hidden'}
               animate="show"
             >
-              <span className={`case-assistant-msg__avatar${isAttorney ? ' case-assistant-msg__avatar--user' : ''}`} aria-hidden="true">
-                {isAttorney ? <User size={13} strokeWidth={2} /> : <Sparkles size={13} strokeWidth={2} />}
+              <span className={`case-assistant-msg__avatar${isAttorney ? ' case-assistant-msg__avatar--user' : ' case-assistant-msg__avatar--ai'}`} aria-hidden="true">
+                {isAttorney ? <User size={16} strokeWidth={2} /> : <img src="/assets/codio.svg" alt="" width={19} height={19} draggable={false} />}
               </span>
               <div className="case-assistant-msg__stack">
                 <div className="case-assistant-msg__bubble">{msg.text}</div>
@@ -123,7 +120,7 @@ const CaseAssistantMock = () => {
       </div>
 
       <footer className="case-assistant-mock__composer">
-        <Sparkles size={14} strokeWidth={1.75} className="case-assistant-mock__composer-icon" aria-hidden="true" />
+        <img src="/assets/codio.svg" alt="" width={22} height={22} draggable={false} className="case-assistant-mock__composer-icon" aria-hidden="true" />
         <span className="case-assistant-mock__composer-placeholder">Ask anything…</span>
         <motion.span
           className="case-assistant-mock__send"
@@ -255,77 +252,29 @@ const COMPARISON = [
   },
 ];
 
-/* ── React Flow step node ────────────────────────────── */
-const NODE_W = 148;
-const NODE_H = 36;
-
-const StepNode = ({ data }) => (
-  <div style={{
-    width: NODE_W, height: NODE_H,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    background: data.first ? 'var(--blue)' : data.last ? 'var(--blue-soft)' : '#fff',
-    border: `1.5px solid ${data.first ? 'var(--blue)' : data.last ? 'rgba(25,80,198,0.25)' : 'rgba(0,0,0,0.12)'}`,
-    borderRadius: 8,
-    fontSize: 11.5, fontWeight: 600,
-    color: data.first ? '#fff' : data.last ? 'var(--blue)' : 'var(--ink-2)',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    boxShadow: data.first ? '0 2px 10px rgba(25,80,198,0.25)' : '0 1px 3px rgba(0,0,0,0.06)',
-    fontFamily: 'var(--body)',
-    boxSizing: 'border-box',
-    padding: '0 12px',
-  }}>
-    {!data.first && <Handle type="target" position={Position.Left} style={{ background: 'transparent', border: 'none', width: 0, height: 0 }} />}
-    {data.label}
-    {!data.last && <Handle type="source" position={Position.Right} style={{ background: 'transparent', border: 'none', width: 0, height: 0 }} />}
-  </div>
+/* ── Flow steps (static DOM — crisp on mobile; same visuals as prior nodes) ── */
+const FlowConnector = () => (
+  <svg className="agent-flow-connector" viewBox="0 0 40 12" width="40" height="12" aria-hidden="true">
+    <line className="agent-flow-connector__line" x1="0" y1="6" x2="28" y2="6" />
+    <path className="agent-flow-connector__head" d="M24 3 L30 6 L24 9" />
+  </svg>
 );
 
-const nodeTypes = { step: StepNode };
-
-function AgentFlow({ steps, agentKey }) {
-  const GAP = NODE_W + 40;
-  const nodes = steps.map((step, i) => ({
-    id: `${agentKey}-${i}`,
-    type: 'step',
-    position: { x: i * GAP, y: 0 },
-    data: { label: step, first: i === 0, last: i === steps.length - 1 },
-    draggable: false,
-    selectable: false,
-    width: NODE_W,
-    height: NODE_H,
-  }));
-
-  const edges = steps.slice(0, -1).map((_, i) => ({
-    id: `${agentKey}-e${i}`,
-    source: `${agentKey}-${i}`,
-    target: `${agentKey}-${i + 1}`,
-    type: 'smoothstep',
-    animated: true,
-    style: { stroke: 'var(--blue)', strokeWidth: 1.5, opacity: 0.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: 'var(--blue)', width: 14, height: 14 },
-  }));
-
-  const width = steps.length * GAP - 10;
-
+function AgentFlow({ steps }) {
   return (
-    <div style={{ width: '100%', height: 44, pointerEvents: 'none' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        nodeTypes={nodeTypes}
-        defaultViewport={{ x: 8, y: 4, zoom: 1 }}
-        nodesDraggable={false}
-        nodesConnectable={false}
-        elementsSelectable={false}
-        panOnDrag={false}
-        zoomOnScroll={false}
-        zoomOnPinch={false}
-        zoomOnDoubleClick={false}
-        proOptions={{ hideAttribution: true }}
-        style={{ background: 'transparent' }}
-      />
+    <div className="agent-panel-flow-wrap">
+      <div className="agent-flow-static">
+        {steps.map((step, i) => (
+          <React.Fragment key={`${step}-${i}`}>
+            <div
+              className={`agent-flow-step${i === 0 ? ' agent-flow-step--first' : ''}${i === steps.length - 1 ? ' agent-flow-step--last' : ''}`}
+            >
+              {step}
+            </div>
+            {i < steps.length - 1 && <FlowConnector />}
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 }
@@ -338,41 +287,24 @@ const LiveDot = () => (
 /* ── Stat badge ──────────────────────────────────────── */
 function StatBadge({ stat }) {
   return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))',
-      padding: 'calc(10px * var(--ui-scale)) calc(16px * var(--ui-scale))',
-      background: 'var(--blue-soft)',
-      borderRadius: 'calc(10px * var(--ui-scale))',
-      border: '1px solid rgba(25,80,198,0.12)',
-      flexShrink: 0,
-    }}>
+    <div className="agent-panel-stat">
       <LiveDot />
-      <span className="mono" style={{ fontSize: 'calc(11px * var(--ui-scale))', letterSpacing: '.08em', color: 'var(--blue)', fontWeight: 700 }}>
-        {stat}
-      </span>
+      <span className="mono agent-panel-stat__label">{stat}</span>
     </div>
   );
 }
 
-/* ── Panel transition ────────────────────────────────── */
+/* ── Panel transition (opacity only — no y shift; keeps container size stable) ── */
 const panelEase = [0.16, 1, 0.3, 1];
 const panelVariants = {
-  enter: { opacity: 0, y: 12 },
-  center: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: panelEase },
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] },
-  },
+  enter: { opacity: 0 },
+  center: { opacity: 1, transition: { duration: 0.32, ease: panelEase } },
+  exit: { opacity: 0, transition: { duration: 0.22, ease: [0.4, 0, 0.2, 1] } },
 };
 const panelVariantsReduced = {
-  enter: { opacity: 1, y: 0 },
-  center: { opacity: 1, y: 0 },
-  exit: { opacity: 1, y: 0 },
+  enter: { opacity: 1 },
+  center: { opacity: 1 },
+  exit: { opacity: 1 },
 };
 
 /* ── Main AgentPanel ────────────────────────────────── */
@@ -380,6 +312,9 @@ function AgentPanel() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduceMotion = useReducedMotion();
+  const tabRefs = React.useRef([]);
+  const tabsScrollRef = React.useRef(null);
+  const tabsShellRef = React.useRef(null);
 
   React.useEffect(() => {
     if (paused) return;
@@ -389,64 +324,74 @@ function AgentPanel() {
     return () => clearInterval(t);
   }, [paused]);
 
+  React.useEffect(() => {
+    const tab = tabRefs.current[active];
+    const scroller = tabsScrollRef.current;
+    tab?.scrollIntoView({
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    });
+    if (!scroller) return;
+    const syncHints = () => scroller.dispatchEvent(new Event('scroll'));
+    const t = window.setTimeout(syncHints, reduceMotion ? 0 : 320);
+    return () => window.clearTimeout(t);
+  }, [active, reduceMotion]);
+
+  React.useEffect(() => {
+    const scroller = tabsScrollRef.current;
+    const shell = tabsShellRef.current;
+    if (!scroller || !shell) return;
+
+    const updateScrollHints = () => {
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      const scrollable = maxScroll > 4;
+      shell.classList.toggle('is-scrollable', scrollable);
+      shell.classList.toggle('can-scroll-start', scrollable && scroller.scrollLeft <= 4);
+      shell.classList.toggle('can-scroll-end', scrollable && scroller.scrollLeft >= maxScroll - 4);
+    };
+
+    updateScrollHints();
+    scroller.addEventListener('scroll', updateScrollHints, { passive: true });
+    window.addEventListener('resize', updateScrollHints);
+
+    return () => {
+      scroller.removeEventListener('scroll', updateScrollHints);
+      window.removeEventListener('resize', updateScrollHints);
+    };
+  }, []);
+
   const agent = AGENTS[active];
   const Icon = agent.Icon;
 
   return (
     <div className="reveal agent-panel">
       {/* ── Top: tab strip ── */}
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', gap: 'calc(6px * var(--ui-scale))',
-        justifyContent: 'center',
-        padding: 'calc(14px * var(--ui-scale)) calc(16px * var(--ui-scale))',
-        background: '#fff',
-        borderBottom: '1px solid var(--line)',
-      }}>
+      <div className="agent-panel-tabs-shell" ref={tabsShellRef}>
+        <div className="agent-panel-tabs" ref={tabsScrollRef} role="tablist" aria-label="Codio AI Agents">
         {AGENTS.map((a, i) => {
           const Ic = a.Icon;
           const isActive = i === active;
           return (
             <button
               key={a.h}
+              ref={(el) => { tabRefs.current[i] = el; }}
               type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`agent-panel-tab${isActive ? ' is-active' : ''}`}
               onClick={() => { setActive(i); setPaused(true); setTimeout(() => setPaused(false), 10000); }}
-              onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; }}
-              onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent'; }}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 'calc(7px * var(--ui-scale))',
-                padding: 'calc(7px * var(--ui-scale)) calc(13px * var(--ui-scale))',
-                background: isActive
-                  ? 'linear-gradient(180deg, var(--blue-bright) 0%, var(--blue) 100%)'
-                  : 'transparent',
-                border: `1.5px solid ${isActive ? 'var(--blue)' : 'transparent'}`,
-                borderRadius: 'calc(10px * var(--ui-scale))',
-                cursor: 'pointer',
-                transition: 'background .18s, box-shadow .18s',
-                boxShadow: isActive
-                  ? '0 8px 20px -6px var(--blue-glow), inset 0 1px 0 rgba(255,255,255,.22)'
-                  : 'none',
-              }}
             >
-              <span style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                width: 'calc(20px * var(--ui-scale))', height: 'calc(20px * var(--ui-scale))',
-                borderRadius: 'calc(5px * var(--ui-scale))',
-                background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.06)',
-                color: isActive ? '#fff' : 'var(--ink-3)',
-                flexShrink: 0, transition: 'background .18s, color .18s',
-              }}>
+              <span className="agent-panel-tab__icon">
                 <Ic size={11} strokeWidth={1.75} />
               </span>
-              <span style={{
-                fontSize: 'calc(11.5px * var(--ui-scale))', fontWeight: isActive ? 600 : 400,
-                color: isActive ? '#fff' : 'var(--ink-3)',
-                lineHeight: 1, transition: 'color .18s', whiteSpace: 'nowrap',
-              }}>
+              <span className="agent-panel-tab__label">
                 {a.h}
               </span>
             </button>
           );
         })}
+        </div>
       </div>
 
       {/* ── Middle: detail panel ── */}
@@ -463,17 +408,12 @@ function AgentPanel() {
             {/* Header */}
             <div className="agent-panel-header">
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-md)' }}>
-                <span style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  width: 'calc(54px * var(--ui-scale))', height: 'calc(54px * var(--ui-scale))',
-                  borderRadius: 'calc(14px * var(--ui-scale))',
-                  background: 'var(--blue-soft)', color: 'var(--blue)', flexShrink: 0,
-                }}>
+                <span className="agent-panel-header-icon">
                   <Icon size={24} strokeWidth={1.6} />
                 </span>
                 <div className="agent-panel-header-copy">
                   <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.12em', color: 'var(--blue)', marginBottom: 'calc(4px * var(--ui-scale))' }}>
-                    AGENT {String(active + 1).padStart(2, '0')} · {agent.tag}
+                    {agent.tag}
                   </div>
                   <h3 className="display agent-panel-title">
                     {agent.h}
@@ -493,7 +433,7 @@ function AgentPanel() {
               <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--muted)', marginBottom: 'calc(8px * var(--ui-scale))' }}>
                 HOW IT WORKS
               </div>
-              <AgentFlow steps={agent.steps} agentKey={active} />
+              <AgentFlow steps={agent.steps} />
             </div>
 
             {/* WHAT IT DOES */}
@@ -501,7 +441,7 @@ function AgentPanel() {
               <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--muted)', marginBottom: 'calc(14px * var(--ui-scale))' }}>
                 WHAT IT DOES
               </div>
-              <ul style={{ listStyle: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'calc(10px * var(--ui-scale))' }}>
+              <ul className="agent-panel-bullets">
                 {agent.bullets.map((b) => (
                   <li
                     key={b}
@@ -528,17 +468,12 @@ function AgentPanel() {
       </div>
 
       {/* ── Bottom: coming soon inner container ── */}
-      <div style={{ padding: 'calc(0px * var(--ui-scale)) calc(24px * var(--ui-scale)) calc(24px * var(--ui-scale))' }}>
-        <div style={{
-          border: '1.5px dashed var(--line-2)',
-          borderRadius: 'calc(12px * var(--ui-scale))',
-          padding: 'calc(14px * var(--ui-scale)) calc(20px * var(--ui-scale))',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-lg)',
-        }}>
+      <div className="agent-panel-coming-foot">
+        <div className="agent-panel-coming">
           <p style={{ fontSize: 'calc(13px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.5 }}>
             <strong style={{ color: 'var(--ink-2)' }}>More agents coming</strong> - released as immigration workflows evolve. Existing clients get access automatically, no additional fees.
           </p>
-          <span className="pill" style={{ flexShrink: 0, fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+          <span className="pill agent-panel-coming-pill" style={{ flexShrink: 0, fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.08em', textTransform: 'uppercase' }}>
             Coming soon
           </span>
         </div>
@@ -640,13 +575,7 @@ export default function Agents() {
       >
         <div
           className="check-cols"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'var(--space-xl)',
-            alignItems: 'stretch',
-          }}
+          style={{ marginTop: 'var(--space-3xl)', alignItems: 'stretch' }}
         >
           {COMPARISON.map((col, i) => (
             <article

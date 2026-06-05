@@ -364,13 +364,7 @@ export default function CodioOps() {
       >
         <div
           className="check-cols reveal"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'var(--space-xl)',
-            alignItems: 'stretch',
-          }}
+          style={{ marginTop: 'var(--space-3xl)', alignItems: 'stretch' }}
         >
           {COMPARISON_COLS.map((col, i) => (
             <article
@@ -556,14 +550,7 @@ export default function CodioOps() {
         emphasis="your firm's operations."
         headAlign="center"
       >
-        <div
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'var(--space-xl)',
-          }}
-        >
+        <div className="check-cols" style={{ marginTop: 'var(--space-3xl)' }}>
           {[
             { href: '/platform', label: 'CodioCMS Platform', desc: 'The case management platform CodioOps configures and runs for your firm.' },
             { href: '/ai-agents', label: 'Codio AI Agents', desc: 'The AI workforce that CodioOps activates and continuously tunes for your workflows.' },

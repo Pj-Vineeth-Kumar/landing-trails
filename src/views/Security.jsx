@@ -151,14 +151,8 @@ export default function Security() {
         headAlign="center"
       >
         <div
-          className="reveal"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'var(--space-3xl)',
-            alignItems: 'start',
-          }}
+          className="reveal split-2--even"
+          style={{ marginTop: 'var(--space-3xl)', alignItems: 'start' }}
         >
           {/* Left - three properties */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
