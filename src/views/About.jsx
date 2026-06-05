@@ -76,7 +76,7 @@ export default function About() {
               leadership worked inside the operational realities of immigration practice-experience that informs every
               product and service decision we make today.
             </p>
-            <SmartLink href="/letter-from-the-founder" className="feature-card-link" style={{ marginTop: 'var(--space-xl)' }}>
+            <SmartLink href="/letter-from-the-founder" className="feature-card-link" style={{ marginTop: 'var(--space-xl)', color: 'var(--blue)' }}>
               Read the founder&apos;s letter
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
             </SmartLink>
@@ -174,7 +174,7 @@ export default function About() {
                 INSZoom in November 2020. That operating experience now shapes GlobalCodio: a fully managed,
                 AI-powered technology operation for modern immigration practice.
               </p>
-              <SmartLink href="/letter-from-the-founder" className="feature-card-link about-founder-link">
+              <SmartLink href="/letter-from-the-founder" className="feature-card-link about-founder-link" style={{ color: 'var(--blue)' }}>
                 Read the letter from the founder
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
               </SmartLink>

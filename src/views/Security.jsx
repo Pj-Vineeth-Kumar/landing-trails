@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { ICON_GRAD, ICON_SHADOW_MD } from '../../lib/tokens';
+import { ICON_PALETTE, ICON_SHADOW_MD } from '../../lib/tokens';
 
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
@@ -40,8 +40,7 @@ const AUDIT_LOG_ENTRIES = [
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <defs><linearGradient id="chk-grad-s" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs>
-    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-s)" />
+    <circle cx="10" cy="10" r="10" fill="var(--blue)" />
     <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -176,6 +175,7 @@ export default function Security() {
               },
             ].map((item, i, arr) => {
               const Icon = item.Icon;
+              const pal = ICON_PALETTE[i % ICON_PALETTE.length];
               return (
                 <div
                   key={item.title}
@@ -195,9 +195,9 @@ export default function Security() {
                       width: 'calc(40px * var(--ui-scale))',
                       height: 'calc(40px * var(--ui-scale))',
                       borderRadius: 'calc(10px * var(--ui-scale))',
-                      background: ICON_GRAD,
+                      background: pal.grad,
                       color: '#fff',
-                      boxShadow: ICON_SHADOW_MD,
+                      boxShadow: pal.shadow,
                       flexShrink: 0,
                       marginTop: 'calc(2px * var(--ui-scale))',
                     }}

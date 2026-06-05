@@ -5,6 +5,7 @@ import { Hero } from '../components/Hero.jsx';
 import { AgentOrbit, Testimonial, Metrics, ValueLevers, Certifications, CTA } from '../components/ContentSections.jsx';
 
 import { Section, SectionEyebrow, FeatureGrid, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { ICON_PALETTE } from '../../lib/tokens';
 import { Cpu, FileText, Bot, Network, Settings, Scale, Users, Building2, Truck, ShieldCheck } from 'lucide-react';
 
 /* Founder credibility band */
@@ -60,7 +61,7 @@ const PainRecognition = () => (
     <ul className="check-list pain-list" style={{ marginTop: 'var(--space-2xl)', gridTemplateColumns: 'repeat(2,1fr)', gap: 'var(--space-lg)' }}>
       {PAINS.map((p, i) => (
         <li key={i} className="reveal pain-item">
-          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}><defs><linearGradient id="chk-grad-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs><circle cx="10" cy="10" r="10" fill="url(#chk-grad-h)" /><path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}><circle cx="10" cy="10" r="10" fill="var(--blue)" /><path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
           {p}
         </li>
       ))}
@@ -71,12 +72,12 @@ const PainRecognition = () => (
 
 /* Five integrated layers */
 const LAYERS = [
-  { Icon: Cpu, h: 'CodioCMS', b: 'The next-generation case management platform built by the founder of INSZoom. Configured to your exact workflows.', featured: true, links: [{ href: '/platform', label: 'Explore the platform' }] },
-  { Icon: FileText, h: 'CodioForms', b: 'Online and offline immigration forms for USA, Canada, Netherlands, and India - with new countries added on demand.', links: [{ href: '/platform', label: 'See CodioForms' }] },
-  { Icon: Bot, h: 'Codio AI Agents', b: 'A team of AI agents handling intake, documents, forms, deadlines, communications, renewals, and business development.', links: [{ href: '/ai-agents', label: 'Meet the agents' }] },
-  { Icon: Settings, h: 'CodioOps', b: 'The dedicated operations team that configures, optimizes, and continuously tunes CodioCMS to match exactly how your firm operates. Bundled with every engagement.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
-  { Icon: Network, h: 'CodioNetwork', b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.', links: [{ href: '/network', label: 'See the network' }] },
-  { Icon: Settings, h: 'Technology Audit', b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.", links: [{ href: '/contact', label: 'Request an audit' }] },
+  { Icon: Cpu,      h: 'CodioCMS',        b: 'The next-generation case management platform built by the founder of INSZoom. Configured to your exact workflows.',                                                                                                      featured: true, linkColor: '#1950C6',                                                         links: [{ href: '/platform',  label: 'Explore the platform'  }] },
+  { Icon: FileText, h: 'CodioForms',      b: 'Online and offline immigration forms for USA, Canada, Netherlands, and India - with new countries added on demand.',                                                                                                        iconGrad: 'linear-gradient(135deg,#11a085 0%,#0d7c66 100%)', iconShadow: 'rgba(13,124,102,.28)', linkColor: '#0d7c66', links: [{ href: '/platform',  label: 'See CodioForms'        }] },
+  { Icon: Bot,      h: 'Codio AI Agents', b: 'A team of AI agents handling intake, documents, forms, deadlines, communications, renewals, and business development.',                                                                                                     iconGrad: 'linear-gradient(135deg,#7c5bc9 0%,#5b3fa8 100%)', iconShadow: 'rgba(91,63,168,.28)',  linkColor: '#5b3fa8', links: [{ href: '/ai-agents', label: 'Meet the agents'        }] },
+  { Icon: Settings, h: 'CodioOps',        b: 'The dedicated operations team that configures, optimizes, and continuously tunes CodioCMS to match exactly how your firm operates. Bundled with every engagement.',                                                         iconGrad: 'linear-gradient(135deg,#d97706 0%,#b45309 100%)', iconShadow: 'rgba(180,83,9,.28)',   linkColor: '#b45309', links: [{ href: '/codioops',  label: 'Learn about CodioOps' }] },
+  { Icon: Network,  h: 'CodioNetwork',    b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.',                                                                                                  iconGrad: 'linear-gradient(135deg,#0ea5c9 0%,#0077a8 100%)', iconShadow: 'rgba(0,119,168,.28)',  linkColor: '#0077a8', links: [{ href: '/network',   label: 'See the network'      }] },
+  { Icon: Settings, h: 'Technology Audit',b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.",                                                                    iconGrad: 'linear-gradient(135deg,#e05c8a 0%,#be2d6c 100%)', iconShadow: 'rgba(190,45,108,.28)', linkColor: '#be2d6c', links: [{ href: '/contact',   label: 'Request an audit'     }] },
 ];
 
 const FiveLayers = () => (
@@ -144,7 +145,6 @@ const PORTALS = [
     tagline: 'Full case control, zero tab-switching.',
     bullets: ['Complete case state at a glance', 'AI agent output surfaced inline', 'Workflow enforcement and filing tools'],
     href: '/for-law-firms',
-    color: 'var(--blue)',
   },
   {
     Icon: Users,
@@ -152,7 +152,6 @@ const PORTALS = [
     tagline: 'Case status in language they understand.',
     bullets: ['Plain-English case timeline', 'Document upload to the right slots', 'Questionnaires with conditional logic'],
     href: '/platform',
-    color: '#0891b2',
   },
   {
     Icon: Building2,
@@ -160,7 +159,6 @@ const PORTALS = [
     tagline: 'Workforce visibility, not a lawyer\'s UI.',
     bullets: ['Pipeline dashboards and health scores', 'Budget tracking and forecasting', 'Multi-firm performance comparison'],
     href: '/for-corporate-teams',
-    color: '#7c3aed',
   },
   {
     Icon: Truck,
@@ -168,7 +166,6 @@ const PORTALS = [
     tagline: 'Work orders, not shared email threads.',
     bullets: ['Scoped access - only what they need', 'Deliverable submission and revision tracking', 'Deadline-aware coordination'],
     href: '/network',
-    color: '#059669',
   },
   {
     Icon: ShieldCheck,
@@ -176,7 +173,6 @@ const PORTALS = [
     tagline: 'Configure everything. No engineering tickets.',
     bullets: ['RBAC, branding, and feature rollout', 'Playbook and template management', 'Audit log and compliance controls'],
     href: '/security',
-    color: '#d97706',
   },
 ];
 
@@ -192,6 +188,7 @@ const FivePortals = () => (
     <div className="portals-grid">
       {PORTALS.map((p, i) => {
         const Icon = p.Icon;
+        const pal = ICON_PALETTE[i % ICON_PALETTE.length];
         return (
           <SmartLink
             key={p.role}
@@ -220,8 +217,9 @@ const FivePortals = () => (
                   width: 'calc(40px * var(--ui-scale))',
                   height: 'calc(40px * var(--ui-scale))',
                   borderRadius: 'calc(10px * var(--ui-scale))',
-                  background: `${p.color}18`,
-                  color: p.color,
+                  background: pal.grad,
+                  boxShadow: pal.shadow,
+                  color: '#fff',
                   flexShrink: 0,
                 }}
               >
@@ -233,7 +231,7 @@ const FivePortals = () => (
                   style={{
                     fontSize: 'calc(9.5px * var(--ui-scale))',
                     letterSpacing: '.08em',
-                    color: p.color,
+                    color: pal.color,
                     fontWeight: 700,
                     marginBottom: 'calc(4px * var(--ui-scale))',
                     textTransform: 'uppercase',
@@ -279,8 +277,8 @@ const FivePortals = () => (
                         width: 'calc(14px * var(--ui-scale))',
                         height: 'calc(14px * var(--ui-scale))',
                         borderRadius: '50%',
-                        background: `${p.color}18`,
-                        color: p.color,
+                        background: pal.soft,
+                        color: pal.color,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',

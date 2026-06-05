@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { ICON_PALETTE } from '../../lib/tokens';
 
 const ease = [0.22, 1, 0.36, 1];
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
@@ -110,15 +111,35 @@ export const Section = ({ id, tone, eyebrow, lead, emphasis, intro, introMaxWidt
 
 export const FeatureGrid = ({ items, cols = 3 }) => (
   <div className={`feature-grid feature-grid--${cols}`}>
-    {items.map((it, i) => (
-      <article key={it.h || i} className={`feature-card reveal d${(i % 4) + 1}${it.featured ? ' feature-card--featured' : ''}`}>
-        {it.Icon && <div className="feature-card-top"><div className="agent-icon" aria-hidden="true"><it.Icon size={24} strokeWidth={1.6} /></div></div>}
-        <h3 className="display feature-card-title">{it.h}</h3>
-        {it.b && <p className="feature-card-body">{it.b}</p>}
-        {it.stat && <div className="mono feature-card-stat">{it.stat}</div>}
-        {it.links && <div className="feature-card-links">{it.links.map((l) => <SmartLink key={l.label} href={l.href} className="feature-card-link">{l.label} <Arrow /></SmartLink>)}</div>}
-      </article>
-    ))}
+    {items.map((it, i) => {
+      const pal = it.iconGrad
+        ? { grad: it.iconGrad, shadow: it.iconShadow || '0 2px 8px var(--blue-a16)', color: it.linkColor || ICON_PALETTE[i % ICON_PALETTE.length].color }
+        : ICON_PALETTE[i % ICON_PALETTE.length];
+      const Icon = it.Icon;
+      return (
+        <article key={it.h || i} className={`feature-card reveal d${(i % 4) + 1}${it.featured ? ' feature-card--featured' : ''}`}>
+          {Icon && (
+            <div className="feature-card-top">
+              <div className="agent-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: pal.shadow }}>
+                <Icon size={24} strokeWidth={1.6} />
+              </div>
+            </div>
+          )}
+          <h3 className="display feature-card-title">{it.h}</h3>
+          {it.b && <p className="feature-card-body">{it.b}</p>}
+          {it.stat && <div className="mono feature-card-stat" style={{ color: pal.color }}>{it.stat}</div>}
+          {it.links && (
+            <div className="feature-card-links">
+              {it.links.map((l) => (
+                <SmartLink key={l.label} href={l.href} className="feature-card-link" style={it.linkColor ? { color: it.linkColor } : undefined}>
+                  {l.label} <Arrow />
+                </SmartLink>
+              ))}
+            </div>
+          )}
+        </article>
+      );
+    })}
   </div>
 );
 

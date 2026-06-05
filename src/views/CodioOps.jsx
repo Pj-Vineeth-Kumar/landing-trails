@@ -15,6 +15,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { ICON_PALETTE } from '../../lib/tokens';
 
 const PROBLEM_GAPS = [
   'Templates don\'t reflect your case types',
@@ -164,13 +165,7 @@ const MIGRATION_FROM = ['Legacy CMS', 'Spreadsheets', 'Other platforms'];
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <defs>
-      <linearGradient id="chk-grad-b" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="var(--blue-bright)" />
-        <stop offset="100%" stopColor="var(--blue)" />
-      </linearGradient>
-    </defs>
-    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-b)" />
+    <circle cx="10" cy="10" r="10" fill="var(--blue)" />
     <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -234,27 +229,31 @@ export default function CodioOps() {
       >
         <div className="codioops-deliverables reveal">
           <div className="codioops-deliverables-grid">
-            {DELIVERABLE_GROUPS.map((group, gi) => (
-              <div key={group.label} className={`codioops-deliverables-col reveal d${gi + 1}`}>
-                <div className="mono codioops-deliverables-label">{group.label}</div>
-                <ul className="codioops-deliverables-list">
-                  {group.items.map((d) => {
-                    const Icon = d.Icon;
-                    return (
-                      <li key={d.h} className="codioops-deliverable">
-                        <span className="codioops-deliverable-icon" aria-hidden="true">
-                          <Icon size={18} strokeWidth={1.65} />
-                        </span>
-                        <div className="codioops-deliverable-copy">
-                          <h3 className="display codioops-deliverable-title">{d.h}</h3>
-                          <p className="codioops-deliverable-text">{d.b}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+            {(() => {
+              let flatIdx = 0;
+              return DELIVERABLE_GROUPS.map((group, gi) => (
+                <div key={group.label} className={`codioops-deliverables-col reveal d${gi + 1}`}>
+                  <div className="mono codioops-deliverables-label">{group.label}</div>
+                  <ul className="codioops-deliverables-list">
+                    {group.items.map((d) => {
+                      const Icon = d.Icon;
+                      const pal = ICON_PALETTE[flatIdx++ % ICON_PALETTE.length];
+                      return (
+                        <li key={d.h} className="codioops-deliverable">
+                          <span className="codioops-deliverable-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: pal.shadow }}>
+                            <Icon size={18} strokeWidth={1.65} />
+                          </span>
+                          <div className="codioops-deliverable-copy">
+                            <h3 className="display codioops-deliverable-title">{d.h}</h3>
+                            <p className="codioops-deliverable-text">{d.b}</p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ));
+            })()}
           </div>
         </div>
       </Section>
@@ -272,9 +271,8 @@ export default function CodioOps() {
           >
             <SectionEyebrow align="center">Why We Built CodioOps</SectionEyebrow>
             <h2
-              className="display"
+              className="display type-display-lg"
               style={{
-                fontSize: 'var(--text-display-md)',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.2,
                 marginBottom: 'var(--space-2xl)',
@@ -493,9 +491,8 @@ export default function CodioOps() {
           >
             <SectionEyebrow align="center">Always Bundled. Always Premium.</SectionEyebrow>
             <h2
-              className="display"
+              className="display type-display-lg"
               style={{
-                fontSize: 'var(--text-display-md)',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.2,
                 marginBottom: 'var(--space-2xl)',

@@ -7,6 +7,7 @@ import { FileText, MessageCircle, RefreshCw, TrendingUp, ClipboardList, PenLine,
 import { Logo } from '../../components/layout/Nav';
 import { SectionEyebrow } from '../../components/ui/PageKit';
 import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../../lib/navigation';
+import { ICON_PALETTE } from '../../lib/tokens';
 
 const interactiveCardProps = {
   onMouseEnter: (e) => {
@@ -346,36 +347,53 @@ export const ValueLevers = () => (
       </div>
 
       <div className="value-levers-columns">
-        {VALUE_LEVER_GROUPS.map((group, gi) => (
-          <div key={group.tag} className={`value-levers-group reveal d${gi + 1}`}>
-            <div className="value-levers-group-grid">
-              {group.levers.map((lever) => (
-                <article
-                  key={lever.h}
-                  className={`card card-compact value-lever-card${lever.comingSoon ? ' value-lever-card--soon' : ''}`}
-                  {...(lever.comingSoon ? {} : interactiveCardProps)}
-                >
-                  <div className="value-lever-card-top">
-                    <div className="agent-icon" aria-hidden="true">
-                      <lever.Icon size={20} strokeWidth={1.75} />
-                    </div>
-                  </div>
-                  <h3 className="display text-card-sm feature-card-title">{lever.h}</h3>
-                  <p className="feature-card-body">{lever.b}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gridColumn: '1 / -1', gridRow: 3 }}>
-                    <div
-                      className="mono value-lever-agent"
-                      style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: 'var(--blue)' }}
+        {VALUE_LEVER_GROUPS.map((group, gi) => {
+          const groupPal = ICON_PALETTE[gi % ICON_PALETTE.length];
+          return (
+            <div key={group.tag} className={`value-levers-group reveal d${gi + 1}`}>
+              <div
+                className="mono value-levers-group-tag"
+                style={{ color: groupPal.color }}
+              >
+                {group.tag}
+              </div>
+              <div className="value-levers-group-grid">
+                {group.levers.map((lever, li) => {
+                  const pal = ICON_PALETTE[(gi * group.levers.length + li) % ICON_PALETTE.length];
+                  const Icon = lever.Icon;
+                  return (
+                    <article
+                      key={lever.h}
+                      className={`card card-compact value-lever-card${lever.comingSoon ? ' value-lever-card--soon' : ''}`}
+                      {...(lever.comingSoon ? {} : interactiveCardProps)}
                     >
-                      {lever.agent}
-                    </div>
-                    {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
-                  </div>
-                </article>
-              ))}
+                      <div className="value-lever-card-top">
+                        <div
+                          className="agent-icon"
+                          aria-hidden="true"
+                          style={{ background: pal.grad, boxShadow: pal.shadow }}
+                        >
+                          <Icon size={20} strokeWidth={1.75} />
+                        </div>
+                      </div>
+                      <h3 className="display text-card-sm feature-card-title">{lever.h}</h3>
+                      <p className="feature-card-body">{lever.b}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gridColumn: '1 / -1', gridRow: 3 }}>
+                        <div
+                          className="mono value-lever-agent"
+                          style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: pal.color }}
+                        >
+                          {lever.agent}
+                        </div>
+                        {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>

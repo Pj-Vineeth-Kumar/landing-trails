@@ -3,7 +3,7 @@ import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon } from 'lucide-react';
-import { ICON_GRAD, ICON_SHADOW_SM, ICON_SHADOW_MD } from '../../lib/tokens';
+import { ICON_PALETTE } from '../../lib/tokens';
 
 const SERVICE_LAYERS = [
   {
@@ -91,6 +91,7 @@ export default function Services() {
         <div style={{ marginTop: 'var(--space-3xl)', borderTop: '1px solid var(--line)' }}>
           {SERVICE_LAYERS.filter(s => s.n !== '08').map((svc, i) => {
             const Icon = svc.Icon;
+            const pal = ICON_PALETTE[i % ICON_PALETTE.length];
             return (
               <div
                 key={svc.h}
@@ -102,15 +103,15 @@ export default function Services() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     width: 'calc(38px * var(--ui-scale))', height: 'calc(38px * var(--ui-scale))',
                     borderRadius: 'calc(10px * var(--ui-scale))',
-                    background: ICON_GRAD,
+                    background: pal.grad,
                     color: '#fff',
-                    boxShadow: svc.featured ? ICON_SHADOW_MD : ICON_SHADOW_SM,
+                    boxShadow: pal.shadow,
                     flexShrink: 0, marginTop: 'calc(2px * var(--ui-scale))',
                   }}>
                     <Icon size={16} strokeWidth={1.75} />
                   </span>
                   <div>
-                    <div className="display" style={{ fontSize: 'calc(24px * var(--ui-scale))', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                    <div className="display" style={{ fontSize: 'calc(24px * var(--ui-scale))', fontWeight: 575, color: 'var(--ink)', letterSpacing: '-0.0064em', lineHeight: 1.2 }}>
                       {svc.h}
                     </div>
                     <div style={{ display: 'flex', gap: 'calc(8px * var(--ui-scale))', marginTop: 'calc(5px * var(--ui-scale))', flexWrap: 'wrap' }}>

@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { ICON_PALETTE } from '../../lib/tokens';
 
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
@@ -29,8 +30,7 @@ import {
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <defs><linearGradient id="chk-grad-p" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs>
-    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-p)" />
+    <circle cx="10" cy="10" r="10" fill="var(--blue)" />
     <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -118,21 +118,9 @@ const ACTIVE_FORM_FIELDS = [
 ];
 
 const FORMS_CAPS = [
-  {
-    n: '01',
-    h: 'Online & offline',
-    b: 'Online forms are filled directly on government portals (USCIS, IRCC, etc.). Offline forms are pre-populated PDFs exported from CodioCMS for traditional paper submission. Same case data, either path.',
-  },
-  {
-    n: '02',
-    h: 'Authority-synced versions',
-    b: 'Every edition tracked to USCIS, IRCC, IND, and MEA releases. Your firm never files on a superseded form.',
-  },
-  {
-    n: '03',
-    h: 'New countries on demand',
-    b: "Need a country we don't support yet? We scope, build, and release it in days - not product quarters.",
-  },
+  { n: '01', color: 'var(--teal)',   h: 'Online & offline',         b: 'Online forms are filled directly on government portals (USCIS, IRCC, etc.). Offline forms are pre-populated PDFs exported from CodioCMS for traditional paper submission. Same case data, either path.' },
+  { n: '02', color: 'var(--blue)',   h: 'Authority-synced versions', b: 'Every edition tracked to USCIS, IRCC, IND, and MEA releases. Your firm never files on a superseded form.' },
+  { n: '03', color: 'var(--violet)', h: 'New countries on demand',   b: "Need a country we don't support yet? We scope, build, and release it in days - not product quarters." },
 ];
 
 
@@ -172,21 +160,9 @@ const NETWORK_ASSIGNMENTS = [
 ];
 
 const NETWORK_CAPS = [
-  {
-    n: '01',
-    h: 'Structured provider workflows',
-    b: 'Outsourcing is a managed workflow, not an email. Assign work, set deliverables, track revisions, and extend deadlines - all with a paper trail both parties can see.',
-  },
-  {
-    n: '02',
-    h: 'Field-level confidentiality',
-    b: 'Send a translator exactly what they need - not salary details, not passport numbers, not case strategy. Confidentiality is enforced at the data field level, automatically.',
-  },
-  {
-    n: '03',
-    h: 'Data-driven provider selection',
-    b: 'Every assignment builds history - with structured feedback, billing, and revisions tracked in one place. No disputed invoices or lost email threads.',
-  },
+  { n: '01', color: 'var(--blue)',   h: 'Structured provider workflows', b: 'Outsourcing is a managed workflow, not an email. Assign work, set deliverables, track revisions, and extend deadlines - all with a paper trail both parties can see.' },
+  { n: '02', color: 'var(--violet)', h: 'Field-level confidentiality',   b: 'Send a translator exactly what they need - not salary details, not passport numbers, not case strategy. Confidentiality is enforced at the data field level, automatically.' },
+  { n: '03', color: 'var(--teal)',   h: 'Data-driven provider selection', b: 'Every assignment builds history - with structured feedback, billing, and revisions tracked in one place. No disputed invoices or lost email threads.' },
 ];
 
 const AI_ERA_POINTS = [
@@ -202,6 +178,7 @@ const AI_ERA_POINTS = [
     h: 'Native AI from the ground up',
     b: 'CodioCMS is different - designed from the ground up to run native AI agents, automate routine work, and grow with your firm.',
     featured: true,
+    linkColor: 'var(--blue)',
     links: [{ href: '/ai-agents', label: 'Meet the AI Agents' }],
   },
   {
@@ -252,6 +229,10 @@ const CMS_GROUPS = [
   {
     tag: 'Case Management',
     color: 'var(--blue)',
+    iconGrad: 'linear-gradient(135deg,var(--blue-bright) 0%,var(--blue) 100%)',
+    iconShadow: 'var(--blue-a16)',
+    headBg: 'var(--blue-tint-2)',
+    headBorder: 'var(--line-blue)',
     items: [
       {
         Icon: Workflow,
@@ -272,7 +253,11 @@ const CMS_GROUPS = [
   },
   {
     tag: 'Portals & Access',
-    color: '#7c3aed',
+    color: 'var(--violet)',
+    iconGrad: 'linear-gradient(135deg,var(--violet-bright) 0%,var(--violet) 100%)',
+    iconShadow: 'var(--violet-a12)',
+    headBg: 'var(--violet-soft)',
+    headBorder: 'var(--violet-a12)',
     items: [
       { Icon: Users,     h: 'Applicant portal',          b: 'Foreign nationals submit documents, track status, and answer questionnaires.' },
       { Icon: Building2, h: 'HR & employer portal',      b: 'Corporate HR teams manage employee visa cases and workforce analytics.' },
@@ -281,7 +266,11 @@ const CMS_GROUPS = [
   },
   {
     tag: 'Intelligence',
-    color: '#0891b2',
+    color: 'var(--teal)',
+    iconGrad: 'linear-gradient(135deg,var(--teal-bright) 0%,var(--teal) 100%)',
+    iconShadow: 'var(--teal-a12)',
+    headBg: 'var(--teal-soft)',
+    headBorder: 'var(--teal-a12)',
     items: [
       { Icon: ShieldCheck, h: 'Role-based access control', b: '27 permission modules, 7 action types, and full data-scope isolation.' },
       { Icon: GitMerge,    h: 'Native integrations',       b: 'Email, calendar, e-signature, and accounting tools connected natively to CodioCMS.' },
@@ -318,10 +307,10 @@ function CMSBento() {
       {/* ── Three category columns ── */}
       <div className="cms-bento-cols">
         {CMS_GROUPS.map((group, gi) => (
-          <div key={group.tag} className={`cms-bento-col reveal d${gi + 2}`}>
-            <div className="cms-bento-col-head">
+          <div key={group.tag} className={`cms-bento-col reveal d${gi + 2}`} style={{ borderColor: group.headBorder }}>
+            <div className="cms-bento-col-head" style={{ background: group.headBg, borderBottomColor: group.headBorder }}>
               <span className="cms-bento-col-dot" style={{ background: group.color }} />
-              <span className="mono">{group.tag}</span>
+              <span className="mono" style={{ color: group.color }}>{group.tag}</span>
             </div>
             <div className="cms-bento-col-rows">
               {group.items.map((item) => {
@@ -329,7 +318,7 @@ function CMSBento() {
                 return (
                   <div key={item.h} className="cms-bento-col-row">
                     <div className="cms-bento-col-row-top">
-                      <span className="cms-bento-col-row-icon" aria-hidden="true">
+                      <span className="cms-bento-col-row-icon" aria-hidden="true" style={{ background: group.iconGrad, boxShadow: `0 2px 6px ${group.iconShadow}` }}>
                         <Icon size={13} strokeWidth={1.75} />
                       </span>
                       <span className="cms-bento-col-row-title">{item.h}</span>
@@ -523,7 +512,8 @@ export default function Platform() {
 
             <div className="forms-cap-stack">
               {FORMS_CAPS.map((cap, i) => (
-                <article key={cap.h} className={`forms-cap-card reveal d${i + 1}`}>
+                <article key={cap.h} className={`forms-cap-card reveal d${i + 1}`} style={{ borderTopColor: cap.color }}>
+                  <span className="mono forms-cap-n" style={{ color: cap.color }}>{cap.n}</span>
                   <h3 className="display forms-cap-title">{cap.h}</h3>
                   <p className="forms-cap-text">{cap.b}</p>
                 </article>
@@ -580,15 +570,16 @@ export default function Platform() {
 
               <div className="network-console-body">
                 <nav className="network-console-nav" aria-label="Provider disciplines">
-                  {NETWORK_PROVIDERS.map((p) => {
+                  {NETWORK_PROVIDERS.map((p, pi) => {
                     const Icon = p.Icon;
+                    const pal = ICON_PALETTE[pi % ICON_PALETTE.length];
                     return (
                       <div
                         key={p.label}
                         className={`network-console-item${p.active ? ' is-active' : ''}`}
                         aria-current={p.active ? 'true' : undefined}
                       >
-                        <span className="network-console-icon" aria-hidden="true">
+                        <span className="network-console-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: pal.shadow }}>
                           <Icon size={14} strokeWidth={1.75} />
                         </span>
                         <span className="network-console-name">{p.label}</span>
@@ -637,7 +628,8 @@ export default function Platform() {
 
             <div className="network-cap-stack">
               {NETWORK_CAPS.map((cap, i) => (
-                <article key={cap.h} className={`network-cap-card reveal d${i + 1}`}>
+                <article key={cap.h} className={`network-cap-card reveal d${i + 1}`} style={{ borderTopColor: cap.color }}>
+                  <span className="mono network-cap-n" style={{ color: cap.color }}>{cap.n}</span>
                   <h3 className="display network-cap-title">{cap.h}</h3>
                   <p className="network-cap-text">{cap.b}</p>
                 </article>

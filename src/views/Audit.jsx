@@ -6,8 +6,7 @@ import { UserCheck } from 'lucide-react';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <defs><linearGradient id="chk-grad-au" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs>
-    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-au)" />
+    <circle cx="10" cy="10" r="10" fill="var(--blue)" />
     <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );

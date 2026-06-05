@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, SplitHeading, StepList, CtaBand } from '../../components/ui/PageKit';
+import { ICON_PALETTE } from '../../lib/tokens';
 import {
   BarChart3,
   FileCheck,
@@ -16,8 +17,7 @@ import {
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <defs><linearGradient id="chk-grad-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs>
-    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-r)" />
+    <circle cx="10" cy="10" r="10" fill="var(--blue)" />
     <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -109,14 +109,17 @@ export default function Rfp() {
             <div className="rfp-problem-panel-block">
               <h3 className="display rfp-problem-panel-title">What corporate buyers now require</h3>
               <div className="rfp-problem-asks-grid">
-                {RFP_BUYER_ASKS.map(({ Icon, t }, i) => (
-                  <div key={t} className={`rfp-problem-ask-tile reveal d${(i % 3) + 1}`}>
-                    <div className="rfp-problem-ask-icon" aria-hidden="true">
-                      <Icon size={16} strokeWidth={1.75} />
+                {RFP_BUYER_ASKS.map(({ Icon, t }, i) => {
+                  const pal = ICON_PALETTE[i % ICON_PALETTE.length];
+                  return (
+                    <div key={t} className={`rfp-problem-ask-tile reveal d${(i % 3) + 1}`}>
+                      <div className="rfp-problem-ask-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: pal.shadow }}>
+                        <Icon size={16} strokeWidth={1.75} />
+                      </div>
+                      <div className="rfp-problem-ask-title">{t}</div>
                     </div>
-                    <div className="rfp-problem-ask-title">{t}</div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
             <div className="rfp-problem-panel-block">

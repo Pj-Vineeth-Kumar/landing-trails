@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
-import { ICON_GRAD, ICON_SHADOW_SM } from '../../lib/tokens';
+import { ICON_PALETTE } from '../../lib/tokens';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import {
   ClipboardList,
@@ -23,13 +23,7 @@ import {
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <defs>
-      <linearGradient id="chk-grad-a" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="var(--blue-bright)" />
-        <stop offset="100%" stopColor="var(--blue)" />
-      </linearGradient>
-    </defs>
-    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-a)" />
+    <circle cx="10" cy="10" r="10" fill="var(--blue)" />
     <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -287,9 +281,7 @@ function AgentFlow({ steps }) {
 }
 
 /* ── Live dot (static) ───────────────────────────────── */
-const LiveDot = () => (
-  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--blue)', flexShrink: 0 }} />
-);
+const LiveDot = () => <span className="agent-panel-stat__dot" aria-hidden="true" />;
 
 /* ── Stat badge ──────────────────────────────────────── */
 function StatBadge({ stat }) {
@@ -370,9 +362,20 @@ function AgentPanel() {
 
   const agent = AGENTS[active];
   const Icon = agent.Icon;
+  const pal = ICON_PALETTE[active % ICON_PALETTE.length];
 
   return (
-    <div className="reveal agent-panel">
+    <div
+      className="reveal agent-panel"
+      style={{
+        '--agent-pal-grad': pal.grad,
+        '--agent-pal-shadow': pal.shadow,
+        '--agent-pal-color': pal.color,
+        '--agent-pal-soft': pal.soft,
+        '--agent-pal-border': pal.border,
+        '--agent-pal-glow': pal.glow,
+      }}
+    >
       {/* ── Top: tab strip ── */}
       <div className="agent-panel-tabs-shell" ref={tabsShellRef}>
         <div className="agent-panel-tabs" ref={tabsScrollRef} role="tablist" aria-label="Codio AI Agents">
@@ -419,7 +422,7 @@ function AgentPanel() {
                   <Icon size={24} strokeWidth={1.6} />
                 </span>
                 <div className="agent-panel-header-copy">
-                  <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.12em', color: 'var(--blue)', marginBottom: 'calc(4px * var(--ui-scale))' }}>
+                  <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.12em', color: pal.color, marginBottom: 'calc(4px * var(--ui-scale))' }}>
                     {agent.tag}
                   </div>
                   <h3 className="display agent-panel-title">
@@ -457,9 +460,9 @@ function AgentPanel() {
                     <span style={{
                       width: 'calc(18px * var(--ui-scale))', height: 'calc(18px * var(--ui-scale))',
                       borderRadius: '50%',
-                      background: ICON_GRAD,
+                      background: pal.grad,
                       color: '#fff',
-                      boxShadow: ICON_SHADOW_SM,
+                      boxShadow: pal.shadow,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0, marginTop: 'calc(1px * var(--ui-scale))',
                     }}>

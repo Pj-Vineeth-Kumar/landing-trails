@@ -4,6 +4,7 @@ import React from 'react';
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { Cpu, FileText, Bot, Network, Settings, GitMerge, ClipboardList, PenLine, MessageCircle, TrendingUp, CheckSquare, History, GitBranch } from 'lucide-react';
+import { ICON_PALETTE } from '../../lib/tokens';
 
 /* What You Get */
 const WHAT_YOU_GET = [
@@ -93,21 +94,35 @@ export default function Firms() {
       >
         <div className="day-grid">
           <ol className="day-timeline">
-            {DAY.map((step, i) => (
-              <li key={step.h} className={`day-step reveal d${(i % 4) + 1}`}>
-                <div className="day-step-rail">
-                  <span className="day-step-icon" aria-hidden="true">
-                    <step.Icon size={18} strokeWidth={1.9} />
-                  </span>
-                  <span className={`day-step-dot${i === DAY.length - 1 ? ' is-now' : ''}`} aria-hidden="true" />
-                </div>
-                <div className="day-step-body">
-                  <h3 className="display day-step-title">{step.h}</h3>
-                  <p className="day-step-text">{step.b}</p>
-                  <span className="day-step-agent mono">{step.agent}</span>
-                </div>
-              </li>
-            ))}
+            {DAY.map((step, i) => {
+              const pal = ICON_PALETTE[i % ICON_PALETTE.length];
+              const Icon = step.Icon;
+              return (
+                <li
+                  key={step.h}
+                  className={`day-step reveal d${(i % 4) + 1}`}
+                  style={{
+                    '--day-step-color': pal.color,
+                    '--day-step-grad': pal.grad,
+                    '--day-step-glow': pal.glow,
+                    '--day-step-soft': pal.soft,
+                    '--day-step-border': pal.border,
+                  }}
+                >
+                  <div className="day-step-rail">
+                    <span className="day-step-icon" aria-hidden="true">
+                      <Icon size={18} strokeWidth={1.9} />
+                    </span>
+                    <span className={`day-step-dot${i === DAY.length - 1 ? ' is-now' : ''}`} aria-hidden="true" />
+                  </div>
+                  <div className="day-step-body">
+                    <h3 className="display day-step-title">{step.h}</h3>
+                    <p className="day-step-text">{step.b}</p>
+                    <span className="day-step-agent mono">{step.agent}</span>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
 
           <aside className="day-payoff reveal d1">

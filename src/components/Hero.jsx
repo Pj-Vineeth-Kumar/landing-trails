@@ -100,7 +100,7 @@ export const Hero = () => (
         position: 'relative',
         isolation: 'isolate',
         background:
-          'linear-gradient(180deg, #f4f8ff 0%, #fbfcff 46%, #ffffff 100%)',
+          'linear-gradient(180deg, #f9f8f7 0%, #fcfbfa 35%, #ffffff 75%)',
       }}
     >
       <div className="hero-aurora" aria-hidden="true" />

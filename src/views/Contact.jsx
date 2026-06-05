@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { PageHero, Section, CtaBand } from '../../components/ui/PageKit';
 import { HowItWorks } from '../components/MarketingSections.jsx';
 import { Mail, MapPin, ExternalLink, Navigation, ArrowRight } from 'lucide-react';
-import { ICON_GRAD, ICON_SHADOW_SM, ICON_SHADOW_LG } from '../../lib/tokens';
+import { ICON_PALETTE, ICON_SHADOW_LG } from '../../lib/tokens';
 
 const OFFICES = [
   {
@@ -52,7 +52,8 @@ const ltext = {
 };
 
 /* ─── Compact info card ──────────────────────────────────────────────────── */
-function InfoCard({ icon: Icon, tag, children, action }) {
+function InfoCard({ icon: Icon, tag, children, action, palIdx = 0 }) {
+  const pal = ICON_PALETTE[palIdx % ICON_PALETTE.length];
   return (
     <div
       style={{
@@ -75,9 +76,9 @@ function InfoCard({ icon: Icon, tag, children, action }) {
             width: 'calc(30px * var(--ui-scale))',
             height: 'calc(30px * var(--ui-scale))',
             borderRadius: 'calc(8px * var(--ui-scale))',
-            background: ICON_GRAD,
+            background: pal.grad,
             color: '#fff',
-            boxShadow: ICON_SHADOW_SM,
+            boxShadow: pal.shadow,
             flexShrink: 0,
           }}
         >
@@ -192,7 +193,7 @@ export default function Contact() {
                   width: 'calc(56px * var(--ui-scale))',
                   height: 'calc(56px * var(--ui-scale))',
                   borderRadius: '50%',
-                  background: ICON_GRAD,
+                  background: ICON_PALETTE[0].grad,
                   boxShadow: ICON_SHADOW_LG,
                   display: 'flex',
                   alignItems: 'center',
@@ -314,22 +315,22 @@ export default function Contact() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(12px * var(--ui-scale))', height: '100%' }}>
 
             {/* USA office */}
-            <InfoCard icon={MapPin} tag="USA Office" action={{ href: OFFICES[0].mapUrl, label: 'Get directions', external: true }}>
+            <InfoCard palIdx={0} icon={MapPin} tag="USA Office" action={{ href: OFFICES[0].mapUrl, label: 'Get directions', external: true }}>
               {OFFICES[0].lines.map((l) => <div key={l}>{l}</div>)}
             </InfoCard>
 
             {/* India office */}
-            <InfoCard icon={MapPin} tag="India Office" action={{ href: OFFICES[1].mapUrl, label: 'Get directions', external: true }}>
+            <InfoCard palIdx={1} icon={MapPin} tag="India Office" action={{ href: OFFICES[1].mapUrl, label: 'Get directions', external: true }}>
               {OFFICES[1].lines.map((l) => <div key={l}>{l}</div>)}
             </InfoCard>
 
             {/* Email */}
-            <InfoCard icon={Mail} tag="Email" action={{ href: 'mailto:info@globalcodio.ai', label: 'info@globalcodio.ai' }}>
+            <InfoCard palIdx={2} icon={Mail} tag="Email" action={{ href: 'mailto:info@globalcodio.ai', label: 'info@globalcodio.ai' }}>
               General enquiries, partnerships &amp; client support.
             </InfoCard>
 
             {/* LinkedIn */}
-            <InfoCard icon={ExternalLink} tag="LinkedIn" action={{ href: 'https://www.linkedin.com/company/globalcodio', label: 'Visit our page', external: true }}>
+            <InfoCard palIdx={3} icon={ExternalLink} tag="LinkedIn" action={{ href: 'https://www.linkedin.com/company/globalcodio', label: 'Visit our page', external: true }}>
               Updates on immigration technology, AI agents, and company news.
             </InfoCard>
 

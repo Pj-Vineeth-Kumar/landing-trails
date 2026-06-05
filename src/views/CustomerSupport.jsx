@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { ICON_GRAD, ICON_SHADOW_SM } from '../../lib/tokens';
+import { ICON_GRAD, ICON_PALETTE, ICON_SHADOW_MD } from '../../lib/tokens';
 import {
   HeadphonesIcon,
   UserCheck,
@@ -149,10 +149,11 @@ export default function CustomerSupport() {
         <div className="cs-details-grid">
           {SUPPORT_DETAILS.map((item, i) => {
             const Icon = item.Icon;
+            const pal = ICON_PALETTE[i % ICON_PALETTE.length];
             return (
               <article key={i} className={`feature-card cs-details-card reveal d${(i % 2) + 1}`}>
                 <div className="feature-card-top">
-                  <div className="agent-icon" aria-hidden="true">
+                  <div className="agent-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: `0 calc(4px * var(--ui-scale)) calc(12px * var(--ui-scale)) ${pal.shadow}` }}>
                     <Icon size={18} strokeWidth={1.75} />
                   </div>
                 </div>
@@ -193,7 +194,7 @@ export default function CustomerSupport() {
         <div className="cs-scope-grid reveal">
           {WHAT_WE_COVER.map((item, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 'calc(10px * var(--ui-scale))', padding: 'calc(14px * var(--ui-scale)) 0', borderBottom: '1px solid var(--line)' }}>
-                <span style={{ width: 'calc(18px * var(--ui-scale))', height: 'calc(18px * var(--ui-scale))', borderRadius: '50%', background: ICON_GRAD, color: '#fff', boxShadow: ICON_SHADOW_SM, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 'calc(2px * var(--ui-scale))' }}>
+                <span style={{ width: 'calc(18px * var(--ui-scale))', height: 'calc(18px * var(--ui-scale))', borderRadius: '50%', background: ICON_GRAD, color: '#fff', boxShadow: ICON_SHADOW_MD, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 'calc(2px * var(--ui-scale))' }}>
                   <svg viewBox="0 0 10 10" fill="none" style={{ width: 8, height: 8 }}>
                     <path d="M2 5l2 2L8 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
