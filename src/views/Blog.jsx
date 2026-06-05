@@ -198,7 +198,7 @@ const PostCard = ({ post, featured = false }) => {
         ...(featured ? { gridColumn: '1 / -1' } : {}),
       }}
       onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(calc(-3px * var(--ui-scale)))'; e.currentTarget.style.borderColor = 'var(--line-blue)'; e.currentTarget.style.boxShadow = 'var(--shadow-blue-lift)'; }}
-      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--line-2)'; e.currentTarget.style.boxShadow = ''; }}
     >
       {imageUrl && (
         <div style={{

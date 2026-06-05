@@ -3587,10 +3587,11 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   padding:0;
 }
 .hrms-plat-name{
+  font-family:var(--display);
   font-size:calc(19px * var(--ui-scale));
-  font-weight:650;
+  font-weight:600;
   color:var(--ink);
-  letter-spacing:-0.015em;
+  letter-spacing:var(--nav-tracking);
   line-height:1.2;
 }
 .hrms-plat-desc{
