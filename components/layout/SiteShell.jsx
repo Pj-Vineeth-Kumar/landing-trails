@@ -50,7 +50,7 @@ export function SiteShell({ children }) {
     };
 
     // Trigger point: element enters view when its top crosses this % of the viewport.
-    // Using 98% means nearly any visible pixel fires the animation — eliminates the
+    // Using 98% means nearly any visible pixel fires the animation - eliminates the
     // "blank bottom" gap where the element is technically on screen but hasn't triggered yet.
     const TRIGGER_PCT = 98;
 
@@ -60,7 +60,7 @@ export function SiteShell({ children }) {
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight;
 
-        // Already in view on load (top half of viewport) — animate immediately, no ScrollTrigger
+        // Already in view on load (top half of viewport) - animate immediately, no ScrollTrigger
         if (rect.top < vh * 0.75 && rect.bottom > 0) {
           gsap.fromTo(el,
             { y: 16, opacity: 0, filter: `blur(${blur}px)` },
@@ -74,7 +74,7 @@ export function SiteShell({ children }) {
           return;
         }
 
-        // Below fold — fire as soon as any part of the element enters the viewport
+        // Below fold - fire as soon as any part of the element enters the viewport
         gsap.fromTo(el,
           { y: 22, opacity: 0, filter: `blur(${blur}px)` },
           {
@@ -130,7 +130,7 @@ export function SiteShell({ children }) {
   // Lenis smooth scroll
   useEffect(() => {
     if (reducedMotion()) return;
-    // Prevent the browser from restoring scroll position on refresh — we always
+    // Prevent the browser from restoring scroll position on refresh - we always
     // want to land at the top. Without this, the browser fires its own scroll
     // restore after Lenis initialises, jumping mid-page.
     if (typeof window !== 'undefined') {

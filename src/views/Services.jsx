@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, SectionEyebrow, CtaBand, SmartLink } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon } from 'lucide-react';
 
 const SERVICE_LAYERS = [
@@ -35,28 +35,28 @@ const SERVICE_LAYERS = [
     stat: 'Survives staff turnover',
   },
   {
-    Icon: Workflow,
-    n: '05',
-    h: 'Managed Operations',
-    b: 'Ongoing day-to-day management of your complete GlobalCodio technology operation. Platform updates, AI agent tuning, network coordination, performance monitoring, and proactive support - handled by our team continuously.',
-    stat: 'Fully managed, ongoing',
-    featured: true,
-  },
-  {
     Icon: HeadphonesIcon,
-    n: '06',
-    h: 'Customer Success & Support',
-    b: 'Support from people who understand immigration workflows — not a generic helpdesk. Our team knows what an I-129 is, understands USCIS deadlines, and speaks your language. We onboard your whole firm, then stay proactively engaged with regular check-ins and workflow reviews.',
+    n: '05',
+    h: 'Customer Support',
+    b: 'Support from people who understand immigration workflows - not a generic helpdesk. Our team knows what an I-129 is, understands USCIS deadlines, and speaks your language. We onboard your whole firm, then stay proactively engaged with regular check-ins and workflow reviews.',
     stat: 'Mon–Fri, 4am–5pm Pacific',
     links: [{ href: '/customer-support', label: 'Learn more' }],
   },
   {
     Icon: Server,
-    n: '07',
+    n: '06',
     h: 'IT Support Services',
     b: 'Full IT support for your firm - helpdesk, device procurement and management, employee onboarding and offboarding, software provisioning, and network and security monitoring.',
     stat: 'Optional add-on',
     optional: true,
+  },
+  {
+    Icon: Workflow,
+    n: '07',
+    h: 'Managed Operations',
+    b: 'Ongoing day-to-day management of your complete GlobalCodio technology operation. Platform updates, AI agent tuning, network coordination, performance monitoring, and proactive support - handled by our team continuously.',
+    stat: 'Fully managed, ongoing',
+    featured: true,
   },
   {
     Icon: FileCheck,
@@ -74,7 +74,7 @@ export default function Services() {
         eyebrow="GlobalCodio Services"
         lead="Your Complete"
         emphasis="Tech Partner."
-        sub="GlobalCodio Services is the team behind your technology operation - migration, configuration, IT support, security, RFP response, and ongoing managed operations. One partner. Everything handled."
+        sub="GlobalCodio Services is the team behind your technology operation - migration, configuration, HRMS integration, IT support, security, RFP response, and ongoing managed operations. One partner. Everything handled."
         primary={{ href: '/contact', label: 'Book a free tech audit' }}
         secondary={{ href: '/rfp-response', label: 'See the RFP service' }}
       />
@@ -82,7 +82,7 @@ export default function Services() {
       <Section
         id="service-layers"
         eyebrow="What We Handle"
-        lead="Eight layers."
+        lead="Nine layers."
         emphasis="One partner."
         headInline
         headAlign="center"
@@ -149,6 +149,121 @@ export default function Services() {
         </div>
       </Section>
 
+      {/* HRMS Integration - standalone section */}
+      <Section id="hrms-integration">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.32fr)',
+          gap: 'var(--space-4xl)',
+          alignItems: 'center',
+        }} className="hrms-split reveal">
+
+          {/* Left - copy */}
+          <div>
+            <SectionEyebrow>Corporate Add-on</SectionEyebrow>
+            <SplitHeading lead="HRMS" emphasis="Integration." inline style={{ marginTop: 'var(--space-md)' }} />
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '66ch' }}>
+              Connect CodioCMS directly to your corporate HR systems. Foreign national records, employment data, and case triggers sync automatically so HR and immigration teams work from the same source of truth - without manual re-entry.
+            </p>
+            <div style={{ marginTop: 'var(--space-xl)', display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+              <SmartLink href="/contact" className="btn btn-primary">
+                Talk to our team
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+              </SmartLink>
+              <SmartLink href="/corporate" className="btn btn-glass">
+                Corporate solutions
+              </SmartLink>
+            </div>
+          </div>
+
+          {/* Right - feature card */}
+          <div style={{
+            width: '80%',
+            maxWidth: '80%',
+            justifySelf: 'end',
+            background: '#fff',
+            border: '1.5px solid var(--line-2)',
+            borderRadius: 'calc(20px * var(--ui-scale))',
+            overflow: 'hidden',
+            boxShadow: '0 1px 2px rgba(11,19,36,.04)',
+          }} className="reveal d1">
+
+            {/* Card header */}
+            <div style={{
+              padding: 'calc(20px * var(--ui-scale)) calc(28px * var(--ui-scale))',
+              borderBottom: '1px solid var(--line)',
+              background: 'var(--surface-2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 'var(--space-md)',
+            }}>
+              <div>
+                <div className="mono" style={{ fontSize: 'calc(10px * var(--ui-scale))', letterSpacing: '.1em', color: 'var(--muted)', fontWeight: 600, marginBottom: 'calc(3px * var(--ui-scale))' }}>
+                  WHAT WE SYNC
+                </div>
+                <div className="display" style={{ fontSize: 'calc(15px * var(--ui-scale))', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>
+                  HR directory → CodioCMS
+                </div>
+              </div>
+              <span style={{
+                display: 'flex', alignItems: 'center', gap: 'calc(5px * var(--ui-scale))',
+                padding: 'calc(5px * var(--ui-scale)) calc(10px * var(--ui-scale))',
+                background: 'rgba(25,80,198,.08)', borderRadius: 999,
+                fontSize: 'calc(10px * var(--ui-scale))', fontWeight: 700,
+                color: 'var(--blue)', fontFamily: 'var(--mono)', letterSpacing: '.06em',
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
+                AUTO-IMPORT
+              </span>
+            </div>
+
+            {/* Capability rows */}
+            <div style={{ padding: 'calc(8px * var(--ui-scale)) 0' }}>
+              {[
+                { name: 'Employee Listing', detail: 'Full directory with immigration-relevant fields' },
+                { name: 'Departments', detail: 'Org structure mapped to case assignment' },
+                { name: 'Case Initiation', detail: 'Start a case directly from the employee record' },
+                { name: 'Record Import', detail: 'Pull name, title, start date, passport details' },
+              ].map((cap, i, arr) => (
+                <div key={cap.name} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 'var(--space-md)',
+                  padding: 'calc(12px * var(--ui-scale)) calc(28px * var(--ui-scale))',
+                  borderBottom: i < arr.length - 1 ? '1px solid var(--line)' : 'none',
+                }}>
+                  <div>
+                    <div style={{ fontSize: 'calc(14px * var(--ui-scale))', fontWeight: 650, color: 'var(--ink)', lineHeight: 1.2 }}>{cap.name}</div>
+                    <div className="mono" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', color: 'var(--muted)', marginTop: 'calc(2px * var(--ui-scale))' }}>{cap.detail}</div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="var(--blue)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              ))}
+            </div>
+
+            {/* Card footer - what syncs */}
+            <div style={{
+              padding: 'calc(16px * var(--ui-scale)) calc(28px * var(--ui-scale))',
+              borderTop: '1px solid var(--line)',
+              background: 'var(--surface-2)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 'calc(8px * var(--ui-scale))',
+            }}>
+              {['Employee directory', 'Departments', 'Case triggers', 'Record import', 'Auto-sync'].map(tag => (
+                <span key={tag} className="pill" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', padding: 'calc(4px * var(--ui-scale)) calc(10px * var(--ui-scale))' }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* RFP Response - standalone callout */}
       <Section id="rfp-response" tone="sec-surface">
         <div className="rfp-response-split reveal">
@@ -157,7 +272,7 @@ export default function Services() {
             <h2 className="display type-display-lg" style={{ whiteSpace: 'nowrap' }}>
               <span style={{ color: 'var(--ink)' }}>RFP Response </span><em className="text-grad-blue" style={{ fontStyle: 'italic' }}>Support.</em>
             </h2>
-            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '48ch' }}>
+            <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.65, marginTop: 'var(--space-lg)', maxWidth: '72ch' }}>
               When corporate clients send RFPs with deep technical and security questions, we draft your responses - written by the same team that built and runs the platform. Available as a bundled add-on.
             </p>
             <div style={{ marginTop: 'var(--space-xl)', display: 'flex', gap: 'var(--space-sm)' }}>

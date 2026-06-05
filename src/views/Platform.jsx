@@ -369,7 +369,7 @@ export default function Platform() {
 
         <CMSBento />
 
-        {/* Passport Vault callout — hidden for now
+        {/* Passport Vault callout - hidden for now
         <div className="cms-passport-vault reveal d1">
           <div>
             <div className="mono cms-passport-vault-label">IMMIGRATION PASSPORT VAULT</div>
@@ -540,7 +540,7 @@ export default function Platform() {
               ))}
             </div>
             <p className="forms-foot-lead">
-              🇺🇸 🇨🇦 🇳🇱 🇮🇳 Four countries live — USCIS, IRCC, IND & MEA editions synced in CodioCMS.
+              🇺🇸 🇨🇦 🇳🇱 🇮🇳 Four countries live - USCIS, IRCC, IND & MEA editions synced in CodioCMS.
               <br />
               New countries on demand. Prefilled from case data, online or PDF.
             </p>

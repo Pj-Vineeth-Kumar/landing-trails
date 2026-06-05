@@ -1276,7 +1276,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4xl);align-items:stretch;
 }
 
-/* cs-onboarding 4-step rail — centered dots + dot-to-dot connectors */
+/* cs-onboarding 4-step rail - centered dots + dot-to-dot connectors */
 #cs-onboarding .process-rail{grid-template-columns:repeat(4,minmax(0,1fr));}
 #cs-onboarding .process-rail-step{align-items:center;text-align:center;}
 #cs-onboarding .process-rail-marker{justify-content:center;}
@@ -1999,27 +1999,27 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 }
 #roadmap + .sec.sec-cta .type-display-cta{margin-bottom:var(--space-xl);}
 
-/* Agents page — first section after hero (60% less than full --sec-py) */
+/* Agents page - first section after hero (60% less than full --sec-py) */
 #main-content .page-hero + section#agents.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
 
-/* Services page — first section after hero */
+/* Services page - first section after hero */
 #main-content .page-hero + #service-layers.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
 
-/* Firms page — first section after hero */
+/* Firms page - first section after hero */
 #main-content .page-hero + #what-you-get.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
 
-/* Corporate page — first section after hero */
+/* Corporate page - first section after hero */
 #main-content .page-hero + #challenges.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
 
-/* Events page — first section after hero */
+/* Events page - first section after hero */
 #main-content .page-hero + #upcoming.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
@@ -2030,12 +2030,12 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   padding-top:calc(var(--sec-py-cta) * 0.3);
 }
 
-/* Contact page — first section after hero */
+/* Contact page - first section after hero */
 #main-content .page-hero + #contact-form.sec{
   padding-top:calc(var(--sec-py) * 0.4);
 }
 
-/* Services — RFP callout: even vertical padding before CTA */
+/* Services - RFP callout: even vertical padding before CTA */
 #main-content #rfp-response.sec{
   padding-top:var(--sec-py-between);
   padding-bottom:var(--sec-py-between);
@@ -2043,7 +2043,7 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 
 #case-assistant.sec{background:#fff;}
 
-/* FAQ — tighter bottom (often sits above CTA) */
+/* FAQ - tighter bottom (often sits above CTA) */
 #main-content #faq.sec{padding-bottom:calc(var(--sec-py) * 0.45);}
 #main-content #faq.sec:has(+ .sec.sec-cta){padding-bottom:calc(var(--sec-py) * 0.35);}
 
@@ -2321,7 +2321,7 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
 }
 .author-signoff-link svg{width:calc(13px * var(--ui-scale));height:calc(13px * var(--ui-scale));flex-shrink:0;}
 
-/* What makes us different — manifesto 2-col */
+/* What makes us different - manifesto 2-col */
 .diff-sec{
   padding-top:var(--sec-py);
   padding-bottom:var(--sec-py);
@@ -2539,7 +2539,7 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   white-space:nowrap;
 }
 
-/* Platform — CodioNetwork → AI Era: tighter vertical rhythm */
+/* Platform - CodioNetwork → AI Era: tighter vertical rhythm */
 #main-content #codionetwork.sec:has(+ #ai-era.sec){
   padding-bottom:calc(var(--sec-py-between) * 0.5);
 }
@@ -3189,6 +3189,8 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   .split-2,.split-2--even{grid-template-columns:1fr;gap:calc(48px * var(--ui-scale));}
   #rfp-response .rfp-response-split{grid-template-columns:1fr;gap:var(--space-3xl);}
   #rfp-response .rfp-response-steps-card{width:100%;max-width:100%;justify-self:stretch;}
+  #hrms-integration .hrms-split{grid-template-columns:1fr !important;gap:var(--space-3xl);}
+  #hrms-integration .hrms-split > div:last-child{width:100% !important;max-width:100% !important;justify-self:stretch !important;}
   #the-problem .rfp-problem-split{gap:var(--space-2xl);}
   #the-problem .rfp-problem-panel{
     grid-template-columns:1fr;
@@ -3800,7 +3802,7 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   }
 }
 
-/* ── Button underline hover (hero CTAs only — expands from left) ── */
+/* ── Button underline hover (hero CTAs only - expands from left) ── */
 .hero-btn-underline{position:relative;}
 .hero-btn-underline::after{
   content:'';
@@ -5509,7 +5511,7 @@ section#letter.sec{padding-top:calc(var(--sec-py) * 0.4);}
   gap:var(--space-lg);
 }
 
-/* ── Global mobile stacking — catch-all for grids without a class ── */
+/* ── Global mobile stacking - catch-all for grids without a class ── */
 @media(max-width:768px){
   /* Homepage RevenueEconomics (split-2--even already handled at 768) */
   /* Homepage AI Savings already 2-col at 900 → handled */

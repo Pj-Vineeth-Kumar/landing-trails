@@ -30,7 +30,7 @@ const wordRise = {
   },
 };
 
-/* Gradient headline words: no filter — blur breaks background-clip:text on the parent em */
+/* Gradient headline words: no filter - blur breaks background-clip:text on the parent em */
 const wordRiseGradient = {
   hidden: { opacity: 0, y: 12 },
   show: {
@@ -114,7 +114,7 @@ export const Hero = () => (
           animate="show"
         >
 
-          {/* Headline — word-by-word blur+slide */}
+          {/* Headline - word-by-word blur+slide */}
           <motion.h1
             className="reveal d1 display type-display-hero"
             style={{ textAlign: 'center', marginBottom: 'var(--space-sm)', lineHeight: 1.12 }}
@@ -132,7 +132,7 @@ export const Hero = () => (
               ))}
             </motion.span>
 
-            {/* Line 2: animate the whole em as one unit — blur on the parent works fine */}
+            {/* Line 2: animate the whole em as one unit - blur on the parent works fine */}
             <motion.em
               className="text-grad-blue"
               style={{ display: 'block', fontStyle: 'italic' }}
@@ -142,7 +142,7 @@ export const Hero = () => (
             </motion.em>
           </motion.h1>
 
-          {/* Pills — subtle blur tier */}
+          {/* Pills - subtle blur tier */}
           <motion.div
             className="reveal hero-pill-row"
             style={{ textAlign: 'center' }}
@@ -153,7 +153,7 @@ export const Hero = () => (
             ))}
           </motion.div>
 
-          {/* Body copy — medium blur tier, full */}
+          {/* Body copy - medium blur tier, full */}
           <motion.p
             className="reveal d2 type-lead hero-lead hero-lead-full"
             style={{ lineHeight: 1.55, color: 'var(--ink-3)', textAlign: 'center', margin: '0 auto var(--space-md)' }}
@@ -167,7 +167,7 @@ export const Hero = () => (
             managing technology again.
           </motion.p>
 
-          {/* Body copy — mobile */}
+          {/* Body copy - mobile */}
           <motion.p
             className="reveal d2 type-lead hero-lead hero-lead-mobile"
             style={{ lineHeight: 1.48, color: 'var(--ink-3)', textAlign: 'center', margin: '0 auto var(--space-md)' }}
@@ -177,7 +177,7 @@ export const Hero = () => (
             <strong>while our team runs the entire technology operation.</strong>
           </motion.p>
 
-          {/* CTAs — subtle tier, slide-up with underline hover handled in CSS */}
+          {/* CTAs - subtle tier, slide-up with underline hover handled in CSS */}
           <motion.div
             className="reveal d3 hero-cta-row"
             style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
@@ -194,7 +194,7 @@ export const Hero = () => (
             </motion.a>
           </motion.div>
 
-          {/* Trust line — faintest tier */}
+          {/* Trust line - faintest tier */}
           <motion.div
             className="reveal d4 hero-trust"
             variants={subtleRise}

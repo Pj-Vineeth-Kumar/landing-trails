@@ -106,7 +106,7 @@ export default function CustomerSupport() {
   return (
     <>
       <PageHero
-        eyebrow="Customer Success & Support"
+        eyebrow="Customer Support"
         lead="Support from people who"
         emphasis="know immigration."
         sub="Most software vendors hand you a help center article. GlobalCodio gives you a team that understands immigration workflows, speaks your language, and stays with you from onboarding through every case milestone."
