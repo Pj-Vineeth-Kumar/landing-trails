@@ -60,7 +60,7 @@ const PainRecognition = () => (
     <ul className="check-list pain-list" style={{ marginTop: 'var(--space-2xl)', gridTemplateColumns: 'repeat(2,1fr)', gap: 'var(--space-lg)' }}>
       {PAINS.map((p, i) => (
         <li key={i} className="reveal pain-item">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8" /><path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}><defs><linearGradient id="chk-grad-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs><circle cx="10" cy="10" r="10" fill="url(#chk-grad-h)" /><path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
           {p}
         </li>
       ))}

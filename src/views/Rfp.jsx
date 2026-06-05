@@ -15,9 +15,10 @@ import {
 } from 'lucide-react';
 
 const Check = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-    <circle cx="10" cy="10" r="8" />
-    <path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+    <defs><linearGradient id="chk-grad-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--blue-bright)" /><stop offset="100%" stopColor="var(--blue)" /></linearGradient></defs>
+    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-r)" />
+    <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -87,7 +88,7 @@ export default function Rfp() {
       <Section id="the-problem">
         <div className="rfp-problem-split reveal">
           <div className="rfp-problem-head">
-            <SectionEyebrow>The Problem</SectionEyebrow>
+            <SectionEyebrow align="center">The Problem</SectionEyebrow>
             <SplitHeading lead="Your Best Corporate Opportunity Just Hit Your Inbox." emphasis="Now What?" />
             <div className="rfp-problem-intro">
               <p>

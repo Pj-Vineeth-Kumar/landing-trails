@@ -73,25 +73,21 @@ const DELIVERABLE_GROUPS = [
 
 const PHASES = [
   {
-    phase: '01',
     title: 'Discovery',
     span: 'Weeks 1–2',
     body: 'We meet your team. Map your existing workflows. Identify what works, what\'s broken, and where the firm is losing time and money. Output: a customized CodioOps roadmap for your firm.',
   },
   {
-    phase: '02',
     title: 'Configuration',
     span: 'Weeks 3–4',
     body: 'We configure CodioCMS to your exact workflows. Build your template library. Set up your forms. Document your processes. Turn on automations.',
   },
   {
-    phase: '03',
     title: 'Optimization Launch',
     span: 'Weeks 5–6',
     body: 'Your team is trained. The platform is live. CodioOps begins active monitoring of platform usage and continuous tuning.',
   },
   {
-    phase: '04',
     title: 'Ongoing Operations',
     span: 'Month 2 and Forever',
     body: 'Continuous optimization. Quarterly business reviews. New workflows added as your firm evolves. New AI agents tuned to your firm\'s processes. New automations added as opportunities surface.',
@@ -167,9 +163,15 @@ const MIGRATION_STEPS = [
 const MIGRATION_FROM = ['Legacy CMS', 'Spreadsheets', 'Other platforms'];
 
 const Check = () => (
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-    <circle cx="10" cy="10" r="8" />
-    <path d="M7 10l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+    <defs>
+      <linearGradient id="chk-grad-b" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="var(--blue-bright)" />
+        <stop offset="100%" stopColor="var(--blue)" />
+      </linearGradient>
+    </defs>
+    <circle cx="10" cy="10" r="10" fill="url(#chk-grad-b)" />
+    <path d="M6.5 10l2.5 2.5 4.5-5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -420,15 +422,12 @@ export default function CodioOps() {
                 <div className="mono codioops-phases-label">{group.label}</div>
                 <ol className="codioops-phases-list">
                   {group.phases.map((p) => (
-                    <li key={p.phase} className="codioops-phase">
-                      <span className="mono codioops-phase-marker" aria-hidden="true">
-                        {p.phase}
-                      </span>
-                      <div className="codioops-phase-copy">
-                        <span className="mono codioops-phase-span">{p.span}</span>
+                    <li key={p.title} className="codioops-phase">
+                      <div className="codioops-phase-head">
                         <h3 className="display codioops-phase-title">{p.title}</h3>
-                        <p className="codioops-phase-text">{p.body}</p>
+                        <span className="mono codioops-phase-span">{p.span}</span>
                       </div>
+                      <p className="codioops-phase-text">{p.body}</p>
                     </li>
                   ))}
                 </ol>

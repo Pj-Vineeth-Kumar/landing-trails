@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { PageHero, Section, CtaBand } from '../../components/ui/PageKit';
 import { HowItWorks } from '../components/MarketingSections.jsx';
 import { Mail, MapPin, ExternalLink, Navigation, ArrowRight } from 'lucide-react';
+import { ICON_GRAD, ICON_SHADOW_SM, ICON_SHADOW_LG } from '../../lib/tokens';
 
 const OFFICES = [
   {
@@ -74,8 +75,9 @@ function InfoCard({ icon: Icon, tag, children, action }) {
             width: 'calc(30px * var(--ui-scale))',
             height: 'calc(30px * var(--ui-scale))',
             borderRadius: 'calc(8px * var(--ui-scale))',
-            background: 'var(--blue-soft)',
-            color: 'var(--blue)',
+            background: ICON_GRAD,
+            color: '#fff',
+            boxShadow: ICON_SHADOW_SM,
             flexShrink: 0,
           }}
         >
@@ -190,13 +192,14 @@ export default function Contact() {
                   width: 'calc(56px * var(--ui-scale))',
                   height: 'calc(56px * var(--ui-scale))',
                   borderRadius: '50%',
-                  background: 'var(--blue-soft)',
+                  background: ICON_GRAD,
+                  boxShadow: ICON_SHADOW_LG,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <Mail size={22} strokeWidth={1.75} style={{ color: 'var(--blue)' }} />
+                <Mail size={22} strokeWidth={1.75} style={{ color: '#fff' }} />
               </div>
               <h3 className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em' }}>
                 Message received.

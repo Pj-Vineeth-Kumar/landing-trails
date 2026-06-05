@@ -3,6 +3,7 @@ import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon } from 'lucide-react';
+import { ICON_GRAD, ICON_SHADOW_SM, ICON_SHADOW_MD } from '../../lib/tokens';
 
 const SERVICE_LAYERS = [
   {
@@ -101,8 +102,9 @@ export default function Services() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     width: 'calc(38px * var(--ui-scale))', height: 'calc(38px * var(--ui-scale))',
                     borderRadius: 'calc(10px * var(--ui-scale))',
-                    background: svc.featured ? 'var(--blue)' : 'var(--blue-soft)',
-                    color: svc.featured ? '#fff' : 'var(--blue)',
+                    background: ICON_GRAD,
+                    color: '#fff',
+                    boxShadow: svc.featured ? ICON_SHADOW_MD : ICON_SHADOW_SM,
                     flexShrink: 0, marginTop: 'calc(2px * var(--ui-scale))',
                   }}>
                     <Icon size={16} strokeWidth={1.75} />

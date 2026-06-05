@@ -177,19 +177,19 @@ export const Hero = () => (
             <strong>while our team runs the entire technology operation.</strong>
           </motion.p>
 
-          {/* CTAs - subtle tier, slide-up with underline hover handled in CSS */}
+          {/* CTAs - subtle tier, slide-up */}
           <motion.div
             className="reveal d3 hero-cta-row"
             style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
             variants={subtleRise}
           >
-            <motion.a href="/contact" className="btn btn-dark hero-btn-underline" {...btnTap}>
+            <motion.a href="/contact" className="btn btn-dark" {...btnTap}>
               Book your free tech audit
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M3 8h10M9 4l4 4-4 4" />
               </svg>
             </motion.a>
-            <motion.a href="#operation" className="btn btn-glass hero-btn-underline" {...btnTap}>
+            <motion.a href="#operation" className="btn btn-glass" {...btnTap}>
               See how it works
             </motion.a>
           </motion.div>

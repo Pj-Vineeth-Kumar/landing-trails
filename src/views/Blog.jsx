@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { Section, SmartLink } from '../../components/ui/PageKit';
+import { ICON_GRAD } from '../../lib/tokens';
 import { motion } from 'framer-motion';
 import { urlFor } from '../../lib/sanity';
 
@@ -176,9 +177,11 @@ function resolveImageUrl(img, width = 800) {
 const PostCard = ({ post, featured = false }) => {
   const imageUrl = resolveImageUrl(post.featuredImage ?? post.image, featured ? 1200 : 600);
   const authorImageUrl = resolveImageUrl(post.author?.image, 80);
-  const formattedDate = post.date
-    ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-    : post.publishedAt ?? post.date ?? '';
+  const rawDate = post.date ?? post.publishedAt ?? '';
+  const parsedDate = rawDate ? new Date(rawDate) : null;
+  const formattedDate = parsedDate && !isNaN(parsedDate)
+    ? parsedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    : rawDate;
 
   return (
     <SmartLink
@@ -231,8 +234,21 @@ const PostCard = ({ post, featured = false }) => {
         </p>
         <div style={{ marginTop: 'auto', paddingTop: 'calc(14px * var(--ui-scale))', borderTop: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-sm)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))' }}>
-            {authorImageUrl && (
-              <img src={authorImageUrl} alt={post.author?.name} width={28} height={28} style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+            {authorImageUrl ? (
+              <img src={authorImageUrl} alt={post.author?.name ?? ''} width={28} height={28}
+                style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                onError={e => { e.currentTarget.style.display = 'none'; }}
+              />
+            ) : (
+              <span style={{
+                width: 'calc(28px * var(--ui-scale))', height: 'calc(28px * var(--ui-scale))',
+                borderRadius: '50%', flexShrink: 0,
+                background: ICON_GRAD,
+                color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 'calc(10px * var(--ui-scale))', fontWeight: 700,
+              }}>
+                {(post.author?.name ?? 'A').split(' ').map(w => w[0]).slice(0, 2).join('')}
+              </span>
             )}
             <div>
               <div style={{ fontSize: 'calc(12px * var(--ui-scale))', fontWeight: 600, color: 'var(--ink-2)', lineHeight: 1.2 }}>{post.author?.name}</div>
