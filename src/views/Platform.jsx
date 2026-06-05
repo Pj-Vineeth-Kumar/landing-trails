@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import {
   Workflow,
@@ -20,9 +20,6 @@ import {
   ShieldCheck,
   ClipboardList,
   BarChart3,
-  Vault,
-  ArrowRightLeft,
-  UserCheck,
   Languages,
   Stethoscope,
   Stamp,
@@ -106,13 +103,6 @@ const FORMS_STATS = [
   { value: '1', label: 'source of truth tied to CodioCMS' },
 ];
 
-const JURISDICTIONS = [
-  { flag: '🇺🇸', name: 'United States', forms: '180+ forms', authority: 'USCIS' },
-  { flag: '🇨🇦', name: 'Canada', forms: 'IRCC suite', authority: 'IRCC' },
-  { flag: '🇳🇱', name: 'Netherlands', forms: 'MVV & permits', authority: 'IND' },
-  { flag: '🇮🇳', name: 'India', forms: 'Visa & OCI', authority: 'MEA / FRRO' },
-];
-
 const CATALOG_FORMS = [
   { id: 'I-130', name: 'Petition for Alien Relative', country: 'US', active: true },
   { id: 'I-485', name: 'Adjustment of Status', country: 'US', active: false },
@@ -139,8 +129,8 @@ const FORMS_CAPS = [
   },
   {
     n: '03',
-    h: 'Built on your priority',
-    b: "Need a country we don't ship yet? We scope, build, and release based on client demand - in days, not product quarters.",
+    h: 'New countries on demand',
+    b: "Need a country we don't support yet? We scope, build, and release it in days - not product quarters.",
   },
 ];
 
@@ -150,12 +140,6 @@ const CODIOOPS_STATS = [
   { value: 'Setup', label: 'Workflow & template configuration' },
   { value: 'Activation', label: 'Automations & team training' },
   { value: 'Ongoing', label: 'Continuous platform tuning' },
-];
-
-const NETWORK_STATS = [
-  { value: '6', label: 'Vetted provider disciplines' },
-  { value: '40+', label: 'Translation languages' },
-  { value: 'Field-level', label: 'Confidentiality on every assignment' },
 ];
 
 const NETWORK_PROVIDERS = [
@@ -268,9 +252,21 @@ const CMS_GROUPS = [
     tag: 'Case Management',
     color: 'var(--blue)',
     items: [
-      { Icon: Workflow, h: 'End-to-end case lifecycle', b: 'From intake through filing to closure - every matter type, one system.' },
-      { Icon: Settings, h: 'Customizable workflows', b: 'Playbook templates and automations built for your exact operations.' },
-      { Icon: Globe,    h: 'Global country support',  b: 'Every country you practice in, with new countries added on demand.' },
+      {
+        Icon: Workflow,
+        h: 'Case lifecycle & workflows',
+        b: 'From intake through filing to closure - playbook templates and automations built for your firm, every matter type in one system.',
+      },
+      {
+        Icon: FileText,
+        h: 'Forms & questionnaires',
+        b: 'Government forms pre-filled from case data and structured client intake - conditional logic, authority-synced editions, and attorney review.',
+      },
+      {
+        Icon: Globe,
+        h: 'Global country support',
+        b: 'Every country you practice in, with new countries added on demand.',
+      },
     ],
   },
   {
@@ -286,18 +282,18 @@ const CMS_GROUPS = [
     tag: 'Intelligence',
     color: '#0891b2',
     items: [
-      { Icon: ClipboardList, h: 'Client questionnaires',      b: 'Conditional logic, case-data prefill, and attorney review workflows.' },
-      { Icon: ShieldCheck,   h: 'Role-based access control',  b: '27 permission modules, 7 action types, and full data-scope isolation.' },
-      { Icon: BarChart3,     h: 'Reporting & analytics',      b: 'Executive reports, HR dashboards, renewal pipeline, and bottleneck alerts.' },
+      { Icon: ShieldCheck, h: 'Role-based access control', b: '27 permission modules, 7 action types, and full data-scope isolation.' },
+      { Icon: GitMerge,    h: 'Native integrations',       b: 'Email, calendar, e-signature, and accounting tools connected natively to CodioCMS.' },
+      { Icon: BarChart3,   h: 'Reporting & analytics',     b: 'Executive reports, HR dashboards, renewal pipeline, and bottleneck alerts.' },
     ],
   },
 ];
 
 function CMSBento() {
   return (
-    <div className="cms-bento reveal">
+    <div className="cms-bento">
       {/* ── Hero card ── */}
-      <div className="cms-bento-hero">
+      <div className="cms-bento-hero reveal d1">
         <div>
           <div className="mono cms-bento-hero-label">CODIOCMS</div>
           <div className="display cms-bento-hero-title">
@@ -306,7 +302,7 @@ function CMSBento() {
           </div>
         </div>
         <div style={{ marginTop: 'calc(32px * var(--ui-scale))' }}>
-          <div className="mono cms-bento-hero-cap-label">10 CAPABILITIES</div>
+          <div className="mono cms-bento-hero-cap-label">9 CAPABILITIES</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(8px * var(--ui-scale))' }}>
             {CMS_GROUPS.map(g => (
               <div key={g.tag} className="cms-bento-hero-cap-item">
@@ -320,8 +316,8 @@ function CMSBento() {
 
       {/* ── Three category columns ── */}
       <div className="cms-bento-cols">
-        {CMS_GROUPS.map((group) => (
-          <div key={group.tag} className="cms-bento-col">
+        {CMS_GROUPS.map((group, gi) => (
+          <div key={group.tag} className={`cms-bento-col reveal d${gi + 2}`}>
             <div className="cms-bento-col-head">
               <span className="cms-bento-col-dot" style={{ background: group.color }} />
               <span className="mono">{group.tag}</span>
@@ -364,18 +360,16 @@ export default function Platform() {
       {/* CodioCMS */}
       <Section id="codiocms" className="sec-codiocms">
         <div className="reveal section-head-wide cms-head-copy">
-          <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-            CodioCMS
-          </div>
+          <SectionEyebrow align="center">CodioCMS</SectionEyebrow>
           <SplitHeading lead="Proprietary immigration" emphasis="case management software." />
-          <p className="cms-head-intro">
+          <p className="section-intro">
             Immigration case management for firms and corporate teams - built by the founder of the world's leading immigration case management platform. Not generic legal tech: a modern platform with native AI agents, CodioForms, and our global services network.
           </p>
         </div>
 
         <CMSBento />
 
-        {/* Passport Vault callout */}
+        {/* Passport Vault callout — hidden for now
         <div className="cms-passport-vault reveal d1">
           <div>
             <div className="mono cms-passport-vault-label">IMMIGRATION PASSPORT VAULT</div>
@@ -424,11 +418,12 @@ export default function Platform() {
             })}
           </div>
         </div>
+        */}
 
-        <div className="codioops-foot reveal d2">
+        <div className="codioops-foot reveal d3">
           <div className="codioops-statband codioops-statband--foot" aria-label="CodioOps at a glance">
-            {CODIOOPS_STATS.map((s) => (
-              <div key={s.label} className="codioops-stat">
+            {CODIOOPS_STATS.map((s, i) => (
+              <div key={s.label} className={`codioops-stat reveal d${i + 1}`}>
                 <span className="display codioops-stat-value">{s.value}</span>
                 <span className="codioops-stat-label">{s.label}</span>
               </div>
@@ -438,33 +433,24 @@ export default function Platform() {
             Every CodioCMS engagement includes CodioOps - dedicated operations that configure your workflows,
             templates, and automations, then continuously tune the platform as your firm evolves.
           </p>
-          <SmartLink href="/codioops" className="btn btn-blue-outline codioops-foot-cta">
+          <SmartLink href="/codioops" className="btn btn-primary codioops-foot-cta">
             Learn more about CodioOps
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
           </SmartLink>
         </div>
       </Section>
 
       {/* CodioForms */}
       <Section id="codioforms" tone="sec-surface" className="sec-codioforms">
-        <div className="forms-head-row reveal">
-          <div className="section-head-wide forms-head-copy">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              CodioForms
-            </div>
-            <SplitHeading lead="Global immigration forms" emphasis="and questionnaires." />
-            <p className="forms-head-intro">
-              The only immigration forms and questionnaires engine built for multi-country practice - every edition authority-synced,
-              prefilled from CodioCMS, and available online or as print-ready PDF.
-            </p>
-          </div>
-          <div className="forms-statband reveal d1" aria-label="CodioForms at a glance">
-            {FORMS_STATS.map((s) => (
-              <div key={s.label} className="forms-stat">
-                <span className="display forms-stat-value">{s.value}</span>
-                <span className="forms-stat-label">{s.label}</span>
-              </div>
-            ))}
-          </div>
+        <div className="reveal section-head-wide forms-head-copy">
+          <SectionEyebrow>CodioForms</SectionEyebrow>
+          <SplitHeading lead="Global immigration forms" emphasis="and questionnaires." />
+          <p className="section-intro">
+            The only immigration forms and questionnaires engine built for multi-country practice - every edition authority-synced,
+            prefilled from CodioCMS, and available online or as print-ready PDF.
+          </p>
         </div>
 
         <div className="forms-bento">
@@ -537,7 +523,6 @@ export default function Platform() {
             <div className="forms-cap-stack">
               {FORMS_CAPS.map((cap, i) => (
                 <article key={cap.h} className={`forms-cap-card reveal d${i + 1}`}>
-                  <span className="mono forms-cap-n">{cap.n}</span>
                   <h3 className="display forms-cap-title">{cap.h}</h3>
                   <p className="forms-cap-text">{cap.b}</p>
                 </article>
@@ -545,31 +530,26 @@ export default function Platform() {
             </div>
           </div>
 
-
-          <div className="forms-juris reveal d2">
-            <p className="forms-juris-lead">
-              Live today across four countries - new countries scoped and released on client priority.
-            </p>
-            <div className="forms-juris-grid">
-              {JURISDICTIONS.map((j) => (
-                <div key={j.name} className="forms-juris-card">
-                  <span className="forms-juris-flag" aria-hidden="true">
-                    {j.flag}
-                  </span>
-                  <div>
-                    <div className="forms-juris-name">{j.name}</div>
-                    <div className="forms-juris-meta">
-                      <span>{j.forms}</span>
-                      <span className="mono forms-juris-auth">{j.authority}</span>
-                    </div>
-                  </div>
+          <div className="forms-foot reveal d1">
+            <div className="forms-statband forms-statband--foot" aria-label="CodioForms at a glance">
+              {FORMS_STATS.map((s) => (
+                <div key={s.label} className="forms-stat">
+                  <span className="display forms-stat-value">{s.value}</span>
+                  <span className="forms-stat-label">{s.label}</span>
                 </div>
               ))}
             </div>
-            <p className="forms-juris-payoff">
-              Most platforms cover the US and stop. CodioForms centralizes every country you practice in -
-              integrated directly with cases in <strong>CodioCMS</strong>.
+            <p className="forms-foot-lead">
+              🇺🇸 🇨🇦 🇳🇱 🇮🇳 Four countries live — USCIS, IRCC, IND & MEA editions synced in CodioCMS.
+              <br />
+              New countries on demand. Prefilled from case data, online or PDF.
             </p>
+            <SmartLink href="/platform#codioforms" className="btn btn-primary forms-foot-cta">
+              Learn more about CodioForms
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </SmartLink>
           </div>
         </div>
       </Section>
@@ -578,11 +558,9 @@ export default function Platform() {
       <Section id="codionetwork" className="sec-codionetwork">
         <div className="network-head reveal">
           <div className="section-head-wide network-head-copy">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              CodioNetwork
-            </div>
+            <SectionEyebrow align="center">CodioNetwork</SectionEyebrow>
             <SplitHeading lead="The global service provider network" emphasis="for immigration." />
-            <p className="network-head-intro">
+            <p className="section-intro">
               A curated B2B network accessible directly through CodioCMS. One coordination layer instead of
               dozens of manual handoffs - with structured workflows, field-level confidentiality, and a full
               history of every assignment.
@@ -659,7 +637,6 @@ export default function Platform() {
             <div className="network-cap-stack">
               {NETWORK_CAPS.map((cap, i) => (
                 <article key={cap.h} className={`network-cap-card reveal d${i + 1}`}>
-                  <span className="mono network-cap-n">{cap.n}</span>
                   <h3 className="display network-cap-title">{cap.h}</h3>
                   <p className="network-cap-text">{cap.b}</p>
                 </article>
@@ -668,19 +645,15 @@ export default function Platform() {
           </div>
 
           <div className="network-foot reveal d1">
-            <div className="network-statband network-statband--foot" aria-label="CodioNetwork at a glance">
-              {NETWORK_STATS.map((s) => (
-                <div key={s.label} className="network-stat">
-                  <span className="display network-stat-value">{s.value}</span>
-                  <span className="network-stat-label">{s.label}</span>
-                </div>
-              ))}
-            </div>
             <p className="network-foot-lead">
-              Replace dozens of manual handoffs with one coordination layer inside CodioCMS.
+              Replace dozens of manual handoffs with one coordination layer inside CodioCMS. Assign vetted
+              providers from the case with field-level confidentiality and a complete assignment history.
             </p>
-            <SmartLink href="/network" className="btn btn-blue-outline network-foot-cta">
+            <SmartLink href="/network" className="btn btn-primary network-foot-cta">
               Explore CodioNetwork
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
             </SmartLink>
           </div>
         </div>
@@ -703,16 +676,19 @@ export default function Platform() {
       <Section id="migration" tone="sec-surface" className="sec-migration">
         <div className="migration-head-row reveal">
           <div className="section-head-wide migration-head-copy">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              Migration
-            </div>
+            <SectionEyebrow align="center">Migration</SectionEyebrow>
             <SplitHeading lead="Coming from another platform?" emphasis="We migrate you." />
-            <p className="migration-head-intro">
+            <p className="section-intro">
               On another CMS? Our team runs the full move - data, workflows, documentation, and parallel
               operations until you're live on CodioCMS.
             </p>
           </div>
-          <div className="migration-statband reveal d1" aria-label="Migration at a glance">
+        </div>
+
+        <FeatureGrid items={MIGRATION_STEPS} cols={4} />
+
+        <div className="migration-foot reveal d1">
+          <div className="migration-statband migration-statband--foot" aria-label="Migration at a glance">
             {MIGRATION_STATS.map((s) => (
               <div key={s.label} className="migration-stat">
                 <span className="display migration-stat-value">{s.value}</span>
@@ -720,11 +696,6 @@ export default function Platform() {
               </div>
             ))}
           </div>
-        </div>
-
-        <FeatureGrid items={MIGRATION_STEPS} cols={4} />
-
-        <div className="migration-foot reveal d1">
           <div className="migration-foot-copy">
             <p className="migration-foot-lead">We migrate firms from platforms including:</p>
             <div className="migration-platforms" role="list">
@@ -771,8 +742,8 @@ export default function Platform() {
             meta: ['~6 week migration', 'Zero case disruption'],
           },
           {
-            q: 'What is the Immigration Passport Vault?',
-            a: 'The Immigration Passport Vault is a personal document record within CodioCMS where applicants store passports, visas, permits, and supporting documents securely. Applicants control what they share and with whom. When they change employers or switch firms, their complete record travels with them - no re-submission or starting from scratch.',
+            q: 'What is the Immigration Passport?',
+            a: 'The Immigration Passport is a personal document record within CodioCMS where applicants store passports, visas, permits, and supporting documents securely. Applicants control what they share and with whom. When they change employers or switch firms, their complete record travels with them - no re-submission or starting from scratch.',
             meta: ['Applicant-owned', 'Portable across firms'],
           },
         ]}

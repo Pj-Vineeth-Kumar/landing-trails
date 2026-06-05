@@ -41,33 +41,74 @@ export function SiteShell({ children }) {
     const reveals = gsap.utils.toArray(
       'section:not(.hero-full-viewport):not(.page-hero):not(.logo-strip-section) .reveal'
     );
+    /* Blur amount scales with element importance (d1 = headlines, no class = body) */
+    const blurFor = (el) => {
+      if (el.classList.contains('d1')) return 10;
+      if (el.classList.contains('d2')) return 7;
+      if (el.classList.contains('d3')) return 5;
+      return 6;
+    };
+
+    // Trigger point: element enters view when its top crosses this % of the viewport.
+    // Using 98% means nearly any visible pixel fires the animation — eliminates the
+    // "blank bottom" gap where the element is technically on screen but hasn't triggered yet.
+    const TRIGGER_PCT = 98;
+
     const ctx = gsap.context(() => {
       reveals.forEach((el) => {
-        const startsBelowFold = el.getBoundingClientRect().top > window.innerHeight * 0.92;
-        if (!startsBelowFold) {
-          gsap.from(el, {
-            y: 18, opacity: 0, duration: 0.7, delay: 0.05 + delayForReveal(el),
-            ease: 'power3.out', immediateRender: true,
-            onComplete: () => el.classList.add('is-in'),
-          });
+        const blur = blurFor(el);
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+
+        // Already in view on load (top half of viewport) — animate immediately, no ScrollTrigger
+        if (rect.top < vh * 0.75 && rect.bottom > 0) {
+          gsap.fromTo(el,
+            { y: 16, opacity: 0, filter: `blur(${blur}px)` },
+            {
+              y: 0, opacity: 1, filter: 'blur(0px)',
+              duration: 0.7, delay: 0.04 + delayForReveal(el),
+              ease: 'power3.out', clearProps: 'filter',
+              onComplete: () => el.classList.add('is-in'),
+            }
+          );
           return;
         }
-        gsap.from(el, {
-          y: 24, opacity: 0, duration: 0.8, delay: delayForReveal(el),
-          ease: 'power3.out', immediateRender: true,
-          scrollTrigger: {
-            trigger: el, start: 'top 88%', toggleActions: 'play none none none',
-            onEnter: () => el.classList.add('is-in'),
-          },
-        });
+
+        // Below fold — fire as soon as any part of the element enters the viewport
+        gsap.fromTo(el,
+          { y: 22, opacity: 0, filter: `blur(${blur}px)` },
+          {
+            y: 0, opacity: 1, filter: 'blur(0px)',
+            duration: 0.75, delay: delayForReveal(el),
+            ease: 'power3.out', clearProps: 'filter',
+            scrollTrigger: {
+              trigger: el,
+              // "top N%" = element top hits N% down from viewport top.
+              // 98% fires the moment the element's top edge is almost at the bottom of screen.
+              start: `top ${TRIGGER_PCT}%`,
+              toggleActions: 'play none none none',
+              onEnter: () => el.classList.add('is-in'),
+            },
+          }
+        );
       });
     });
-    const failsafe = window.setTimeout(() => {
+
+    // Immediate reveal pass: catch anything already visible that GSAP missed
+    // (e.g. elements mid-viewport on a short page, or after fast navigation)
+    const revealVisible = () => {
       reveals.forEach((el) => {
         const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
+        if (r.top < window.innerHeight && r.bottom > 0 && !el.classList.contains('is-in')) {
+          el.classList.add('is-in');
+          gsap.set(el, { opacity: 1, y: 0, filter: 'blur(0px)', clearProps: 'filter' });
+        }
       });
-    }, 900);
+    };
+
+    // Run immediately, then again after layout settles (fonts, images)
+    revealVisible();
+    const failsafe = window.setTimeout(revealVisible, 600);
     requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => { window.clearTimeout(failsafe); ctx.revert(); };
   }, [pathname, tweaks]);
@@ -89,6 +130,13 @@ export function SiteShell({ children }) {
   // Lenis smooth scroll
   useEffect(() => {
     if (reducedMotion()) return;
+    // Prevent the browser from restoring scroll position on refresh — we always
+    // want to land at the top. Without this, the browser fires its own scroll
+    // restore after Lenis initialises, jumping mid-page.
+    if (typeof window !== 'undefined') {
+      history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
     const lenis = new Lenis({
       lerp: 0.12, smoothWheel: true, wheelMultiplier: 1,
       touchMultiplier: 1.1, syncTouch: true, syncTouchLerp: 0.1, autoRaf: false,

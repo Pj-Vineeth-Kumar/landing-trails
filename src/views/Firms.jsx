@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { Cpu, FileText, Bot, Network, Settings, GitMerge, ClipboardList, PenLine, MessageCircle, TrendingUp, CheckSquare, History, GitBranch } from 'lucide-react';
 
@@ -11,8 +11,8 @@ const WHAT_YOU_GET = [
   { Icon: FileText, n: '02', h: 'CodioForms', b: 'Online and offline immigration forms for every country you practice in, kept current as rules change.', links: [{ href: '/platform', label: 'See CodioForms' }] },
   { Icon: Bot, n: '03', h: 'Codio AI Agents', b: 'A team of AI agents handling case prep, communications, renewals, and business development.', featured: true, links: [{ href: '/ai-agents', label: 'Meet the agents' }] },
   { Icon: Network, n: '04', h: 'CodioNetwork', b: 'A curated network for global service coordination - translators, physicians, apostille, foreign counsel.', links: [{ href: '/network', label: 'See the network' }] },
-  { Icon: Settings, n: '05', h: 'GlobalCodio Services', b: 'IT support, RFP response, and ongoing management. We run your technology operation end to end.', links: [{ href: '/services', label: 'Explore services' }] },
-  { Icon: GitMerge, n: '06', h: 'Migration support', b: 'Switching from another platform? We handle the migration - data, workflows, and your team - cleanly.', links: [{ href: '/services', label: 'How migration works' }] },
+  { Icon: Settings, n: '05', h: 'GlobalCodio Services', b: 'IT support, RFP response, and ongoing management. We run your technology operation end to end.', links: [{ href: '/it-services', label: 'Explore services' }] },
+  { Icon: GitMerge, n: '06', h: 'Migration support', b: 'Switching from another platform? We handle the migration - data, workflows, and your team - cleanly.', links: [{ href: '/it-services', label: 'How migration works' }] },
 ];
 
 /* A day with GlobalCodio - narrative beats */
@@ -89,13 +89,12 @@ export default function Firms() {
         lead="What a day looks like"
         emphasis="with GlobalCodio."
         intro="From the first client intake to filing, client questions, and renewal outreach-specialized AI agents run routine work in parallel all day, so your staff stay focused on strategy and advocacy."
-        introMaxWidth="76ch"
         headAlign="center"
       >
         <div className="day-grid">
-          <ol className="day-timeline reveal">
+          <ol className="day-timeline">
             {DAY.map((step, i) => (
-              <li key={step.h} className="day-step">
+              <li key={step.h} className={`day-step reveal d${(i % 4) + 1}`}>
                 <div className="day-step-rail">
                   <span className="day-step-icon" aria-hidden="true">
                     <step.Icon size={18} strokeWidth={1.9} />
@@ -112,7 +111,7 @@ export default function Firms() {
           </ol>
 
           <aside className="day-payoff reveal d1">
-            <span className="eyebrow day-payoff-eyebrow">The result</span>
+            <SectionEyebrow>The result</SectionEyebrow>
             <div className="day-payoff-inner">
               <div className="day-payoff-copy">
                 <p className="display day-payoff-title">
@@ -145,7 +144,6 @@ export default function Firms() {
         lead="The platform enforces process."
         emphasis="So your team doesn't have to."
         intro="Most case management platforms are passive record-keepers. CodioCMS enforces your process actively - steps can't be marked complete without required reviews, approvals are logged with full context, and nothing gets silently changed after a partner signs off."
-        introMaxWidth="76ch"
         headAlign="center"
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
@@ -155,7 +153,7 @@ export default function Firms() {
         {/* Cross-case dependencies callout */}
         <div className="reveal d1 integrity-crosscase">
           <div>
-            <div className="eyebrow integrity-crosscase-eyebrow">Cross-Case Awareness</div>
+            <SectionEyebrow>Cross-Case Awareness</SectionEyebrow>
             <h3 className="display integrity-crosscase-title">
               Family cases. Derivative cases.{' '}
               <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>
@@ -174,8 +172,8 @@ export default function Firms() {
               { label: 'Principal petitions', detail: 'Linked to all derivative beneficiaries - status changes propagate automatically.' },
               { label: 'Family-based cases', detail: 'Spouse and dependent cases tracked together, with shared deadline visibility.' },
               { label: 'Corporate transfers', detail: 'Prior visa history carried forward - no re-gathering what\'s already on file.' },
-            ].map((item) => (
-              <div key={item.label} className="integrity-crosscase-item">
+            ].map((item, i) => (
+              <div key={item.label} className={`integrity-crosscase-item reveal d${i + 1}`}>
                 <div className="integrity-crosscase-item-label">{item.label}</div>
                 <div className="integrity-crosscase-item-detail">{item.detail}</div>
               </div>
@@ -190,7 +188,6 @@ export default function Firms() {
         lead="Why firms"
         emphasis="choose us."
         intro="Immigration firms on GlobalCodio report faster case preparation, recovered renewal revenue, and fewer missed deadlines-without adding headcount or stitching together another stack of point solutions. These are the outcomes partners typically see in their first year on the platform."
-        introMaxWidth="76ch"
         headAlign="center"
         headInline
       >

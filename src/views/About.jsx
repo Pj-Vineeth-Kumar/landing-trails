@@ -1,6 +1,6 @@
 'use client';
 
-import { PageHero, Section, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { Cpu, Workflow, Settings, Bot, Globe, TrendingUp } from 'lucide-react';
 
 /* Verified history: Umesh Vaidyamath came to the US on an H-1B as an engineer;
@@ -48,9 +48,9 @@ export default function About() {
       {/* Stat band - full-width proof strip right under the hero */}
       <section className="sec about-statband-sec">
         <div className="container">
-          <div className="m-grid metric-band reveal">
-            {STATS.map(([n, l]) => (
-              <div key={l}>
+          <div className="m-grid metric-band">
+            {STATS.map(([n, l], i) => (
+              <div key={l} className={`reveal d${i + 1}`}>
                 <div className="display type-display-metric metric-value" style={{ color: 'var(--blue)', letterSpacing: '-0.03em' }}>{n}</div>
                 <div className="metric-label">{l}</div>
               </div>
@@ -63,7 +63,7 @@ export default function About() {
       <Section id="history" tone="sec-surface">
         <div className="about-story">
           <div className="about-story-head reveal">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Our History</div>
+            <SectionEyebrow>Our History</SectionEyebrow>
             <div style={{ marginBottom: 'var(--space-lg)' }}>
               <SplitHeading
                 lead="Two decades defining"
@@ -103,18 +103,18 @@ export default function About() {
       <section className="sec about-thesis-sec">
         <div className="container">
           <div className="about-thesis reveal">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-lg)' }}>The Thesis</div>
+            <SectionEyebrow>The Thesis</SectionEyebrow>
             <div className="about-thesis-row">
               <p className="display about-thesis-quote">
                 For twenty years we watched firms buy software and never get the value. The software was never the
                 problem - <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>the missing operation around it was.</em>
               </p>
               <div className="about-thesis-grid">
-                <div className="about-thesis-col">
+                <div className="about-thesis-col reveal d1">
                   <span className="mono about-thesis-tag">What we kept seeing</span>
                   <p>Platforms went unconfigured. Workflows stayed manual. Tribal knowledge walked out the door with every staff departure.</p>
                 </div>
-                <div className="about-thesis-col">
+                <div className="about-thesis-col reveal d2">
                   <span className="mono about-thesis-tag">What we built instead</span>
                   <p>Not software you have to figure out. A complete operation - platform, AI agents, network, and the team running all of it for you.</p>
                 </div>
@@ -159,8 +159,8 @@ export default function About() {
                 <li><span className="mono">2025</span> Founded GlobalCodio</li>
               </ul>
             </aside>
-            <div className="about-founder-quote">
-              <div className="eyebrow about-founder-eyebrow">Leadership</div>
+            <div className="about-founder-quote reveal d1">
+              <SectionEyebrow>Leadership</SectionEyebrow>
               <p className="display about-founder-statement">
                 Few have seen immigration practice from the inside as long, or as widely, as the team that built the
                 platform firms ran on for{' '}

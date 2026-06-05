@@ -9,8 +9,12 @@ import {
   Award,
   TrendingUp,
   BarChart3,
+  Database,
+  Workflow,
+  FileText,
+  RefreshCw,
 } from 'lucide-react';
-import { PageHero, Section, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 
 const PROBLEM_GAPS = [
   'Templates don\'t reflect your case types',
@@ -130,6 +134,38 @@ const COMPARISON_COLS = [
   },
 ];
 
+const MIGRATION_STATS = [
+  { value: '~6 wks', label: 'typical full migration' },
+  { value: 'Parallel', label: 'ops until you cut over' },
+  { value: 'Verified', label: 'data before go-live' },
+];
+
+const MIGRATION_STEPS = [
+  {
+    Icon: Database,
+    h: 'Move your data',
+    b: 'Full export from your current platform - imported into CodioCMS and verified before anything moves.',
+  },
+  {
+    Icon: Workflow,
+    h: 'Rebuild workflows',
+    b: 'Operations reconfigured in CodioCMS to match how your firm actually works.',
+  },
+  {
+    Icon: FileText,
+    h: 'Document processes',
+    b: "Institutional knowledge captured in the system, not in people's heads.",
+  },
+  {
+    Icon: RefreshCw,
+    h: 'Run in parallel',
+    b: 'Dual operations until your team is fully transitioned-usually within six weeks.',
+    featured: true,
+  },
+];
+
+const MIGRATION_FROM = ['Legacy CMS', 'Spreadsheets', 'Other platforms'];
+
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
     <circle cx="10" cy="10" r="8" />
@@ -153,7 +189,7 @@ export default function CodioOps() {
       <Section id="the-problem" tone="sec-surface" className="sec-codioops-problem">
         <div className="reveal codioops-problem">
           <div className="codioops-problem-head">
-            <div className="eyebrow codioops-problem-eyebrow">The Problem</div>
+            <SectionEyebrow align="center">The Problem</SectionEyebrow>
             <SplitHeading lead="Most Firms Buy Software." emphasis="Few Ever Use It Well." />
             <p className="codioops-problem-lead">
               The biggest hidden problem in immigration law firms isn&apos;t bad software - it&apos;s software that was
@@ -169,8 +205,8 @@ export default function CodioOps() {
               </span>
             </div>
             <ul className="codioops-problem-gaps">
-              {PROBLEM_GAPS.map((gap) => (
-                <li key={gap} className="codioops-problem-gap">
+              {PROBLEM_GAPS.map((gap, i) => (
+                <li key={gap} className={`codioops-problem-gap reveal d${(i % 4) + 1}`}>
                   <span className="codioops-problem-gap-mark" aria-hidden="true" />
                   <span>{gap}</span>
                 </li>
@@ -191,7 +227,6 @@ export default function CodioOps() {
         lead="Your Dedicated"
         emphasis="Operations Team."
         intro="Eight things CodioOps does for every CodioCMS firm - at setup and continuously thereafter."
-        introMaxWidth="64ch"
         headAlign="center"
         headInline
       >
@@ -233,9 +268,7 @@ export default function CodioOps() {
               textAlign: 'center',
             }}
           >
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-lg)' }}>
-              Why We Built CodioOps
-            </div>
+            <SectionEyebrow align="center">Why We Built CodioOps</SectionEyebrow>
             <h2
               className="display"
               style={{
@@ -411,6 +444,49 @@ export default function CodioOps() {
         </div>
       </Section>
 
+      {/* Migration */}
+      <Section id="migration" tone="sec-surface" className="sec-migration">
+        <div className="migration-head-row reveal">
+          <div className="section-head-wide migration-head-copy">
+            <SectionEyebrow align="center">Migration</SectionEyebrow>
+            <SplitHeading lead="Coming from another platform?" emphasis="We migrate you." />
+            <p className="section-intro">
+              On another CMS? Our team runs the full move - data, workflows, documentation, and parallel
+              operations until you&apos;re live on CodioCMS.
+            </p>
+          </div>
+        </div>
+
+        <FeatureGrid items={MIGRATION_STEPS} cols={4} />
+
+        <div className="migration-foot reveal d1">
+          <div className="migration-statband migration-statband--foot" aria-label="Migration at a glance">
+            {MIGRATION_STATS.map((s) => (
+              <div key={s.label} className="migration-stat">
+                <span className="display migration-stat-value">{s.value}</span>
+                <span className="migration-stat-label">{s.label}</span>
+              </div>
+            ))}
+          </div>
+          <div className="migration-foot-copy">
+            <p className="migration-foot-lead">We migrate firms from platforms including:</p>
+            <div className="migration-platforms" role="list">
+              {MIGRATION_FROM.map((name) => (
+                <span key={name} className="migration-platform" role="listitem">
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+          <SmartLink href="mailto:info@globalcodio.ai" className="btn btn-primary migration-foot-cta">
+            Talk to us about migration
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </SmartLink>
+        </div>
+      </Section>
+
       {/* Always Bundled */}
       <section className="sec">
         <div className="container">
@@ -422,9 +498,7 @@ export default function CodioOps() {
               textAlign: 'center',
             }}
           >
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-lg)' }}>
-              Always Bundled. Always Premium.
-            </div>
+            <SectionEyebrow align="center">Always Bundled. Always Premium.</SectionEyebrow>
             <h2
               className="display"
               style={{
@@ -483,7 +557,6 @@ export default function CodioOps() {
         headAlign="center"
       >
         <div
-          className="reveal"
           style={{
             marginTop: 'var(--space-3xl)',
             display: 'grid',
@@ -495,10 +568,10 @@ export default function CodioOps() {
             { href: '/platform', label: 'CodioCMS Platform', desc: 'The case management platform CodioOps configures and runs for your firm.' },
             { href: '/ai-agents', label: 'Codio AI Agents', desc: 'The AI workforce that CodioOps activates and continuously tunes for your workflows.' },
             { href: '/free-tech-audit', label: 'Free Tech Audit', desc: 'See exactly what CodioOps would build, configure, and optimize for your practice.' },
-          ].map((link) => (
+          ].map((link, i) => (
             <SmartLink key={link.href} href={link.href} style={{ textDecoration: 'none' }}>
               <article
-                className="feature-card"
+                className={`feature-card reveal d${i + 1}`}
                 style={{ padding: 'calc(28px * var(--ui-scale))', height: '100%', cursor: 'pointer', transition: 'box-shadow .18s, transform .18s' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px -8px rgba(11,19,36,0.13)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}

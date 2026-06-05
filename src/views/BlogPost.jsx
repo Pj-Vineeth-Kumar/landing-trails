@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { PortableText } from '@portabletext/react';
 
 import { Section, SmartLink, CtaBand } from '../../components/ui/PageKit';
@@ -320,14 +321,24 @@ export default function BlogPost({ sanityPost, slug }) {
         <div className="container page-hero-inner">
 
           {/* Breadcrumb */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))', marginBottom: 'var(--space-lg)', fontSize: 'calc(13px * var(--ui-scale))' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.45 }}
+            style={{ display: 'flex', alignItems: 'center', gap: 'calc(8px * var(--ui-scale))', marginBottom: 'var(--space-lg)', fontSize: 'calc(13px * var(--ui-scale))' }}
+          >
             <Link href="/blog" style={{ color: 'var(--blue)', textDecoration: 'none', fontWeight: 600 }}>Blog</Link>
             <span style={{ color: 'var(--muted)' }}>›</span>
             <span style={{ color: 'var(--muted)' }}>{post.category}</span>
-          </div>
+          </motion.div>
 
           {/* Category + read time */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'calc(12px * var(--ui-scale))', marginBottom: 'var(--space-lg)', justifyContent: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.5, delay: 0.06 }}
+            style={{ display: 'flex', alignItems: 'center', gap: 'calc(12px * var(--ui-scale))', marginBottom: 'var(--space-lg)', justifyContent: 'center' }}
+          >
             <span style={{
               fontFamily: 'var(--mono)', fontSize: 'calc(10px * var(--ui-scale))',
               letterSpacing: '.08em', textTransform: 'uppercase',
@@ -340,14 +351,19 @@ export default function BlogPost({ sanityPost, slug }) {
             <span className="mono" style={{ fontSize: 'calc(12px * var(--ui-scale))', color: 'var(--muted)' }}>
               {post.readTime} min read
             </span>
-          </div>
+          </motion.div>
 
           {/* Title */}
-          <div style={{ maxWidth: '70ch', margin: '0 auto', width: '100%' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.65, delay: 0.1 }}
+            style={{ maxWidth: '70ch', margin: '0 auto', width: '100%' }}
+          >
             <h1 className="display type-display-lg" style={{ textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
               {post.title}
             </h1>
-          </div>
+          </motion.div>
 
           {/* Author row */}
           <div style={{ marginTop: 'var(--space-lg)', display: 'flex', alignItems: 'center', gap: 'calc(12px * var(--ui-scale))', justifyContent: 'center' }}>

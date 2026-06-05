@@ -566,7 +566,6 @@ export default function Agents() {
         lead="Specialized agents."
         emphasis="One immigration team."
         intro="Each agent is purpose-built for a stage of the immigration workflow - working together inside CodioCMS, 24/7, with no configuration required from your firm."
-        introMaxWidth="68ch"
         headAlign="center"
       >
         <AgentPanel />

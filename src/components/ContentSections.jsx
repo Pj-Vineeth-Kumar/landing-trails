@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { gsap } from 'gsap';
 import { FileText, MessageCircle, RefreshCw, TrendingUp, ClipboardList, PenLine, CalendarClock, Globe, Megaphone } from 'lucide-react';
 import { Logo } from '../../components/layout/Nav';
+import { SectionEyebrow } from '../../components/ui/PageKit';
 import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../../lib/navigation';
 
 const interactiveCardProps = {
@@ -80,7 +81,7 @@ export const AgentOrbit = () => {
 
         {/* Section header */}
         <div className="reveal section-head-wide" style={{ textAlign: 'left', marginBottom: 'var(--space-3xl)' }}>
-          <div className="eyebrow" style={{ color: 'var(--blue-hover)', marginBottom: 'var(--space-md)' }}>Platform</div>
+          <SectionEyebrow>Platform</SectionEyebrow>
           <h2 className="display type-display-xl" style={{ color: '#fff' }}>
             <span style={{ display: 'block' }}>10 agents, three pillars,</span>
             <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue-hover)' }}>one case file.</em>
@@ -215,7 +216,7 @@ export const Testimonial = () => (
         className="reveal section-head"
         style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}
       >
-        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Two Audiences</div>
+        <SectionEyebrow align="center">Two Audiences</SectionEyebrow>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>Built for law firms</span>
           <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)', whiteSpace: 'nowrap' }}>and corporate immigration teams.</em>
@@ -229,7 +230,7 @@ export const Testimonial = () => (
             body: 'Solo, mid-size, and large law firms practicing immigration law. Pain points: manual case preparation, scaling case volume, growing revenue from existing clients, and managing technology.',
             services: [
               { label: 'AI Agents', desc: 'Intake, documents, forms, deadlines, comms, renewals & BD' },
-              { label: 'Audit & Consulting', desc: 'Technology audit and immigration workflow advisory' },
+              { label: 'Technology Audit', desc: 'Comprehensive audit of your tech stack, workflows, and operations' },
               { label: 'Configuration & Optimization', desc: 'CodioCMS configured to your exact firm workflows' },
               { label: 'Managed Operations', desc: 'We run your entire tech operation day-to-day' },
             ],
@@ -240,7 +241,7 @@ export const Testimonial = () => (
             body: 'In-house mobility, HR, and legal operations teams at mid-to-large employers managing employee visa cases. Pain points: scaling case volume, compliance, vendor management, and cost predictability.',
             services: [
               { label: 'AI Agents', desc: 'Case tracking, compliance monitoring & vendor coordination' },
-              { label: 'Audit & Consulting', desc: 'Technology audit and corporate immigration advisory' },
+              { label: 'Technology Audit', desc: 'Technology audit and corporate immigration advisory' },
               { label: 'Configuration & Optimization', desc: 'Platform configured to your corporate workflows' },
               { label: 'Managed Operations', desc: 'IT support, security, and ongoing operations handled' },
             ],
@@ -272,20 +273,20 @@ export const Testimonial = () => (
 export const Metrics = () => (
   <section className="sec sec-metrics" id="metrics">
     <div className="container">
-      <div className="reveal m-grid">
+      <div className="reveal metrics-promise-head" style={{ textAlign: 'center', margin: '0 auto var(--space-2xl)' }}>
+        <SectionEyebrow align="center">Year One Promise</SectionEyebrow>
+        <p className="section-intro" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+          Firms partnering with GlobalCodio typically see a 3x return in year one through reduced operational
+          costs and significantly increased case volume.
+        </p>
+      </div>
+      <div className="reveal d1 m-grid">
         {[['3x', 'return in year one'], ['Base', 'retainer + performance share'], ['10+', 'autonomous AI Agents'], ['2', 'audiences - firms & corporate']].map(([n, l], i) => (
           <div key={i}>
             <div className="display type-display-metric metric-value" style={{ color: 'var(--blue)', letterSpacing: '-0.03em' }}>{n}</div>
             <div className="metric-label">{l}</div>
           </div>
         ))}
-      </div>
-      <div className="reveal d1" style={{ textAlign: 'center', maxWidth: '62ch', margin: 'var(--space-2xl) auto 0' }}>
-        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-sm)' }}>Year One Promise</div>
-        <p style={{ fontSize: 'calc(16px * var(--ui-scale))', color: 'var(--ink-3)', lineHeight: 1.65 }}>
-          Firms partnering with GlobalCodio typically see a 3x return in year one through reduced operational
-          costs and significantly increased case volume.
-        </p>
       </div>
     </div>
   </section>
@@ -333,12 +334,12 @@ export const ValueLevers = () => (
   <section id="value-levers" className="sec sec-levers">
     <div className="container">
       <div className="reveal section-head-wide">
-        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value Levers</div>
+        <SectionEyebrow align="center">Value Levers</SectionEyebrow>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>Where savings</span>
           <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>and revenue come from.</em>
         </h2>
-        <p className="value-levers-intro">
+        <p className="section-intro">
           Every agent ties to a measurable outcome - reduced prep time, lower support costs, captured renewals,
           or new client revenue. We track what each lever delivers so your team sees the impact, not just the software.
         </p>
@@ -435,7 +436,7 @@ export const Certifications = () => (
     <div className="container">
       <div className="how-grid cert-layout">
         <div className="reveal cert-section-head">
-          <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Trust & Compliance</div>
+          <SectionEyebrow>Trust & Compliance</SectionEyebrow>
           <h2 id="certifications-heading" className="display type-display-lg">
             <span style={{ display: 'block' }}>Built to pass</span>
             <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>firm-grade due diligence.</em>

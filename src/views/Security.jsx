@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { CertLogos } from '../components/ContentSections.jsx';
 import { Lock, KeyRound, Globe, Eye, Database, UserCheck, Bot, ScrollText, SlidersHorizontal } from 'lucide-react';
@@ -115,7 +115,7 @@ export default function Security() {
         <div className="container">
           <div className="how-grid cert-layout">
             <div className="reveal cert-section-head">
-              <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Certifications &amp; Frameworks</div>
+              <SectionEyebrow>Certifications &amp; Frameworks</SectionEyebrow>
               <h2 className="display type-display-lg">
                 <span style={{ display: 'block' }}>Built to the standards</span>
                 <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>corporate buyers require.</em>
@@ -148,7 +148,6 @@ export default function Security() {
         lead="AI agents that can't go rogue."
         emphasis="Because the data is too important."
         intro="When AI operates on sensitive immigration data, the compliance question isn't just 'Is the platform secure?' - it's 'What can the AI actually do, and can you prove it?' GlobalCodio has a specific answer."
-        introMaxWidth="72ch"
         headAlign="center"
       >
         <div
@@ -184,6 +183,7 @@ export default function Security() {
               return (
                 <div
                   key={item.title}
+                  className={`reveal d${i + 1}`}
                   style={{
                     display: 'flex',
                     gap: 'var(--space-lg)',
@@ -229,7 +229,7 @@ export default function Security() {
           </div>
 
           {/* Right - audit log mock */}
-          <div className="audit-log-mock">
+          <div className="audit-log-mock reveal d2">
             <header className="audit-log-mock__head">
               <div className="audit-log-mock__brand">
                 <span className="audit-log-mock__icon" aria-hidden="true">
@@ -247,8 +247,8 @@ export default function Security() {
             </header>
 
             <div className="audit-log-mock__body">
-              {AUDIT_LOG_ENTRIES.map((entry) => (
-                <article key={`${entry.agent}-${entry.time}`} className={`audit-log-row audit-log-row--${entry.type}`}>
+              {AUDIT_LOG_ENTRIES.map((entry, i) => (
+                <article key={`${entry.agent}-${entry.time}`} className={`audit-log-row audit-log-row--${entry.type} reveal d${(i % 4) + 1}`}>
                   <div className="audit-log-row__top">
                     <span className="audit-log-row__type mono">{entry.type}</span>
                     <span className="audit-log-row__agent">{entry.agent}</span>

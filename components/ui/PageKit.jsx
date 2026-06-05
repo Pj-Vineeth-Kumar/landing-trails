@@ -19,6 +19,15 @@ export const SmartLink = ({ href, className, children, ...rest }) => {
   return <a href={href} className={className} {...rest}>{children}</a>;
 };
 
+export const SectionEyebrow = ({ children, align = 'left' }) => (
+  <div className={`section-eyebrow-row${align === 'center' ? ' section-eyebrow-row--center' : ''}`}>
+    <span className="pill section-eyebrow-pill">
+      <span className="hero-eyebrow-dot" aria-hidden="true" />
+      <span className="section-eyebrow-text">{children}</span>
+    </span>
+  </div>
+);
+
 export const SplitHeading = ({ lead, emphasis, className = 'type-display-lg', as: Tag = 'h2', inline = false, style }) => (
   <Tag className={`display ${className}${inline ? ' split-heading--inline' : ''}`.trim()} style={style}>
     {lead && <span style={inline ? { color: 'var(--ink)' } : { display: 'block' }}>{lead}{inline && emphasis ? ' ' : null}</span>}
@@ -32,16 +41,39 @@ export const PageHero = ({ eyebrow, lead, emphasis, sub, primary, secondary, hea
     <div className="hero-grid-overlay" aria-hidden="true" />
     <div className="container page-hero-inner">
       {eyebrow && (
-        <motion.div className="page-hero-eyebrow" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
+        <motion.div
+          className="page-hero-eyebrow"
+          initial={{ opacity: 0, y: 12, filter: 'blur(6px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.5, ease }}
+        >
           <span className="pill hero-eyebrow-pill"><span className="hero-eyebrow-dot" aria-hidden="true" />{eyebrow}</span>
         </motion.div>
       )}
-      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.06, ease }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        transition={{ duration: 0.65, delay: 0.06, ease }}
+      >
         <SplitHeading lead={lead} emphasis={emphasis} className={`type-display-xl page-hero-title${headInline ? ' page-hero-title--inline' : ''}`} as="h1" inline={headInline} />
       </motion.div>
-      {sub && <motion.p className="page-hero-sub" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.16, ease }}>{sub}</motion.p>}
+      {sub && (
+        <motion.p
+          className="page-hero-sub"
+          initial={{ opacity: 0, y: 14, filter: 'blur(7px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.65, delay: 0.16, ease }}
+        >
+          {sub}
+        </motion.p>
+      )}
       {(primary || secondary) && (
-        <motion.div className="page-hero-cta" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.24, ease }}>
+        <motion.div
+          className="page-hero-cta"
+          initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.55, delay: 0.26, ease }}
+        >
           {primary && <motion.span {...btnTap} style={{ display: 'inline-flex' }}><SmartLink href={primary.href} className="btn btn-primary">{primary.label}<Arrow /></SmartLink></motion.span>}
           {secondary && <motion.span {...btnTap} style={{ display: 'inline-flex' }}><SmartLink href={secondary.href} className="btn btn-glass">{secondary.label}</SmartLink></motion.span>}
         </motion.div>
@@ -51,14 +83,24 @@ export const PageHero = ({ eyebrow, lead, emphasis, sub, primary, secondary, hea
   </section>
 );
 
-export const Section = ({ id, tone, eyebrow, lead, emphasis, intro, introMaxWidth = '64ch', headAlign = 'left', headInline = false, children, className = '', style }) => (
+export const Section = ({ id, tone, eyebrow, lead, emphasis, intro, introMaxWidth, headAlign = 'left', headInline = false, children, className = '', style }) => (
   <section id={id} className={`sec ${tone || ''} ${className}`.trim()} style={style}>
     <div className="container">
       {(eyebrow || lead || emphasis || intro) && (
         <div className="reveal section-head-wide" style={headAlign === 'center' ? { marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' } : undefined}>
-          {eyebrow && <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>{eyebrow}</div>}
+          {eyebrow && <SectionEyebrow align={headAlign}>{eyebrow}</SectionEyebrow>}
           {(lead || emphasis) && <SplitHeading lead={lead} emphasis={emphasis} inline={headInline} />}
-          {intro && <p style={{ fontSize: 'var(--text-body)', color: 'var(--ink-3)', lineHeight: 1.6, maxWidth: introMaxWidth, marginTop: 'var(--space-lg)', ...(headAlign === 'center' ? { marginLeft: 'auto', marginRight: 'auto' } : null) }}>{intro}</p>}
+          {intro && (
+            <p
+              className="section-intro"
+              style={{
+                ...(headAlign === 'center' ? { marginLeft: 'auto', marginRight: 'auto' } : null),
+                ...(introMaxWidth ? { maxWidth: introMaxWidth } : null),
+              }}
+            >
+              {intro}
+            </p>
+          )}
         </div>
       )}
       {children}

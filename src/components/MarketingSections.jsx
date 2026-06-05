@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SectionEyebrow } from '../../components/ui/PageKit';
 import {
   Bot,
   CalendarClock,
@@ -51,7 +52,7 @@ export const OutcomesHeadline = () => (
   <section className="outcomes-headline-section">
     <div className="container">
       <div className="reveal section-head-wide">
-        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Value-Based Partnership</div>
+        <SectionEyebrow>Value-Based Partnership</SectionEyebrow>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>Agents that handle the work -</span>
           <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>pricing tied to what they deliver.</em>
@@ -75,7 +76,7 @@ export const ValueProp = () => (
   <section className="sec sec-pillars" id="pillars">
     <div className="container">
       <div className="reveal section-head-wide">
-        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>The Three Pillars</div>
+        <SectionEyebrow>The Three Pillars</SectionEyebrow>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>One operation,</span>
           <em style={{ display: 'block', fontStyle: 'italic' }} className="text-grad-blue">three pillars working as one.</em>
@@ -115,7 +116,7 @@ export const AgentCatalog = () => (
   <section className="sec sec-surface" id="agents">
     <div className="container">
       <div className="reveal section-head-wide">
-        <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>The AI Agents</div>
+        <SectionEyebrow>The AI Agents</SectionEyebrow>
         <h2 className="display type-display-lg">
           <span style={{ display: 'block' }}>Autonomous workers</span>
           <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>for every immigration workflow.</em>
@@ -175,7 +176,7 @@ export const HowItWorks = () => {
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'var(--space-7xl)', alignItems: 'start' }} className="how-grid">
           <div className="reveal">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>FAQ's</div>
+            <SectionEyebrow>FAQ&apos;s</SectionEyebrow>
             <h2 id="faq-heading" className="display type-display-lg" style={{ marginBottom: 'var(--space-xl)' }}>
               <span style={{ display: 'block' }}>Straight answers,</span>
               <em style={{ display: 'block', fontStyle: 'italic', color: 'var(--blue)' }}>before you commit.</em>

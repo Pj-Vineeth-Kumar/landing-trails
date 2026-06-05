@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, CtaBand, SmartLink } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, CtaBand, SmartLink } from '../../components/ui/PageKit';
 import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon } from 'lucide-react';
 
 const SERVICE_LAYERS = [
@@ -45,9 +45,10 @@ const SERVICE_LAYERS = [
   {
     Icon: HeadphonesIcon,
     n: '06',
-    h: 'Customer Support',
-    b: 'Dedicated support for your staff and clients. Helpdesk, onboarding assistance, and day-to-day issue resolution handled by our team - so your firm never waits on a support ticket queue.',
-    stat: 'Dedicated support team',
+    h: 'Customer Success & Support',
+    b: 'Support from people who understand immigration workflows — not a generic helpdesk. Our team knows what an I-129 is, understands USCIS deadlines, and speaks your language. We onboard your whole firm, then stay proactively engaged with regular check-ins and workflow reviews.',
+    stat: 'Mon–Fri, 4am–5pm Pacific',
+    links: [{ href: '/customer-support', label: 'Learn more' }],
   },
   {
     Icon: Server,
@@ -81,18 +82,18 @@ export default function Services() {
       <Section
         id="service-layers"
         eyebrow="What We Handle"
-        lead="Seven layers."
+        lead="Eight layers."
         emphasis="One partner."
         headInline
         headAlign="center"
       >
-        <div className="reveal" style={{ marginTop: 'var(--space-3xl)', borderTop: '1px solid var(--line)' }}>
-          {SERVICE_LAYERS.filter(s => s.n !== '08').map((svc) => {
+        <div style={{ marginTop: 'var(--space-3xl)', borderTop: '1px solid var(--line)' }}>
+          {SERVICE_LAYERS.filter(s => s.n !== '08').map((svc, i) => {
             const Icon = svc.Icon;
             return (
               <div
                 key={svc.h}
-                className="service-layer-row"
+                className={`service-layer-row reveal d${(i % 3) + 1}`}
               >
                 {/* Left - name + icon + stat */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'calc(14px * var(--ui-scale))' }}>
@@ -152,7 +153,7 @@ export default function Services() {
       <Section id="rfp-response" tone="sec-surface">
         <div className="rfp-response-split reveal">
           <div>
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Add-on Service</div>
+            <SectionEyebrow>Add-on Service</SectionEyebrow>
             <h2 className="display type-display-lg" style={{ whiteSpace: 'nowrap' }}>
               <span style={{ color: 'var(--ink)' }}>RFP Response </span><em className="text-grad-blue" style={{ fontStyle: 'italic' }}>Support.</em>
             </h2>
@@ -174,7 +175,7 @@ export default function Services() {
             ].map((step, i, arr) => (
               <div
                 key={step.n}
-                className={`rfp-response-step${i < arr.length - 1 ? ' rfp-response-step--ruled' : ''}`}
+                className={`rfp-response-step reveal d${i + 1}${i < arr.length - 1 ? ' rfp-response-step--ruled' : ''}`}
               >
                 <span className="mono rfp-response-step-num">{step.n}</span>
                 <div>

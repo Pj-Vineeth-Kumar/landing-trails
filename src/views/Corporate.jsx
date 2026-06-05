@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { Users, Globe, Network, ShieldCheck, TrendingUp, BarChart3, Activity, DollarSign, Building2, GitCompare, FileText } from 'lucide-react';
 
@@ -95,7 +95,7 @@ const SOLUTIONS = [
     n: '05',
     h: 'Cost Predictability',
     b: 'Replace unpredictable outside counsel billing with a predictable managed service partnership.',
-    links: [{ href: '/services', label: 'Explore services' }],
+    links: [{ href: '/it-services', label: 'Explore services' }],
   },
 ];
 
@@ -124,8 +124,8 @@ export default function Corporate() {
               In-house mobility, HR, and legal operations teams face a familiar set of pressures.
             </p>
             <ul className="check-list" style={{ marginTop: 'var(--space-lg)' }}>
-              {CHALLENGES.map((c) => (
-                <li key={c}>
+              {CHALLENGES.map((c, i) => (
+                <li key={c} className={`reveal d${(i % 4) + 1}`}>
                   <Check />
                   {c}
                 </li>
@@ -156,7 +156,6 @@ export default function Corporate() {
         lead="Finally - immigration visibility"
         emphasis="your executives actually expect."
         intro="Most corporate mobility teams operate in the dark. Status updates come from email threads. Reports are built on request. Dashboards don't exist. GlobalCodio gives your team a dedicated HR portal - designed for what you actually need to do, not a lawyer's view with fields hidden."
-        introMaxWidth="calc(76ch * 1.3)"
         headAlign="center"
       >
         <div style={{ marginTop: 'var(--space-3xl)' }}>
@@ -193,9 +192,7 @@ export default function Corporate() {
           }}
         >
           <div>
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              HR-Led Onboarding
-            </div>
+            <SectionEyebrow>HR-Led Onboarding</SectionEyebrow>
             <h3
               className="display"
               style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 'var(--space-lg)' }}

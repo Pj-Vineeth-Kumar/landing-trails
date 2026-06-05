@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { Languages, Stethoscope, Stamp, Scale, Truck, Building2, Globe, Network as NetworkIcon, Workflow } from 'lucide-react';
 
 const NETWORK_ITEMS = [
@@ -45,7 +45,7 @@ export default function Network() {
 
           {/* Headline left, pull quote right */}
           <div className="network-problem-head reveal">
-            <div className="eyebrow" style={{ color: 'var(--blue)' }}>The Coordination Problem</div>
+            <SectionEyebrow>The Coordination Problem</SectionEyebrow>
             <div className="network-problem-head-row">
               <h2 className="display network-problem-title">
                 <span>Immigration is global.</span>
@@ -68,8 +68,8 @@ export default function Network() {
               </p>
 
               <ol className="network-pain-list">
-                {PAIN_POINTS.map(p => (
-                  <li key={p.n} className="network-pain-item">
+                {PAIN_POINTS.map((p, i) => (
+                  <li key={p.n} className={`network-pain-item reveal d${i + 1}`}>
                     <span className="mono network-pain-n">{p.n}</span>
                     <div className="network-pain-item-body">
                       <span className="network-pain-item-label">{p.label}</span>
@@ -86,9 +86,9 @@ export default function Network() {
               </div>
             </div>
 
-            <ul className="network-benefits-list reveal d2">
+            <ul className="network-benefits-list">
               {BENEFITS.map((b, i) => (
-                <li key={i} className="network-benefit-item">
+                <li key={i} className={`network-benefit-item reveal d${(i % 4) + 1}`}>
                   <div className="network-benefit-dot" aria-hidden="true" />
                   <div>
                     <p className="network-benefit-title">{b.title}</p>

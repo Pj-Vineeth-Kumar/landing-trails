@@ -266,7 +266,7 @@ export default function Blog({ sanityPosts }) {
       }}>
         <div className="hero-aurora" aria-hidden="true" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <motion.div initial={{ opacity: 0, y: 12, filter: 'blur(6px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.5 }}>
             <div className="hero-eyebrow-row" style={{ textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
               <span className="pill hero-eyebrow-pill">
                 <span className="hero-eyebrow-dot" aria-hidden="true" />
@@ -276,14 +276,14 @@ export default function Blog({ sanityPosts }) {
           </motion.div>
           <motion.h1
             className="display type-display-hero"
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.08 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.65, delay: 0.08 }}
             style={{ textAlign: 'center', lineHeight: 1.1, marginBottom: 'var(--space-md)' }}
           >
             <span style={{ display: 'block' }}>Ideas for</span>
             <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>immigration teams.</em>
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.16 }}
+            initial={{ opacity: 0, y: 14, filter: 'blur(7px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.65, delay: 0.16 }}
             style={{ textAlign: 'center', fontSize: 'var(--text-body)', color: 'var(--ink-3)', maxWidth: '52ch', margin: '0 auto var(--space-2xl)', lineHeight: 1.6 }}
           >
             Insights on AI in immigration workflows, technology operations, and what it takes to build a modern immigration practice.
@@ -291,7 +291,7 @@ export default function Blog({ sanityPosts }) {
 
           {/* Category filter tabs */}
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.24 }}
+            initial={{ opacity: 0, filter: 'blur(5px)' }} animate={{ opacity: 1, filter: 'blur(0px)' }} transition={{ delay: 0.26 }}
             style={{ display: 'flex', justifyContent: 'center', gap: 'calc(6px * var(--ui-scale))', flexWrap: 'wrap' }}
           >
             {CATEGORIES.map((cat) => {
@@ -402,13 +402,15 @@ export default function Blog({ sanityPosts }) {
             gap: 'calc(20px * var(--ui-scale))',
           }}>
             {filtered.map((post, i) => (
-              <PostCard key={post.slug} post={post} featured={i === 0} />
+              <div key={post.slug} className={`reveal d${(i % 3) + 1}`}>
+                <PostCard post={post} featured={i === 0} />
+              </div>
             ))}
           </div>
         )}
 
         {/* ── Subscribe strip - full width, low height ── */}
-        <div style={{
+        <div className="reveal d1" style={{
           marginTop: 'var(--space-xl)',
           background: 'linear-gradient(90deg, var(--blue) 0%, var(--blue-ink) 100%)',
           borderRadius: 'calc(16px * var(--ui-scale))',

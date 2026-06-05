@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SectionEyebrow } from './PageKit';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 /**
@@ -48,12 +49,7 @@ export function FaqAccordion({
         >
           {/* Left - heading (sticky so it stays visible while scrolling long answer lists) */}
           <div className="reveal faq-accordion-left">
-            <div
-              className="eyebrow"
-              style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}
-            >
-              {eyebrow}
-            </div>
+            <SectionEyebrow>{eyebrow}</SectionEyebrow>
             <h2
               id={`${id}-heading`}
               className="display type-display-lg"

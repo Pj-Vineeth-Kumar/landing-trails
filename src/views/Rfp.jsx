@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, SplitHeading, StepList, CtaBand } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, SplitHeading, StepList, CtaBand } from '../../components/ui/PageKit';
 import {
   BarChart3,
   FileCheck,
@@ -81,15 +81,13 @@ export default function Rfp() {
         emphasis="Technical RFP Questions."
         sub="When corporate clients send 50-page RFPs with deep technical and security questions about your case management platform, data security, and infrastructure - our team drafts your responses. Accurately. Professionally. On time."
         primary={{ href: 'mailto:info@globalcodio.ai', label: 'Send us your RFP' }}
-        secondary={{ href: '/services', label: 'See all services' }}
+        secondary={{ href: '/it-services', label: 'See all services' }}
       />
 
       <Section id="the-problem">
         <div className="rfp-problem-split reveal">
           <div className="rfp-problem-head">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              The Problem
-            </div>
+            <SectionEyebrow>The Problem</SectionEyebrow>
             <SplitHeading lead="Your Best Corporate Opportunity Just Hit Your Inbox." emphasis="Now What?" />
             <div className="rfp-problem-intro">
               <p>
@@ -110,8 +108,8 @@ export default function Rfp() {
             <div className="rfp-problem-panel-block">
               <h3 className="display rfp-problem-panel-title">What corporate buyers now require</h3>
               <div className="rfp-problem-asks-grid">
-                {RFP_BUYER_ASKS.map(({ Icon, t }) => (
-                  <div key={t} className="rfp-problem-ask-tile">
+                {RFP_BUYER_ASKS.map(({ Icon, t }, i) => (
+                  <div key={t} className={`rfp-problem-ask-tile reveal d${(i % 3) + 1}`}>
                     <div className="rfp-problem-ask-icon" aria-hidden="true">
                       <Icon size={16} strokeWidth={1.75} />
                     </div>
@@ -126,7 +124,7 @@ export default function Rfp() {
                 {RFP_STAKES.map((item, i, arr) => (
                   <div
                     key={item.n}
-                    className={`rfp-problem-stake${i < arr.length - 1 ? ' rfp-problem-stake--ruled' : ''}`}
+                    className={`rfp-problem-stake reveal d${i + 1}${i < arr.length - 1 ? ' rfp-problem-stake--ruled' : ''}`}
                   >
                     <span className="mono rfp-problem-stake-num">{item.n}</span>
                     <div>
@@ -161,13 +159,11 @@ export default function Rfp() {
       <Section id="how-it-works">
         <div className="how-it-works-split reveal">
           <div className="how-it-works-head">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              How It Works
-            </div>
+            <SectionEyebrow>How It Works</SectionEyebrow>
             <SplitHeading lead="From Inbox to" emphasis="Winning Response." />
           </div>
           <div className="how-it-works-steps">
-            <StepList steps={steps} revealRows={false} />
+            <StepList steps={steps} revealRows={true} />
           </div>
         </div>
       </Section>
@@ -175,9 +171,7 @@ export default function Rfp() {
       <Section id="why" tone="sec-dark">
         <div className="rfp-why-split reveal">
           <div className="rfp-why-head">
-            <div className="eyebrow" style={{ marginBottom: 'var(--space-md)' }}>
-              Why This Service Exists
-            </div>
+            <SectionEyebrow>Why This Service Exists</SectionEyebrow>
             <SplitHeading lead="The Answers, Written" emphasis="by a Partner." />
           </div>
           <div className="rfp-why-copy reveal d1">

@@ -166,16 +166,7 @@ export default function Contact() {
       />
 
       <Section id="contact-form" eyebrow="Get in Touch" lead="Send us a " emphasis="message." headAlign="center" headInline>
-        <div
-          className="reveal"
-          style={{
-            marginTop: 'var(--space-3xl)',
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 2.4fr) minmax(0, 1fr)',
-            gap: 'var(--space-2xl)',
-            alignItems: 'stretch',
-          }}
-        >
+        <div className="contact-layout reveal">
 
           {/* ── LEFT: form ─────────────────────────────────────────────── */}
           {submitted ? (
@@ -240,7 +231,7 @@ export default function Contact() {
               </div>
 
               {/* Full name + Work email */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)' }}>
+              <div className="contact-form-row">
                 <label style={lbl}>
                   <span style={ltext}>Full Name <span style={{ color: 'var(--blue)' }}>*</span></span>
                   <input type="text" required placeholder="Jane Smith" value={form.fullName} onChange={set('fullName')} style={field} />
@@ -252,7 +243,7 @@ export default function Contact() {
               </div>
 
               {/* Org name + Website */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-lg)' }}>
+              <div className="contact-form-row">
                 <label style={lbl}>
                   <span style={ltext}>Organization Name <span style={{ color: 'var(--blue)' }}>*</span></span>
                   <input type="text" required placeholder="Smith Immigration Law" value={form.orgName} onChange={set('orgName')} style={field} />

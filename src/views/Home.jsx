@@ -4,7 +4,7 @@ import { Hero } from '../components/Hero.jsx';
 // import { OperatingSystem } from '../components/OperatingSystem.jsx';
 import { AgentOrbit, Testimonial, Metrics, ValueLevers, Certifications, CTA } from '../components/ContentSections.jsx';
 
-import { Section, FeatureGrid, SmartLink, SplitHeading } from '../../components/ui/PageKit';
+import { Section, SectionEyebrow, FeatureGrid, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { Cpu, FileText, Bot, Network, Settings, Scale, Users, Building2, Truck, ShieldCheck } from 'lucide-react';
 
 /* Founder credibility band */
@@ -17,7 +17,7 @@ const FOUNDER_STATS = [
 
 const FounderBand = () => (
   <Section id="founder" tone="sec-surface" className="sec-founder">
-    <div className="eyebrow reveal founder-eyebrow">The Next Chapter in Immigration Tech</div>
+    <div className="reveal"><SectionEyebrow>The Next Chapter in Immigration Tech</SectionEyebrow></div>
     <div className="founder-layout">
       <div className="reveal founder-copy">
         <SplitHeading lead="Built by the people" emphasis="who built immigration tech." />
@@ -33,9 +33,9 @@ const FounderBand = () => (
         </SmartLink>
       </div>
 
-      <div className="reveal d1 founder-stat-grid">
-        {FOUNDER_STATS.map(([n, l]) => (
-          <div key={l} className="founder-stat">
+      <div className="founder-stat-grid">
+        {FOUNDER_STATS.map(([n, l], i) => (
+          <div key={l} className={`founder-stat reveal d${i + 1}`}>
             <div className="display founder-stat-num">{n}</div>
             <div className="founder-stat-label">{l}</div>
           </div>
@@ -56,7 +56,7 @@ const PAINS = [
 ];
 
 const PainRecognition = () => (
-  <Section id="pain" eyebrow="Sound Familiar?" lead="If any of these describe your firm," emphasis="you're exactly who GlobalCodio was built for." headAlign="center">
+  <Section id="pain" eyebrow="Sounds Familiar?" lead="If any of these describe your firm," emphasis="you're exactly who GlobalCodio was built for." headAlign="center">
     <ul className="check-list pain-list" style={{ marginTop: 'var(--space-2xl)', gridTemplateColumns: 'repeat(2,1fr)', gap: 'var(--space-lg)' }}>
       {PAINS.map((p, i) => (
         <li key={i} className="reveal pain-item">
@@ -77,7 +77,6 @@ const LAYERS = [
   { Icon: Settings, h: 'CodioOps', b: 'The dedicated operations team that configures, optimizes, and continuously tunes CodioCMS to match exactly how your firm operates. Bundled with every engagement.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
   { Icon: Network, h: 'CodioNetwork', b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.', links: [{ href: '/network', label: 'See the network' }] },
   { Icon: Settings, h: 'Technology Audit', b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.", links: [{ href: '/contact', label: 'Request an audit' }] },
-  { Icon: Cpu, h: 'Audit & Consulting', b: 'Advisory and consulting services for immigration law firms and corporate teams. We help you understand what technology you need and how to get the most from it.', links: [{ href: '/contact', label: 'Talk to us' }] },
 ];
 
 const FiveLayers = () => (
@@ -93,7 +92,7 @@ const FiveLayers = () => (
     <div style={{ marginTop: 'var(--space-3xl)' }}>
       <FeatureGrid items={LAYERS.slice(0, 3)} cols={3} />
       <div style={{ marginTop: 'var(--space-lg)' }}>
-        <FeatureGrid items={LAYERS.slice(3)} cols={4} />
+        <FeatureGrid items={LAYERS.slice(3)} cols={3} />
       </div>
     </div>
   </Section>
@@ -113,7 +112,6 @@ const CodioOpsCallout = () => (
     lead="Software Doesn't Run a Firm."
     emphasis="Operations Do."
     intro="Every CodioCMS engagement includes CodioOps - a dedicated team that configures, optimizes, and continuously tunes the platform to match how your firm actually operates."
-    introMaxWidth="68ch"
     headAlign="center"
   >
     <ol className="process-rail reveal" style={{ marginTop: 'var(--space-3xl)' }}>
@@ -154,7 +152,7 @@ const PORTALS = [
     tagline: 'Case status in language they understand.',
     bullets: ['Plain-English case timeline', 'Document upload to the right slots', 'Questionnaires with conditional logic'],
     href: '/platform',
-    color: '#7c3aed',
+    color: '#0891b2',
   },
   {
     Icon: Building2,
@@ -162,7 +160,7 @@ const PORTALS = [
     tagline: 'Workforce visibility, not a lawyer\'s UI.',
     bullets: ['Pipeline dashboards and health scores', 'Budget tracking and forecasting', 'Multi-firm performance comparison'],
     href: '/for-corporate-teams',
-    color: '#0891b2',
+    color: '#7c3aed',
   },
   {
     Icon: Truck,
@@ -189,19 +187,10 @@ const FivePortals = () => (
     lead="One platform."
     emphasis="Purpose-built for each role."
     intro="Most platforms give every user the same interface with some fields hidden. GlobalCodio provides five purpose-built portals - each designed for how that person actually works, with no clutter from the roles that don't apply to them."
-    introMaxWidth="72ch"
     headAlign="center"
   >
-    <div
-      className="reveal"
-      style={{
-        marginTop: 'var(--space-3xl)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
-        gap: 'calc(12px * var(--ui-scale))',
-      }}
-    >
-      {PORTALS.map((p) => {
+    <div className="portals-grid">
+      {PORTALS.map((p, i) => {
         const Icon = p.Icon;
         return (
           <SmartLink
@@ -210,7 +199,7 @@ const FivePortals = () => (
             style={{ textDecoration: 'none' }}
           >
             <article
-              className="feature-card"
+              className={`feature-card reveal d${(i % 4) + 1}`}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -321,8 +310,8 @@ const RevenueEconomics = () => (
     lead="Where the return"
     emphasis="actually comes from."
     headAlign="center">
-    <div className="split-2--even reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4xl)', alignItems: 'stretch' }}>
-      <article className="feature-card feature-card--featured" style={{ padding: 'calc(36px * var(--ui-scale))' }}>
+    <div className="split-2--even" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4xl)', alignItems: 'stretch' }}>
+      <article className="feature-card feature-card--featured reveal d1" style={{ padding: 'calc(36px * var(--ui-scale))' }}>
         <h3 className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 'var(--space-md)' }}>
           Your next <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>$200K</em> is already in your database.
         </h3>
@@ -335,7 +324,7 @@ const RevenueEconomics = () => (
           $50K&ndash;$300K TYPICAL ANNUAL RECOVERY
         </div>
       </article>
-      <article className="feature-card" style={{ padding: 'calc(36px * var(--ui-scale))' }}>
+      <article className="feature-card reveal d2" style={{ padding: 'calc(36px * var(--ui-scale))' }}>
         <h3 className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 'var(--space-md)' }}>
           Less than one paralegal. <em className="text-grad-blue" style={{ fontStyle: 'italic' }}>More productive than eight.</em>
         </h3>
@@ -367,7 +356,6 @@ const AiSavings = () => (
     lead="What AI agents"
     emphasis="actually save your firm."
     intro="Beyond recovering dormant revenue, Codio AI Agents replace hours of manual work every day - cutting operational costs, eliminating errors, and scaling your capacity without adding headcount."
-    introMaxWidth="72ch"
     headAlign="center"
   >
     <div className="ai-savings-grid reveal" style={{ marginTop: 'var(--space-3xl)' }}>

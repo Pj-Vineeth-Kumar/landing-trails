@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { PageHero, Section, SplitHeading, StepList, CtaBand, SmartLink } from '../../components/ui/PageKit';
+import { PageHero, Section, SectionEyebrow, SplitHeading, StepList, CtaBand, SmartLink } from '../../components/ui/PageKit';
 import { UserCheck } from 'lucide-react';
 
 const Check = () => (
@@ -59,13 +59,11 @@ export default function Audit() {
       <Section id="how-it-works" tone="sec-surface">
         <div className="how-it-works-split reveal">
           <div className="how-it-works-head">
-            <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>
-              How It Works
-            </div>
+            <SectionEyebrow>How It Works</SectionEyebrow>
             <SplitHeading lead="Four simple steps," emphasis="from booking to report." />
           </div>
           <div className="how-it-works-steps">
-            <StepList steps={steps} revealRows={false} />
+            <StepList steps={steps} revealRows={true} />
           </div>
         </div>
       </Section>
@@ -74,7 +72,7 @@ export default function Audit() {
         <div className="container">
           <div className="audit-founder-layout reveal">
             <div className="audit-founder-copy">
-              <div className="eyebrow" style={{ color: 'var(--blue)', marginBottom: 'var(--space-md)' }}>Founder Access</div>
+              <SectionEyebrow>Founder Access</SectionEyebrow>
               <h2 className="display audit-founder-heading" id="founder-access-heading">
                 <span style={{ display: 'block' }}>Audit led by</span>
                 <em className="text-grad-blue" style={{ display: 'block', fontStyle: 'italic' }}>the founder himself.</em>
@@ -86,22 +84,17 @@ export default function Audit() {
               </p>
 
               <ul className="audit-founder-facts">
-                <li>
-                  <span className="mono audit-founder-fact-label">1999</span>
-                  Co-founded INSZoom - the industry's first cloud immigration platform
-                </li>
-                <li>
-                  <span className="mono audit-founder-fact-label">20 yrs</span>
-                  Leading immigration technology serving firms worldwide
-                </li>
-                <li>
-                  <span className="mono audit-founder-fact-label">2020</span>
-                  INSZoom acquired by Mitratech
-                </li>
-                <li>
-                  <span className="mono audit-founder-fact-label">2025</span>
-                  Founded GlobalCodio - the next chapter
-                </li>
+                {[
+                  { yr: '1999', text: "Co-founded INSZoom - the industry's first cloud immigration platform" },
+                  { yr: '20 yrs', text: 'Leading immigration technology serving firms worldwide' },
+                  { yr: '2020', text: 'INSZoom acquired by Mitratech' },
+                  { yr: '2025', text: 'Founded GlobalCodio - the next chapter' },
+                ].map((f, i) => (
+                  <li key={f.yr} className={`reveal d${i + 1}`}>
+                    <span className="mono audit-founder-fact-label">{f.yr}</span>
+                    {f.text}
+                  </li>
+                ))}
               </ul>
 
               <div className="audit-founder-cta">

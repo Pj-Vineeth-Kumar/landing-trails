@@ -4,28 +4,82 @@ import { motion } from 'framer-motion';
 
 const ease = [0.2, 0.7, 0.2, 1];
 
+/* ── Stagger containers ── */
 const stagger = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.06 },
-  },
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
 };
-
 const headlineStagger = {
   hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.02 } },
+};
+/* Word-by-word stagger for split text */
+const wordStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0 } },
+};
+
+/* ── Variants ── */
+
+/* Primary headline words: blur(10px) + slide up + fade */
+const wordRise = {
+  hidden: { opacity: 0, y: 12, filter: 'blur(10px)' },
   show: {
-    transition: { staggerChildren: 0.11, delayChildren: 0.02 },
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    transition: { duration: 0.55, ease },
   },
 };
 
-const rise = {
-  hidden: { opacity: 0, y: 36 },
+/* Gradient headline words: no filter — blur breaks background-clip:text on the parent em */
+const wordRiseGradient = {
+  hidden: { opacity: 0, y: 12 },
   show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.62, ease },
+    opacity: 1, y: 0,
+    transition: { duration: 0.55, ease },
   },
 };
+
+/* Body / sub-copy: lighter blur (7px) + smaller lift */
+const bodyRise = {
+  hidden: { opacity: 0, y: 10, filter: 'blur(7px)' },
+  show: {
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    transition: { duration: 0.58, ease },
+  },
+};
+
+/* Pills / trust line: faintest blur (5px) */
+const subtleRise = {
+  hidden: { opacity: 0, y: 8, filter: 'blur(5px)' },
+  show: {
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    transition: { duration: 0.52, ease },
+  },
+};
+
+/* Dashboard: lift from further below, slight perspective tilt */
+const dashRise = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(6px)' },
+  show: {
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    transition: { duration: 0.9, delay: 0.38, ease },
+  },
+};
+
+/* Helper: split a string into word-span elements */
+const Words = ({ text, className, style }) => (
+  <motion.span className={className} style={style} variants={wordStagger}>
+    {text.split(' ').map((word, i) => (
+      <motion.span
+        key={i}
+        variants={wordRise}
+        style={{ display: 'inline-block', whiteSpace: 'pre' }}
+      >
+        {word}{i < text.split(' ').length - 1 ? ' ' : ''}
+      </motion.span>
+    ))}
+  </motion.span>
+);
 
 const btnTap = { whileHover: { scale: 1.03, y: -2 }, whileTap: { scale: 0.98 } };
 
@@ -60,92 +114,97 @@ export const Hero = () => (
           animate="show"
         >
 
-
-        <motion.h1
-          className="reveal d1 display type-display-hero"
-          style={{
-            textAlign: 'center',
-            marginBottom: 'var(--space-sm)',
-            lineHeight: 1.12,
-          }}
-          variants={headlineStagger}
-        >
-          <motion.span style={{ display: 'block' }} variants={rise}>
-            Win Cases.
-          </motion.span>
-          <motion.em
-            className="text-grad-blue"
-            style={{ display: 'block', fontStyle: 'italic' }}
-            variants={rise}
+          {/* Headline — word-by-word blur+slide */}
+          <motion.h1
+            className="reveal d1 display type-display-hero"
+            style={{ textAlign: 'center', marginBottom: 'var(--space-sm)', lineHeight: 1.12 }}
+            variants={headlineStagger}
           >
-            We&rsquo;ll Handle All the Technology.
-          </motion.em>
-        </motion.h1>
+            {/* Line 1 */}
+            <motion.span style={{ display: 'block' }} variants={wordStagger}>
+              {['Win', 'Cases.'].map((word, i, arr) => (
+                <React.Fragment key={i}>
+                  <motion.span variants={wordRise} style={{ display: 'inline-block' }}>
+                    {word}
+                  </motion.span>
+                  {i < arr.length - 1 && ' '}
+                </React.Fragment>
+              ))}
+            </motion.span>
 
-        <motion.div
-          className="reveal hero-pill-row"
-          style={{ textAlign: 'center' }}
-          variants={rise}
-        >
-          {['Global Immigration Case Management', 'Global Immigration Forms', 'Managed Tech Operations', 'Audit & Consulting'].map((label) => (
-            <span key={label} className="pill">
-              {label}
+            {/* Line 2: animate the whole em as one unit — blur on the parent works fine */}
+            <motion.em
+              className="text-grad-blue"
+              style={{ display: 'block', fontStyle: 'italic' }}
+              variants={wordRise}
+            >
+              We&rsquo;ll Handle All the Technology.
+            </motion.em>
+          </motion.h1>
+
+          {/* Pills — subtle blur tier */}
+          <motion.div
+            className="reveal hero-pill-row"
+            style={{ textAlign: 'center' }}
+            variants={subtleRise}
+          >
+            {['Global Immigration Case Management', 'Global Immigration Forms', 'Managed Tech Operations', 'Technology Audit'].map((label) => (
+              <span key={label} className="pill">{label}</span>
+            ))}
+          </motion.div>
+
+          {/* Body copy — medium blur tier, full */}
+          <motion.p
+            className="reveal d2 type-lead hero-lead hero-lead-full"
+            style={{ lineHeight: 1.55, color: 'var(--ink-3)', textAlign: 'center', margin: '0 auto var(--space-md)' }}
+            variants={bodyRise}
+          >
+            GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce-built,
+            deployed, and managed end-to-end. Our AI Agents handle case management, client communications, renewals,
+            and business development,{' '}
+            <strong>while our team runs the entire technology operation.</strong>{' '}
+            Connected to a global ecosystem of immigration partners, we help your team cut costs and grow revenue-without ever
+            managing technology again.
+          </motion.p>
+
+          {/* Body copy — mobile */}
+          <motion.p
+            className="reveal d2 type-lead hero-lead hero-lead-mobile"
+            style={{ lineHeight: 1.48, color: 'var(--ink-3)', textAlign: 'center', margin: '0 auto var(--space-md)' }}
+            variants={bodyRise}
+          >
+            Your AI workforce for immigration-agents for cases, clients, renewals, and growth,{' '}
+            <strong>while our team runs the entire technology operation.</strong>
+          </motion.p>
+
+          {/* CTAs — subtle tier, slide-up with underline hover handled in CSS */}
+          <motion.div
+            className="reveal d3 hero-cta-row"
+            style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
+            variants={subtleRise}
+          >
+            <motion.a href="/contact" className="btn btn-dark hero-btn-underline" {...btnTap}>
+              Book your free tech audit
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </motion.a>
+            <motion.a href="#operation" className="btn btn-glass hero-btn-underline" {...btnTap}>
+              See how it works
+            </motion.a>
+          </motion.div>
+
+          {/* Trust line — faintest tier */}
+          <motion.div
+            className="reveal d4 hero-trust"
+            variants={subtleRise}
+            aria-label="Trusted by immigration practices worldwide"
+          >
+            <span className="hero-trust-copy">
+              Built by the founder of <strong>INSZoom</strong> - trusted by 1,000+ immigration firms.
             </span>
-          ))}
-        </motion.div>
+          </motion.div>
 
-        <motion.p
-          className="reveal d2 type-lead hero-lead hero-lead-full"
-          style={{
-            lineHeight: 1.55,
-            color: 'var(--ink-3)',
-            textAlign: 'center',
-            margin: '0 auto var(--space-md)',
-          }}
-          variants={rise}
-        >
-          GlobalCodio gives immigration law firms and corporate immigration departments their own AI workforce-built,
-          deployed, and managed end-to-end. Our AI Agents handle case management, client communications, renewals,
-          and business development, <strong>while our team runs the entire technology operation.</strong> Connected to
-          a global ecosystem of immigration partners, we help your team cut costs and grow revenue-without ever
-          managing technology again.
-        </motion.p>
-
-        <motion.p
-          className="reveal d2 type-lead hero-lead hero-lead-mobile"
-          style={{
-            lineHeight: 1.48,
-            color: 'var(--ink-3)',
-            textAlign: 'center',
-            margin: '0 auto var(--space-md)',
-          }}
-          variants={rise}
-        >
-          Your AI workforce for immigration-agents for cases, clients, renewals, and growth,{' '}
-          <strong>while our team runs the entire technology operation.</strong>
-        </motion.p>
-
-        <motion.div
-          className="reveal d3 hero-cta-row"
-          style={{ display: 'flex', gap: 'var(--space-xs)', justifyContent: 'center', flexWrap: 'wrap', marginBottom: 0 }}
-          variants={rise}
-        >
-          <motion.a href="/contact" className="btn btn-dark" {...btnTap}>
-            Book your free tech audit
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 8h10M9 4l4 4-4 4" />
-            </svg>
-          </motion.a>
-          <motion.a href="#operation" className="btn btn-glass" {...btnTap}>
-            See how it works
-          </motion.a>
-        </motion.div>
-
-        <motion.div className="reveal d4 hero-trust" variants={rise} aria-label="Trusted by immigration practices worldwide">
-          <span className="hero-trust-copy">
-            Built by the founder of <strong>INSZoom</strong> - trusted by 1,000+ immigration firms.
-          </span>
-        </motion.div>
         </motion.div>
       </div>
 
@@ -178,9 +237,9 @@ export const Hero = () => (
 
 export const HeroDashboard = ({ imageHeight } = {}) => (
   <motion.div
-    initial={{ opacity: 0, y: 40, rotateX: 10 }}
-    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-    transition={{ duration: 0.95, delay: 0.35, ease }}
+    variants={dashRise}
+    initial="hidden"
+    animate="show"
     style={{
       position: 'relative',
       width: '100%',
@@ -376,8 +435,7 @@ export const HeroDashboard = ({ imageHeight } = {}) => (
           width: '100%',
           height: imageHeight ?? 'clamp(calc(220px * var(--ui-scale)), calc(40vw * var(--ui-scale)), calc(480px * var(--ui-scale)))',
           objectFit: 'cover',
-          /* Was bottom center - cropped off top of UI; ~72% shows more from the start without full reflow */
-          objectPosition: 'center 25%',
+          objectPosition: 'center 2%',
         }}
       />
 
