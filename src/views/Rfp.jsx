@@ -6,14 +6,13 @@ import { ICON_PALETTE } from '../../lib/tokens';
 import {
   BarChart3,
   FileCheck,
-  Globe,
   KeyRound,
   Lock,
   Plug,
   RefreshCw,
-  ShieldCheck,
   Workflow,
 } from 'lucide-react';
+import { GlobeIcon, ShieldCheckIcon } from '@animateicons/react/lucide';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -38,13 +37,13 @@ const technicalSections = [
 
 const RFP_BUYER_ASKS = [
   { Icon: Workflow, t: 'Case management & workflows' },
-  { Icon: ShieldCheck, t: 'SOC 2 & ISO compliance' },
+  { Icon: ShieldCheckIcon, t: 'SOC 2 & ISO compliance' },
   { Icon: Lock, t: 'Encryption & data residency' },
   { Icon: KeyRound, t: 'Access controls & SSO' },
   { Icon: RefreshCw, t: 'DR & business continuity' },
   { Icon: Plug, t: 'APIs & integrations' },
   { Icon: FileCheck, t: 'HIPAA & GDPR posture' },
-  { Icon: Globe, t: 'Multi-jurisdiction & privilege' },
+  { Icon: GlobeIcon, t: 'Multi-jurisdiction & privilege' },
   { Icon: BarChart3, t: 'Reporting & analytics' },
 ];
 

@@ -5,7 +5,8 @@ import { ICON_PALETTE, ICON_SHADOW_MD } from '../../lib/tokens';
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import { CertLogos } from '../components/ContentSections.jsx';
-import { Lock, KeyRound, Globe, Eye, Database, UserCheck, Bot, ScrollText, SlidersHorizontal } from 'lucide-react';
+import { Lock, KeyRound, Eye, Database, Bot, ScrollText, SlidersHorizontal } from 'lucide-react';
+import { GlobeIcon, UserCheckIcon } from '@animateicons/react/lucide';
 
 const AUDIT_LOG_ENTRIES = [
   {
@@ -48,36 +49,42 @@ const Check = () => (
 const layers = [
   {
     Icon: Lock,
+    animated: false,
     n: '01',
     h: 'Encryption',
     b: 'AES-256 at rest, TLS 1.3 in transit, and end-to-end encryption for sensitive document workflows.',
   },
   {
     Icon: KeyRound,
+    animated: false,
     n: '02',
     h: 'Access Controls',
     b: 'MFA required for all users, role-based access aligned with case roles, and complete audit logging of all access and changes.',
   },
   {
-    Icon: Globe,
+    Icon: GlobeIcon,
+    animated: true,
     n: '03',
     h: 'Data Residency',
     b: 'Compliant regional infrastructure for regulated countries, with configurable data residency for global enterprise clients.',
   },
   {
     Icon: Eye,
+    animated: false,
     n: '04',
     h: 'Continuous Monitoring',
     b: '24/7 threat detection and intrusion monitoring, active vulnerability scanning and patch management, and incident response protocols.',
   },
   {
     Icon: Database,
+    animated: false,
     n: '05',
     h: 'Backup & Recovery',
     b: 'Daily encrypted backups across regions, tested DR and business continuity plans, and defined RTO/RPO objectives.',
   },
   {
-    Icon: UserCheck,
+    Icon: UserCheckIcon,
+    animated: true,
     n: '06',
     h: 'Personnel Security',
     b: 'Background-checked staff with signed confidentiality agreements, annual security training, and the principle of least privilege.',

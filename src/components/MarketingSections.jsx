@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionEyebrow } from '../../components/ui/PageKit';
@@ -8,14 +8,16 @@ import {
   CalendarClock,
   ClipboardList,
   FileText,
-  Globe,
-  MessageCircle,
   Network,
   PenLine,
   RefreshCw,
-  Settings,
-  TrendingUp,
 } from 'lucide-react';
+import {
+  GlobeIcon,
+  MessageCircleIcon,
+  SettingsIcon,
+  TrendingUpIcon,
+} from '@animateicons/react/lucide';
 
 export const LogoStrip = () => {
   const logos = [
@@ -67,10 +69,34 @@ export const OutcomesHeadline = () => (
 );
 
 const PILLARS = [
-  { n: '01', Icon: Bot, h: 'AI Agents', b: 'A suite of autonomous AI workers handling case management, client communications, renewals, and business development - purpose-built for immigration workflows.', featured: true },
-  { n: '02', Icon: Settings, h: 'Managed Technology Operations', b: 'We deploy, configure, monitor, and optimize the entire agent ecosystem within your firm. Updates, integrations, support, and ongoing improvements - fully managed by our team.' },
-  { n: '03', Icon: Network, h: 'Global Immigration Ecosystem', b: 'Curated network of pre-vetted immigration service providers worldwide - translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more - all accessible through one platform.' },
+  { n: '01', Icon: Bot, animated: false, h: 'AI Agents', b: 'A suite of autonomous AI workers handling case management, client communications, renewals, and business development - purpose-built for immigration workflows.', featured: true },
+  { n: '02', Icon: SettingsIcon, animated: true, h: 'Managed Technology Operations', b: 'We deploy, configure, monitor, and optimize the entire agent ecosystem within your firm. Updates, integrations, support, and ongoing improvements - fully managed by our team.' },
+  { n: '03', Icon: Network, animated: false, h: 'Global Immigration Ecosystem', b: 'Curated network of pre-vetted immigration service providers worldwide - translators, document authentication services, foreign attorneys, medical exam centers, courier services, and more - all accessible through one platform.' },
 ];
+
+function PillarCard({ v, i }) {
+  const iconRef = useRef(null);
+  const onMouseEnter = v.animated ? () => iconRef.current?.startAnimation() : undefined;
+  const onMouseLeave = v.animated ? () => iconRef.current?.stopAnimation() : undefined;
+  return (
+    <article
+      className={`pillar-card reveal d${i + 1}${v.featured ? ' pillar-card--featured' : ''}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="pillar-card-top">
+        <div className="agent-icon pillar-icon" aria-hidden="true">
+          {v.animated
+            ? <v.Icon ref={iconRef} size={20} isAnimated={false} />
+            : <v.Icon size={20} strokeWidth={1.75} />}
+        </div>
+        <span className="mono pillar-index">/{v.n}</span>
+      </div>
+      <h3 className="display pillar-title">{v.h}</h3>
+      <p className="pillar-body">{v.b}</p>
+    </article>
+  );
+}
 
 export const ValueProp = () => (
   <section className="sec sec-pillars" id="pillars">
@@ -84,33 +110,45 @@ export const ValueProp = () => (
       </div>
 
       <div className="pillars-grid vp-grid">
-        {PILLARS.map((v, i) => (
-          <article key={i} className={`pillar-card reveal d${i + 1}${v.featured ? ' pillar-card--featured' : ''}`}>
-            <div className="pillar-card-top">
-              <div className="agent-icon pillar-icon" aria-hidden="true">
-                <v.Icon size={20} strokeWidth={1.75} />
-              </div>
-              <span className="mono pillar-index">/{v.n}</span>
-            </div>
-            <h3 className="display pillar-title">{v.h}</h3>
-            <p className="pillar-body">{v.b}</p>
-          </article>
-        ))}
+        {PILLARS.map((v, i) => <PillarCard key={i} v={v} i={i} />)}
       </div>
     </div>
   </section>
 );
 
 const AGENTS = [
-  { Icon: ClipboardList, h: 'Intake Agent', b: 'Collects client info, validates documents, opens cases' },
-  { Icon: FileText, h: 'Document Agent', b: 'Extracts data from passports, visas, foreign records, translates' },
-  { Icon: PenLine, h: 'Forms Agent', b: 'Auto-fills I-130, I-485, N-400, H-1B, EB-5, and other USCIS forms' },
-  { Icon: CalendarClock, h: 'Deadline Agent', b: 'Tracks every case deadline, alerts on expirations' },
-  { Icon: MessageCircle, h: 'Client Comms Agent', b: 'Proactively updates clients, answers FAQs, sends reminders' },
-  { Icon: RefreshCw, h: 'Renewal Agent', b: 'Surfaces renewal opportunities from existing client data' },
-  { Icon: TrendingUp, h: 'BD Agent', b: 'Runs business development campaigns, qualifies leads' },
-  { Icon: Globe, h: 'Ecosystem Agent', b: 'Coordinates with translators, courier services, foreign agents' },
+  { Icon: ClipboardList, animated: false, h: 'Intake Agent', b: 'Collects client info, validates documents, opens cases' },
+  { Icon: FileText, animated: false, h: 'Document Agent', b: 'Extracts data from passports, visas, foreign records, translates' },
+  { Icon: PenLine, animated: false, h: 'Forms Agent', b: 'Auto-fills I-130, I-485, N-400, H-1B, EB-5, and other USCIS forms' },
+  { Icon: CalendarClock, animated: false, h: 'Deadline Agent', b: 'Tracks every case deadline, alerts on expirations' },
+  { Icon: MessageCircleIcon, animated: true, h: 'Client Comms Agent', b: 'Proactively updates clients, answers FAQs, sends reminders' },
+  { Icon: RefreshCw, animated: false, h: 'Renewal Agent', b: 'Surfaces renewal opportunities from existing client data' },
+  { Icon: TrendingUpIcon, animated: true, h: 'BD Agent', b: 'Runs business development campaigns, qualifies leads' },
+  { Icon: GlobeIcon, animated: true, h: 'Ecosystem Agent', b: 'Coordinates with translators, courier services, foreign agents' },
 ];
+
+function AgentCard({ a, i }) {
+  const iconRef = useRef(null);
+  const onMouseEnter = a.animated ? () => iconRef.current?.startAnimation() : undefined;
+  const onMouseLeave = a.animated ? () => iconRef.current?.stopAnimation() : undefined;
+  return (
+    <article
+      key={a.h}
+      className={`card card-compact reveal d${(i % 4) + 1}`}
+      style={{ display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))' }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="agent-icon" aria-hidden="true">
+        {a.animated
+          ? <a.Icon ref={iconRef} size={20} isAnimated={false} />
+          : <a.Icon size={20} strokeWidth={1.75} />}
+      </div>
+      <h3 className="display text-card-sm">{a.h}</h3>
+      <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{a.b}</p>
+    </article>
+  );
+}
 
 export const AgentCatalog = () => (
   <section className="sec sec-surface" id="agents">
@@ -124,15 +162,7 @@ export const AgentCatalog = () => (
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-lg)' }} className="agent-catalog-grid">
-        {AGENTS.map((a, i) => (
-          <article key={a.h} className={`card card-compact reveal d${(i % 4) + 1}`} style={{ display: 'flex', flexDirection: 'column', gap: 'calc(10px * var(--ui-scale))' }}>
-            <div className="agent-icon" aria-hidden="true">
-              <a.Icon size={20} strokeWidth={1.75} />
-            </div>
-            <h3 className="display text-card-sm">{a.h}</h3>
-            <p style={{ fontSize: 'var(--text-body-sm)', color: 'var(--ink-3)', lineHeight: 1.55 }}>{a.b}</p>
-          </article>
-        ))}
+        {AGENTS.map((a, i) => <AgentCard key={a.h} a={a} i={i} />)}
       </div>
     </div>
   </section>

@@ -2,7 +2,8 @@
 import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
-import { GitMerge, Settings, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon, Link2 } from 'lucide-react';
+import { GitMerge, FileSearch, Server, Workflow, FileCheck, ScanSearch, HeadphonesIcon, Link2 } from 'lucide-react';
+import { SettingsIcon } from '@animateicons/react/lucide';
 import { ICON_PALETTE } from '../../lib/tokens';
 
 const SERVICE_LAYERS = [
@@ -22,7 +23,7 @@ const SERVICE_LAYERS = [
     stat: 'Most migrations complete in 6 weeks',
   },
   {
-    Icon: Settings,
+    Icon: SettingsIcon,
     n: '03',
     h: 'Configuration & Optimization',
     b: "Configure CodioCMS to match your firm's exact workflows. Build templates, automations, and integrations that reflect how your firm actually operates - not generic out-of-the-box defaults.",

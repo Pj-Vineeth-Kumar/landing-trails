@@ -3,7 +3,8 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { gsap } from 'gsap';
-import { FileText, MessageCircle, RefreshCw, TrendingUp, ClipboardList, PenLine, CalendarClock, Globe, Megaphone } from 'lucide-react';
+import { FileText, RefreshCw, ClipboardList, PenLine, CalendarClock, Megaphone } from 'lucide-react';
+import { GlobeIcon, MessageCircleIcon, TrendingUpIcon } from '@animateicons/react/lucide';
 import { Logo } from '../../components/layout/Nav';
 import { SectionEyebrow } from '../../components/ui/PageKit';
 import { FOOTER_COLUMNS, SUPPORT_EMAIL, SUPPORT_MAILTO, SITE_URL, AUDIT_URL } from '../../lib/navigation';
@@ -21,14 +22,14 @@ const FooterLink = ({ href, children, ...rest }) => {
 };
 
 const AGENTS_BENTO = [
-  { Icon: ClipboardList, label: 'Intake Agent',       desc: 'Opens & classifies cases automatically.' },
-  { Icon: FileText,      label: 'Document Agent',     desc: 'Extracts, translates & validates documents.' },
-  { Icon: PenLine,       label: 'Forms Agent',        desc: 'Auto-fills forms across every country.' },
-  { Icon: CalendarClock, label: 'Deadline Agent',     desc: 'Tracks every filing window. Zero misses.' },
-  { Icon: MessageCircle, label: 'Client Comms Agent', desc: '24/7 status updates & document collection.' },
-  { Icon: RefreshCw,     label: 'Renewal Agent',      desc: 'Mines your database for dormant revenue.' },
-  { Icon: Megaphone,     label: 'BD Agent',           desc: 'Automates outreach & books consultations.' },
-  { Icon: Globe,         label: 'Ecosystem Agent',    desc: 'Coordinates translators, physicians & couriers.' },
+  { Icon: ClipboardList,   animated: false, label: 'Intake Agent',       desc: 'Opens & classifies cases automatically.' },
+  { Icon: FileText,        animated: false, label: 'Document Agent',     desc: 'Extracts, translates & validates documents.' },
+  { Icon: PenLine,         animated: false, label: 'Forms Agent',        desc: 'Auto-fills forms across every country.' },
+  { Icon: CalendarClock,   animated: false, label: 'Deadline Agent',     desc: 'Tracks every filing window. Zero misses.' },
+  { Icon: MessageCircleIcon, animated: true, label: 'Client Comms Agent', desc: '24/7 status updates & document collection.' },
+  { Icon: RefreshCw,       animated: false, label: 'Renewal Agent',      desc: 'Mines your database for dormant revenue.' },
+  { Icon: Megaphone,       animated: false, label: 'BD Agent',           desc: 'Automates outreach & books consultations.' },
+  { Icon: GlobeIcon,       animated: true,  label: 'Ecosystem Agent',    desc: 'Coordinates translators, physicians & couriers.' },
 ];
 
 const PILLARS = [
@@ -36,6 +37,61 @@ const PILLARS = [
   { label: 'Managed Tech Ops', desc: 'Our team runs your entire tech operation' },
   { label: 'Ecosystem',        desc: 'Global network of immigration service providers' },
 ];
+
+function BentoAgentCard({ agent: { Icon, animated, label, desc } }) {
+  const iconRef = useRef(null);
+  return (
+    <div
+      className="bento-agent-card"
+      style={{
+        background: 'rgba(255,255,255,.04)',
+        border: '1px solid rgba(255,255,255,.08)',
+        borderRadius: 'calc(16px * var(--ui-scale))',
+        padding: 'calc(22px * var(--ui-scale)) calc(20px * var(--ui-scale))',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'calc(12px * var(--ui-scale))',
+        transition: 'background .2s, border-color .2s, transform .2s',
+        cursor: 'default',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = 'rgba(25,80,198,.18)';
+        e.currentTarget.style.borderColor = 'rgba(74,126,224,.45)';
+        e.currentTarget.style.transform = 'translateY(calc(-3px * var(--ui-scale)))';
+        e.currentTarget.style.boxShadow = '0 8px 24px -8px rgba(25,80,198,.35)';
+        if (animated) iconRef.current?.startAnimation();
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = 'rgba(255,255,255,.04)';
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,.08)';
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = '';
+        if (animated) iconRef.current?.stopAnimation();
+      }}
+    >
+      <span style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 'calc(36px * var(--ui-scale))',
+        height: 'calc(36px * var(--ui-scale))',
+        borderRadius: 'calc(10px * var(--ui-scale))',
+        background: 'rgba(25,80,198,.35)',
+        border: '1px solid rgba(74,126,224,.4)',
+        color: 'var(--blue-hover)',
+        flexShrink: 0,
+      }}>
+        {animated
+          ? <Icon ref={iconRef} size={16} isAnimated={false} color="currentColor" />
+          : <Icon size={16} strokeWidth={1.75} />}
+      </span>
+      <div>
+        <div style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 650, color: '#fff', lineHeight: 1.25, marginBottom: 'calc(5px * var(--ui-scale))' }}>{label}</div>
+        <div style={{ fontSize: 'calc(11.5px * var(--ui-scale))', color: 'rgba(255,255,255,.5)', lineHeight: 1.5 }}>{desc}</div>
+      </div>
+    </div>
+  );
+}
 
 /* Agent bento - replaces the orbit visualization */
 export const AgentOrbit = () => {
@@ -130,53 +186,8 @@ export const AgentOrbit = () => {
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 'calc(12px * var(--ui-scale))',
           }}>
-            {AGENTS_BENTO.map(({ Icon, label, desc }) => (
-              <div
-                key={label}
-                className="bento-agent-card"
-                style={{
-                  background: 'rgba(255,255,255,.04)',
-                  border: '1px solid rgba(255,255,255,.08)',
-                  borderRadius: 'calc(16px * var(--ui-scale))',
-                  padding: 'calc(22px * var(--ui-scale)) calc(20px * var(--ui-scale))',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'calc(12px * var(--ui-scale))',
-                  transition: 'background .2s, border-color .2s, transform .2s',
-                  cursor: 'default',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(25,80,198,.18)';
-                  e.currentTarget.style.borderColor = 'rgba(74,126,224,.45)';
-                  e.currentTarget.style.transform = 'translateY(calc(-3px * var(--ui-scale)))';
-                  e.currentTarget.style.boxShadow = '0 8px 24px -8px rgba(25,80,198,.35)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,.04)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,.08)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '';
-                }}
-              >
-                <span style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 'calc(36px * var(--ui-scale))',
-                  height: 'calc(36px * var(--ui-scale))',
-                  borderRadius: 'calc(10px * var(--ui-scale))',
-                  background: 'rgba(25,80,198,.35)',
-                  border: '1px solid rgba(74,126,224,.4)',
-                  color: 'var(--blue-hover)',
-                  flexShrink: 0,
-                }}>
-                  <Icon size={16} strokeWidth={1.75} />
-                </span>
-                <div>
-                  <div style={{ fontSize: 'calc(13px * var(--ui-scale))', fontWeight: 650, color: '#fff', lineHeight: 1.25, marginBottom: 'calc(5px * var(--ui-scale))' }}>{label}</div>
-                  <div style={{ fontSize: 'calc(11.5px * var(--ui-scale))', color: 'rgba(255,255,255,.5)', lineHeight: 1.5 }}>{desc}</div>
-                </div>
-              </div>
+            {AGENTS_BENTO.map((agent) => (
+              <BentoAgentCard key={agent.label} agent={agent} />
             ))}
           </div>
         </div>
@@ -288,13 +299,13 @@ const VALUE_LEVER_GROUPS = [
     tag: 'Cost Savings',
     levers: [
       {
-        Icon: FileText,
+        Icon: FileText, animated: false,
         h: 'Reduced case preparation time',
         b: 'Document extraction, form auto-fill, and intake validation cut hours of manual prep on every case.',
         agent: 'Document, Forms & Intake Agents',
       },
       {
-        Icon: MessageCircle,
+        Icon: MessageCircleIcon, animated: true,
         h: 'AI-powered customer support',
         b: 'Proactive client updates, FAQ handling, and reminders without adding paralegal headcount.',
         agent: 'Client Comms Agent',
@@ -305,13 +316,13 @@ const VALUE_LEVER_GROUPS = [
     tag: 'Revenue Growth',
     levers: [
       {
-        Icon: RefreshCw,
+        Icon: RefreshCw, animated: false,
         h: 'Renewal detection',
         b: 'Surface expiring visas and lapsed clients from existing records - revenue that used to slip through.',
         agent: 'Renewal Agent',
       },
       {
-        Icon: TrendingUp,
+        Icon: TrendingUpIcon, animated: true,
         h: 'BD campaign automation',
         b: 'Revenue from new client acquisition (BD Agent)',
         agent: 'BD Agent',
@@ -320,6 +331,34 @@ const VALUE_LEVER_GROUPS = [
     ],
   },
 ];
+
+function ValueLeverCard({ lever, pal }) {
+  const iconRef = useRef(null);
+  const { Icon, animated } = lever;
+  return (
+    <article
+      className={`card card-compact value-lever-card${lever.comingSoon ? ' value-lever-card--soon' : ''}`}
+      onMouseEnter={animated ? () => iconRef.current?.startAnimation() : undefined}
+      onMouseLeave={animated ? () => iconRef.current?.stopAnimation() : undefined}
+    >
+      <div className="value-lever-card-top">
+        <div className="agent-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: pal.shadow }}>
+          {animated
+            ? <Icon ref={iconRef} size={20} isAnimated={false} />
+            : <Icon size={20} strokeWidth={1.75} />}
+        </div>
+      </div>
+      <h3 className="display text-card-sm feature-card-title">{lever.h}</h3>
+      <p className="feature-card-body">{lever.b}</p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gridColumn: '1 / -1', gridRow: 3 }}>
+        <div className="mono value-lever-agent" style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: pal.color }}>
+          {lever.agent}
+        </div>
+        {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
+      </div>
+    </article>
+  );
+}
 
 export const ValueLevers = () => (
   <section id="value-levers" className="sec sec-levers">
@@ -341,43 +380,11 @@ export const ValueLevers = () => (
           const groupPal = ICON_PALETTE[gi % ICON_PALETTE.length];
           return (
             <div key={group.tag} className={`value-levers-group reveal d${gi + 1}`}>
-              <div
-                className="mono value-levers-group-tag"
-                style={{ color: groupPal.color }}
-              >
-                {group.tag}
-              </div>
+              <div className="mono value-levers-group-tag" style={{ color: groupPal.color }}>{group.tag}</div>
               <div className="value-levers-group-grid">
                 {group.levers.map((lever, li) => {
                   const pal = ICON_PALETTE[(gi * group.levers.length + li) % ICON_PALETTE.length];
-                  const Icon = lever.Icon;
-                  return (
-                    <article
-                      key={lever.h}
-                      className={`card card-compact value-lever-card${lever.comingSoon ? ' value-lever-card--soon' : ''}`}
-                    >
-                      <div className="value-lever-card-top">
-                        <div
-                          className="agent-icon"
-                          aria-hidden="true"
-                          style={{ background: pal.grad, boxShadow: pal.shadow }}
-                        >
-                          <Icon size={20} strokeWidth={1.75} />
-                        </div>
-                      </div>
-                      <h3 className="display text-card-sm feature-card-title">{lever.h}</h3>
-                      <p className="feature-card-body">{lever.b}</p>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gridColumn: '1 / -1', gridRow: 3 }}>
-                        <div
-                          className="mono value-lever-agent"
-                          style={{ fontSize: 'calc(10.5px * var(--ui-scale))', letterSpacing: '.06em', color: pal.color }}
-                        >
-                          {lever.agent}
-                        </div>
-                        {lever.comingSoon && <span className="pill value-lever-soon-pill">Coming soon</span>}
-                      </div>
-                    </article>
-                  );
+                  return <ValueLeverCard key={lever.h} lever={lever} pal={pal} />;
                 })}
               </div>
             </div>

@@ -5,30 +5,35 @@ import { PageHero, Section, SectionEyebrow, FeatureGrid, SplitHeading, CtaBand, 
 import { ICON_PALETTE, ICON_GRAD, ICON_SHADOW_MD } from '../../lib/tokens';
 import {
   Database,
-  ShieldCheck,
-  TrendingUp,
-  Users,
-  Zap,
   RefreshCw,
   Link2,
   Plug,
   BarChart3,
 } from 'lucide-react';
+import {
+  ShieldCheckIcon,
+  TrendingUpIcon,
+  UsersIcon,
+  ZapIcon,
+} from '@animateicons/react/lucide';
 
 const WHY_DRIVERS = [
   {
     Icon: Database,
+    animated: false,
     h: 'Scale makes manual exchange untenable',
     b: "A company managing dozens or hundreds of foreign nationals cannot have HR teams re-keying employee data into a law firm's system. At volume, every manual handoff is a source of error, delay, and cost.",
     featured: true,
   },
   {
-    Icon: ShieldCheck,
+    Icon: ShieldCheckIcon,
+    animated: true,
     h: 'Compliance risk lives in the data',
     b: "I-9 verification, LCA management, and visa expiration tracking all depend on accurate, current employee data. When HR and the law firm work from disconnected systems, status changes fall through the cracks.",
   },
   {
     Icon: BarChart3,
+    animated: false,
     h: 'Integration is now a scored RFP criterion',
     b: "Corporations no longer ask whether your attorneys are good. In RFPs, they ask whether your systems connect to theirs. Firms that cannot integrate are screened out before legal merits are evaluated.",
   },
@@ -36,32 +41,38 @@ const WHY_DRIVERS = [
 
 const WHAT_IT_DELIVERS = [
   {
-    Icon: TrendingUp,
+    Icon: TrendingUpIcon,
+    animated: true,
     h: 'Win more corporate work',
     b: "Meet the integration requirement that decides RFP outcomes. Your firm becomes the one that connects - not the one that can't.",
   },
   {
-    Icon: Zap,
+    Icon: ZapIcon,
+    animated: true,
     h: 'Zero double entry',
     b: 'Employee details and status sync automatically across systems. No spreadsheets, no re-keying, no divergent records.',
   },
   {
-    Icon: ShieldCheck,
+    Icon: ShieldCheckIcon,
+    animated: true,
     h: 'Automated compliance tracking',
     b: 'Employee and dependent expiration dates are monitored continuously from your clients\' HR system - no manual chasing required.',
   },
   {
-    Icon: Users,
+    Icon: UsersIcon,
+    animated: true,
     h: 'Real-time visibility for HR teams',
     b: 'HR staff, hiring managers, and employees all see live case status - not "wait for an email update" workflows.',
   },
   {
     Icon: RefreshCw,
+    animated: false,
     h: 'Faster case initiation',
     b: 'New sponsored hires can trigger a case automatically at the moment of offer, directly from your clients\' HR or ATS system.',
   },
   {
     Icon: Link2,
+    animated: false,
     h: 'One source of truth',
     b: 'Guaranteed data consistency between HR and case management - exactly what auditors and corporate legal teams want to see.',
   },

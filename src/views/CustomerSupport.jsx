@@ -1,12 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useRef } from 'react';
 import { ICON_GRAD, ICON_PALETTE, ICON_SHADOW_MD } from '../../lib/tokens';
 import {
   HeadphonesIcon,
-  UserCheck,
-  BookOpen,
   Clock,
-  MessageCircle,
   RefreshCw,
   Star,
   Users,
@@ -15,24 +12,32 @@ import {
   Zap,
   Shield,
 } from 'lucide-react';
+import {
+  UserCheckIcon,
+  BookOpenIcon,
+  MessageCircleIcon,
+} from '@animateicons/react/lucide';
 import { PageHero, Section, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 
 const SUPPORT_PILLARS = [
   {
-    Icon: UserCheck,
+    Icon: UserCheckIcon,
+    animated: true,
     n: '01',
     h: 'Immigration-literate staff',
     b: 'Our support team understands H-1Bs, I-140s, I-485s, and the pressure of USCIS deadlines. You will never explain what a priority date is to someone reading from a script.',
     featured: true,
   },
   {
-    Icon: BookOpen,
+    Icon: BookOpenIcon,
+    animated: true,
     n: '02',
     h: 'Structured onboarding',
     b: 'We onboard your whole firm - managing attorneys, paralegals, and case managers. Not just the person who signed the contract. Everyone gets trained before go-live.',
   },
   {
     Icon: RefreshCw,
+    animated: false,
     n: '03',
     h: 'Proactive success reviews',
     b: 'Regular check-ins, workflow reviews, and feature adoption guidance. We reach out before something breaks - not just after you file a ticket.',
@@ -42,21 +47,25 @@ const SUPPORT_PILLARS = [
 const SUPPORT_DETAILS = [
   {
     Icon: Clock,
+    animated: false,
     h: 'Support hours',
     b: 'Monday through Friday, 4am to 5pm Pacific. We are there when your office is open and your team is under deadline.',
   },
   {
-    Icon: MessageCircle,
+    Icon: MessageCircleIcon,
+    animated: true,
     h: 'Multiple channels',
     b: 'Reach us by email, live chat, or phone. No endless ticket queues. You get a real person who knows your firm.',
   },
   {
     Icon: CalendarClock,
+    animated: false,
     h: 'Fast response',
     b: 'We prioritize urgent requests - active case issues, filing deadlines, and data questions get same-day attention.',
   },
   {
-    Icon: UserCheck,
+    Icon: UserCheckIcon,
+    animated: true,
     h: 'Dedicated CSM',
     b: 'Larger accounts get a dedicated Customer Success Manager who stays with your firm, learns your workflows, and brings proactive recommendations.',
   },
@@ -103,6 +112,30 @@ const WHAT_WE_COVER = [
   'Filing deadline and case urgency triage',
 ];
 
+function SupportDetailCard({ item, i }) {
+  const iconRef = useRef(null);
+  const pal = ICON_PALETTE[i % ICON_PALETTE.length];
+  const onMouseEnter = item.animated ? () => iconRef.current?.startAnimation() : undefined;
+  const onMouseLeave = item.animated ? () => iconRef.current?.stopAnimation() : undefined;
+  return (
+    <article
+      className={`feature-card cs-details-card reveal d${(i % 2) + 1}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div className="feature-card-top">
+        <div className="agent-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: `0 calc(4px * var(--ui-scale)) calc(12px * var(--ui-scale)) ${pal.shadow}` }}>
+          {item.animated
+            ? <item.Icon ref={iconRef} size={18} isAnimated={false} />
+            : <item.Icon size={18} strokeWidth={1.75} />}
+        </div>
+      </div>
+      <h3 className="display feature-card-title cs-details-card-title">{item.h}</h3>
+      <p className="feature-card-body">{item.b}</p>
+    </article>
+  );
+}
+
 export default function CustomerSupport() {
   return (
     <>
@@ -147,21 +180,7 @@ export default function CustomerSupport() {
       {/* Support details - 2 col grid */}
       <Section id="cs-details" tone="sec-surface" eyebrow="Support Details" lead="Everything your firm" emphasis="needs to stay unblocked." headAlign="center">
         <div className="cs-details-grid">
-          {SUPPORT_DETAILS.map((item, i) => {
-            const Icon = item.Icon;
-            const pal = ICON_PALETTE[i % ICON_PALETTE.length];
-            return (
-              <article key={i} className={`feature-card cs-details-card reveal d${(i % 2) + 1}`}>
-                <div className="feature-card-top">
-                  <div className="agent-icon" aria-hidden="true" style={{ background: pal.grad, boxShadow: `0 calc(4px * var(--ui-scale)) calc(12px * var(--ui-scale)) ${pal.shadow}` }}>
-                    <Icon size={18} strokeWidth={1.75} />
-                  </div>
-                </div>
-                <h3 className="display feature-card-title cs-details-card-title">{item.h}</h3>
-                <p className="feature-card-body">{item.b}</p>
-              </article>
-            );
-          })}
+          {SUPPORT_DETAILS.map((item, i) => <SupportDetailCard key={i} item={item} i={i} />)}
         </div>
       </Section>
 

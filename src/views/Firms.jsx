@@ -3,7 +3,8 @@ import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
-import { Cpu, FileText, Bot, Network, Settings, GitMerge, ClipboardList, PenLine, MessageCircle, TrendingUp, CheckSquare, History, GitBranch } from 'lucide-react';
+import { Cpu, FileText, Bot, Network, GitMerge, ClipboardList, PenLine, CheckSquare, History, GitBranch } from 'lucide-react';
+import { SettingsIcon, MessageCircleIcon, TrendingUpIcon } from '@animateicons/react/lucide';
 import { ICON_PALETTE } from '../../lib/tokens';
 
 /* What You Get */
@@ -12,7 +13,7 @@ const WHAT_YOU_GET = [
   { Icon: FileText, n: '02', h: 'CodioForms', b: 'Online and offline immigration forms for every country you practice in, kept current as rules change.', links: [{ href: '/platform', label: 'See CodioForms' }] },
   { Icon: Bot, n: '03', h: 'Codio AI Agents', b: 'A team of AI agents handling case prep, communications, renewals, and business development.', featured: true, links: [{ href: '/ai-agents', label: 'Meet the agents' }] },
   { Icon: Network, n: '04', h: 'CodioNetwork', b: 'A curated network for global service coordination - translators, physicians, apostille, foreign counsel.', links: [{ href: '/network', label: 'See the network' }] },
-  { Icon: Settings, n: '05', h: 'GlobalCodio Services', b: 'IT support, RFP response, and ongoing management. We run your technology operation end to end.', links: [{ href: '/it-services', label: 'Explore services' }] },
+  { Icon: SettingsIcon, animated: true, n: '05', h: 'GlobalCodio Services', b: 'IT support, RFP response, and ongoing management. We run your technology operation end to end.', links: [{ href: '/it-services', label: 'Explore services' }] },
   { Icon: GitMerge, n: '06', h: 'Migration support', b: 'Switching from another platform? We handle the migration - data, workflows, and your team - cleanly.', links: [{ href: '/it-services', label: 'How migration works' }] },
 ];
 
@@ -21,8 +22,8 @@ const DAY = [
   { h: 'A new client signs up.', b: 'The Intake Agent captures their information and opens the case.', agent: 'Intake Agent', Icon: ClipboardList },
   { h: 'Documents arrive.', b: 'The Document Agent extracts and translates their passport.', agent: 'Document Agent', Icon: FileText },
   { h: 'Filing begins.', b: 'The Forms Agent prepares the I-130 while the Deadline Agent monitors filing windows.', agent: 'Forms + Deadline', Icon: PenLine },
-  { h: 'Questions come in.', b: "The Client Comms Agent answers them in the client's native language.", agent: 'Client Comms Agent', Icon: MessageCircle },
-  { h: 'Meanwhile, revenue surfaces.', b: 'The Renewal Agent flags three dormant clients whose visas expire in 60 days, and the BD Agent books two consultations for next week.', agent: 'Renewal + BD', Icon: TrendingUp },
+  { h: 'Questions come in.', b: "The Client Comms Agent answers them in the client's native language.", agent: 'Client Comms Agent', Icon: MessageCircleIcon },
+  { h: 'Meanwhile, revenue surfaces.', b: 'The Renewal Agent flags three dormant clients whose visas expire in 60 days, and the BD Agent books two consultations for next week.', agent: 'Renewal + BD', Icon: TrendingUpIcon },
 ];
 
 /* Workflow integrity - three pillars */

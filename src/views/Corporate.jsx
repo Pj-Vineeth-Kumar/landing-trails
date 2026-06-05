@@ -3,7 +3,8 @@ import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
-import { Users, Globe, Network, ShieldCheck, TrendingUp, BarChart3, Activity, DollarSign, Building2, GitCompare, FileText } from 'lucide-react';
+import { Network, BarChart3, Activity, DollarSign, Building2, GitCompare, FileText } from 'lucide-react';
+import { UsersIcon, GlobeIcon, ShieldCheckIcon, TrendingUpIcon } from '@animateicons/react/lucide';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -23,12 +24,14 @@ const CHALLENGES = [
 const VISIBILITY_ITEMS = [
   {
     Icon: BarChart3,
+    animated: false,
     n: '01',
     h: 'Workforce Pipeline Dashboards',
     b: 'Your entire employee immigration population visible at a glance. Filter by country, visa type, status, or risk level. No more requesting reports from outside counsel.',
   },
   {
     Icon: Activity,
+    animated: false,
     n: '02',
     h: 'Immigration Health Scores',
     b: 'One number per visa program tells you if it\'s healthy or heading toward trouble. Drill into the breakdown when you need it. Problems surface before they become emergencies.',
@@ -36,24 +39,28 @@ const VISIBILITY_ITEMS = [
   },
   {
     Icon: GitCompare,
+    animated: false,
     n: '03',
     h: 'Multi-Firm Performance Comparison',
     b: 'Managing more than one law firm? See who is actually delivering. Hold every outside counsel to the same standard, with data - not anecdote.',
   },
   {
     Icon: DollarSign,
+    animated: false,
     n: '04',
     h: 'Budget Tracking & Forecasting',
     b: 'Immigration spend tracked in real time. Alerts surface at 75% of budget - not after you\'ve overrun. Renewal costs projected automatically so surprises stay off the executive report.',
   },
   {
     Icon: Building2,
+    animated: false,
     n: '05',
     h: 'Executive PDF Reports',
     b: 'Stakeholders who never log into the platform still get the data they need. One-click executive reports, formatted for the boardroom - not the case manager\'s screen.',
   },
   {
     Icon: FileText,
+    animated: false,
     n: '06',
     h: 'Versioned Immigration Policies',
     b: 'Corporate immigration policies live versioned inside the platform - not buried in a SharePoint document. When guidelines change, the updated version flows through to active cases automatically.',
@@ -62,7 +69,8 @@ const VISIBILITY_ITEMS = [
 
 const SOLUTIONS = [
   {
-    Icon: Users,
+    Icon: UsersIcon,
+    animated: true,
     n: '01',
     h: 'Scale Without Adding Headcount',
     b: 'Codio AI Agents handle routine case work - intake, documents, forms, deadlines, employee communications - so your team focuses on strategy and exception management.',
@@ -70,7 +78,8 @@ const SOLUTIONS = [
     links: [{ href: '/ai-agents', label: 'Meet the agents' }],
   },
   {
-    Icon: Globe,
+    Icon: GlobeIcon,
+    animated: true,
     n: '02',
     h: 'One Platform for Global Operations',
     b: 'CodioCMS and CodioForms cover the countries you operate in, with new country support added on demand.',
@@ -78,20 +87,23 @@ const SOLUTIONS = [
   },
   {
     Icon: Network,
+    animated: false,
     n: '03',
     h: 'Vendor Coordination Through CodioNetwork',
     b: 'Manage translators, physicians, foreign attorneys, and apostille services through one integrated platform.',
     links: [{ href: '/network', label: 'See the network' }],
   },
   {
-    Icon: ShieldCheck,
+    Icon: ShieldCheckIcon,
+    animated: true,
     n: '04',
     h: 'Compliance & Reporting Built In',
     b: 'Always-on deadline monitoring, audit-ready compliance records, and executive-level reporting.',
     links: [{ href: '/security', label: 'Security & compliance' }],
   },
   {
-    Icon: TrendingUp,
+    Icon: TrendingUpIcon,
+    animated: true,
     n: '05',
     h: 'Cost Predictability',
     b: 'Replace unpredictable outside counsel billing with a predictable managed service partnership.',

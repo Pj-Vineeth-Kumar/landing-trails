@@ -2,7 +2,8 @@
 import React from 'react';
 
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand } from '../../components/ui/PageKit';
-import { Languages, Stethoscope, Stamp, Scale, Truck, Building2, Globe, Network as NetworkIcon, Workflow } from 'lucide-react';
+import { Languages, Stethoscope, Stamp, Scale, Truck, Building2, Network as NetworkIcon, Workflow } from 'lucide-react';
+import { GlobeIcon } from '@animateicons/react/lucide';
 
 const NETWORK_ITEMS = [
   { Icon: Languages, n: '01', h: 'Certified Translators', b: 'Document translation across 40+ languages, delivered to immigration-grade standards.', stat: '40+ LANGUAGES' },
@@ -131,9 +132,9 @@ export default function Network() {
           <FeatureGrid
             cols={3}
             items={[
-              { Icon: Globe, n: '01', h: 'Identify Providers', b: 'Surface the right vetted providers for each country and service type, in seconds.' },
-              { Icon: Workflow, n: '02', h: 'Coordinate Services', b: 'Engage and manage providers without leaving CodioCMS - no separate tools or email chains.' },
-              { Icon: NetworkIcon, n: '03', h: 'Track Progress', b: 'Monitor every external service against the case, with full visibility into status and timing.' },
+              { Icon: GlobeIcon, animated: true, n: '01', h: 'Identify Providers', b: 'Surface the right vetted providers for each country and service type, in seconds.' },
+              { Icon: Workflow, animated: false, n: '02', h: 'Coordinate Services', b: 'Engage and manage providers without leaving CodioCMS - no separate tools or email chains.' },
+              { Icon: NetworkIcon, animated: false, n: '03', h: 'Track Progress', b: 'Monitor every external service against the case, with full visibility into status and timing.' },
             ]}
           />
         </div>

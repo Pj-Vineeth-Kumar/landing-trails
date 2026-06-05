@@ -1,7 +1,8 @@
 'use client';
 
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
-import { Cpu, Workflow, Settings, Bot, Globe, TrendingUp } from 'lucide-react';
+import { Cpu, Workflow, Bot } from 'lucide-react';
+import { SettingsIcon, GlobeIcon, TrendingUpIcon } from '@animateicons/react/lucide';
 
 /* Verified history: Umesh Vaidyamath came to the US on an H-1B as an engineer;
    launched INSZoom (co-founded with brother Raj) from home in 1999 as the
@@ -25,12 +26,12 @@ const STATS = [
 ];
 
 const DIFFERENCE = [
-  { Icon: Cpu,        h: 'Purpose-built for immigration',        b: 'Not adapted legal tech - engineered from the ground up for immigration workflows.' },
-  { Icon: Workflow,   h: 'End-to-end managed',                   b: 'Not self-serve software - a complete, fully managed technology operation.' },
-  { Icon: Settings,   h: 'CodioOps included with every engagement', b: 'A dedicated operations team configuring and optimizing your platform - not software you figure out yourself.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
-  { Icon: Bot,        h: 'AI-native architecture',               b: 'Designed for an AI workforce from day one, not bolted on after the fact.' },
-  { Icon: Globe,      h: 'Global from day one',                  b: 'Built for worldwide immigration practice - not US-only.' },
-  { Icon: TrendingUp, h: 'Outcome-aligned pricing',              b: 'We earn when you earn. Pricing tied to results, not seats.' },
+  { Icon: Cpu,        animated: false, h: 'Purpose-built for immigration',        b: 'Not adapted legal tech - engineered from the ground up for immigration workflows.' },
+  { Icon: Workflow,   animated: false, h: 'End-to-end managed',                   b: 'Not self-serve software - a complete, fully managed technology operation.' },
+  { Icon: SettingsIcon,   animated: true,  h: 'CodioOps included with every engagement', b: 'A dedicated operations team configuring and optimizing your platform - not software you figure out yourself.', links: [{ href: '/codioops', label: 'Learn about CodioOps' }] },
+  { Icon: Bot,            animated: false, h: 'AI-native architecture',               b: 'Designed for an AI workforce from day one, not bolted on after the fact.' },
+  { Icon: GlobeIcon,      animated: true,  h: 'Global from day one',                  b: 'Built for worldwide immigration practice - not US-only.' },
+  { Icon: TrendingUpIcon, animated: true,  h: 'Outcome-aligned pricing',              b: 'We earn when you earn. Pricing tied to results, not seats.' },
 ];
 
 export default function About() {

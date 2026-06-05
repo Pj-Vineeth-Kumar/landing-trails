@@ -4,16 +4,14 @@ import {
   GitBranch,
   LayoutTemplate,
   ClipboardList,
-  BookOpen,
-  Zap,
   Award,
-  TrendingUp,
   BarChart3,
   Database,
   Workflow,
   FileText,
   RefreshCw,
 } from 'lucide-react';
+import { BookOpenIcon, ZapIcon, TrendingUpIcon } from '@animateicons/react/lucide';
 import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { ICON_PALETTE } from '../../lib/tokens';
 
@@ -41,12 +39,14 @@ const DELIVERABLES = [
     b: 'We configure CodioForms for the countries you practice in and integrate forms directly into your case workflows.',
   },
   {
-    Icon: BookOpen,
+    Icon: BookOpenIcon,
+    animated: true,
     h: 'Process Documentation',
     b: 'We capture the tribal knowledge that lives in your team\'s heads and turn it into documented workflows that survive any staff turnover.',
   },
   {
-    Icon: Zap,
+    Icon: ZapIcon,
+    animated: true,
     h: 'Automation Setup',
     b: 'We turn on the rules engine, reminders, escalations, integrations, and triggers - the automation work most firms never get to.',
   },
@@ -56,7 +56,8 @@ const DELIVERABLES = [
     b: 'We bring in immigration-specific best practices informed by two decades of working with 1,500+ firms - so you start ahead.',
   },
   {
-    Icon: TrendingUp,
+    Icon: TrendingUpIcon,
+    animated: true,
     h: 'Continuous Optimization',
     b: 'As your firm evolves, CodioOps continuously tunes workflows, automations, and templates. This is not a one-time project. It\'s an ongoing service.',
   },

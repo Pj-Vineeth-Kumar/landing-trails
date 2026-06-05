@@ -9,17 +9,19 @@ import {
   ClipboardList,
   FileText,
   ScanText,
-  ShieldCheck,
   PenLine,
   CalendarClock,
-  MessageCircle,
   RefreshCw,
-  TrendingUp,
-  Globe,
-  BellRing,
   User,
   Send,
 } from 'lucide-react';
+import {
+  ShieldCheckIcon,
+  MessageCircleIcon,
+  TrendingUpIcon,
+  GlobeIcon,
+  BellRingIcon,
+} from '@animateicons/react/lucide';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -154,7 +156,7 @@ const AGENTS = [
     tag: 'Document Processing',
   },
   {
-    Icon: ShieldCheck, n: '03', h: 'Document Validation',
+    Icon: ShieldCheckIcon, n: '03', h: 'Document Validation',
     b: 'Cross-checks extracted documents for completeness, flags missing or expired items, and verifies authenticity before anything is filed.',
     stat: 'ZERO MISSING DOCS AT FILING',
     bullets: ['Cross-checks every document against case requirements', 'Flags expired passports, visas, and permits', 'Identifies missing supporting documents', 'Verifies document authenticity markers', 'Sends automated requests for missing items'],
@@ -178,7 +180,7 @@ const AGENTS = [
     tag: 'Deadline Tracking',
   },
   {
-    Icon: MessageCircle, n: '06', h: 'Client Comms',
+    Icon: MessageCircleIcon, n: '06', h: 'Client Comms',
     b: 'Sends case status updates, answers common questions 24/7, schedules appointments, and collects missing documents - in multiple languages.',
     stat: '80% FEWER INBOUND CALLS',
     bullets: ['Sends proactive case status updates at key milestones', 'Answers common immigration questions 24/7', 'Schedules consultations directly on attorney calendars', 'Collects missing documents via secure upload links', 'Communicates in the client\'s preferred language'],
@@ -194,7 +196,7 @@ const AGENTS = [
     tag: 'Revenue Recovery',
   },
   {
-    Icon: TrendingUp, n: '08', h: 'BD',
+    Icon: TrendingUpIcon, n: '08', h: 'BD',
     b: 'Runs automated outreach to prospective clients, qualifies leads by case type and urgency, and books consultations directly on attorney calendars.',
     stat: '8–15 NEW CASES PER MONTH',
     bullets: ['Runs targeted outreach campaigns to prospect lists', 'Qualifies leads by case type, urgency, and fit', 'Books consultations directly on attorney calendars', 'Follows up with non-responders automatically', 'Reports pipeline value and conversion rates'],
@@ -202,7 +204,7 @@ const AGENTS = [
     tag: 'Business Development',
   },
   {
-    Icon: Globe, n: '09', h: 'Ecosystem',
+    Icon: GlobeIcon, n: '09', h: 'Ecosystem',
     b: 'Coordinates translators, certified physicians, apostille services, foreign attorneys, and consular logistics through the CodioNetwork.',
     stat: '30% FASTER CASE TURNAROUND',
     bullets: ['Identifies the right CodioNetwork provider for each need', 'Dispatches work orders to translators and couriers', 'Coordinates medical exam scheduling with USCIS physicians', 'Tracks apostille and authentication status in real time', 'Brings all external coordination inside CodioCMS'],
@@ -210,7 +212,7 @@ const AGENTS = [
     tag: 'Ecosystem Coordination',
   },
   {
-    Icon: BellRing, n: '10', h: 'Government Notice Update',
+    Icon: BellRingIcon, n: '10', h: 'Government Notice Update',
     b: 'Monitors government portals and immigration authority announcements for policy changes, form revisions, and notice updates - alerting your firm to anything that affects open cases.',
     stat: 'REAL-TIME POLICY ALERTS',
     bullets: ['Monitors USCIS, IRCC, IND, and other authority portals', 'Detects form version changes before your firm is caught out', 'Alerts attorneys to policy changes affecting open cases', 'Summarises regulatory updates in plain language', 'Logs all notices to the relevant case records'],
@@ -326,12 +328,17 @@ function AgentPanel() {
   React.useEffect(() => {
     const tab = tabRefs.current[active];
     const scroller = tabsScrollRef.current;
-    tab?.scrollIntoView({
-      behavior: reduceMotion ? 'auto' : 'smooth',
-      inline: 'center',
-      block: 'nearest',
-    });
-    if (!scroller) return;
+    if (!scroller || !tab) return;
+    // Scroll only within the tab strip — never let the browser scroll the page
+    const tabLeft = tab.offsetLeft;
+    const tabWidth = tab.offsetWidth;
+    const scrollerWidth = scroller.clientWidth;
+    const targetScroll = tabLeft - (scrollerWidth - tabWidth) / 2;
+    if (reduceMotion) {
+      scroller.scrollLeft = targetScroll;
+    } else {
+      scroller.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    }
     const syncHints = () => scroller.dispatchEvent(new Event('scroll'));
     const t = window.setTimeout(syncHints, reduceMotion ? 0 : 320);
     return () => window.clearTimeout(t);

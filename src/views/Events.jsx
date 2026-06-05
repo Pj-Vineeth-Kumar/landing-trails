@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 
 import { PageHero, Section, CtaBand, SmartLink } from '../../components/ui/PageKit';
-import { MapPin, Calendar, ExternalLink, Clock } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
+import { MapPinIcon, ExternalLinkIcon } from '@animateicons/react/lucide';
 
 /* ─── All events - past + upcoming ─── */
 const ALL_EVENTS = [
@@ -87,7 +88,7 @@ function EventCard({ event, index }) {
           <span>{event.dates}</span>
         </div>
         <div className="event-meta-row">
-          <MapPin size={14} strokeWidth={1.75} aria-hidden="true" />
+          <MapPinIcon size={14} strokeWidth={1.75} aria-hidden="true" />
           <span>{event.location}</span>
         </div>
       </div>
@@ -132,7 +133,7 @@ function EventCard({ event, index }) {
           rel="noopener noreferrer"
           aria-label={`${event.websiteLabel} (opens in a new tab)`}
         >
-          <ExternalLink size={13} strokeWidth={1.75} aria-hidden="true" />
+          <ExternalLinkIcon size={13} strokeWidth={1.75} aria-hidden="true" />
           {event.websiteLabel}
         </SmartLink>
       </div>
@@ -186,13 +187,13 @@ export default function Events() {
                 <div>
                   <p className="event-past-name">{ev.name}</p>
                   <span className="event-past-loc">
-                    <MapPin size={11} strokeWidth={1.75} aria-hidden="true" />
+                    <MapPinIcon size={11} strokeWidth={1.75} aria-hidden="true" />
                     {ev.location}
                   </span>
                 </div>
               </div>
               <SmartLink href={ev.website} className="event-website-link">
-                <ExternalLink size={12} strokeWidth={1.75} aria-hidden="true" />
+                <ExternalLinkIcon size={12} strokeWidth={1.75} aria-hidden="true" />
                 {ev.websiteLabel}
               </SmartLink>
             </div>

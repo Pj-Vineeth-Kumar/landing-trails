@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import { PageHero, Section, CtaBand } from '../../components/ui/PageKit';
 import { HowItWorks } from '../components/MarketingSections.jsx';
-import { Mail, MapPin, ExternalLink, Navigation, ArrowRight } from 'lucide-react';
+import { Navigation, ArrowRight } from 'lucide-react';
+import { MailIcon, MapPinIcon, ExternalLinkIcon } from '@animateicons/react/lucide';
 import { ICON_PALETTE, ICON_SHADOW_LG } from '../../lib/tokens';
 
 const OFFICES = [
@@ -200,7 +201,7 @@ export default function Contact() {
                   justifyContent: 'center',
                 }}
               >
-                <Mail size={22} strokeWidth={1.75} style={{ color: '#fff' }} />
+                <MailIcon size={22} style={{ color: '#fff' }} />
               </div>
               <h3 className="display" style={{ fontSize: 'var(--text-display-md)', letterSpacing: '-0.02em' }}>
                 Message received.
@@ -315,22 +316,22 @@ export default function Contact() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(12px * var(--ui-scale))', height: '100%' }}>
 
             {/* USA office */}
-            <InfoCard palIdx={0} icon={MapPin} tag="USA Office" action={{ href: OFFICES[0].mapUrl, label: 'Get directions', external: true }}>
+            <InfoCard palIdx={0} icon={MapPinIcon} tag="USA Office" action={{ href: OFFICES[0].mapUrl, label: 'Get directions', external: true }}>
               {OFFICES[0].lines.map((l) => <div key={l}>{l}</div>)}
             </InfoCard>
 
             {/* India office */}
-            <InfoCard palIdx={1} icon={MapPin} tag="India Office" action={{ href: OFFICES[1].mapUrl, label: 'Get directions', external: true }}>
+            <InfoCard palIdx={1} icon={MapPinIcon} tag="India Office" action={{ href: OFFICES[1].mapUrl, label: 'Get directions', external: true }}>
               {OFFICES[1].lines.map((l) => <div key={l}>{l}</div>)}
             </InfoCard>
 
             {/* Email */}
-            <InfoCard palIdx={2} icon={Mail} tag="Email" action={{ href: 'mailto:info@globalcodio.ai', label: 'info@globalcodio.ai' }}>
+            <InfoCard palIdx={2} icon={MailIcon} tag="Email" action={{ href: 'mailto:info@globalcodio.ai', label: 'info@globalcodio.ai' }}>
               General enquiries, partnerships &amp; client support.
             </InfoCard>
 
             {/* LinkedIn */}
-            <InfoCard palIdx={3} icon={ExternalLink} tag="LinkedIn" action={{ href: 'https://www.linkedin.com/company/globalcodio', label: 'Visit our page', external: true }}>
+            <InfoCard palIdx={3} icon={ExternalLinkIcon} tag="LinkedIn" action={{ href: 'https://www.linkedin.com/company/globalcodio', label: 'Visit our page', external: true }}>
               Updates on immigration technology, AI agents, and company news.
             </InfoCard>
 

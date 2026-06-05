@@ -6,11 +6,7 @@ import { PageHero, Section, SectionEyebrow, FeatureGrid, CtaBand, SmartLink, Spl
 import { FaqAccordion } from '../../components/ui/FaqAccordion';
 import {
   Workflow,
-  Users,
-  Globe,
-  Settings,
   GitMerge,
-  TrendingUp,
   Cpu,
   RefreshCw,
   Bot,
@@ -18,7 +14,6 @@ import {
   Database,
   Building2,
   Network,
-  ShieldCheck,
   ClipboardList,
   BarChart3,
   Languages,
@@ -27,6 +22,7 @@ import {
   Scale,
   Truck,
 } from 'lucide-react';
+import { UsersIcon, GlobeIcon, SettingsIcon, ShieldCheckIcon } from '@animateicons/react/lucide';
 
 const Check = () => (
   <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -38,60 +34,70 @@ const Check = () => (
 const CMS_FEATURES = [
   {
     Icon: Workflow,
+    animated: false,
     n: '01',
     h: 'End-to-end case lifecycle',
     b: 'Full case lifecycle management for every immigration matter type - from intake through filing to closure.',
   },
   {
-    Icon: Users,
+    Icon: UsersIcon,
+    animated: true,
     n: '02',
     h: 'Applicant portal',
     b: 'Secure portal for foreign nationals and beneficiaries to submit documents, answer questionnaires, track their case status - and own their immigration record across every matter they ever open.',
   },
   {
     Icon: Building2,
+    animated: false,
     n: '03',
     h: 'HR portal',
     b: 'Dedicated portal for corporate HR and mobility teams to manage employee visa cases, track immigration health, and view workforce analytics.',
   },
   {
     Icon: Network,
+    animated: false,
     n: '04',
     h: 'Service provider portal',
     b: 'Controlled access portal for external service providers to receive assignments, submit deliverables, and coordinate directly within CodioCMS.',
   },
   {
-    Icon: ShieldCheck,
+    Icon: ShieldCheckIcon,
+    animated: true,
     n: '05',
     h: 'Role-based access control',
     b: 'Granular permissions across 27 modules and 7 action types - attorney, HR admin, firm admin, provider, and super admin roles with data-scope isolation.',
   },
   {
     Icon: ClipboardList,
+    animated: false,
     n: '06',
     h: 'Client questionnaires',
     b: 'Structured intake and case questionnaires with conditional logic, prefill from case data, per-portal delivery, and attorney review workflows.',
   },
   {
-    Icon: Globe,
+    Icon: GlobeIcon,
+    animated: true,
     n: '07',
     h: 'Global country support',
     b: 'Case handling across every country you serve in one unified system - with new countries added on demand.',
   },
   {
-    Icon: Settings,
+    Icon: SettingsIcon,
+    animated: true,
     n: '08',
     h: 'Customizable workflows',
     b: "Playbook templates and work-step automations configured to your firm's exact operations - not one-size-fits-all defaults.",
   },
   {
     Icon: GitMerge,
+    animated: false,
     n: '09',
     h: 'Native integrations',
     b: 'Native integrations with email, calendar, e-signature, and accounting tools your team already relies on.',
   },
   {
     Icon: BarChart3,
+    animated: false,
     n: '10',
     h: 'Reporting & analytics',
     b: 'Executive reports, HR analytics dashboards, firm performance comparison, renewal pipeline, budget tracking, and bottleneck alerts.',
@@ -245,7 +251,7 @@ const CMS_GROUPS = [
         b: 'Government forms pre-filled from case data and structured client intake - conditional logic, authority-synced editions, and attorney review.',
       },
       {
-        Icon: Globe,
+        Icon: GlobeIcon,
         h: 'Global country support',
         b: 'Every country you practice in, with new countries added on demand.',
       },
@@ -259,7 +265,7 @@ const CMS_GROUPS = [
     headBg: 'var(--violet-soft)',
     headBorder: 'var(--violet-a12)',
     items: [
-      { Icon: Users,     h: 'Applicant portal',          b: 'Foreign nationals submit documents, track status, and answer questionnaires.' },
+      { Icon: UsersIcon,     h: 'Applicant portal',          b: 'Foreign nationals submit documents, track status, and answer questionnaires.' },
       { Icon: Building2, h: 'HR & employer portal',      b: 'Corporate HR teams manage employee visa cases and workforce analytics.' },
       { Icon: Network,   h: 'Service provider portal',   b: 'Translators, physicians, and attorneys coordinate inside the same platform.' },
     ],
@@ -272,7 +278,7 @@ const CMS_GROUPS = [
     headBg: 'var(--teal-soft)',
     headBorder: 'var(--teal-a12)',
     items: [
-      { Icon: ShieldCheck, h: 'Role-based access control', b: '27 permission modules, 7 action types, and full data-scope isolation.' },
+      { Icon: ShieldCheckIcon, h: 'Role-based access control', b: '27 permission modules, 7 action types, and full data-scope isolation.' },
       { Icon: GitMerge,    h: 'Native integrations',       b: 'Email, calendar, e-signature, and accounting tools connected natively to CodioCMS.' },
       { Icon: BarChart3,   h: 'Reporting & analytics',     b: 'Executive reports, HR dashboards, renewal pipeline, and bottleneck alerts.' },
     ],

@@ -1,12 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Hero } from '../components/Hero.jsx';
 // import { OperatingSystem } from '../components/OperatingSystem.jsx';
 import { AgentOrbit, Testimonial, Metrics, ValueLevers, Certifications, CTA } from '../components/ContentSections.jsx';
 
 import { Section, SectionEyebrow, FeatureGrid, SmartLink, SplitHeading } from '../../components/ui/PageKit';
 import { ICON_PALETTE } from '../../lib/tokens';
-import { Cpu, FileText, Bot, Network, Settings, Scale, Users, Building2, Truck, ShieldCheck } from 'lucide-react';
+import { Cpu, FileText, Bot, Network, Scale, Building2, Truck } from 'lucide-react';
+import { SettingsIcon, ShieldCheckIcon, UsersIcon } from '@animateicons/react/lucide';
 
 /* Founder credibility band */
 const FOUNDER_STATS = [
@@ -72,12 +73,12 @@ const PainRecognition = () => (
 
 /* Five integrated layers */
 const LAYERS = [
-  { Icon: Cpu,      h: 'CodioCMS',        b: 'The next-generation case management platform built by the founder of INSZoom. Configured to your exact workflows.',                                                                                                      featured: true, linkColor: '#1950C6',                                                         links: [{ href: '/platform',  label: 'Explore the platform'  }] },
-  { Icon: FileText, h: 'CodioForms',      b: 'Online and offline immigration forms for USA, Canada, Netherlands, and India - with new countries added on demand.',                                                                                                        iconGrad: 'linear-gradient(135deg,#11a085 0%,#0d7c66 100%)', iconShadow: 'rgba(13,124,102,.28)', linkColor: '#0d7c66', links: [{ href: '/platform',  label: 'See CodioForms'        }] },
-  { Icon: Bot,      h: 'Codio AI Agents', b: 'A team of AI agents handling intake, documents, forms, deadlines, communications, renewals, and business development.',                                                                                                     iconGrad: 'linear-gradient(135deg,#7c5bc9 0%,#5b3fa8 100%)', iconShadow: 'rgba(91,63,168,.28)',  linkColor: '#5b3fa8', links: [{ href: '/ai-agents', label: 'Meet the agents'        }] },
-  { Icon: Settings, h: 'CodioOps',        b: 'The dedicated operations team that configures, optimizes, and continuously tunes CodioCMS to match exactly how your firm operates. Bundled with every engagement.',                                                         iconGrad: 'linear-gradient(135deg,#d97706 0%,#b45309 100%)', iconShadow: 'rgba(180,83,9,.28)',   linkColor: '#b45309', links: [{ href: '/codioops',  label: 'Learn about CodioOps' }] },
-  { Icon: Network,  h: 'CodioNetwork',    b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.',                                                                                                  iconGrad: 'linear-gradient(135deg,#0ea5c9 0%,#0077a8 100%)', iconShadow: 'rgba(0,119,168,.28)',  linkColor: '#0077a8', links: [{ href: '/network',   label: 'See the network'      }] },
-  { Icon: Settings, h: 'Technology Audit',b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.",                                                                    iconGrad: 'linear-gradient(135deg,#e05c8a 0%,#be2d6c 100%)', iconShadow: 'rgba(190,45,108,.28)', linkColor: '#be2d6c', links: [{ href: '/contact',   label: 'Request an audit'     }] },
+  { Icon: Cpu,         animated: false, h: 'CodioCMS',        b: 'The next-generation case management platform built by the founder of INSZoom. Configured to your exact workflows.',                                                                                                      featured: true, linkColor: '#1950C6',                                                         links: [{ href: '/platform',  label: 'Explore the platform'  }] },
+  { Icon: FileText,    animated: false, h: 'CodioForms',      b: 'Online and offline immigration forms for USA, Canada, Netherlands, and India - with new countries added on demand.',                                                                                                        iconGrad: 'linear-gradient(135deg,#11a085 0%,#0d7c66 100%)', iconShadow: 'rgba(13,124,102,.28)', linkColor: '#0d7c66', links: [{ href: '/platform',  label: 'See CodioForms'        }] },
+  { Icon: Bot,         animated: false, h: 'Codio AI Agents', b: 'A team of AI agents handling intake, documents, forms, deadlines, communications, renewals, and business development.',                                                                                                     iconGrad: 'linear-gradient(135deg,#7c5bc9 0%,#5b3fa8 100%)', iconShadow: 'rgba(91,63,168,.28)',  linkColor: '#5b3fa8', links: [{ href: '/ai-agents', label: 'Meet the agents'        }] },
+  { Icon: SettingsIcon,animated: true,  h: 'CodioOps',        b: 'The dedicated operations team that configures, optimizes, and continuously tunes CodioCMS to match exactly how your firm operates. Bundled with every engagement.',                                                         iconGrad: 'linear-gradient(135deg,#d97706 0%,#b45309 100%)', iconShadow: 'rgba(180,83,9,.28)',   linkColor: '#b45309', links: [{ href: '/codioops',  label: 'Learn about CodioOps' }] },
+  { Icon: Network,     animated: false, h: 'CodioNetwork',    b: 'A curated network of certified translators, physicians, apostille services, foreign attorneys, and consular coordinators.',                                                                                                  iconGrad: 'linear-gradient(135deg,#0ea5c9 0%,#0077a8 100%)', iconShadow: 'rgba(0,119,168,.28)',  linkColor: '#0077a8', links: [{ href: '/network',   label: 'See the network'      }] },
+  { Icon: SettingsIcon,animated: true,  h: 'Technology Audit',b: "A comprehensive audit of your firm's current tech stack, workflows, and operations. Identifies gaps, risks, and opportunities before onboarding begins.",                                                                    iconGrad: 'linear-gradient(135deg,#e05c8a 0%,#be2d6c 100%)', iconShadow: 'rgba(190,45,108,.28)', linkColor: '#be2d6c', links: [{ href: '/contact',   label: 'Request an audit'     }] },
 ];
 
 const FiveLayers = () => (
@@ -141,13 +142,15 @@ const CodioOpsCallout = () => (
 const PORTALS = [
   {
     Icon: Scale,
+    animated: false,
     role: 'Attorney / Case Manager',
     tagline: 'Full case control, zero tab-switching.',
     bullets: ['Complete case state at a glance', 'AI agent output surfaced inline', 'Workflow enforcement and filing tools'],
     href: '/for-law-firms',
   },
   {
-    Icon: Users,
+    Icon: UsersIcon,
+    animated: true,
     role: 'Applicant / Beneficiary',
     tagline: 'Case status in language they understand.',
     bullets: ['Plain-English case timeline', 'Document upload to the right slots', 'Questionnaires with conditional logic'],
@@ -155,6 +158,7 @@ const PORTALS = [
   },
   {
     Icon: Building2,
+    animated: false,
     role: 'HR / Employer',
     tagline: 'Workforce visibility, not a lawyer\'s UI.',
     bullets: ['Pipeline dashboards and health scores', 'Budget tracking and forecasting', 'Multi-firm performance comparison'],
@@ -162,19 +166,134 @@ const PORTALS = [
   },
   {
     Icon: Truck,
+    animated: false,
     role: 'Service Provider',
     tagline: 'Work orders, not shared email threads.',
     bullets: ['Scoped access - only what they need', 'Deliverable submission and revision tracking', 'Deadline-aware coordination'],
     href: '/network',
   },
   {
-    Icon: ShieldCheck,
+    Icon: ShieldCheckIcon,
+    animated: true,
     role: 'Firm & Platform Admin',
     tagline: 'Configure everything. No engineering tickets.',
     bullets: ['RBAC, branding, and feature rollout', 'Playbook and template management', 'Audit log and compliance controls'],
     href: '/security',
   },
 ];
+
+function PortalCard({ p, i }) {
+  const iconRef = useRef(null);
+  const pal = ICON_PALETTE[i % ICON_PALETTE.length];
+  const onMouseEnter = p.animated ? () => iconRef.current?.startAnimation() : undefined;
+  const onMouseLeave = p.animated ? () => iconRef.current?.stopAnimation() : undefined;
+  return (
+    <SmartLink key={p.role} href={p.href} style={{ textDecoration: 'none' }}>
+      <article
+        className={`feature-card reveal d${(i % 4) + 1}`}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--space-md)',
+          padding: 'calc(24px * var(--ui-scale))',
+          height: '100%',
+          cursor: 'pointer',
+          transition: 'box-shadow .18s, transform .18s',
+        }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        <span
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 'calc(40px * var(--ui-scale))',
+            height: 'calc(40px * var(--ui-scale))',
+            borderRadius: 'calc(10px * var(--ui-scale))',
+            background: pal.grad,
+            boxShadow: pal.shadow,
+            color: '#fff',
+            flexShrink: 0,
+          }}
+        >
+          {p.animated
+            ? <p.Icon ref={iconRef} size={18} isAnimated={false} />
+            : <p.Icon size={18} strokeWidth={1.75} />}
+        </span>
+        <div>
+          <div
+            className="mono"
+            style={{
+              fontSize: 'calc(9.5px * var(--ui-scale))',
+              letterSpacing: '.08em',
+              color: pal.color,
+              fontWeight: 700,
+              marginBottom: 'calc(4px * var(--ui-scale))',
+              textTransform: 'uppercase',
+            }}
+          >
+            {p.role}
+          </div>
+          <p
+            style={{
+              fontSize: 'calc(13px * var(--ui-scale))',
+              fontWeight: 600,
+              color: 'var(--ink)',
+              lineHeight: 1.35,
+              margin: 0,
+            }}
+          >
+            {p.tagline}
+          </p>
+        </div>
+        <ul
+          style={{
+            listStyle: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'calc(6px * var(--ui-scale))',
+            marginTop: 'auto',
+          }}
+        >
+          {p.bullets.map((b) => (
+            <li
+              key={b}
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 'calc(7px * var(--ui-scale))',
+                fontSize: 'calc(12px * var(--ui-scale))',
+                color: 'var(--ink-3)',
+                lineHeight: 1.45,
+              }}
+            >
+              <span
+                style={{
+                  width: 'calc(14px * var(--ui-scale))',
+                  height: 'calc(14px * var(--ui-scale))',
+                  borderRadius: '50%',
+                  background: pal.soft,
+                  color: pal.color,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  marginTop: 'calc(1px * var(--ui-scale))',
+                }}
+              >
+                <svg viewBox="0 0 10 10" fill="none" style={{ width: 7, height: 7 }}>
+                  <path d="M2 5l2 2L8 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </article>
+    </SmartLink>
+  );
+}
 
 const FivePortals = () => (
   <Section
@@ -186,118 +305,7 @@ const FivePortals = () => (
     headAlign="center"
   >
     <div className="portals-grid">
-      {PORTALS.map((p, i) => {
-        const Icon = p.Icon;
-        const pal = ICON_PALETTE[i % ICON_PALETTE.length];
-        return (
-          <SmartLink
-            key={p.role}
-            href={p.href}
-            style={{ textDecoration: 'none' }}
-          >
-            <article
-              className={`feature-card reveal d${(i % 4) + 1}`}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--space-md)',
-                padding: 'calc(24px * var(--ui-scale))',
-                height: '100%',
-                cursor: 'pointer',
-                transition: 'box-shadow .18s, transform .18s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px -8px rgba(11,19,36,0.13)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
-            >
-              <span
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 'calc(40px * var(--ui-scale))',
-                  height: 'calc(40px * var(--ui-scale))',
-                  borderRadius: 'calc(10px * var(--ui-scale))',
-                  background: pal.grad,
-                  boxShadow: pal.shadow,
-                  color: '#fff',
-                  flexShrink: 0,
-                }}
-              >
-                <Icon size={18} strokeWidth={1.75} />
-              </span>
-              <div>
-                <div
-                  className="mono"
-                  style={{
-                    fontSize: 'calc(9.5px * var(--ui-scale))',
-                    letterSpacing: '.08em',
-                    color: pal.color,
-                    fontWeight: 700,
-                    marginBottom: 'calc(4px * var(--ui-scale))',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {p.role}
-                </div>
-                <p
-                  style={{
-                    fontSize: 'calc(13px * var(--ui-scale))',
-                    fontWeight: 600,
-                    color: 'var(--ink)',
-                    lineHeight: 1.35,
-                    margin: 0,
-                  }}
-                >
-                  {p.tagline}
-                </p>
-              </div>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'calc(6px * var(--ui-scale))',
-                  marginTop: 'auto',
-                }}
-              >
-                {p.bullets.map((b) => (
-                  <li
-                    key={b}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: 'calc(7px * var(--ui-scale))',
-                      fontSize: 'calc(12px * var(--ui-scale))',
-                      color: 'var(--ink-3)',
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: 'calc(14px * var(--ui-scale))',
-                        height: 'calc(14px * var(--ui-scale))',
-                        borderRadius: '50%',
-                        background: pal.soft,
-                        color: pal.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        marginTop: 'calc(1px * var(--ui-scale))',
-                      }}
-                    >
-                      <svg viewBox="0 0 10 10" fill="none" style={{ width: 7, height: 7 }}>
-                        <path d="M2 5l2 2L8 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </SmartLink>
-        );
-      })}
+      {PORTALS.map((p, i) => <PortalCard key={p.role} p={p} i={i} />)}
     </div>
   </Section>
 );
