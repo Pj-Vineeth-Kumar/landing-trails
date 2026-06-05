@@ -45,6 +45,7 @@ export default function Audit() {
         lead="Six concrete takeaways,"
         emphasis="not a sales pitch."
         intro="Every audit produces a tangible set of findings about your firm's technology operation - the kind of clarity most firms have never had."
+        headAlign="center"
       >
         <ul className="check-list check-cols reveal" style={{ marginTop: 'var(--space-3xl)' }}>
           {deliverables.map((d) => (
@@ -108,7 +109,7 @@ export default function Audit() {
             <div className="audit-founder-portrait-wrap reveal d1">
               <div className="audit-founder-portrait-frame">
                 <img
-                  src="/assets/Umesh.webp"
+                  src="/assets/founder.png"
                   alt="Umesh Vaidyamath, Founder and CEO of GlobalCodio"
                   className="audit-founder-portrait-img"
                   loading="lazy"

@@ -11,7 +11,7 @@ const CATEGORIES = ['All', 'Product Updates', 'Immigration Tech', 'Guides', 'Cas
 const AUTHOR = {
   name: 'Umesh Vaidyamath',
   designation: 'Founder & CEO, GlobalCodio',
-  image: '/assets/Umesh.webp',
+  image: '/assets/founder.png',
 };
 
 /* ── Placeholder posts - swap for real data when ready ─── */
